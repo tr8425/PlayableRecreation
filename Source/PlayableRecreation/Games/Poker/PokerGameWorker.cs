@@ -100,8 +100,12 @@ namespace Poker
             handShownUntil = 0f;
             lastLogCount = -1;
 
-            peakStack = match.Stack(PokerSeat.Player);
-            lowStack = match.Stack(PokerSeat.Player);
+            int stack = match.Stack(PokerSeat.Player) + match.Bet(PokerSeat.Player);
+
+            peakStack = stack;
+
+            // 이어서 한 판은 그전에 밀렸는지 알 수 없다. 모르는 것을 무결점으로 쳐 주지는 않는다.
+            lowStack = Mathf.Min(stack, HoldemMatch.StartingStack);
             handsWon = 0;
             showdowns = 0;
         }

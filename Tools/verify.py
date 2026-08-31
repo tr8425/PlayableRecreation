@@ -148,6 +148,62 @@ for game in ET.parse(GAMES).getroot():
     if ('class %s' % name) not in sources:
         problems.append('workerClass not found in source: ' + node.text.strip())
 
+# ---------- 6. Def 가 가리키는 이름이 실제로 있는가 ----------
+# 여기서 잡히는 오타는 게임을 켜야만 빨간 줄로 드러나는 종류다.
+PATCH = ROOT + u'/Patches/Patch_Recreation.xml'
+VANILLA = u'C:/Program Files (x86)/Steam/steamapps/common/RimWorld/Data'
+
+ours = set()
+for path in walk(ROOT + u'/Defs', '.xml'):
+    ours |= set(re.findall(r'<defName>([^<]+)</defName>', io.open(path, encoding='utf-8').read()))
+
+vanilla = set()
+if os.path.isdir(VANILLA):
+    for path in walk(VANILLA, '.xml'):
+        try:
+            src = io.open(path, encoding='utf-8', errors='ignore').read()
+        except Exception:
+            continue
+        vanilla |= set(re.findall(r'<defName>([^<]+)</defName>', src))
+
+known = vanilla | ours
+print('defNames known: %d (vanilla %d + ours %d)' % (len(known), len(vanilla), len(ours)))
+
+if not vanilla:
+    print('  (RimWorld 설치본을 못 찾아 바닐라 대조는 건너뜀)')
+
+REFERENCES = ['targetThing', 'vanillaJob', 'playThought', 'wonTale', 'linkedSkill']
+
+games = ET.parse(GAMES).getroot()
+patch_src = io.open(PATCH, encoding='utf-8').read()
+targets = []
+
+for game in games:
+    name = game.find('defName').text.strip()
+    targets.append(game.find('targetThing').text.strip())
+
+    if known:
+        for field in REFERENCES:
+            node = game.find(field)
+            if node is None or not node.text:
+                continue
+            if node.text.strip() not in known:
+                problems.append('%s: %s "%s" is not a Def' % (name, field, node.text.strip()))
+
+    # 승부인 항목에는 집계 이름표가 있어야 기록 화면이 비지 않는다.
+    flag = game.find('hasMatch')
+    if flag is None or flag.text.strip().lower() != 'false':
+        tally = game.find('tallyKeys')
+        if tally is None or len(list(tally)) == 0:
+            problems.append('%s: a match with no tallyKeys' % name)
+
+    if '<game>%s</game>' % name not in patch_src:
+        problems.append('%s: no patch entry' % name)
+
+patched = re.findall(r'defName="([^"]+)"', patch_src)
+if sorted(patched) != sorted(targets):
+    problems.append('patch targets %s but Defs name %s' % (sorted(patched), sorted(targets)))
+
 # ---------- 결과 ----------
 print('')
 if problems:

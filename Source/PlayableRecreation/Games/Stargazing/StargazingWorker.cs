@@ -185,7 +185,14 @@ namespace Stargazing
 
             LayoutDisc(sky);
 
-            if (view == null) { view = SkyWatch.Observe(Board); Rebuild(); }
+            // Tick 은 판이 얼마나 큰지 알기 전에 돈다. 자리가 잡히거나 바뀐 첫 프레임은 여기서 세운다.
+            if (view == null || disc != lastDisc)
+            {
+                if (view == null) view = SkyWatch.Observe(Board);
+
+                lastDisc = disc;
+                Rebuild();
+            }
 
             DrawDisc();
             TrackPointer();

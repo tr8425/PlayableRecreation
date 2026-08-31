@@ -112,6 +112,9 @@ namespace PlayableRecreation
                 }
             };
 
+            // 승부가 아닌 항목에는 남길 전적이 없다. 버튼도 두지 않는다.
+            if (!Game.hasMatch) yield break;
+
             yield return new Command_Action
             {
                 defaultLabel = "PR.Btn.Records".Translate(),
