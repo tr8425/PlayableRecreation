@@ -2,31 +2,11 @@
 
 다음 세션이 제일 먼저 읽는 문서. 지금 어디까지 왔고, 무엇을 먼저 해야 하는가.
 
-작성 시각: 2026-08-31 23:5x · 커밋 `c730506`
+작성 시각: 2026-09-01 · 커밋 `97accd9` 이후
 
----
-
-## 0. 먼저 할 일 — 폴더 이름 바꾸기가 아직 안 끝났다
-
-저장소 안의 이름은 전부 정리됐다. **폴더 이름만 남았다.**
-세션이 그 폴더를 작업 디렉터리로 잡고 있어 세션 안에서는 못 바꾼다.
-
-cmd.exe 에서, Claude Code 를 종료한 뒤:
-
-```bat
-cd /d C:\Users\tr842\orca\projects
-ren RoyalGameOfUr PlayableRecreation
-
-rmdir "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\RoyalGameOfUr"
-
-cd PlayableRecreation
-python Tools\package.py --install
-```
-
-`rmdir` 에 `/s` 를 붙이지 말 것. 그냥 `rmdir` 이면 정션만 지워지고 원본은 안 건드린다.
-
-**이미 끝냈다면** 이 절은 지워도 된다. 확인하는 법 — `Tools/package.py --install` 이
-불평 없이 통과하고, 림월드 모드 목록에 `Playable Recreation` 이 하나만 뜬다.
+> 폴더 이름 바꾸기(구 0절)는 끝났다 — `projects/PlayableRecreation` 로 개명 완료,
+> Mods 의 끊어진 `RoyalGameOfUr` 링크 제거 완료, `package.py --install` 통과,
+> `Mods/Playable Recreation` 설치 확인 (2026-09-01).
 
 ---
 
@@ -79,17 +59,19 @@ python Tools\package.py --install
 - `Tools/package.py` — 통과 (36 파일 · 432 KB)
 - 인게임 확인: 일곱 창 전부 열리고 돌아간다 (스크린샷으로 확인)
 
-**창작마당에는 아직 안 올렸다.** `About/PublishedFileId.txt` 가 없다.
+**창작마당에는 아직 안 올렸다.** `About/PublishedFileId.txt` 가 없다 — 저장소에도,
+설치본에도 (2026-09-01 확인). 창작마당 검색에도 `Playable Recreation` 항목 없음.
+이름이 겹치는 다른 모드도 없다.
 
 ---
 
 ## 4. 다음에 할 일
 
-1. **폴더 이름** (0절)
-2. **창작마당 업로드** — 절차는 `Workshop/RELEASE.md` 에 전부 있다.
+1. **창작마당 업로드** — 절차는 `Workshop/RELEASE.md` 에 전부 있다. 림월드를 직접 띄워
+   Mods 메뉴에서 올려야 한다 (사람 손이 필요한 단계).
    첫 업로드 뒤 `About/PublishedFileId.txt` 를 저장소로 가져와 커밋하는 것을 잊지 말 것.
    그게 없으면 다음 업로드가 같은 항목을 갱신하지 못하고 새 항목을 만든다
-3. **인게임 QA 남은 것** — 판을 저장하고 다시 여는 것, 무효화 조건(전투·청소·수리·손상·이동·만료),
+2. **인게임 QA 남은 것** — 판을 저장하고 다시 여는 것, 무효화 조건(전투·청소·수리·손상·이동·만료),
    오디세이 소행성/궤도의 하늘과 지표 두 모드, 한국어·영어 양쪽 화면 읽기
 
 ### 손대면 좋을 것 (급하지 않음)
