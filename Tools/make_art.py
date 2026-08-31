@@ -242,13 +242,13 @@ def preview():
         d.line([(0, i), (W, i)], fill=(BITUMEN[0] + v, BITUMEN[1] + v, BITUMEN[2] + v))
 
     title_f = font(['georgiab.ttf', 'timesbd.ttf', 'malgunbd.ttf'], 34 * S)
-    sub_f = font(['malgun.ttf', 'georgia.ttf'], 15 * S)
-    cap_f = font(['malgun.ttf', 'georgia.ttf'], 10 * S)
+    sub_f = font(['georgia.ttf', 'malgun.ttf'], 15 * S)
+    cap_f = font(['georgia.ttf', 'malgun.ttf'], 10 * S)
     CARD_FONT = font(['georgiab.ttf', 'timesbd.ttf'], 8 * S)
-    TAG_FONT = font(['malgun.ttf', 'georgia.ttf'], 8 * S)
+    TAG_FONT = font(['georgia.ttf', 'malgun.ttf'], 8 * S)
 
     d.text((44 * S, 20 * S), 'PLAYABLE RECREATION', font=title_f, fill=SHELL)
-    d.text((46 * S, 60 * S), u'오락은 식민자에게 맡기고 당신은 구경만 했다면',
+    d.text((46 * S, 60 * S), 'Your colonists have been having all the fun.',
            font=sub_f, fill=GOLD)
     d.line([(46 * S, 86 * S), (280 * S, 86 * S)], fill=(0x4A, 0x40, 0x31), width=max(1, S))
 
@@ -268,7 +268,7 @@ def preview():
 
     # 1. 우르
     box = cell(0)
-    panel(d, box, u'우르의 게임', cap_f)
+    panel(d, box, 'game of Ur', cap_f)
     bw = COLS * (7 * S + 2 * S) - 2 * S
     bh = ROWS * (7 * S + 2 * S) - 2 * S
     bx, by = art_origin(box, bw, bh)
@@ -276,27 +276,27 @@ def preview():
 
     # 2. 체스
     box = cell(1)
-    panel(d, box, u'체스', cap_f)
+    panel(d, box, 'chess', cap_f)
     chess_panel(img, d, box)
 
     # 3. 포커
     box = cell(2)
-    panel(d, box, u'포커', cap_f)
+    panel(d, box, 'poker', cap_f)
     poker_panel(img, d, box)
 
     # 4. 별 보기
     box = cell(3)
-    panel(d, box, u'별 보기', cap_f)
+    panel(d, box, 'stargazing', cap_f)
     sky_panel(d, box)
 
     # 5. 나인볼
     box = cell(4)
-    panel(d, box, u'나인볼', cap_f)
+    panel(d, box, 'nine-ball', cap_f)
     pool_panel(d, box)
 
     # 6. 편자
     box = cell(5)
-    panel(d, box, u'편자 던지기', cap_f)
+    panel(d, box, 'horseshoes', cap_f)
     cx = (box[0] + box[2]) / 2
     cy = box[1] + (height - 22 * S) / 2
     rings(d, cx, cy, [36 * S, 14 * S],
@@ -305,7 +305,7 @@ def preview():
 
     # 7. 후프스톤
     box = cell(6)
-    panel(d, box, u'후프스톤', cap_f)
+    panel(d, box, 'hoopstone', cap_f)
     cx = (box[0] + box[2]) / 2
     rings(d, cx, cy, [36 * S, 19 * S],
           [(0.95, 165, 'b'), (0.44, 20, 'p'), (0.12, 255, 'p')])
@@ -315,10 +315,10 @@ def preview():
     box = cell(7)
     d.rounded_rectangle(box, radius=8 * S, fill=BOARD_BG, outline=(0x5C, 0x4C, 0x35), width=max(1, S))
 
-    lines = [(u'7', title_f, GOLD, 16 * S),
-             (u'가구, 전부', sub_f, SHELL, 52 * S),
-             (u'AI 5단계 · 규칙 안내', cap_f, DIM, 76 * S),
-             (u'Harmony 패치 없음', cap_f, DIM, 90 * S)]
+    lines = [('7', title_f, GOLD, 16 * S),
+             ('buildings', sub_f, SHELL, 52 * S),
+             ('five AI tiers · records', cap_f, DIM, 76 * S),
+             ('no DLC required', cap_f, DIM, 90 * S)]
 
     for text, face, colour, offset in lines:
         d.text((box[0] + 14 * S, box[1] + offset), text, font=face, fill=colour)
