@@ -33,8 +33,6 @@ namespace PlayableRecreation
         /// <summary>AI "생각 중" 연출의 기준 시간(초). 난이도가 높을수록 짧아진다.</summary>
         public float botThinkSeconds = 0.75f;
 
-        public bool tutorialSeen = false;
-
         // ---------- 숙련도 ----------
 
         /// <summary>난이도를 깰수록 식민자의 그 여가·학습이 아주 조금씩 좋아진다.</summary>
@@ -138,7 +136,6 @@ namespace PlayableRecreation
 
             Scribe_Values.Look(ref linkToPawnSkill, "linkToPawnSkill", false);
             Scribe_Values.Look(ref botThinkSeconds, "botThinkSeconds", 0.75f);
-            Scribe_Values.Look(ref tutorialSeen, "tutorialSeen", false);
 
             Scribe_Values.Look(ref masteryBonus, "masteryBonus", true);
             Scribe_Values.Look(ref playThought, "playThought", true);

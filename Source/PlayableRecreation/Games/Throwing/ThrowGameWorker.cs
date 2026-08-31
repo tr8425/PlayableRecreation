@@ -139,13 +139,6 @@ namespace Throwing
             float delta = lastTime <= 0f ? 0f : Mathf.Min(0.1f, now - lastTime);
             lastTime = now;
 
-            // 이닝이 넘어갔으면 과녁을 치운다.
-            if (match.Inning != drawnInning)
-            {
-                landed.Clear();
-                drawnInning = match.Inning;
-            }
-
             switch (stage)
             {
                 case Stage.Aim:
@@ -221,6 +214,13 @@ namespace Throwing
         private void NextThrower(float now)
         {
             if (match.IsOver) return;
+
+            // 이닝이 넘어갔으면 이제 과녁을 치운다 — 마지막 한 발을 보여준 뒤다.
+            if (match.Inning != drawnInning)
+            {
+                landed.Clear();
+                drawnInning = match.Inning;
+            }
 
             sweep = 0f;
             sweepDirection = 1f;

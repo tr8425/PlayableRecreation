@@ -120,7 +120,7 @@ namespace PlayableRecreation.UI
             threatAtOpen = ThreatPresent();
             nextThreatCheck = openedAt + ThreatCheckInterval;
 
-            if (game.tutorialPages > 0 && !PRMod.Settings.tutorialSeen)
+            if (game.tutorialPages > 0 && !Dialog_Tutorial.SeenFor(game))
                 Find.WindowStack.Add(new Dialog_Tutorial(game, null));
         }
 
@@ -129,6 +129,9 @@ namespace PlayableRecreation.UI
             base.PostClose();
 
             AccumulatePlayTime();
+
+            // 이긴 그 프레임에 바로 창을 닫아도 기록은 남아야 한다.
+            if (worker != null && worker.IsOver) FinishMatch();
 
             GameComponent_Recreation component = GameComponent_Recreation.Current;
             if (component == null) return;
@@ -212,7 +215,11 @@ namespace PlayableRecreation.UI
         public override void WindowUpdate()
         {
             base.WindowUpdate();
-            if (worker == null || worker.IsOver) return;
+            if (worker == null) return;
+
+            // 판은 Tick 에서 끝날 수도, 판을 클릭하는 순간 끝날 수도 있다.
+            // 정리는 어느 쪽이든 다음 프레임의 여기서 한 번만 일어난다.
+            if (worker.IsOver) { FinishMatch(); return; }
 
             float now = Time.realtimeSinceStartup;
 
@@ -221,8 +228,6 @@ namespace PlayableRecreation.UI
 
             worker.Tick(now);
             TrackSavePoint();
-
-            if (worker.IsOver) FinishMatch();
         }
 
         /// <summary>게임이 알려준 안전한 지점마다 가구 위의 판을 갱신해 둔다. 별도 저장 버튼은 없다.</summary>

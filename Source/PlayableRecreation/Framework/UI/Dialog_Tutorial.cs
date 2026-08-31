@@ -50,11 +50,17 @@ namespace PlayableRecreation.UI
             forcePause = Current.ProgramState == ProgramState.Playing;
         }
 
+        /// <summary>규칙 안내는 게임마다 따로 센다. 우르를 읽었다고 편자를 건너뛰지 않는다.</summary>
+        public static bool SeenFor(MiniGameDef game)
+        {
+            return game != null && PRMod.Settings.GetBool(game.defName + ".tutorialSeen", false);
+        }
+
         public override void PostClose()
         {
             base.PostClose();
 
-            PRMod.Settings.tutorialSeen = true;
+            PRMod.Settings.SetBool(game.defName + ".tutorialSeen", true);
             PRMod.Settings.Write();
 
             if (onFinished != null) onFinished();

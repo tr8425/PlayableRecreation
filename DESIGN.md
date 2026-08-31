@@ -1,7 +1,14 @@
-# 우르의 게임 (Royal Game of Ur) — RimWorld 모드 기획서
+# 직접 하는 오락 (Playable Recreation) — RimWorld 모드 기획서
 
-> 오락가구 **Game-of-Ur board** 를 우클릭해 **플레이어 본인이** AI 봇과 우르의 게임을 두는 모드.
-> 작성일: 2026-08-30 (rev.2) / 대상: RimWorld 1.6
+> 오락 가구를 우클릭해 **플레이어 본인이** AI 상대와 그 게임을 하는 모드.
+> 우르의 게임 · 편자 던지기 · 후프스톤.
+> 작성일: 2026-08-30 (rev.3) / 대상: RimWorld 1.6
+
+**rev.3 변경 요약**
+- 인게임 계층을 **게임을 모르는 프레임워크**와 **게임별 워커**로 분리 (§12)
+- 편자막대 · 후프스톤 추가 — 워커 하나에 Def 둘
+- 모드 이름과 packageId 변경: `tr8425.playablerecreation` (Workshop 미배포 상태라 안전)
+- 이 문서의 §1~§11 은 **우르 한 게임의 명세**로 읽는다. 프레임워크가 무엇을 가져갔는지는 §12
 
 **rev.2 변경 요약**
 - 진입 방식을 **RimChess 관습**으로 확정 (폰 선택 → 보드 우클릭 → 직접 플레이)
@@ -87,7 +94,9 @@
 
 ### 1.1 한 줄 정의
 
-> 식민지의 우르 보드를 우클릭하면, **기원전 2500년의 실제 보드게임을 당신이 직접 둔다.**
+> 식민지의 오락 가구를 우클릭하면, **식민자가 하던 그 게임을 당신이 직접 한다.**
+>
+> 우르의 게임(기원전 2500년의 보드게임) · 편자 던지기 · 후프스톤.
 
 ### 1.2 핵심 경험 (Core Loop)
 
@@ -665,61 +674,76 @@ public sealed class UrRecord : IExposable {
 
 ---
 
-## 12. 프로젝트 구조
+## 12. 구조 — 프레임워크와 게임
+
+우르 하나로 끝낼 계획이었으나, 같은 창을 편자막대·후프스톤에도 쓰기로 하면서
+**인게임 계층을 게임을 모르는 프레임워크와 게임별 워커로 갈랐다.**
+
+### 12.1 이음매
+
+프레임워크는 **수명만** 소유한다. 게임은 **Rect 하나 안의 전부**를 소유한다.
+
+| 프레임워크가 소유 | 게임이 소유 |
+|---|---|
+| 진입 — 우클릭 · 기즈모 · 걸어가기 Job | 판 그리기와 조작 전부 (`Rect` 하나 받고 그 안은 자유) |
+| 창 껍데기 — 일시정지, 위협 인터럽트, 도구 줄, 상태 줄 | 규칙 · AI · 연출 |
+| 세션 저장 · 이어하기 · 무효화 7종 | 자기 상태 직렬화(`MiniGameSaveData` 파생) |
+| 난이도 선택 창, 기록, 숙련도, 튜토리얼 쪽 넘김 | 난이도별 동작, 튜토리얼 쪽 그림 |
+
+**턴도 주사위도 상대도 프레임워크의 개념이 아니다.** 그래서 실시간 조준 게임인 편자막대가
+턴제 보드게임인 우르와 같은 창에 들어간다 — 구현체 둘이 서로 아무것도 공유하지 않는데도.
+
+`MiniGameWorker` 의 필수는 다섯이다: 시작하고(`StartNew`), 갱신하고(`Tick`), 그리고(`DrawPlayArea`),
+끝났는지 답하고(`IsOver`/`PlayerWon`), 진행량을 낸다(`Rounds`/`SavePoint`).
+무르기 · 로그 · 저장 · 튜토리얼 · 설정은 전부 선택이다 — 편자막대는 무르기를 그냥 두었다.
+
+게임별 설정은 `PRSettings` 의 이름표 자루(`GetBool("PR_Ur.highlight", …)`)에 실린다.
+ModSettings 는 Def 가 로드되기 **전에** 읽히므로, 게임별 설정을 타입으로 나누면 불러올 시점에 그 타입이 없다.
+
+### 12.2 폴더
 
 ```
-RoyalGameOfUr/
-├─ About/
-│  ├─ About.xml                  (packageId: tr8425.royalgameofur, supportedVersions 1.6,
-│  │                              외부 의존성 없음)
-│  ├─ Preview.png                (640×360)
-│  └─ ModIcon.png
+RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable Recreation)
+├─ About/                          (packageId: tr8425.playablerecreation)
 ├─ Defs/
-│  ├─ JobDefs/Jobs_RGU.xml       (RGU_GoToUrBoard — 몰입 모드 전용, 기본 미사용)
-│  ├─ ThoughtDefs/Thoughts_RGU.xml  (RGU_WonAtUr / RGU_LostAtUr — 기본 OFF)
-│  └─ TaleDefs/Tales_RGU.xml     (RGU_WonUrMatch — 예술 작품 소재)
-├─ Patches/
-│  └─ Patch_GameOfUrBoard.xml    (GameOfUrBoard 에 CompProperties_UrBoard 주입 — 추가만)
-├─ Languages/
-│  ├─ English/Keyed/RGU.xml
-│  └─ Korean/Keyed/RGU.xml
-├─ Textures/RGU/                 (board, piece_p, piece_b, die_0, die_1, rosette, overlay_saved)
-├─ Sounds/RGU/                   (dice_roll, piece_move, capture, rosette, win, lose)
-├─ Assemblies/                   (빌드 산출물 RoyalGameOfUr.dll)
-└─ Source/RoyalGameOfUr/
-   ├─ RoyalGameOfUr.csproj       (net472, Krafs.Rimworld.Ref 또는 로컬 DLL 참조)
-   ├─ Core/                      ★ Verse 의존 0 — 단위 테스트 대상
-   │  ├─ Side.cs                 (진영 + Opponent 확장)
-   │  ├─ UrBoardLayout.cs        (경로 테이블, 로제트 상수, 좌표 변환)
-   │  ├─ UrMove.cs · UrGameState.cs · UrRules.cs
-   │  ├─ UrDice.cs               (UrRoll · UrDice · UrDiceStream)
-   │  └─ UrMatch.cs              (한 판의 진행 상태 기계 + 기보)
-   ├─ AI/                        ★ Verse 의존 0
-   │  ├─ IUrAi.cs · RandomAi.cs · GreedyAi.cs · ExpectiminimaxAi.cs
-   │  ├─ UrEvaluator.cs
-   │  └─ UrDifficulty.cs         (난이도 enum + 깊이/실수율/생성 팩토리)
-   ├─ Session/
-   │  ├─ GameComponent_Ur.cs     (보상 하루 한도. M6에서 세션 레지스트리 + 무효화 폴링 추가)
-   │  └─ UrSession.cs · InvalidationReason.cs             (M6)
-   ├─ Integration/
-   │  ├─ CompUrBoard.cs          (유일한 게임 접점: 우클릭 + 기즈모)
-   │  ├─ UrEntry.cs              (진입 분기: 몰입 모드 / 폰 지능 연동 / 난이도 선택)
-   │  ├─ JobDriver_GoToUrBoard.cs(몰입 모드에서만 발급)
-   │  ├─ UrRewards.cs            (판 종료 시 joy / XP / Thought / Tale, 하루 한도)
-   │  └─ RGUDefOf.cs
-   ├─ UI/
-   │  ├─ Dialog_UrGame.cs · Dialog_UrDifficulty.cs
-   │  ├─ UrBoardRenderer.cs · UrDiceWidget.cs
-   │  ├─ UrTextures.cs           (절차적 도형 텍스처 + UrTheme 색상)
-   │  ├─ UrSounds.cs             (바닐라 SoundDef 차용 — 전용 오디오는 M8)
-   │  └─ Dialog_UrTutorial.cs · Dialog_UrLeaderboard.cs   (M5 / M7)
-   ├─ Stats/
-   │  └─ UrRecord.cs · UrPersonalStats.cs · UrColonyStats.cs
-   └─ Settings/
-      └─ RGUMod.cs · RGUSettings.cs · RGUDefOf.cs
+│  ├─ MiniGameDefs/MiniGames_PR.xml   (PR_Ur · PR_Horseshoes · PR_Hoopstone)
+│  ├─ JobDefs/Jobs_PR.xml             (PR_GoToGame — 몰입 모드 전용)
+│  ├─ ThoughtDefs/Thoughts_PR.xml     (게임마다 6단계, 플레이어 숙련도를 따라감)
+│  └─ TaleDefs/Tales_PR.xml           (PR_WonMatch — 셋이 공용)
+├─ Patches/Patch_Recreation.xml    (세 가구에 CompProperties_MiniGame 주입 — 추가만)
+├─ Languages/{English,Korean}/Keyed/{PR,RGU,THR}.xml
+├─ Assemblies/PlayableRecreation.dll
+└─ Source/PlayableRecreation/
+   ├─ Framework/                   ★ 게임을 하나도 모른다
+   │  ├─ MiniGameDef.cs · MiniGameWorker.cs · MiniGameSaveData.cs
+   │  ├─ CompMiniGame.cs · GameEntry.cs · JobDriver_GoToGame.cs · PRDefOf.cs
+   │  ├─ GameSession.cs · Invalidation.cs · GameComponent_Recreation.cs
+   │  ├─ MapComponent_Recreation.cs · Mastery.cs · Thought_Mastery.cs
+   │  ├─ GameRecord.cs · RecordStore.cs · PRSettings.cs · PRMod.cs
+   │  └─ UI/ Dialog_MiniGame · Dialog_Difficulty · Dialog_Leaderboard
+   │         Dialog_Tutorial · PRTheme · PRTextures
+   └─ Games/                       ★ 서로를 모른다
+      ├─ Ur/
+      │  ├─ Core/                  ★ Verse 의존 0 — 단위 테스트 대상
+      │  ├─ AI/                    ★ Verse 의존 0
+      │  ├─ UrGameWorker.cs · UrSaveData.cs · UrSettings.cs
+      │  └─ UrBoardRenderer.cs · UrDiceWidget.cs · UrTextures.cs · UrSounds.cs
+      └─ Throwing/                 (편자막대 · 후프스톤 — 워커 하나, Def 둘)
+         ├─ Core/                  ★ Verse 의존 0 — ThrowRules · ThrowMatch · ThrowAim
+         └─ ThrowGameWorker.cs · ThrowRulesExtension.cs · ThrowSaveData.cs · ThrowTheme.cs
 
-Tests/RoyalGameOfUr.Tests/       (Core/AI 전용 — RimWorld 없이 실행)
+Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 ```
+
+### 12.3 게임을 하나 더 붙이려면
+
+1. `MiniGameWorker` 파생 하나 (+ 저장을 지원하면 `MiniGameSaveData` 파생 하나)
+2. `MiniGameDef` 하나 — workerClass, 난이도 수, 튜토리얼 쪽수, 집계 이름표, 바닐라 여가 Job
+3. `Patches/` 에 그 가구로 `CompProperties_MiniGame` 한 줄
+4. 번역 키 한 벌
+
+프레임워크는 손대지 않는다. 후프스톤은 2번과 3번만으로 만들어졌다 — 편자막대와 같은 워커에
+`ThrowRulesExtension` 값만 달리 주었다(이닝당 던지기 3회, 15점 선취, 던질 때마다 채점).
 
 ---
 
@@ -736,6 +760,7 @@ Tests/RoyalGameOfUr.Tests/       (Core/AI 전용 — RimWorld 없이 실행)
 | **M6 세션/무효화** ✅ | `UrSession` · `UrInvalidation` · 60틱 폴링 · 무르기/재시도/기권 | 턴 시작 시점 자동 저장 · 무효화 7종 · 되감기 테스트 6종 통과 |
 | **M7 리더보드** ✅ | `UrRecord` · `UrRecords`(config 파일) · `Dialog_UrLeaderboard` | 나의 통산(세이브 무관) + 이 식민지 2탭 |
 | **M8 배포** ✅ | Preview.png · ModIcon.png · About 설명 · 점검 스크립트 | 빌드 경고 0 · 테스트 89개 · 번역 키 156개 한·영 일치 |
+| **M9 프레임워크** ✅ | `Framework/` 분리 · 우르 이식 · 편자막대 · 후프스톤 | 프레임워크가 게임을 참조하지 않음 · 게임끼리 서로 참조하지 않음 · 테스트 103개 · 번역 키 198개 |
 
 **의존 관계**: M1은 M0과 병행 가능(Verse 무관). M3은 M1 필수. M6/M7은 M2 이후 어디든.
 **rev.1 대비**: JobDriver·joy 틱·폰 대 폰이 사라져 M4가 크게 가벼워졌다.
@@ -767,53 +792,72 @@ Tests/RoyalGameOfUr.Tests/       (Core/AI 전용 — RimWorld 없이 실행)
 
 ## 15. 현재 상태
 
-**M0 ~ M8 전 구간 완료 (2026-08-31)**
+**M0 ~ M9 완료 (2026-08-31)**
 
 | | 산출물 |
 |---|---|
-| **M0 뼈대** | `About.xml` · `Patches/Patch_GameOfUrBoard.xml` · `CompUrBoard`(우클릭 + 기즈모) · `RGUMod`/`RGUSettings` · 한/영 번역 |
-| **M1 룰 엔진** | `Core/`(`Verse` 의존 0). 랜덤 대 랜덤 10,000판 무결 |
-| **M2 UI** | 원클릭 말 조작, 합법수/잡기 강조, 주사위 위젯, 자동 패스, 수순 로그, `forcePause` |
+| **M0 뼈대** | `About.xml` · 가구 패치 · 우클릭 + 기즈모 · 모드 설정 · 한/영 번역 |
+| **M1 룰 엔진** | `Games/Ur/Core/`(`Verse` 의존 0). 랜덤 대 랜덤 10,000판 무결 |
+| **M2 UI** | 원클릭 말 조작, 합법수/잡기 강조, 주사위 위젯, 자동 패스, 수순 로그 |
 | **M3 AI** | 난이도 5단계 + Expectiminimax. 명인 vs 견습 92.7% · 1수 1.62ms |
-| **M4 마감** | 사운드 8종 · 몰입 모드 Job · 폰 지능 연동 · 설정 창 |
-| **M5 튜토리얼** | `Dialog_UrTutorial` 6쪽(목표/내 길/주사위/로제트/잡기·안전칸/정확 골인) — 매 쪽 실제 보드 도식. 첫 대국 시 자동 1회. 연습 모드(초보 고정·미기록). 칸 툴팁 · 이동 강조 · 잡힐 확률(기본 OFF) |
-| **M6 세션/무효화** | `UrSession`(턴 시작 시점 자동 저장) · `UrInvalidation` 7종 · `GameComponent_Ur` 60틱 폴링 · 무르기(같은 눈 재현) · 재시도(하루 1회) · 기권 · 최초 1회 설명 편지 |
-| **M7 리더보드** | `UrRecord`/`UrRecords` — 나의 통산은 `Config/RoyalGameOfUr_Records.xml`, 이 식민지는 세이브 내부. `Dialog_UrLeaderboard` 2탭 |
-| **M8 배포** | `About/Preview.png`(640×360) · `About/ModIcon.png` · Workshop 설명(한/영) · 점검 스크립트 |
+| **M4 마감** | 사운드 · 몰입 모드 Job · 폰 스킬 연동 · 설정 창 |
+| **M5 튜토리얼** | 6쪽 온보딩 — 매 쪽 실제 도식. 게임마다 처음 한 번 자동. 연습 판(최저 단계·미기록) |
+| **M6 세션/무효화** | `GameSession`(게임이 정한 지점에서 자동 저장) · 무효화 7종 · 60틱 폴링 · 무르기 · 재시도(하루 1회) · 기권 |
+| **M7 리더보드** | `GameRecord`/`RecordStore` — 나의 통산은 `Config/PlayableRecreation_Records.xml`, 이 식민지는 세이브 내부. 게임 탭 + 범위 탭 |
+| **M8 배포** | `About/Preview.png`(640×360, 3면 구성) · `ModIcon.png` · Workshop 설명(한/영) · 점검 스크립트 |
+| **M9 프레임워크** | 인게임 계층을 `Framework/` 와 `Games/` 로 분리. 우르 이식 + 편자막대 + 후프스톤 |
+
+**게임 셋**
+
+| | 가구 | 규칙 | 연동 스킬 | 무르기 |
+|---|---|---|---|---|
+| 우르의 게임 | `GameOfUrBoard` | 필켈 복원 룰. 말 7개, 4면 주사위 4개 | 지적 | ○ |
+| 편자 던지기 | `HorseshoesPin` | 이닝당 2번, 21점 선취. 이닝이 끝나면 한쪽만 득점 | 사격 | ✕ |
+| 후프스톤 | `HoopstoneRing` | 이닝당 3번, 15점 선취. 던질 때마다 채점 | 사격 | ✕ |
+
+던지기 두 종은 **워커 하나에 Def 둘**이다. 규칙 차이는 `ThrowRulesExtension` 값 네 개가 전부다.
+상대의 던지기는 `(시드, 순번)`으로 결정되므로 이어 던져도 같은 결과가 나온다 — 우르의 주사위와 같은 원리(P4).
 
 **보상 구조 (오너 방침 반영)**
 
 폰에게 반복 플레이를 강요하지 않는다. **플레이어가 각 난이도를 처음 깨는 것**만이 숙련도를 올리고,
-숙련도는 식민자가 (바닐라 여가로) 우르를 둘 때 얻는 여가·지적 XP를 단계당 +4%, 최대 +20% 늘린다.
-식민자가 얻는 생각 `RGU_PlayedUr` 의 문구도 숙련도 단계를 따라 6단계로 바뀐다.
+숙련도는 식민자가 (바닐라 여가로) **그 가구를 쓸 때** 얻는 여가·스킬 XP를 단계당 +4%, 최대 +20% 늘린다.
+획득량은 바닐라 `JobDef` 가 이미 들고 있는 `joySkill`·`joyXpPerTick` 에서 그대로 읽어 쓴다.
+숙련도는 **게임마다 따로** 쌓인다 — 우르를 마스터해도 편자는 처음부터다.
 
 **검증**
 
 ```
 dotnet build -c Release   경고 0 · 오류 0
-dotnet test               89개 통과 (룰 R1~R11 · 주사위 비트 고정 · 10,000판 시뮬 · 되감기/복원 6종)
-XML                       8종 유효
-번역 키                    156개 한·영 완전 일치 · 미사용 키 0 · 코드가 쓰는 키 누락 0
+dotnet test               103개 통과 (우르 룰·주사위·시뮬·되감기 89 + 던지기 규칙·조준 14)
+XML                       15종 유효
+번역 키                    198개 한·영 완전 일치 · 미사용 키 0 · 코드가 쓰는 키 누락 0
 ```
 
-**인게임 검증**: RimWorld 1.6 실환경에서 우클릭 → 난이도 선택 → 대국 진행 **동작 확인**(초보).
-M5~M7에서 추가된 튜토리얼·세션 무효화·리더보드는 **아직 인게임 미확인** — 배포 전 클린 프로필 QA 필요.
+**인게임 검증**: 우르는 RimWorld 1.6 실환경에서 우클릭 → 난이도 선택 → 대국 진행 **동작 확인**(초보).
+튜토리얼 · 세션 무효화 · 리더보드 · **프레임워크 분리 이후 전 구간** · **던지기 두 종 전부**는
+**아직 인게임 미확인** — 배포 전 클린 프로필 QA 필요.
 
 **남은 일 (배포 직전)**
 
-1. 클린 프로필(Core만) QA — 세이브/로드 후 이어두기, 무효화 트리거 3종(청소·수리·전투) 실증
+1. 클린 프로필(Core만) QA
+   - 세 가구 우클릭 · 기즈모 · 인스펙트 문자열
+   - 세이브/로드 후 이어하기 (우르 = 턴 경계, 던지기 = 이닝 경계)
+   - 무효화 트리거 3종(청소 · 수리 · 전투) 실증
+   - 게임별 튜토리얼 자동 1회, 게임별 숙련도 누적, 게임 on/off 토글
+   - 한국어 오타 육안 확인 — 점검 스크립트는 키 짝만 보지 문장은 못 본다
 2. Steam Workshop 업로드
 
 개발용 정션: `RimWorld\Mods\RoyalGameOfUr` → 이 저장소 (해제하려면 그 폴더만 삭제)
-웹 플레이테스트 벤치: `Tools/WebPreview/index.html` — 룰·AI 이식본. 주사위는 C#과 **비트 단위 일치**(테스트로 고정)
+웹 플레이테스트 벤치: `Tools/WebPreview/index.html` — 우르 룰·AI 이식본. 주사위는 C#과 **비트 단위 일치**
 
 **빌드 방법**
 
 ```
-# 모드 어셈블리 (Assemblies\RoyalGameOfUr.dll 로 출력)
-dotnet build Source/RoyalGameOfUr -c Release
+# 모드 어셈블리 (Assemblies\PlayableRecreation.dll 로 출력)
+dotnet build Source/PlayableRecreation -c Release
 # RimWorld 경로가 다르면
-dotnet build Source/RoyalGameOfUr -c Release -p:RimWorldDir="D:\...\RimWorld"
+dotnet build Source/PlayableRecreation -c Release -p:RimWorldDir="D:\...\RimWorld"
 
 # 룰 엔진 · AI 테스트 (RimWorld 불필요)
 dotnet test Tests/RoyalGameOfUr.Tests
