@@ -12,3 +12,6 @@ Assemblies/*.deps.json
 
 # 파이썬 도구 캐시
 __pycache__/
+
+# 배포용으로 구운 폴더
+dist/

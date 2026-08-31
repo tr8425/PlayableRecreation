@@ -1,6 +1,57 @@
-[h1]직접 하는 오락 · Playable Recreation[/h1]
+[h1]Playable Recreation[/h1]
 
-[i]스팀 창작마당 설명란에 그대로 붙여 넣는 글. 한국어 먼저, 영어가 뒤에 온다.[/i]
+The recreation your colonists have been enjoying, played by you instead.
+
+Select a colonist and right-click the furniture. Selecting the furniture alone works too.
+
+[h2]Seven things to do[/h2]
+[list]
+[*][b]The game of Ur[/b] — a board game from 2500 BC. Still thrilling, still infuriating
+[*][b]Chess[/b] — sixty-four squares. Your opponent looks five moves ahead
+[*][b]Poker[/b] — heads-up Texas hold'em. Bust your opponent to win
+[*][b]Nine-ball[/b] — the balls actually roll. Hit the lowest number first
+[*][b]Horseshoes[/b] — stick them on the pin. First to 21
+[*][b]Hoopstone[/b] — put the stone through the ring. First to 15
+[*][b]Stargazing[/b] — point the telescope at this planet's sky. The one thing here you cannot win
+[/list]
+
+All seven are base-game buildings. No DLC required.
+
+[h2]While you play[/h2]
+
+The six games each have five tiers of AI — novice to master — plus a rules walkthrough, practice games, and a record per tier, counted both all-time and for this colony.
+
+Colony time keeps running. The mod never touches your game speed: space still pauses, exactly as it always did. Enter is the key that moves the board. If you would rather the colony held still, the mod can pause for you while a window is open.
+
+When trouble arrives the window closes and the position stays on the furniture. Sit down again and you pick up where you left off, unless someone moved it, broke it, or cleaned it in the meantime. You choose which of those spoil a position.
+
+You also choose how many undos you get. Set it to zero and there are none.
+
+[h2]The telescope is different[/h2]
+
+The stars come from the seed your world was generated from, so every world has its own sky.
+
+What you can see depends on your settlement's real latitude and longitude, the hour, and the weather. At the northern edge of the world the southern stars never rise at all. During the day the sun washes them out.
+
+Join stars into constellations and name them. Those belong to the world, not to the telescope. Move the gravship and your latitude changes, and the sky with it.
+
+With [b]Odyssey[/b] installed you also see what passes overhead. Standing on an asteroid or an orbital platform gives you a different sky altogether — the planet fills one side of it, and you can turn the telescope down and look at the surface instead.
+
+[h2]Mastery[/h2]
+
+The first time you clear a difficulty, colonists get a little more recreation and a little more skill from that piece of furniture. It accrues per game. Switch it off in the settings if you would rather it didn't.
+
+[h2]Under the hood[/h2]
+[list]
+[*]No Harmony patches
+[*]No vanilla Defs modified — one component is [i]added[/i] to the furniture, nothing else
+[*]Safe to add to and remove from existing saves. Remove it and the furniture goes back to vanilla
+[*]Every entry can be switched off. Switching one off only removes the right-click option; colonists still use the furniture on their own
+[*]English · 한국어
+[*]No multiplayer support
+[/list]
+
+RimWorld 1.6.
 
 [hr][/hr]
 
@@ -27,7 +78,7 @@
 
 여섯 게임에는 AI 상대 5단계 — 초보부터 명인까지 — 와 규칙 안내, 연습 판, 난이도별 전적이 붙습니다. 전적은 전체와 이번 콜로니를 따로 셉니다.
 
-하는 동안 콜로니 시간은 계속 흐릅니다. 게임 속도는 건드리지 않습니다 — 멈추고 싶으면 늘 하던 대로 스페이스를 누르면 되고, 모드 설정에서 판을 여는 동안 자동으로 멈추게 할 수도 있습니다.
+하는 동안 콜로니 시간은 계속 흐릅니다. 게임 속도는 건드리지 않습니다 — 스페이스는 늘 그랬듯 일시정지고, 판을 진행시키는 키는 엔터입니다. 멈춰 두고 싶으면 모드 설정에서 판을 여는 동안 자동으로 멈추게 할 수 있습니다.
 
 위협이 나타나면 창이 닫히고, 하던 판은 가구에 남습니다. 다시 앉으면 그 자리에서 이어집니다 — 그 사이 아무도 가구를 옮기거나 부수거나 닦지 않았다면. 무엇이 판을 무르게 할지는 설정에서 하나씩 고를 수 있습니다.
 
@@ -53,65 +104,8 @@
 [*]바닐라 Def 를 수정하지 않습니다. 가구에 컴포넌트 하나를 [i]더할[/i] 뿐입니다
 [*]기존 세이브에 넣고 빼도 안전합니다. 빼면 가구는 바닐라 상태로 돌아갑니다
 [*]항목은 하나씩 끌 수 있습니다. 끄면 우클릭 메뉴만 사라지고, 식민자의 자율 여가는 그대로입니다
-[*]한국어 · English
+[*]English · 한국어
 [*]멀티플레이어는 지원하지 않습니다
-[/list]
-
-RimWorld 1.6.
-
-[hr][/hr]
-
-[h1]Playable Recreation[/h1]
-
-The recreation your colonists have been enjoying, played by you instead.
-
-Select a colonist and right-click the furniture. Selecting the furniture alone works too.
-
-[h2]Seven things to do[/h2]
-[list]
-[*][b]The game of Ur[/b] — a board game from 2500 BC. Still thrilling, still infuriating
-[*][b]Chess[/b] — sixty-four squares. Your opponent looks five moves ahead
-[*][b]Poker[/b] — heads-up Texas hold'em. Bust your opponent to win
-[*][b]Nine-ball[/b] — the balls actually roll. Hit the lowest number first
-[*][b]Horseshoes[/b] — stick them on the pin. First to 21
-[*][b]Hoopstone[/b] — put the stone through the ring. First to 15
-[*][b]Stargazing[/b] — point the telescope at this planet's sky. The one thing here you cannot win
-[/list]
-
-All seven are base-game buildings. No DLC required.
-
-[h2]While you play[/h2]
-
-The six games each have five tiers of AI — novice to master — plus a rules walkthrough, practice games, and a record per tier, counted both all-time and for this colony.
-
-Colony time keeps running. The mod never touches your game speed — pause the way you always do, or have the mod pause for you while a window is open.
-
-When trouble arrives the window closes and the position stays on the furniture. Sit down again and you pick up where you left off, unless someone moved it, broke it, or cleaned it in the meantime. You choose which of those spoil a position.
-
-You also choose how many undos you get. Set it to zero and there are none.
-
-[h2]The telescope is different[/h2]
-
-The stars come from the seed your world was generated from, so every world has its own sky.
-
-What you can see depends on your settlement's real latitude and longitude, the hour, and the weather. At the northern edge of the world the southern stars never rise at all. During the day the sun washes them out.
-
-Join stars into constellations and name them. Those belong to the world, not to the telescope. Move the gravship and your latitude changes, and the sky with it.
-
-With [b]Odyssey[/b] installed you also see what passes overhead. Standing on an asteroid or an orbital platform gives you a different sky altogether — the planet fills one side of it, and you can turn the telescope down and look at the surface instead.
-
-[h2]Mastery[/h2]
-
-The first time you clear a difficulty, colonists get a little more recreation and a little more skill from that piece of furniture. It accrues per game. Switch it off in the settings if you would rather it didn't.
-
-[h2]Under the hood[/h2]
-[list]
-[*]No Harmony patches
-[*]No vanilla Defs modified — one component is [i]added[/i] to the furniture, nothing else
-[*]Safe to add to and remove from existing saves. Remove it and the furniture goes back to vanilla
-[*]Every entry can be switched off. Switching one off only removes the right-click option; colonists still use the furniture on their own
-[*]한국어 · English
-[*]No multiplayer support
 [/list]
 
 RimWorld 1.6.

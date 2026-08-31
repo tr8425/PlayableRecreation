@@ -3,11 +3,23 @@
   <name>Playable Recreation</name>
   <author>Team Rostra</author>
   <packageId>teamrostra.playablerecreation</packageId>
-  <modVersion>0.2.0</modVersion>
+  <modVersion>1.0.0</modVersion>
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
-  <description>식민자가 하던 오락을, 이제 당신이 직접 합니다.
+  <description>The recreation your colonists have been enjoying, played by you instead.
+
+Select a colonist and right-click the furniture. Seven things to do: the game of Ur, chess, poker, nine-ball, horseshoes, hoopstone, and the telescope.
+
+The six games each have five tiers of AI, a rules walkthrough, practice games, and a record per tier. Colony time keeps running while you play. When trouble arrives the window closes and the position stays on the furniture, unless something knocks it over first.
+
+The telescope is the one thing here you cannot win. The stars come from the seed your world was generated from, so every world has its own sky, and what you can see depends on your settlement's real latitude and longitude, the hour, and the weather. Join stars into constellations and name them; those belong to the world, not to the telescope. Moving the gravship changes your latitude, and with it the sky. With Odyssey installed you also see what passes overhead, and standing on an asteroid or a platform gives you a different sky altogether — the planet fills one side of it, and you can point the telescope down at the surface instead.
+
+No Harmony patches. No vanilla Defs modified. Safe to add to and remove from existing saves. Each entry can be switched off in the mod settings. Korean and English.
+
+---
+
+식민자가 하던 오락을, 이제 당신이 직접 합니다.
 
 식민자를 선택하고 가구를 우클릭하세요. 가구만 선택해도 됩니다.
 
@@ -25,17 +37,5 @@
 
 난이도를 처음 깰 때마다 그 가구에서 식민자가 얻는 여가와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다.
 
-Harmony 패치를 쓰지 않고 바닐라 Def도 수정하지 않습니다. 기존 세이브에 넣고 빼도 안전합니다. 항목은 모드 설정에서 하나씩 끌 수 있고, 끄면 우클릭 메뉴만 사라질 뿐 식민자의 자율 여가는 그대로입니다. 멀티플레이어는 지원하지 않습니다.
-
----
-
-The recreation your colonists have been enjoying, played by you instead.
-
-Select a colonist and right-click the furniture. Seven things to do: the game of Ur, chess, poker, nine-ball, horseshoes, hoopstone, and the telescope.
-
-The six games each have five tiers of AI, a rules walkthrough, practice games, and a record per tier. Colony time keeps running while you play. When trouble arrives the window closes and the position stays on the furniture, unless something knocks it over first.
-
-The telescope is the one thing here you cannot win. The stars come from the seed your world was generated from, so every world has its own sky, and what you can see depends on your settlement's real latitude and longitude, the hour, and the weather. Join stars into constellations and name them; those belong to the world, not to the telescope. Moving the gravship changes your latitude, and with it the sky. With Odyssey installed you also see what passes overhead, and standing on an asteroid or a platform gives you a different sky altogether — the planet fills one side of it, and you can point the telescope down at the surface instead.
-
-No Harmony patches. No vanilla Defs modified. Safe to add to and remove from existing saves. Each entry can be switched off in the mod settings. Korean and English.</description>
+Harmony 패치를 쓰지 않고 바닐라 Def도 수정하지 않습니다. 기존 세이브에 넣고 빼도 안전합니다. 항목은 모드 설정에서 하나씩 끌 수 있고, 끄면 우클릭 메뉴만 사라질 뿐 식민자의 자율 여가는 그대로입니다. 멀티플레이어는 지원하지 않습니다.</description>
 </ModMetaData>
