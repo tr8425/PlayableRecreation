@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PR_Ur.label>우르의 게임</PR_Ur.label>
+  <PR_Ur.description>AI 상대와 우르 한 판.</PR_Ur.description>
+
+  <PR_Horseshoes.label>편자 던지기</PR_Horseshoes.label>
+  <PR_Horseshoes.description>AI 상대와 편자를 막대에 던져 붙인다.</PR_Horseshoes.description>
+
+  <PR_Hoopstone.label>후프스톤</PR_Hoopstone.label>
+  <PR_Hoopstone.description>AI 상대와 돌을 고리에 통과시킨다.</PR_Hoopstone.description>
+
+</LanguageData>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PR.ModTitle>Playable Recreation</PR.ModTitle>
+
+  <!-- Entry -->
+  <PR.Play.Label>Play {0}</PR.Play.Label>
+  <PR.Play.Broken>Too broken to use</PR.Play.Broken>
+  <PR.Play.Resume>Pick up where you left off (round {0}, {1})</PR.Play.Resume>
+  <PR.Play.Discard>Sweep it up and start over</PR.Play.Discard>
+
+  <!-- Window -->
+  <PR.Window.Paused>Paused</PR.Window.Paused>
+  <PR.Window.Running>Colony time is running</PR.Window.Running>
+  <PR.Window.Practice>Practice</PR.Window.Practice>
+  <PR.Header.You>You</PR.Header.You>
+  <PR.Header.YouNamed>You ({0})</PR.Header.YouNamed>
+  <PR.Header.Opponent>AI opponent ({0})</PR.Header.Opponent>
+  <PR.Log.Title>Play by play</PR.Log.Title>
+  <PR.Side.You>You</PR.Side.You>
+  <PR.Side.Opponent>AI </PR.Side.Opponent>
+
+  <!-- Difficulty -->
+  <PR.Difficulty.Title>{0} - pick your opponent</PR.Difficulty.Title>
+  <PR.Difficulty.Hint>You cannot change this once the game starts.</PR.Difficulty.Hint>
+  <PR.Difficulty.Practice>Practice game</PR.Difficulty.Practice>
+  <PR.Difficulty.Practice.Desc>Lowest tier. Nothing is recorded.</PR.Difficulty.Practice.Desc>
+  <PR.Difficulty.T0.Label>Novice</PR.Difficulty.T0.Label>
+  <PR.Difficulty.T1.Label>Apprentice</PR.Difficulty.T1.Label>
+  <PR.Difficulty.T2.Label>Skilled</PR.Difficulty.T2.Label>
+  <PR.Difficulty.T3.Label>Expert</PR.Difficulty.T3.Label>
+  <PR.Difficulty.T4.Label>Master</PR.Difficulty.T4.Label>
+
+  <!-- Buttons -->
+  <PR.Btn.NewMatch>New game</PR.Btn.NewMatch>
+  <PR.Btn.Help.Tip>How to play.</PR.Btn.Help.Tip>
+  <PR.Btn.Undo>Undo</PR.Btn.Undo>
+  <PR.Btn.Undo.Tip>Back to your last turn. {0} of {1} left.</PR.Btn.Undo.Tip>
+  <PR.Btn.Undo.Blocked>No undo above Skilled.</PR.Btn.Undo.Blocked>
+  <PR.Btn.Undo.Practice>Unlimited in practice.</PR.Btn.Undo.Practice>
+  <PR.Btn.Retry>Retry</PR.Btn.Retry>
+  <PR.Btn.Retry.Tip>Start over. Once a day.</PR.Btn.Retry.Tip>
+  <PR.Btn.Retry.Cooldown>Already retried today.</PR.Btn.Retry.Cooldown>
+  <PR.Btn.Resign>Resign</PR.Btn.Resign>
+  <PR.Btn.Resign.Tip>Recorded as a loss.</PR.Btn.Resign.Tip>
+  <PR.Btn.Records>Records</PR.Btn.Records>
+  <PR.Btn.Records.Tip>Your record by tier.</PR.Btn.Records.Tip>
+
+  <PR.Confirm.Discard>Sweep it up and start over? Recorded as a resignation.</PR.Confirm.Discard>
+  <PR.Confirm.Retry>Start over? Recorded as a resignation.</PR.Confirm.Retry>
+  <PR.Confirm.Resign>Resign? Recorded as a loss.</PR.Confirm.Resign>
+  <PR.Status.Resigned>You resigned.</PR.Status.Resigned>
+
+  <!-- Tutorial -->
+  <PR.Tut.Prev>Back</PR.Tut.Prev>
+  <PR.Tut.Next>Next</PR.Tut.Next>
+  <PR.Tut.Skip>Skip</PR.Tut.Skip>
+  <PR.Tut.Done>Play</PR.Tut.Done>
+
+  <!-- Interruption -->
+  <PR.Interrupted.Saved>There is fighting to do. You stand up and leave it as it lies.</PR.Interrupted.Saved>
+  <PR.Interrupted.Lost>There is fighting to do. You stand up and the whole thing goes over.</PR.Interrupted.Lost>
+
+  <!-- Mastery -->
+  <PR.Mastery.Cleared>{1} - first win against {0}. Mastery {2}/{3}, recreation and skill gain +{4}%</PR.Mastery.Cleared>
+  <PR.Inspect.Saved>Game in progress: round {0}, {1}</PR.Inspect.Saved>
+  <PR.Inspect.Mastery>Mastery {0}/{1} (+{2}%)</PR.Inspect.Mastery>
+
+  <!-- Invalidation -->
+  <PR.Invalidation.Combat.Label>Fighting nearby</PR.Invalidation.Combat.Label>
+  <PR.Invalidation.Cleaning.Label>Someone cleaned around it</PR.Invalidation.Cleaning.Label>
+  <PR.Invalidation.Repair.Label>Furniture repaired</PR.Invalidation.Repair.Label>
+  <PR.Invalidation.Damaged.Label>Furniture damaged</PR.Invalidation.Damaged.Label>
+  <PR.Invalidation.Moved.Label>Furniture moved</PR.Invalidation.Moved.Label>
+  <PR.Invalidation.Expired.Label>Left too long</PR.Invalidation.Expired.Label>
+
+  <PR.Invalidation.Combat.Msg>The fighting went right over the game.</PR.Invalidation.Combat.Msg>
+  <PR.Invalidation.Cleaning.Msg>Someone swept the game away along with everything else.</PR.Invalidation.Cleaning.Msg>
+  <PR.Invalidation.Repair.Msg>The repair work scattered the game.</PR.Invalidation.Repair.Msg>
+  <PR.Invalidation.Damaged.Msg>The damage left nothing anyone can read.</PR.Invalidation.Damaged.Msg>
+  <PR.Invalidation.Moved.Msg>Moving it tipped the whole game over.</PR.Invalidation.Moved.Msg>
+  <PR.Invalidation.Destroyed.Msg>It is gone, and the game with it.</PR.Invalidation.Destroyed.Msg>
+  <PR.Invalidation.Expired.Msg>Nobody remembers how that game stood.</PR.Invalidation.Expired.Msg>
+
+  <PR.Invalidation.Letter.Label>Game scattered</PR.Invalidation.Letter.Label>
+  <PR.Invalidation.Letter.Text>{0}
+
+What was sitting there was not a save file. It was a physical thing. Anyone who brushes past it knocks it over, and nobody remembers where any of it stood.
+
+You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
+
+  <!-- Records -->
+  <PR.Records.Title>Records</PR.Records.Title>
+  <PR.Records.NoGames>No games are enabled.</PR.Records.NoGames>
+  <PR.Records.Tab.Player>All time</PR.Records.Tab.Player>
+  <PR.Records.Tab.Colony>This colony</PR.Records.Tab.Colony>
+  <PR.Records.Col.Difficulty>Tier</PR.Records.Col.Difficulty>
+  <PR.Records.Col.Record>W-L</PR.Records.Col.Record>
+  <PR.Records.Col.WinRate>Win rate</PR.Records.Col.WinRate>
+  <PR.Records.Col.Fastest>Fastest</PR.Records.Col.Fastest>
+  <PR.Records.Col.Streak>Best streak</PR.Records.Col.Streak>
+  <PR.Records.Rounds>{0} rds</PR.Records.Rounds>
+  <PR.Records.Summary>{0}W {1}L, {2} lost to chaos, {3} resigned</PR.Records.Summary>
+  <PR.Records.Streak>Shutouts {0}, best streak {1}</PR.Records.Streak>
+  <PR.Records.Time>Time played {0}, undos {1}</PR.Records.Time>
+  <PR.Records.HoursMinutes>{0}h {1}m</PR.Records.HoursMinutes>
+  <PR.Records.Minutes>{0}m</PR.Records.Minutes>
+  <PR.Records.Reset>Reset records</PR.Records.Reset>
+  <PR.Records.Reset.Confirm>Erase all {0} records under [{1}]? This cannot be undone.</PR.Records.Reset.Confirm>
+  <PR.Records.Close>Close</PR.Records.Close>
+
+  <!-- Settings -->
+  <PR.Settings.Group.Games>Games</PR.Settings.Group.Games>
+  <PR.Settings.Games.Desc>Turning one off removes its right-click option. Colonists still use the furniture on their own.</PR.Settings.Games.Desc>
+  <PR.Settings.Group.Play>Play</PR.Settings.Group.Play>
+  <PR.Settings.Group.Mastery>Mastery and the colony</PR.Settings.Group.Mastery>
+  <PR.Settings.Group.Session>Unfinished games</PR.Settings.Group.Session>
+
+  <PR.Settings.Pause>Pause the game while you play</PR.Settings.Pause>
+  <PR.Settings.Pause.Desc>Off means colony time runs. The window closes itself when a threat shows up.</PR.Settings.Pause.Desc>
+  <PR.Settings.Immersion>Immersion mode (walk over first)</PR.Settings.Immersion>
+  <PR.Settings.Immersion.Desc>The window opens once the colonist reaches the furniture.</PR.Settings.Immersion.Desc>
+  <PR.Settings.LinkSkill>Set the tier from the colonist skill</PR.Settings.LinkSkill>
+  <PR.Settings.LinkSkill.Desc>Skips the picker. Each game uses its own skill.</PR.Settings.LinkSkill.Desc>
+  <PR.Settings.Sounds>Sound effects</PR.Settings.Sounds>
+  <PR.Settings.ThinkTime>AI pause before acting: {0}s (shorter at higher tiers)</PR.Settings.ThinkTime>
+
+  <PR.Settings.Mastery.Explain>One step per tier you beat for the first time. +{0}% each, +{1}% for all of them. Tracked per game.</PR.Settings.Mastery.Explain>
+  <PR.Settings.Mastery.Current>{0} mastery: {1}/{2} (+{3}%)</PR.Settings.Mastery.Current>
+  <PR.Settings.MasteryBonus>Colonists get more out of the furniture as you improve</PR.Settings.MasteryBonus>
+  <PR.Settings.PlayThought>Give colonists a thought after playing</PR.Settings.PlayThought>
+  <PR.Settings.PlayThought.Desc>The wording follows your mastery.</PR.Settings.PlayThought.Desc>
+  <PR.Settings.DisableImpact>Turn off all colony effects</PR.Settings.DisableImpact>
+  <PR.Settings.NoImpact>Nothing about your colony changes.</PR.Settings.NoImpact>
+
+  <PR.Settings.SaveSessions>Leave unfinished games on the furniture</PR.Settings.SaveSessions>
+  <PR.Settings.SaveSessions.Desc>Closing the window leaves the position where it is.</PR.Settings.SaveSessions.Desc>
+  <PR.Settings.Invalidate>A disturbed board loses the game on it</PR.Settings.Invalidate>
+  <PR.Settings.Invalidate.Desc>Whatever happens around the furniture happens to the game.</PR.Settings.Invalidate.Desc>
+  <PR.Settings.ExpiryDays>Forget it {0} days after you last touched it</PR.Settings.ExpiryDays>
+  <PR.Settings.UndoLimit>Undos per game: {0}</PR.Settings.UndoLimit>
+  <PR.Settings.NoUndoHard>No undo at Expert and Master</PR.Settings.NoUndoHard>
+
+</LanguageData>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    '몰입 모드'(기본 OFF) 전용. 켜면 식민자가 가구까지 걸어간 뒤 창이 열린다.
+    바닐라 여가 Job 은 그대로 두고, 이 Job 은 여가 시스템과 무관하게 동작한다.
+  -->
+  <JobDef>
+    <defName>PR_GoToGame</defName>
+    <driverClass>PlayableRecreation.JobDriver_GoToGame</driverClass>
+    <reportString>heading over to play.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+
+</Defs>

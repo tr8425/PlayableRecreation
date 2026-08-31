@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AssemblyName>RoyalGameOfUr.Tests</AssemblyName>
+    <RootNamespace>RoyalGameOfUr.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <!--
+    Core 와 AI 는 Verse 의존이 0이므로 RimWorld 없이 그대로 컴파일된다.
+    소스를 링크로 끌어와 테스트한다 (별도 어셈블리 분리 불필요).
+  -->
+  <ItemGroup>
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Ur\Core\**\*.cs" LinkBase="UrCore" />
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Ur\AI\**\*.cs" LinkBase="UrAI" />
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Throwing\Core\**\*.cs" LinkBase="Throwing" />
+    <Compile Include="*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+</Project>

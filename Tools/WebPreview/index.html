@@ -1,0 +1,960 @@
+<title>우르 플레이테스트 벤치</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@500;600&display=swap">
+
+<style>
+/* ------------------------------------------------------------------
+   팔레트는 대영박물관 우르 보드의 실제 재료에서 가져왔다.
+   역청 바탕 위에 조개 · 청금석 · 붉은사암 · 황토 상감.
+   유물 진열장을 의도한 단일(다크) 테마이므로 모든 색을 명시한다.
+------------------------------------------------------------------- */
+:root {
+  --bitumen:    #16130F;
+  --case:       #1E1A15;
+  --case-2:     #262119;
+  --hairline:   #3A3227;
+  --shell:      #EDE4D3;
+  --shell-dim:  #C8BCA6;
+  --muted:      #8A8072;
+  --lapis:      #4C74C4;
+  --lapis-deep: #24386B;
+  --limestone:  #B4543C;
+  --ochre:      #C9A227;
+  --good:       #6FA86A;
+
+  --cell: clamp(34px, 5.6vw, 54px);
+  --cellgap: 6px;
+  --pip: 17px;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Spectral", Georgia, "Times New Roman", serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bitumen);
+  color: var(--shell);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell { max-width: 1180px; margin: 0 auto; padding: 28px 20px 56px; }
+
+/* ---------- 헤더 ---------- */
+
+.masthead {
+  display: flex; flex-wrap: wrap; align-items: flex-end;
+  justify-content: space-between; gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--hairline);
+}
+.masthead h1 {
+  font-family: var(--font-display);
+  font-weight: 600; font-size: 30px; line-height: 1.1;
+  margin: 0; letter-spacing: .01em; text-wrap: balance;
+}
+.provenance {
+  margin: 6px 0 0; color: var(--muted);
+  font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
+}
+.provenance b { color: var(--shell-dim); font-weight: 500; }
+
+.difficulty { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  font: inherit; font-size: 12.5px; font-weight: 500;
+  color: var(--shell-dim); background: var(--case);
+  border: 1px solid var(--hairline); border-radius: 2px;
+  padding: 7px 12px; cursor: pointer;
+  transition: border-color .15s var(--ease), color .15s var(--ease), background .15s var(--ease);
+}
+.pill:hover { color: var(--shell); border-color: var(--lapis); }
+.pill[aria-pressed="true"] {
+  color: var(--bitumen); background: var(--shell); border-color: var(--shell);
+}
+.pill:focus-visible, button:focus-visible, select:focus-visible {
+  outline: 2px solid var(--lapis); outline-offset: 2px;
+}
+
+/* ---------- 본문 배치 ---------- */
+
+main {
+  display: grid; grid-template-columns: minmax(0, 1fr) 296px;
+  gap: 28px; margin-top: 26px; align-items: start;
+}
+@media (max-width: 900px) { main { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- 진열장 ---------- */
+
+.vitrine {
+  position: relative;
+  background: linear-gradient(180deg, var(--case-2), var(--case));
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  padding: 18px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  overflow-x: auto;
+}
+
+.rail {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; max-width: calc(8 * (var(--cell) + var(--cellgap)) - var(--cellgap));
+}
+.rail-label {
+  font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap;
+}
+.slots { display: flex; gap: 4px; }
+.slots.home { margin-left: auto; }
+.slot {
+  width: var(--pip); height: var(--pip); border-radius: 50%;
+  border: 1px solid var(--hairline);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, var(--cell));
+  grid-template-rows: repeat(3, var(--cell));
+  gap: var(--cellgap);
+}
+.cell {
+  border-radius: 2px;
+  background: #221C15;
+  border: 1px solid #33291E;
+  position: relative;
+  transition: background .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.cell.void { visibility: hidden; }
+.cell.rosette { background: #2C2415; border-color: #453419; }
+.cell .rose { position: absolute; inset: 16%; opacity: .5; }
+.cell .rose path { fill: var(--ochre); }
+
+.cell.target { background: var(--lapis-deep); border-color: var(--lapis); }
+.cell.target-capture { background: #4A2119; border-color: var(--limestone); }
+
+/* 말 ------------------------------------------------------------- */
+
+.pieces { position: absolute; inset: 0; pointer-events: none; }
+.piece {
+  position: absolute; top: 0; left: 0;
+  border-radius: 50%;
+  transition: transform .34s var(--ease), width .34s var(--ease), height .34s var(--ease);
+  will-change: transform;
+}
+.piece.player { background: var(--shell); box-shadow: inset 0 -2px 3px rgba(0,0,0,.28); }
+.piece.bot {
+  background: transparent;
+  border: 3.5px solid var(--limestone);
+}
+.piece.movable {
+  pointer-events: auto; cursor: pointer;
+  box-shadow: 0 0 0 2px var(--bitumen), 0 0 0 4px var(--good);
+}
+.piece.movable:hover { box-shadow: 0 0 0 2px var(--bitumen), 0 0 0 5px var(--shell); }
+.piece.landed { animation: land .45s var(--ease); }
+@keyframes land { 0% { filter: brightness(2.2); } 100% { filter: none; } }
+
+/* 주사위 --------------------------------------------------------- */
+
+.tray {
+  display: flex; align-items: center; gap: 20px;
+  padding-top: 6px;
+}
+.dice { display: flex; gap: 9px; }
+.die { width: 34px; height: 34px; }
+.die path { fill: none; stroke: var(--hairline); stroke-width: 7; stroke-linejoin: round; }
+.die circle { fill: none; }
+.die.marked path { fill: var(--ochre); stroke: var(--ochre); }
+.die.marked circle { fill: var(--bitumen); }
+.die.hidden path { stroke: #2C2519; }
+.total {
+  font-family: var(--font-data); font-size: 26px; font-weight: 500;
+  font-variant-numeric: tabular-nums; color: var(--ochre); min-width: 2ch;
+}
+.total.hidden { color: var(--hairline); }
+
+button.act {
+  font: inherit; font-weight: 600; font-size: 14px;
+  background: var(--shell); color: var(--bitumen);
+  border: 1px solid var(--shell); border-radius: 2px;
+  padding: 10px 22px; cursor: pointer; margin-left: auto;
+  transition: opacity .15s var(--ease), background .15s var(--ease);
+}
+button.act:hover { background: #fff; }
+button.act[disabled] {
+  background: transparent; color: var(--muted);
+  border-color: var(--hairline); cursor: default;
+}
+
+.status {
+  margin-top: 14px; padding: 11px 14px;
+  background: var(--case); border: 1px solid var(--hairline); border-radius: 3px;
+  border-left: 3px solid var(--lapis);
+  font-size: 13.5px; min-height: 44px; display: flex; align-items: center;
+}
+.status.win { border-left-color: var(--good); color: var(--shell); }
+.status.lose { border-left-color: var(--limestone); }
+
+/* ---------- 오른쪽 벤치 ---------- */
+
+.bench { display: flex; flex-direction: column; gap: 18px; }
+.panel {
+  background: var(--case); border: 1px solid var(--hairline); border-radius: 3px;
+  padding: 14px 15px;
+}
+.panel h2 {
+  font-family: var(--font-display); font-weight: 500; font-size: 15px;
+  margin: 0 0 4px; letter-spacing: .01em;
+}
+.panel .hint { margin: 0 0 12px; font-size: 12px; color: var(--muted); }
+
+.log {
+  font-family: var(--font-data); font-size: 12px; line-height: 1.75;
+  font-variant-numeric: tabular-nums;
+  height: 232px; overflow-y: auto; overflow-x: hidden;
+  border-top: 1px solid var(--hairline); padding-top: 8px;
+}
+.log div { display: flex; gap: 8px; white-space: nowrap; }
+.log .n { color: var(--muted); width: 3ch; text-align: right; }
+.log .who { width: 4ch; }
+.log .bot { color: var(--shell-dim); }
+.log .bot .who { color: var(--limestone); }
+.log .cap { color: var(--limestone); }
+.log .ext { color: var(--ochre); }
+.log .empty { color: var(--muted); display: block; }
+
+.field { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.field label { font-size: 12px; color: var(--muted); width: 52px; flex: none; }
+select {
+  font: inherit; font-size: 12.5px; flex: 1;
+  background: var(--case-2); color: var(--shell);
+  border: 1px solid var(--hairline); border-radius: 2px; padding: 6px 8px;
+}
+button.sub {
+  font: inherit; font-size: 12.5px; font-weight: 500; width: 100%;
+  background: var(--case-2); color: var(--shell);
+  border: 1px solid var(--hairline); border-radius: 2px;
+  padding: 8px; cursor: pointer; margin-top: 4px;
+  transition: border-color .15s var(--ease);
+}
+button.sub:hover { border-color: var(--lapis); }
+button.sub[disabled] { color: var(--muted); cursor: default; border-color: var(--hairline); }
+
+.bars { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+.bar-row {
+  display: grid; grid-template-columns: 2ch 1fr auto; gap: 8px; align-items: center;
+  font-family: var(--font-data); font-size: 11px; font-variant-numeric: tabular-nums;
+}
+.bar-row .k { color: var(--muted); }
+.bar-track { height: 12px; background: var(--case-2); border-radius: 1px; position: relative; }
+.bar-fill { height: 100%; background: var(--lapis); border-radius: 1px; transition: width .5s var(--ease); }
+.bar-mark { position: absolute; top: -2px; bottom: -2px; width: 1px; background: var(--ochre); }
+.bar-row .v { color: var(--shell-dim); }
+
+.verdict {
+  margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--hairline);
+  font-size: 12.5px; color: var(--shell-dim);
+}
+.verdict b {
+  font-family: var(--font-data); font-size: 17px; font-weight: 500;
+  color: var(--shell); font-variant-numeric: tabular-nums;
+}
+.verdict .sub { color: var(--muted); font-size: 11.5px; }
+
+.progress { height: 3px; background: var(--case-2); margin-top: 10px; border-radius: 2px; overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; background: var(--ochre); transition: width .2s linear; }
+
+footer {
+  margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--hairline);
+  color: var(--muted); font-size: 12px; max-width: 68ch;
+}
+footer code {
+  font-family: var(--font-data); font-size: 11.5px;
+  color: var(--shell-dim); background: var(--case); padding: 1px 5px; border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+</style>
+
+<div class="shell">
+
+  <header class="masthead">
+    <div>
+      <h1>우르 플레이테스트 벤치</h1>
+      <p class="provenance">Ur, c. 2500 BC · <b>Finkel 룰</b> · 말 7개 · 4면체 주사위 4개</p>
+    </div>
+    <div class="difficulty" id="difficulty" role="group" aria-label="난이도"></div>
+  </header>
+
+  <main>
+    <section>
+      <div class="vitrine" id="vitrine">
+        <div class="rail">
+          <span class="rail-label">봇 대기</span>
+          <div class="slots" id="botWaiting"></div>
+          <span class="rail-label" style="margin-left:auto">골인</span>
+          <div class="slots home" id="botScored"></div>
+        </div>
+
+        <div class="grid" id="grid"></div>
+
+        <div class="rail">
+          <span class="rail-label">내 대기</span>
+          <div class="slots" id="playerWaiting"></div>
+          <span class="rail-label" style="margin-left:auto">골인</span>
+          <div class="slots home" id="playerScored"></div>
+        </div>
+
+        <div class="tray">
+          <div class="dice" id="dice"></div>
+          <span class="total hidden" id="total">?</span>
+          <button class="act" id="roll">주사위 굴리기</button>
+        </div>
+
+        <div class="pieces" id="pieces"></div>
+      </div>
+
+      <div class="status" id="status">난이도를 고르고 주사위를 굴리세요. 스페이스바로도 굴립니다.</div>
+    </section>
+
+    <aside class="bench">
+      <div class="panel">
+        <h2>수순</h2>
+        <p class="hint">눈 · 출발 → 도착 · 결과</p>
+        <div class="log" id="log"><span class="empty">아직 둔 수가 없습니다.</span></div>
+      </div>
+
+      <div class="panel">
+        <h2>주사위 분포 점검</h2>
+        <p class="hint">C# <code style="font-family:var(--font-data)">UrDice</code> 와 같은 murmur3 해시입니다. 관측값(막대)이 이항분포 기댓값(세로선)에 붙어야 정상입니다.</p>
+        <div class="bars" id="bars"></div>
+        <button class="sub" id="runDist">160,000회 굴려보기</button>
+      </div>
+
+      <div class="panel">
+        <h2>AI 대전 시뮬레이션</h2>
+        <p class="hint">선공 이점은 절반씩 자리를 바꿔 상쇄합니다.</p>
+        <div class="field"><label for="chal">도전자</label><select id="chal"></select></div>
+        <div class="field"><label for="def">상대</label><select id="def"></select></div>
+        <div class="field"><label for="games">판 수</label>
+          <select id="games"><option>20</option><option selected>40</option><option>80</option></select>
+        </div>
+        <button class="sub" id="runSim">대전 실행</button>
+        <div class="progress"><i id="simBar"></i></div>
+        <div class="verdict" id="simOut">아직 실행하지 않았습니다.</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    이 페이지는 RimWorld 모드의 룰 엔진(<code>Core/</code>)과 AI(<code>AI/</code>)를 브라우저로 옮긴 <b>플레이테스트용 사본</b>입니다.
+    경로·로제트·잡기·안전칸·정확 골인 규칙, 평가함수, Expectiminimax 깊이와 실수율까지 C# 원본과 같은 상수를 씁니다.
+    다만 <b>정본은 C# 쪽</b>이며, 인게임 화면(Unity IMGUI)은 브라우저에서 재현되지 않습니다.
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+/* ==================================================================
+   룰 엔진 — Source/RoyalGameOfUr/Core 의 이식본
+   ================================================================== */
+
+const PIECES = 7, PATH = 14, SCORED = 15, SAFE = 8, SHARED_A = 5, SHARED_B = 12;
+const PLAYER = 0, BOT = 1;
+const PROB = [1/16, 4/16, 6/16, 4/16, 1/16];
+
+const isRosette = i => i === 4 || i === 8 || i === 14;
+const isShared  = i => i >= SHARED_A && i <= SHARED_B;
+
+// row 0 = 봇 진영, 1 = 공유 전장, 2 = 플레이어 진영
+function cellOf(side, i) {
+  const home = side === PLAYER ? 2 : 0;
+  if (i <= 4)  return [home, 4 - i];
+  if (i <= 12) return [1, i - 5];
+  return [home, i === 13 ? 7 : 6];
+}
+const cellExists = (r, c) => r === 1 || c <= 3 || c >= 6;
+
+// 수는 정수 하나로 인코딩한다 — 탐색 중 객체 할당을 없애기 위해.
+const mk   = (f, t, cap, ext) => f | (t << 5) | (cap ? 1024 : 0) | (ext ? 2048 : 0);
+const mFrom  = m => m & 31;
+const mTo    = m => (m >> 5) & 31;
+const mCap   = m => (m & 1024) !== 0;
+const mExtra = m => (m & 2048) !== 0;
+
+const newState = first => ({ o0: 0, o1: 0, w0: PIECES, w1: PIECES, s0: 0, s1: 0, t: first });
+const occ     = (s, side) => side === PLAYER ? s.o0 : s.o1;
+const waiting = (s, side) => side === PLAYER ? s.w0 : s.w1;
+const scored  = (s, side) => side === PLAYER ? s.s0 : s.s1;
+const isOcc   = (s, side, i) => (occ(s, side) & (1 << i)) !== 0;
+
+function genMoves(s, roll, out) {
+  let n = 0;
+  if (roll <= 0 || roll > 4) return 0;
+  const me = s.t, opp = 1 - me;
+
+  const tryAdd = (from, to) => {
+    if (to > SCORED) return;
+    if (to === SCORED) { out[n++] = mk(from, to, false, false); return; }
+    if (isOcc(s, me, to)) return;                        // R4 자기 말 중첩 금지
+    const oppThere = isShared(to) && isOcc(s, opp, to);
+    if (to === SAFE && oppThere) return;                 // R6 안전칸
+    out[n++] = mk(from, to, oppThere, isRosette(to));
+  };
+
+  if (waiting(s, me) > 0) tryAdd(0, roll);               // R2 투입
+  for (let i = 1; i <= PATH; i++) if (isOcc(s, me, i)) tryAdd(i, i + roll);
+  return n;
+}
+
+function applyMove(s, m) {
+  const me = s.t, opp = 1 - me;
+  const n = { o0: s.o0, o1: s.o1, w0: s.w0, w1: s.w1, s0: s.s0, s1: s.s1, t: s.t };
+  const from = mFrom(m), to = mTo(m);
+
+  if (from === 0) { if (me === PLAYER) n.w0--; else n.w1--; }
+  else { if (me === PLAYER) n.o0 &= ~(1 << from); else n.o1 &= ~(1 << from); }
+
+  if (to === SCORED) { if (me === PLAYER) n.s0++; else n.s1++; }
+  else {
+    if (me === PLAYER) n.o0 |= (1 << to); else n.o1 |= (1 << to);
+    if (mCap(m)) {                                        // R5 잡기
+      if (opp === PLAYER) { n.o0 &= ~(1 << to); n.w0++; }
+      else { n.o1 &= ~(1 << to); n.w1++; }
+    }
+  }
+
+  if (!mExtra(m)) n.t = opp;                              // R7 로제트면 턴 유지
+  return n;
+}
+
+const passTurn = s => ({ ...s, t: 1 - s.t });
+const winner = s => s.s0 >= PIECES ? PLAYER : (s.s1 >= PIECES ? BOT : null);
+
+/* 결정론적 주사위 — C# UrDice 와 같은 비트 연산 */
+function rollDice(seed, index) {
+  let h = (Math.imul(seed | 0, 2654435761) ^ Math.imul((index + 1) | 0, 2246822519)) >>> 0;
+  h = (h ^ (h >>> 16)) >>> 0;
+  h = Math.imul(h, 0x85EBCA6B) >>> 0;
+  h = (h ^ (h >>> 13)) >>> 0;
+  h = Math.imul(h, 0xC2B2AE35) >>> 0;
+  h = (h ^ (h >>> 16)) >>> 0;
+  return (h & 1) | (((h >>> 8) & 1) << 1) | (((h >>> 16) & 1) << 2) | (((h >>> 24) & 1) << 3);
+}
+const faceTotal = f => (f & 1) + ((f >> 1) & 1) + ((f >> 2) & 1) + ((f >> 3) & 1);
+
+/* ==================================================================
+   AI — Source/RoyalGameOfUr/AI 의 이식본
+   ================================================================== */
+
+const TIERS = [
+  { key: 0, name: "초보",  depth: 0, blunder: 0,    note: "무작위. 골인만은 놓치지 않습니다." },
+  { key: 1, name: "견습",  depth: 1, blunder: .15,  note: "한 수 앞. 잡기와 로제트는 챙깁니다." },
+  { key: 2, name: "숙련",  depth: 2, blunder: .08,  note: "두 수 앞을 확률로 계산합니다." },
+  { key: 3, name: "상급",  depth: 3, blunder: .03,  note: "세 수 앞. 잡힐 위험을 저울질합니다." },
+  { key: 4, name: "명인",  depth: 4, blunder: 0,    note: "네 수 앞. 실수하지 않습니다." },
+];
+
+const pieceValue = i => 4 + i * 2;
+
+function material(s, side) {
+  let v = scored(s, side) * 100;
+  for (let i = 1; i <= PATH; i++) {
+    if (!isOcc(s, side, i)) continue;
+    v += pieceValue(i);
+    if (i === SAFE) v += 30;
+    else if (isRosette(i)) v += 12;
+  }
+  let oppInLane = false;
+  for (let i = SHARED_A; i <= SHARED_B; i++) if (isOcc(s, 1 - side, i)) { oppInLane = true; break; }
+  if (!oppInLane) v += 8;
+  return v;
+}
+
+function exposure(s, side) {
+  const att = 1 - side;
+  let loss = 0;
+  for (let i = SHARED_A; i <= SHARED_B; i++) {
+    if (i === SAFE || !isOcc(s, side, i)) continue;      // 안전칸은 잡히지 않는다
+    let p = 0;
+    for (let r = 1; r <= 4; r++) {
+      const f = i - r;
+      if (f >= 1 && isOcc(s, att, f)) p += PROB[r];
+    }
+    loss += pieceValue(i) * Math.min(p, 1);
+  }
+  return -loss;
+}
+
+const evaluate = (s, me) =>
+  material(s, me) - material(s, 1 - me) + exposure(s, me) - exposure(s, 1 - me);
+
+const searchBufs = Array.from({ length: 8 }, () => new Int32Array(8));
+
+function search(s, me, left) {
+  const w = winner(s);
+  if (w !== null) return w === me ? 10000 : -10000;
+  if (left <= 0) return evaluate(s, me);
+
+  let expected = 0;
+  for (let r = 0; r <= 4; r++) expected += PROB[r] * bestReply(s, me, r, left);
+  return expected;
+}
+
+function bestReply(s, me, roll, left) {
+  const buf = searchBufs[left];
+  const n = genMoves(s, roll, buf);
+  if (n === 0) return search(passTurn(s), me, left - 1);
+
+  const max = s.t === me;
+  let best = max ? -Infinity : Infinity;
+  for (let i = 0; i < n; i++) {
+    const v = search(applyMove(s, buf[i]), me, left - 1);
+    if (max ? v > best : v < best) best = v;
+  }
+  return best;
+}
+
+// 재현 가능한 난수 (mulberry32)
+function makeRng(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function greedyScore(m) {
+  if (mCap(m)) return 1000 + mTo(m);
+  if (mExtra(m)) return 800 + mTo(m);
+  if (mTo(m) === SCORED) return 600;
+  if (mFrom(m) !== 0) return 300 + mTo(m);
+  return 100;
+}
+
+function chooseMove(tier, s, moves, count, rng) {
+  if (tier.key === 0) {
+    for (let i = 0; i < count; i++) if (mTo(moves[i]) === SCORED) return i;
+    return Math.floor(rng() * count);
+  }
+
+  let best = 0, bestV = -Infinity, second = -1, secondV = -Infinity;
+  for (let i = 0; i < count; i++) {
+    const v = tier.key === 1
+      ? greedyScore(moves[i])
+      : search(applyMove(s, moves[i]), s.t, tier.depth - 1);
+
+    if (v > bestV) { secondV = bestV; second = best; bestV = v; best = i; }
+    else if (v > secondV) { secondV = v; second = i; }
+  }
+
+  if (second >= 0 && tier.blunder > 0 && rng() < tier.blunder) return second;
+  return best;
+}
+
+/* ==================================================================
+   화면
+   ================================================================== */
+
+const $ = id => document.getElementById(id);
+const cellEls = [];
+const slotEls = { 0: { w: [], s: [] }, 1: { w: [], s: [] } };
+const pieceEls = { 0: [], 1: [] };
+
+let tier = TIERS[1];
+let state, seed, diceIndex, faces, revealed, phase, turnNo, log, view, moves, moveCount, timer;
+
+function rosettePath(petals = 8, steps = 220) {
+  let d = "";
+  for (let k = 0; k <= steps; k++) {
+    const a = (k / steps) * Math.PI * 2;
+    const r = 0.52 + 0.34 * Math.cos(petals * a);
+    d += (k ? "L" : "M") + (50 + 50 * r * Math.cos(a)).toFixed(2)
+       + " " + (50 + 50 * r * Math.sin(a)).toFixed(2);
+  }
+  return d + "Z";
+}
+
+function buildBoard() {
+  const grid = $("grid");
+  const path = rosettePath();
+
+  for (let r = 0; r < 3; r++) {
+    cellEls[r] = [];
+    for (let c = 0; c < 8; c++) {
+      const el = document.createElement("div");
+      el.className = "cell";
+      if (!cellExists(r, c)) el.classList.add("void");
+      else if ((r !== 1 && (c === 0 || c === 6)) || (r === 1 && c === 3)) {
+        el.classList.add("rosette");
+        el.innerHTML = `<svg class="rose" viewBox="0 0 100 100" aria-hidden="true"><path d="${path}"/></svg>`;
+      }
+      grid.appendChild(el);
+      cellEls[r][c] = el;
+    }
+  }
+
+  for (const [side, wId, sId] of [[PLAYER, "playerWaiting", "playerScored"], [BOT, "botWaiting", "botScored"]]) {
+    for (let i = 0; i < PIECES; i++) {
+      const w = document.createElement("div"); w.className = "slot";
+      $(wId).appendChild(w); slotEls[side].w.push(w);
+      const s = document.createElement("div"); s.className = "slot";
+      $(sId).appendChild(s); slotEls[side].s.push(s);
+    }
+  }
+
+  const layer = $("pieces");
+  for (const side of [BOT, PLAYER]) {
+    for (let i = 0; i < PIECES; i++) {
+      const el = document.createElement("div");
+      el.className = "piece " + (side === PLAYER ? "player" : "bot");
+      layer.appendChild(el);
+      pieceEls[side].push(el);
+    }
+  }
+
+  const dice = $("dice");
+  for (let i = 0; i < 4; i++) {
+    dice.insertAdjacentHTML("beforeend",
+      `<svg class="die hidden" viewBox="0 0 100 100" aria-hidden="true">
+         <path d="M50 10 L90 84 L10 84 Z"/><circle cx="50" cy="34" r="7"/>
+       </svg>`);
+  }
+}
+
+function buildControls() {
+  const box = $("difficulty");
+  TIERS.forEach(t => {
+    const b = document.createElement("button");
+    b.className = "pill";
+    b.type = "button";
+    b.textContent = t.name;
+    b.title = t.note;
+    b.setAttribute("aria-pressed", String(t === tier));
+    b.onclick = () => { tier = t; syncPills(); newMatch(); };
+    box.appendChild(b);
+  });
+
+  for (const id of ["chal", "def"]) {
+    TIERS.forEach(t => $(id).insertAdjacentHTML("beforeend", `<option value="${t.key}">${t.name}</option>`));
+  }
+  $("chal").value = "4";
+  $("def").value = "1";
+}
+
+const syncPills = () =>
+  [...$("difficulty").children].forEach((b, i) =>
+    b.setAttribute("aria-pressed", String(TIERS[i] === tier)));
+
+/* ---------- 말 배치 ---------- */
+
+function anchorRect(side, loc, ordinal) {
+  if (loc === "w") return slotEls[side].w[ordinal];
+  if (loc === "s") return slotEls[side].s[ordinal];
+  const [r, c] = cellOf(side, loc);
+  return cellEls[r][c];
+}
+
+function placePieces(landedIds) {
+  const box = $("vitrine").getBoundingClientRect();
+
+  for (const side of [PLAYER, BOT]) {
+    let wOrd = 0, sOrd = 0;
+    view[side].forEach((p, idx) => {
+      const el = pieceEls[side][idx];
+      const ordinal = p.loc === "w" ? wOrd++ : (p.loc === "s" ? sOrd++ : 0);
+      const anchor = anchorRect(side, p.loc, ordinal);
+      const rect = anchor.getBoundingClientRect();
+      const onBoard = typeof p.loc === "number";
+      const size = onBoard ? rect.width * 0.62 : rect.width * 0.86;
+
+      el.style.width = el.style.height = size + "px";
+      el.style.transform =
+        `translate(${rect.left - box.left + (rect.width - size) / 2}px,` +
+        ` ${rect.top - box.top + (rect.height - size) / 2}px)`;
+      el.classList.toggle("landed", !!landedIds && landedIds.has(side + ":" + idx));
+    });
+  }
+}
+
+function applyToView(m) {
+  const me = state.t, opp = 1 - me;
+  const from = mFrom(m), to = mTo(m);
+  const mine = view[me];
+
+  const moved = from === 0
+    ? mine.find(p => p.loc === "w")
+    : mine.find(p => p.loc === from);
+
+  if (mCap(m)) {
+    const victim = view[opp].find(p => p.loc === to);
+    if (victim) victim.loc = "w";
+  }
+  if (moved) moved.loc = to === SCORED ? "s" : to;
+
+  return new Set(moved ? [me + ":" + view[me].indexOf(moved)] : []);
+}
+
+/* ---------- 대국 흐름 ---------- */
+
+function newMatch() {
+  clearTimeout(timer);
+  state = newState(PLAYER);
+  seed = (Date.now() ^ (Math.random() * 0xFFFFFFFF)) | 0;
+  diceIndex = 0; faces = 0; revealed = false;
+  phase = "roll"; turnNo = 1; log = [];
+  moves = new Int32Array(8); moveCount = 0;
+  view = { 0: [], 1: [] };
+  for (const side of [PLAYER, BOT])
+    for (let i = 0; i < PIECES; i++) view[side].push({ loc: "w" });
+
+  render();
+  setStatus(`상대는 <b>${tier.name}</b> — ${tier.note} 주사위를 굴리세요.`);
+}
+
+function doRoll() {
+  if (phase !== "roll" || winner(state) !== null) return;
+  faces = rollDice(seed, diceIndex++);
+  revealed = true;
+  moveCount = genMoves(state, faceTotal(faces), moves);
+  phase = moveCount > 0 ? "move" : "pass";
+  render();
+
+  if (phase === "pass") {
+    setStatus(`눈 <b>${faceTotal(faces)}</b> — 둘 수 있는 수가 없습니다. 턴을 넘깁니다.`);
+    timer = setTimeout(() => { doPass(); }, 900);
+  } else if (state.t === PLAYER) {
+    setStatus(`눈 <b>${faceTotal(faces)}</b> — 움직일 말을 고르세요. (${moveCount}가지)`);
+  } else {
+    scheduleBotMove();
+  }
+}
+
+function doPass() {
+  log.push({ n: turnNo, side: state.t, roll: faceTotal(faces), pass: true });
+  state = passTurn(state);
+  endTurn();
+}
+
+function play(index) {
+  if (phase !== "move" || index < 0 || index >= moveCount) return;
+  const m = moves[index];
+  log.push({ n: turnNo, side: state.t, roll: faceTotal(faces), m });
+  const landed = applyToView(m);
+  state = applyMove(state, m);
+
+  if (winner(state) !== null) {
+    phase = "over"; revealed = false;
+    render(landed);
+    const won = winner(state) === PLAYER;
+    setStatus(won ? "일곱 개를 모두 통과시켰습니다. <b>당신의 승리.</b>"
+                  : `<b>${tier.name}</b> 에게 졌습니다.`, won ? "win" : "lose");
+    return;
+  }
+  endTurn(landed);
+}
+
+function endTurn(landed) {
+  revealed = false; moveCount = 0; turnNo++; phase = "roll";
+  render(landed);
+
+  if (state.t === BOT) {
+    setStatus(`<b>${tier.name}</b> 이(가) 생각 중…`);
+    timer = setTimeout(doRoll, 550);
+  } else {
+    setStatus("주사위를 굴리세요.");
+  }
+}
+
+function scheduleBotMove() {
+  setStatus(`<b>${tier.name}</b> — 눈 ${faceTotal(faces)}. 생각 중…`);
+  const delay = Math.max(180, (0.75 - 0.08 * tier.key) * 1000);
+  timer = setTimeout(() => {
+    const rng = makeRng(seed ^ (diceIndex * 2654435761));
+    play(chooseMove(tier, state, moves, moveCount, rng));
+  }, delay);
+}
+
+/* ---------- 렌더 ---------- */
+
+function render(landed) {
+  for (let r = 0; r < 3; r++)
+    for (let c = 0; c < 8; c++)
+      cellEls[r][c].classList.remove("target", "target-capture");
+
+  const interactive = phase === "move" && state.t === PLAYER;
+
+  for (const side of [PLAYER, BOT])
+    pieceEls[side].forEach(el => { el.classList.remove("movable"); el.onclick = el.onmouseenter = el.onmouseleave = null; });
+
+  placePieces(landed);
+
+  if (interactive) {
+    for (let k = 0; k < moveCount; k++) {
+      const m = moves[k];
+      const from = mFrom(m);
+      // 한 수의 출발지는 유일하므로 "말 클릭 = 그 수를 둔다" 가 성립한다.
+      const index = view[PLAYER].findIndex(p => from === 0 ? p.loc === "w" : p.loc === from);
+      if (index < 0) continue;
+
+      const el = pieceEls[PLAYER][index];
+      el.classList.add("movable");
+      el.onclick = () => play(k);
+      el.onmouseenter = () => showTarget(m, true);
+      el.onmouseleave = () => showTarget(m, false);
+    }
+  }
+
+  const total = faceTotal(faces);
+  [...$("dice").children].forEach((d, i) => {
+    d.classList.toggle("hidden", !revealed);
+    d.classList.toggle("marked", revealed && ((faces >> i) & 1) === 1);
+  });
+  $("total").textContent = revealed ? total : "?";
+  $("total").classList.toggle("hidden", !revealed);
+
+  const btn = $("roll");
+  btn.disabled = !(phase === "roll" && state.t === PLAYER);
+  btn.textContent = phase === "over" ? "새 판 시작"
+    : (state.t === BOT ? "상대 차례" : "주사위 굴리기");
+  if (phase === "over") btn.disabled = false;
+
+  renderLog();
+}
+
+function showTarget(m, on) {
+  const to = mTo(m);
+  if (to === SCORED) return;
+  const [r, c] = cellOf(PLAYER, to);
+  cellEls[r][c].classList.toggle(mCap(m) ? "target-capture" : "target", on);
+}
+
+function renderLog() {
+  const box = $("log");
+  if (!log.length) { box.innerHTML = '<span class="empty">아직 둔 수가 없습니다.</span>'; return; }
+
+  box.innerHTML = log.map(e => {
+    const who = e.side === PLAYER ? "나" : "봇";
+    const cls = e.side === PLAYER ? "" : "bot";
+    if (e.pass)
+      return `<div class="${cls}"><span class="n">${e.n}</span><span class="who">${who}</span><span>${e.roll}</span><span>패스</span></div>`;
+
+    const from = mFrom(e.m) === 0 ? "투입" : mFrom(e.m);
+    const to = mTo(e.m) === SCORED ? "골인" : mTo(e.m);
+    const tag = mCap(e.m) ? '<span class="cap">잡기</span>'
+              : (mExtra(e.m) ? '<span class="ext">추가 턴</span>' : "");
+    return `<div class="${cls}"><span class="n">${e.n}</span><span class="who">${who}</span>` +
+           `<span>${e.roll}</span><span>${from}→${to}</span>${tag}</div>`;
+  }).join("");
+  box.scrollTop = box.scrollHeight;
+}
+
+function setStatus(html, kind) {
+  const el = $("status");
+  el.className = "status" + (kind ? " " + kind : "");
+  el.innerHTML = html;
+}
+
+/* ---------- 벤치: 주사위 분포 ---------- */
+
+function renderBars(counts, total) {
+  $("bars").innerHTML = [0, 1, 2, 3, 4].map(f => {
+    const observed = total ? counts[f] / total : 0;
+    const width = (observed / 0.42 * 100).toFixed(2);
+    const mark = (PROB[f] / 0.42 * 100).toFixed(2);
+    return `<div class="bar-row"><span class="k">${f}</span>
+      <span class="bar-track"><i class="bar-fill" style="width:${width}%"></i>
+      <span class="bar-mark" style="left:${mark}%"></span></span>
+      <span class="v">${total ? (observed * 100).toFixed(2) + "%" : "—"}</span></div>`;
+  }).join("");
+}
+
+$("runDist").onclick = () => {
+  const N = 160000, counts = [0, 0, 0, 0, 0];
+  const base = (Math.random() * 0xFFFFFFFF) | 0;
+  for (let i = 0; i < N; i++) counts[faceTotal(rollDice(base, i))]++;
+  renderBars(counts, N);
+};
+
+/* ---------- 벤치: AI 대전 ---------- */
+
+function playHeadless(matchSeed, first, second) {
+  let s = newState(PLAYER);
+  const buf = new Int32Array(8);
+  const rngA = makeRng(matchSeed), rngB = makeRng(matchSeed ^ 0x9E3779B9);
+  let idx = 0, guard = 0;
+
+  while (winner(s) === null) {
+    if (++guard > 4000) break;
+    const total = faceTotal(rollDice(matchSeed, idx++));
+    const n = genMoves(s, total, buf);
+    if (n === 0) { s = passTurn(s); continue; }
+    const who = s.t === PLAYER ? first : second;
+    s = applyMove(s, buf[chooseMove(who, s, buf, n, s.t === PLAYER ? rngA : rngB)]);
+  }
+  return winner(s);
+}
+
+$("runSim").onclick = async () => {
+  const chal = TIERS[+$("chal").value];
+  const def = TIERS[+$("def").value];
+  const games = +$("games").value;
+  const btn = $("runSim");
+
+  btn.disabled = true;
+  btn.textContent = "대전 중…";
+  $("simOut").innerHTML = "";
+  const started = performance.now();
+  let wins = 0;
+
+  for (let i = 0; i < games; i++) {
+    const chalFirst = i % 2 === 0;
+    const w = playHeadless(i * 6151 + 17, chalFirst ? chal : def, chalFirst ? def : chal);
+    if (w === (chalFirst ? PLAYER : BOT)) wins++;
+
+    $("simBar").style.width = ((i + 1) / games * 100) + "%";
+    if (i % 4 === 3) await new Promise(r => setTimeout(r, 0));
+  }
+
+  const rate = wins / games;
+  const secs = ((performance.now() - started) / 1000).toFixed(1);
+  $("simOut").innerHTML =
+    `<b>${(rate * 100).toFixed(1)}%</b> — ${chal.name} 가 ${def.name} 상대로 ${wins}/${games}승` +
+    `<div class="sub">${secs}초 · 선공 교대 · 시드 고정</div>`;
+
+  btn.disabled = false;
+  btn.textContent = "대전 실행";
+  $("simBar").style.width = "0%";
+};
+
+/* ---------- 시작 ---------- */
+
+buildBoard();
+buildControls();
+renderBars([0, 0, 0, 0, 0], 0);
+newMatch();
+
+$("roll").onclick = () => { if (phase === "over") newMatch(); else doRoll(); };
+
+addEventListener("keydown", e => {
+  if (e.code !== "Space" || e.target.tagName === "SELECT" || e.target.tagName === "BUTTON") return;
+  e.preventDefault();
+  if (phase === "over") newMatch(); else if (phase === "roll" && state.t === PLAYER) doRoll();
+});
+
+addEventListener("resize", () => placePieces());
+
+// 웹폰트가 늦게 붙으면 레일 높이가 바뀌므로 로드 후 한 번 더 자리를 잡는다.
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => placePieces());
+</script>

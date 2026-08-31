@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 버튼 -->
+  <RGU.Btn.Roll>Roll the dice  (Space)</RGU.Btn.Roll>
+  <RGU.Btn.Waiting>Opponent's turn</RGU.Btn.Waiting>
+
+  <!-- 난이도 설명 -->
+  <RGU.Difficulty.T0.Desc>Plays at random, but never misses a chance to bear off. Start here if you are learning.</RGU.Difficulty.T0.Desc>
+  <RGU.Difficulty.T1.Desc>Looks one move ahead. Takes captures and rosettes, but blunders now and then.</RGU.Difficulty.T1.Desc>
+  <RGU.Difficulty.T2.Desc>Calculates two moves ahead over the dice odds. Starts setting traps.</RGU.Difficulty.T2.Desc>
+  <RGU.Difficulty.T3.Desc>Looks three moves ahead. Weighs the safe square against capture risk precisely.</RGU.Difficulty.T3.Desc>
+  <RGU.Difficulty.T4.Desc>Looks four moves ahead. Does not make mistakes.</RGU.Difficulty.T4.Desc>
+
+  <!-- 트레이 -->
+  <RGU.Tray.Waiting>Waiting</RGU.Tray.Waiting>
+  <RGU.Tray.Scored>Home</RGU.Tray.Scored>
+
+  <!-- 상태 -->
+  <RGU.Status.Roll>Roll the dice.</RGU.Status.Roll>
+  <RGU.Status.NoMove>Rolled {0} — no legal move. Passing the turn.</RGU.Status.NoMove>
+  <RGU.Status.PickMove>Rolled {0} — choose a piece to move. ({1} options)</RGU.Status.PickMove>
+  <RGU.Status.BotThinking>The AI opponent is thinking...</RGU.Status.BotThinking>
+  <RGU.Status.WinPlayer>You win!</RGU.Status.WinPlayer>
+  <RGU.Status.WinBot>The AI opponent wins.</RGU.Status.WinBot>
+
+  <!-- 수순 로그 -->
+  <RGU.Log.Pass>pass</RGU.Log.Pass>
+  <RGU.Log.Entry>in</RGU.Log.Entry>
+  <RGU.Log.BearOff>off</RGU.Log.BearOff>
+  <RGU.Log.Capture>capture</RGU.Log.Capture>
+  <RGU.Log.Extra>extra turn</RGU.Log.Extra>
+
+  <!-- 칸 설명 -->
+  <RGU.Tip.MyPath>Your path, square {0}</RGU.Tip.MyPath>
+  <RGU.Tip.BotPath>Opponent's path, square {0}</RGU.Tip.BotPath>
+  <RGU.Tip.Shared>Shared lane — can be captured</RGU.Tip.Shared>
+  <RGU.Tip.Home>Private lane — safe</RGU.Tip.Home>
+  <RGU.Tip.Safe>Safe square — cannot be captured</RGU.Tip.Safe>
+  <RGU.Tip.Rosette>Rosette — extra turn</RGU.Tip.Rosette>
+
+  <!-- 튜토리얼 -->
+  <RGU.Tut.DiceChart>Chance of each roll</RGU.Tut.DiceChart>
+  <RGU.Tut.P1.Title>1. The goal</RGU.Tut.P1.Title>
+  <RGU.Tut.P1.Body>The Royal Game of Ur is a two-player race game played in Mesopotamia some 4,500 years ago.\n\nEach side has seven pieces and runs them along its own path and off the far end of the board. Several of your pieces can be on the board at once; on each turn you move exactly one of them. The first side to bring all seven home wins.\n\nThe filled discs are yours; the rings belong to your opponent.</RGU.Tut.P1.Body>
+  <RGU.Tut.P2.Title>2. Your path</RGU.Tut.P2.Title>
+  <RGU.Tut.P2.Body>The fourteen green squares are your path, walked in the order shown.\n\nYou start on the inside of your own row and move outward (1–4), climb to the middle row and run its full length (5–12), then drop back to your row for the last two squares (13–14) and off the board.\n\nYour opponent walks a mirror image of the same path along the far row.</RGU.Tut.P2.Body>
+  <RGU.Tut.P3.Title>3. The dice</RGU.Tut.P3.Title>
+  <RGU.Tut.P3.Body>You roll four tetrahedral dice. Each one shows either a marked corner (1) or an unmarked one (0).\n\nTheir sum, from 0 to 4, is how far you move a piece this turn. A 2 is by far the most common; 0 and 4 each come up only once in sixteen rolls.\n\nRoll a 0 — or have no legal move — and the turn passes to your opponent untouched.</RGU.Tut.P3.Body>
+  <RGU.Tut.P4.Title>4. Rosettes</RGU.Tut.P4.Title>
+  <RGU.Tut.P4.Body>The five squares marked with a flower are rosettes.\n\nLand exactly on one and you roll again. Chain them together and you can play several moves in a single turn.\n\nTaking your own rosette on square 4 with the opening roll is the classic first move in Ur.</RGU.Tut.P4.Body>
+  <RGU.Tut.P5.Title>5. Capturing and the safe square</RGU.Tut.P5.Title>
+  <RGU.Tut.P5.Body>The red middle row (path squares 5–12) is shared by both players.\n\nLand exactly on an enemy piece there and it is sent back to its waiting row to start over. Almost every swing in a game of Ur comes from a capture in this lane.\n\nThe one exception is the blue centre rosette (square 8). It is the safe square: a piece there cannot be captured, and while it is occupied the opponent cannot even enter it.</RGU.Tut.P5.Body>
+  <RGU.Tut.P6.Title>6. Bearing off exactly</RGU.Tut.P6.Title>
+  <RGU.Tut.P6.Body>Past the last two squares, a piece leaves the board and is home.\n\nBearing off needs an exact roll: a piece on square 14 needs a 1, one on square 13 needs a 2. A larger roll cannot overshoot the end.\n\nBring all seven pieces home and you win. Time to play a match.</RGU.Tut.P6.Body>
+
+  <!-- 설정 -->
+  <RGU.Settings.Highlight>Highlight movable pieces and their destinations</RGU.Settings.Highlight>
+  <RGU.Settings.Tooltips>Explain a square on mouseover</RGU.Settings.Tooltips>
+  <RGU.Settings.RiskWarning>Show capture risk on the destination square</RGU.Settings.RiskWarning>
+  <RGU.Settings.RiskWarning.Desc>Shows the chance of being captured next turn on the destination square.</RGU.Settings.RiskWarning.Desc>
+  <RGU.Settings.AutoAdvance>Play automatically when only one move is legal</RGU.Settings.AutoAdvance>
+  <RGU.Settings.RandomFirst>Randomize who moves first</RGU.Settings.RandomFirst>
+  <RGU.Settings.RandomFirst.Desc>Moving first is a slight advantage in Ur.</RGU.Settings.RandomFirst.Desc>
+
+  <!-- 기록 -->
+  <RGU.Tally.Captures>Pieces captured {0}</RGU.Tally.Captures>
+  <RGU.Tally.CapturesTaken>Pieces lost {0}</RGU.Tally.CapturesTaken>
+  <RGU.Tally.Rosettes>Rosettes landed {0}</RGU.Tally.Rosettes>
+
+</LanguageData>

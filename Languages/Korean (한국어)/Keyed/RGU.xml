@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 버튼 -->
+  <RGU.Btn.Roll>주사위 굴리기  (Space)</RGU.Btn.Roll>
+  <RGU.Btn.Waiting>상대 차례</RGU.Btn.Waiting>
+
+  <!-- 난이도 설명 -->
+  <RGU.Difficulty.T0.Desc>무작위로 둡니다. 골인만은 놓치지 않습니다. 룰을 익히는 중이라면 여기서.</RGU.Difficulty.T0.Desc>
+  <RGU.Difficulty.T1.Desc>한 수 앞만 봅니다. 잡기와 로제트는 챙기지만 종종 실수합니다.</RGU.Difficulty.T1.Desc>
+  <RGU.Difficulty.T2.Desc>두 수 앞을 확률로 계산합니다. 함정을 놓기 시작합니다.</RGU.Difficulty.T2.Desc>
+  <RGU.Difficulty.T3.Desc>세 수 앞을 봅니다. 안전칸과 잡힐 위험을 정확히 저울질합니다.</RGU.Difficulty.T3.Desc>
+  <RGU.Difficulty.T4.Desc>네 수 앞을 봅니다. 실수하지 않습니다.</RGU.Difficulty.T4.Desc>
+
+  <!-- 트레이 -->
+  <RGU.Tray.Waiting>대기</RGU.Tray.Waiting>
+  <RGU.Tray.Scored>골인</RGU.Tray.Scored>
+
+  <!-- 상태 -->
+  <RGU.Status.Roll>주사위를 굴리세요.</RGU.Status.Roll>
+  <RGU.Status.NoMove>눈 {0} — 둘 수 있는 수가 없습니다. 턴을 넘깁니다.</RGU.Status.NoMove>
+  <RGU.Status.PickMove>눈 {0} — 움직일 말을 고르세요. ({1}가지)</RGU.Status.PickMove>
+  <RGU.Status.BotThinking>AI 봇이 생각 중…</RGU.Status.BotThinking>
+  <RGU.Status.WinPlayer>당신의 승리!</RGU.Status.WinPlayer>
+  <RGU.Status.WinBot>AI 봇의 승리.</RGU.Status.WinBot>
+
+  <!-- 수순 로그 -->
+  <RGU.Log.Pass>패스</RGU.Log.Pass>
+  <RGU.Log.Entry>투입</RGU.Log.Entry>
+  <RGU.Log.BearOff>골인</RGU.Log.BearOff>
+  <RGU.Log.Capture>잡기</RGU.Log.Capture>
+  <RGU.Log.Extra>추가 턴</RGU.Log.Extra>
+
+  <!-- 칸 설명 -->
+  <RGU.Tip.MyPath>내 경로 {0}번 칸</RGU.Tip.MyPath>
+  <RGU.Tip.BotPath>상대 경로 {0}번 칸</RGU.Tip.BotPath>
+  <RGU.Tip.Shared>공유 구간 — 잡힐 수 있음</RGU.Tip.Shared>
+  <RGU.Tip.Home>전용 구간 — 안전</RGU.Tip.Home>
+  <RGU.Tip.Safe>안전칸 — 잡히지 않음</RGU.Tip.Safe>
+  <RGU.Tip.Rosette>로제트 — 추가 턴</RGU.Tip.Rosette>
+
+  <!-- 튜토리얼 -->
+  <RGU.Tut.DiceChart>눈이 나올 확률</RGU.Tut.DiceChart>
+  <RGU.Tut.P1.Title>1. 목표</RGU.Tut.P1.Title>
+  <RGU.Tut.P1.Body>우르의 게임은 4,500년 전 메소포타미아에서 두던 2인 경주 게임입니다.\n\n당신과 상대는 각자 말 7개를 가지고, 자기 경로를 따라 말을 움직여 판 밖으로 내보냅니다. 여러 말을 동시에 판 위에 올려 둘 수 있고, 한 차례에는 그중 하나만 움직입니다. 7개를 모두 먼저 내보낸 쪽이 이깁니다.\n\n노란 원이 당신 말, 파란 고리가 상대 말입니다.</RGU.Tut.P1.Body>
+  <RGU.Tut.P2.Title>2. 내 길</RGU.Tut.P2.Title>
+  <RGU.Tut.P2.Body>초록으로 칠한 14칸이 당신의 경로입니다. 번호 순서대로 나아갑니다.\n\n아래 줄 안쪽에서 출발해 바깥으로 나아가고(1–4), 가운데 줄로 올라가 반대편 끝까지 간 다음(5–12), 다시 아래 줄로 내려와 마지막 두 칸(13–14)을 지나 판을 빠져나갑니다.\n\n상대는 위쪽 줄에서 거울처럼 같은 길을 갑니다.</RGU.Tut.P2.Body>
+  <RGU.Tut.P3.Title>3. 주사위</RGU.Tut.P3.Title>
+  <RGU.Tut.P3.Body>사면체 주사위 4개를 굴립니다. 각 주사위는 표시된 꼭짓점이 위로 오면 1, 아니면 0.\n\n그 합(0–4)이 이번에 말을 움직일 칸 수입니다. 2가 가장 흔하고, 0과 4는 각각 16번에 한 번꼴로만 나옵니다.\n\n0이 나오거나 둘 수 있는 수가 하나도 없으면 턴이 그대로 상대에게 넘어갑니다.</RGU.Tut.P3.Body>
+  <RGU.Tut.P4.Title>4. 로제트</RGU.Tut.P4.Title>
+  <RGU.Tut.P4.Body>꽃 무늬가 그려진 다섯 칸이 로제트입니다.\n\n로제트에 정확히 도착하면 주사위를 한 번 더 굴립니다. 연달아 밟으면 한 차례에 여러 수를 몰아 둘 수 있습니다.\n\n판이 시작되자마자 자기 쪽 로제트(경로 4번)를 잡는 것이 우르의 정석입니다.</RGU.Tut.P4.Body>
+  <RGU.Tut.P5.Title>5. 잡기와 안전칸</RGU.Tut.P5.Title>
+  <RGU.Tut.P5.Body>붉게 칠한 가운데 줄(경로 5–12)은 두 사람이 함께 쓰는 구간입니다.\n\n상대 말이 있는 칸에 정확히 도착하면 그 말을 잡아 대기줄로 돌려보냅니다. 잡힌 말은 처음부터 다시 가야 합니다. 우르에서 판을 뒤집는 것은 거의 언제나 이 잡기입니다.\n\n다만 파랗게 칠한 가운데 로제트(경로 8번)는 안전칸입니다. 그 위의 말은 잡히지 않고, 이미 말이 있으면 상대는 들어올 수도 없습니다.</RGU.Tut.P5.Body>
+  <RGU.Tut.P6.Title>6. 정확히 나가기</RGU.Tut.P6.Title>
+  <RGU.Tut.P6.Body>마지막 두 칸을 지나 판을 빠져나가면 골인입니다.\n\n골인에는 정확한 눈이 필요합니다. 14번 칸의 말은 눈 1, 13번 칸의 말은 눈 2가 있어야 나갑니다. 눈이 남아도 그냥 넘어갈 수는 없습니다.\n\n말 7개를 모두 내보내면 승리입니다. 이제 한 판 두어 보세요.</RGU.Tut.P6.Body>
+
+  <!-- 설정 -->
+  <RGU.Settings.Highlight>이동 가능한 말과 도착칸 강조</RGU.Settings.Highlight>
+  <RGU.Settings.Tooltips>칸에 마우스를 올리면 설명 표시</RGU.Settings.Tooltips>
+  <RGU.Settings.RiskWarning>도착칸에 잡힐 확률 표시</RGU.Settings.RiskWarning>
+  <RGU.Settings.RiskWarning.Desc>도착칸에 다음 턴 잡힐 확률을 표시합니다.</RGU.Settings.RiskWarning.Desc>
+  <RGU.Settings.AutoAdvance>합법수가 1개뿐이면 자동 진행</RGU.Settings.AutoAdvance>
+  <RGU.Settings.RandomFirst>선공을 무작위로</RGU.Settings.RandomFirst>
+  <RGU.Settings.RandomFirst.Desc>우르는 선공이 조금 유리합니다.</RGU.Settings.RandomFirst.Desc>
+
+  <!-- 기록 -->
+  <RGU.Tally.Captures>잡은 말 {0}</RGU.Tally.Captures>
+  <RGU.Tally.CapturesTaken>잡힌 말 {0}</RGU.Tally.CapturesTaken>
+  <RGU.Tally.Rosettes>로제트 {0}</RGU.Tally.Rosettes>
+
+</LanguageData>

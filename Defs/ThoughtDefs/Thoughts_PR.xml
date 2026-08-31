@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    이 가구로 여가를 즐긴 식민자가 얻는 기분 생각. 단계(stage)는 폰이 아니라
+    **플레이어의 숙련도**를 따라간다 - Thought_Mastery 가 CurStageIndex 를
+    그 게임에서 클리어한 난이도 수로 덮어쓴다.
+  -->
+
+  <ThoughtDef>
+    <defName>PR_PlayedUr</defName>
+    <thoughtClass>PlayableRecreation.Thought_Mastery</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>played Ur clueless</label>
+        <description>I pushed the little pieces around the board for a while. I honestly have no idea how this game works. It was nice to sit down, at least.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+      <li>
+        <label>starting to get Ur</label>
+        <description>I think I finally understand what the rosettes do. You land on one, you go again. That's most of it, right?</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>played a decent game of Ur</label>
+        <description>I held the middle square for three turns and nobody could touch me. There's more to this old game than it looks.</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>played Ur well</label>
+        <description>I can see two moves ahead now. You don't run a piece into the shared row unless you've counted what the other side can roll.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>rarely loses at Ur</label>
+        <description>People have stopped asking me to play. I keep telling them it's mostly the dice. It is not mostly the dice.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>mastered the game of Ur</label>
+        <description>Four thousand five hundred years of this game, and I have it solved. Seven pieces, fourteen squares, and not one wasted roll.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PR_PlayedHorseshoes</defName>
+    <thoughtClass>PlayableRecreation.Thought_Mastery</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>threw horseshoes badly</label>
+        <description>Most of them landed nowhere near the pin. One went into the dirt about a metre short. Good arm exercise.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+      <li>
+        <label>getting the hang of horseshoes</label>
+        <description>You have to let it turn once in the air. Once I stopped throwing it flat, they started landing close.</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>threw a decent round</label>
+        <description>Two leaners and a ringer. Not bad for standing in a field flinging metal at a stick.</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>threw horseshoes well</label>
+        <description>I know the distance in my shoulder now. I do not have to think about it any more.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>rarely misses the pin</label>
+        <description>Somebody bet me a meal I could not ring three in a row. I am eating well tonight.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>mastered horseshoes</label>
+        <description>Twelve metres, a lump of iron, and a stick in the ground. There is nothing left in it I do not know.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PR_PlayedHoopstone</defName>
+    <thoughtClass>PlayableRecreation.Thought_Mastery</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>threw stones at a ring</label>
+        <description>I threw stones at a ring for a while and none of them went through. Somebody said that is normal at first.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+      <li>
+        <label>getting the hang of hoopstone</label>
+        <description>The trick is the arc, not the speed. Throw it flat and it just clangs off the rim.</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>put a few through</label>
+        <description>Three clean through the ring today. You hear it when it goes through without touching.</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>threw hoopstone well</label>
+        <description>I can pick my stone by weight now and know where it will land before it leaves my hand.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>rarely misses the ring</label>
+        <description>People come to watch rather than play. It is a little embarrassing. I keep throwing.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>mastered hoopstone</label>
+        <description>A stone, a ring, and the space between them. I have not missed in a long time.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

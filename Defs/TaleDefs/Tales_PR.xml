@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 바닐라 PlayedGame 과 같은 구조(Tale_SinglePawnAndDef). 이긴 판만 기록한다. -->
+  <TaleDef>
+    <defName>PR_WonMatch</defName>
+    <label>won a game</label>
+    <taleClass>Tale_SinglePawnAndDef</taleClass>
+    <type>Volatile</type>
+    <defSymbol>OBJECT</defSymbol>
+    <baseInterest>0.8</baseInterest>
+    <rulePack>
+      <rulesStrings>
+        <li>tale_noun->[PAWN_nameDef]'s victory at the [OBJECT_label]</li>
+        <li>tale_noun->[PAWN_nameDef] taking the last point at a [OBJECT_label]</li>
+        <li>tale_noun->a game won by [PAWN_nameDef]</li>
+
+        <li>image->[PAWN_nameFull] winning at a [OBJECT_label], [circumstance_group]</li>
+        <li>image->[PAWN_nameFull] leaning over a [OBJECT_label] as the game ends, [circumstance_group]</li>
+        <li>image->[PAWN_nameFull] seated in triumph before a [OBJECT_label], [circumstance_group]</li>
+        <li>image->[PAWN_nameFull] standing over a [OBJECT_label] with nothing left to play, [circumstance_group]</li>
+
+        <li>circumstance_phrase->[PAWN_possessive] hand still open above the board</li>
+        <li>circumstance_phrase->counting the last of it under [PAWN_possessive] breath</li>
+        <li>circumstance_phrase->tense with energy</li>
+        <li>circumstance_phrase->[PAWN_possessive] body loose and relaxed</li>
+        <li>circumstance_phrase->wearing a [AdjectiveAngsty] look</li>
+        <li>circumstance_phrase->[angstyverb]</li>
+
+        <li>desc_sentence->The pieces lie scattered where they fell.</li>
+        <li>desc_sentence->A faint [Color] mark is worn into the [OBJECT_label].</li>
+        <li>desc_sentence->The loser has left nothing behind but the mess.</li>
+        <li>desc_sentence->[Quantity_adjphrase] [PersonJob]s watch the final play.</li>
+        <li>desc_sentence->[Quantity_adjphrase] [PersonJob]s are slumped in defeat.</li>
+        <li>desc_sentence->In the distance, a [TerrainFeature] is visible.</li>
+        <li>desc_sentence->[PAWN_nameDef] towers above the scene.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+
+</Defs>

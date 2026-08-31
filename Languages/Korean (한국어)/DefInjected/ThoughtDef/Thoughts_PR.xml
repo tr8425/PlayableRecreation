@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PR_PlayedUr.stages.0.label>솔직히 어떻게 하는지도 모르고 가지고 놀았어</PR_PlayedUr.stages.0.label>
+  <PR_PlayedUr.stages.0.description>말들을 한참 이리저리 밀어 봤다. 이 게임이 어떻게 돌아가는 건지 솔직히 하나도 모르겠다. 그래도 앉아서 쉬는 건 좋았다.</PR_PlayedUr.stages.0.description>
+
+  <PR_PlayedUr.stages.1.label>규칙은 대충 알 것 같아</PR_PlayedUr.stages.1.label>
+  <PR_PlayedUr.stages.1.description>꽃무늬 칸이 뭘 하는지는 이제 알겠다. 거기 올라가면 한 번 더 굴린다. 그게 거의 전부 아닌가?</PR_PlayedUr.stages.1.description>
+
+  <PR_PlayedUr.stages.2.label>이제 좀 둘 줄 알아</PR_PlayedUr.stages.2.label>
+  <PR_PlayedUr.stages.2.description>가운데 칸을 세 턴이나 지켰고 아무도 못 건드렸다. 이 오래된 게임, 보기보다 뭐가 더 있다.</PR_PlayedUr.stages.2.description>
+
+  <PR_PlayedUr.stages.3.label>웬만한 상대는 이겨</PR_PlayedUr.stages.3.label>
+  <PR_PlayedUr.stages.3.description>이제 두 수 앞이 보인다. 상대가 무슨 눈을 낼 수 있는지 세어 보지 않고는 공유 구간에 말을 들이밀지 않는다.</PR_PlayedUr.stages.3.description>
+
+  <PR_PlayedUr.stages.4.label>지는 판이 거의 없어</PR_PlayedUr.stages.4.label>
+  <PR_PlayedUr.stages.4.description>사람들이 나한테 두자는 말을 안 하기 시작했다. 대부분 주사위 운이라고 계속 말해 주는데도 그런다. 대부분 주사위 운이 아니다.</PR_PlayedUr.stages.4.description>
+
+  <PR_PlayedUr.stages.5.label>나는 이 게임을 마스터했다</PR_PlayedUr.stages.5.label>
+  <PR_PlayedUr.stages.5.description>사천오백 년 묵은 게임을 내가 풀어냈다. 말 일곱 개, 칸 열넷, 버리는 주사위는 단 한 번도 없다.</PR_PlayedUr.stages.5.description>
+
+  <PR_PlayedHorseshoes.stages.0.label>편자가 사방으로 날아갔어</PR_PlayedHorseshoes.stages.0.label>
+  <PR_PlayedHorseshoes.stages.0.description>막대 근처에도 못 갔다. 하나는 한 걸음쯤 앞 흙바닥에 처박혔다. 팔 운동은 됐다.</PR_PlayedHorseshoes.stages.0.description>
+
+  <PR_PlayedHorseshoes.stages.1.label>던지는 감은 좀 잡았어</PR_PlayedHorseshoes.stages.1.label>
+  <PR_PlayedHorseshoes.stages.1.description>공중에서 한 바퀴 돌게 던져야 한다. 납작하게 던지는 걸 그만두니 붙기 시작했다.</PR_PlayedHorseshoes.stages.1.description>
+
+  <PR_PlayedHorseshoes.stages.2.label>그럭저럭 붙였어</PR_PlayedHorseshoes.stages.2.label>
+  <PR_PlayedHorseshoes.stages.2.description>기댄 게 둘, 걸린 게 하나. 들판에 서서 쇳덩이를 막대에 던지는 것치고는 나쁘지 않다.</PR_PlayedHorseshoes.stages.2.description>
+
+  <PR_PlayedHorseshoes.stages.3.label>잘 던져</PR_PlayedHorseshoes.stages.3.label>
+  <PR_PlayedHorseshoes.stages.3.description>이제 거리가 어깨에 들어 있다. 더는 생각하지 않아도 된다.</PR_PlayedHorseshoes.stages.3.description>
+
+  <PR_PlayedHorseshoes.stages.4.label>거의 안 빗나가</PR_PlayedHorseshoes.stages.4.label>
+  <PR_PlayedHorseshoes.stages.4.description>세 번 연속으로 걸면 밥 한 끼 사겠다고 누가 그랬다. 오늘 잘 먹는다.</PR_PlayedHorseshoes.stages.4.description>
+
+  <PR_PlayedHorseshoes.stages.5.label>편자 던지기를 마스터했다</PR_PlayedHorseshoes.stages.5.label>
+  <PR_PlayedHorseshoes.stages.5.description>열두 걸음, 쇳덩이 하나, 땅에 박힌 막대 하나. 여기서 내가 모르는 건 없다.</PR_PlayedHorseshoes.stages.5.description>
+
+  <PR_PlayedHoopstone.stages.0.label>고리에 돌을 던져 봤어</PR_PlayedHoopstone.stages.0.label>
+  <PR_PlayedHoopstone.stages.0.description>한참 던졌는데 하나도 안 들어갔다. 처음엔 다 그렇다고들 한다.</PR_PlayedHoopstone.stages.0.description>
+
+  <PR_PlayedHoopstone.stages.1.label>던지는 감은 좀 잡았어</PR_PlayedHoopstone.stages.1.label>
+  <PR_PlayedHoopstone.stages.1.description>세기가 아니라 포물선이다. 낮게 던지면 테두리에 튕겨 나갈 뿐이다.</PR_PlayedHoopstone.stages.1.description>
+
+  <PR_PlayedHoopstone.stages.2.label>몇 개 통과시켰어</PR_PlayedHoopstone.stages.2.label>
+  <PR_PlayedHoopstone.stages.2.description>오늘 셋을 깨끗하게 통과시켰다. 아무 데도 안 닿고 지나가면 소리로 안다.</PR_PlayedHoopstone.stages.2.description>
+
+  <PR_PlayedHoopstone.stages.3.label>잘 던져</PR_PlayedHoopstone.stages.3.label>
+  <PR_PlayedHoopstone.stages.3.description>이제 돌을 무게로 고르고, 손을 떠나기 전에 어디 떨어질지 안다.</PR_PlayedHoopstone.stages.3.description>
+
+  <PR_PlayedHoopstone.stages.4.label>거의 안 빗나가</PR_PlayedHoopstone.stages.4.label>
+  <PR_PlayedHoopstone.stages.4.description>같이 던지자는 사람보다 구경하러 오는 사람이 많아졌다. 조금 민망하다. 계속 던진다.</PR_PlayedHoopstone.stages.4.description>
+
+  <PR_PlayedHoopstone.stages.5.label>후프스톤을 마스터했다</PR_PlayedHoopstone.stages.5.label>
+  <PR_PlayedHoopstone.stages.5.description>돌 하나, 고리 하나, 그 사이의 거리. 못 넣어 본 지 오래됐다.</PR_PlayedHoopstone.stages.5.description>
+</LanguageData>

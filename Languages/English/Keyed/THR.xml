@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Difficulty -->
+  <THR.Difficulty.T0.Desc>Goes through the motions. Lands close by accident.</THR.Difficulty.T0.Desc>
+  <THR.Difficulty.T1.Desc>Misses often, but the direction is right.</THR.Difficulty.T1.Desc>
+  <THR.Difficulty.T2.Desc>Scores about half the time.</THR.Difficulty.T2.Desc>
+  <THR.Difficulty.T3.Desc>Rarely misses the scoring zone.</THR.Difficulty.T3.Desc>
+  <THR.Difficulty.T4.Desc>Dead centre nearly every throw.</THR.Difficulty.T4.Desc>
+
+  <!-- Controls -->
+  <THR.Btn.LockAim>Lock aim  (Space)</THR.Btn.LockAim>
+  <THR.Btn.Throw>Throw  (Space)</THR.Btn.Throw>
+  <THR.Btn.Waiting>Their turn</THR.Btn.Waiting>
+  <THR.Bar.Aim>Aim</THR.Bar.Aim>
+  <THR.Bar.Power>Power</THR.Bar.Power>
+  <THR.Scoreboard>Inning {0} - first to {1}</THR.Scoreboard>
+
+  <!-- Status -->
+  <THR.Status.Aim>Stop the aim bar.</THR.Status.Aim>
+  <THR.Status.Power>Stop the power bar.</THR.Status.Power>
+  <THR.Status.Opponent>They are lining it up...</THR.Status.Opponent>
+  <THR.Status.Ringer>{0}!</THR.Status.Ringer>
+  <THR.Status.Landed>Off by {0}</THR.Status.Landed>
+  <THR.Status.WinPlayer>You win! {0} to {1}</THR.Status.WinPlayer>
+  <THR.Status.WinOpponent>They win. {0} to {1}</THR.Status.WinOpponent>
+
+  <THR.Ringer.Shoe>Ringer</THR.Ringer.Shoe>
+  <THR.Ringer.Through>Through</THR.Ringer.Through>
+
+  <!-- Records -->
+  <THR.Tally.Ringers>Ringers {0}</THR.Tally.Ringers>
+  <THR.Tally.Throughs>Clean throws {0}</THR.Tally.Throughs>
+  <THR.Tally.PointsFor>Points for {0}</THR.Tally.PointsFor>
+  <THR.Tally.PointsAgainst>Points against {0}</THR.Tally.PointsAgainst>
+
+  <!-- Scoring -->
+  <THR.Tut.Score.Ringer>{0}: {1} points</THR.Tut.Score.Ringer>
+  <THR.Tut.Score.Near>Closer than theirs and still in range: {0} point each</THR.Tut.Score.Near>
+  <THR.Tut.Score.Rim>Catching the rim: {0} point</THR.Tut.Score.Rim>
+  <THR.Tut.Score.Target>{1} throws an inning, first to {0}</THR.Tut.Score.Target>
+
+  <!-- Horseshoes -->
+  <THR.Tut.HS.P1.Title>1. Horseshoes</THR.Tut.HS.P1.Title>
+  <THR.Tut.HS.P1.Body>You pitch a horseshoe at a pin driven into the ground.
+
+You are looking down at the target. The pin is dead centre. Inside the tight circle is a ringer; inside the wide one still scores. Past that, nothing.
+
+Each inning both sides throw twice, alternating.</THR.Tut.HS.P1.Body>
+
+  <THR.Tut.HS.P2.Title>2. Throwing</THR.Tut.HS.P2.Title>
+  <THR.Tut.HS.P2.Body>Stop two bars in turn and the shoe goes.
+
+Aim first, then power. The closer you stop to the green band, the truer the throw. Click or press Space.
+
+Higher tiers move the bars faster and throw better against you.</THR.Tut.HS.P2.Body>
+
+  <THR.Tut.HS.P3.Title>3. Scoring</THR.Tut.HS.P3.Title>
+  <THR.Tut.HS.P3.Body>A ringer scores on its own.
+
+Everything else is counted after the inning. Only shoes closer than their nearest one count, so one inning goes entirely to one side.
+
+There is no undo. A throw is a throw.</THR.Tut.HS.P3.Body>
+
+  <!-- Hoopstone -->
+  <THR.Tut.HP.P1.Title>1. Hoopstone</THR.Tut.HP.P1.Title>
+  <THR.Tut.HP.P1.Body>You toss a stone through a standing ring.
+
+You are looking down at the target. The ring is dead centre. Inside the tight circle goes clean through; the wider one is a stone that caught the rim.
+
+Each inning both sides throw three times, alternating.</THR.Tut.HP.P1.Body>
+
+  <THR.Tut.HP.P2.Title>2. Throwing</THR.Tut.HP.P2.Title>
+  <THR.Tut.HP.P2.Body>Stop two bars in turn and the stone goes.
+
+Aim first, then power. The closer you stop to the green band, the truer the throw. Click or press Space.
+
+Higher tiers move the bars faster and throw better against you.</THR.Tut.HP.P2.Body>
+
+  <THR.Tut.HP.P3.Title>3. Scoring</THR.Tut.HP.P3.Title>
+  <THR.Tut.HP.P3.Body>Unlike horseshoes, every throw scores on its own. You are not competing with them, you are competing with the ring.
+
+In exchange the ring is a tighter target than the pin and the game is shorter. Three bad throws hands it over.
+
+There is no undo.</THR.Tut.HP.P3.Body>
+
+</LanguageData>

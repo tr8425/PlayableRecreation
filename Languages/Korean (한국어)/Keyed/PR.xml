@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PR.ModTitle>직접 하는 오락</PR.ModTitle>
+
+  <!-- 진입 -->
+  <PR.Play.Label>{0} 하기</PR.Play.Label>
+  <PR.Play.Broken>못 쓸 만큼 부서져 있음</PR.Play.Broken>
+  <PR.Play.Resume>이어서 하기 ({0}회차 · {1})</PR.Play.Resume>
+  <PR.Play.Discard>하던 판을 접고 새로 시작</PR.Play.Discard>
+
+  <!-- 창 -->
+  <PR.Window.Paused>일시정지 중</PR.Window.Paused>
+  <PR.Window.Running>콜로니 시간 진행 중</PR.Window.Running>
+  <PR.Window.Practice>연습</PR.Window.Practice>
+  <PR.Header.You>당신</PR.Header.You>
+  <PR.Header.YouNamed>당신 ({0})</PR.Header.YouNamed>
+  <PR.Header.Opponent>AI 상대 ({0})</PR.Header.Opponent>
+  <PR.Log.Title>진행</PR.Log.Title>
+  <PR.Side.You>당신</PR.Side.You>
+  <PR.Side.Opponent>상대</PR.Side.Opponent>
+
+  <!-- 난이도 -->
+  <PR.Difficulty.Title>{0} · 상대 고르기</PR.Difficulty.Title>
+  <PR.Difficulty.Hint>판이 시작되면 도중에 바꿀 수 없습니다.</PR.Difficulty.Hint>
+  <PR.Difficulty.Practice>연습 판으로 하기</PR.Difficulty.Practice>
+  <PR.Difficulty.Practice.Desc>가장 낮은 단계. 기록에 남지 않습니다.</PR.Difficulty.Practice.Desc>
+  <PR.Difficulty.T0.Label>초보</PR.Difficulty.T0.Label>
+  <PR.Difficulty.T1.Label>견습</PR.Difficulty.T1.Label>
+  <PR.Difficulty.T2.Label>숙련</PR.Difficulty.T2.Label>
+  <PR.Difficulty.T3.Label>상급</PR.Difficulty.T3.Label>
+  <PR.Difficulty.T4.Label>명인</PR.Difficulty.T4.Label>
+
+  <!-- 버튼 -->
+  <PR.Btn.NewMatch>새 판 시작</PR.Btn.NewMatch>
+  <PR.Btn.Help.Tip>규칙 안내.</PR.Btn.Help.Tip>
+  <PR.Btn.Undo>무르기</PR.Btn.Undo>
+  <PR.Btn.Undo.Tip>직전 내 차례로. 남은 횟수 {0}/{1}.</PR.Btn.Undo.Tip>
+  <PR.Btn.Undo.Blocked>상급 이상에서는 무르기를 쓸 수 없습니다.</PR.Btn.Undo.Blocked>
+  <PR.Btn.Undo.Practice>연습 판은 무제한.</PR.Btn.Undo.Practice>
+  <PR.Btn.Retry>재시도</PR.Btn.Retry>
+  <PR.Btn.Retry.Tip>처음부터 다시. 하루 한 번.</PR.Btn.Retry.Tip>
+  <PR.Btn.Retry.Cooldown>오늘은 이미 재시도했습니다.</PR.Btn.Retry.Cooldown>
+  <PR.Btn.Resign>기권</PR.Btn.Resign>
+  <PR.Btn.Resign.Tip>패배로 기록됩니다.</PR.Btn.Resign.Tip>
+  <PR.Btn.Records>기록</PR.Btn.Records>
+  <PR.Btn.Records.Tip>난이도별 전적.</PR.Btn.Records.Tip>
+
+  <PR.Confirm.Discard>하던 판을 접고 새로 시작할까요? 기권패로 기록됩니다.</PR.Confirm.Discard>
+  <PR.Confirm.Retry>처음부터 다시 할까요? 기권패로 기록됩니다.</PR.Confirm.Retry>
+  <PR.Confirm.Resign>기권할까요? 패배로 기록됩니다.</PR.Confirm.Resign>
+  <PR.Status.Resigned>기권했습니다.</PR.Status.Resigned>
+
+  <!-- 튜토리얼 -->
+  <PR.Tut.Prev>이전</PR.Tut.Prev>
+  <PR.Tut.Next>다음</PR.Tut.Next>
+  <PR.Tut.Skip>건너뛰기</PR.Tut.Skip>
+  <PR.Tut.Done>시작하기</PR.Tut.Done>
+
+  <!-- 습격 -->
+  <PR.Interrupted.Saved>싸울 일이 생겼습니다. 판은 그대로 둔 채 자리에서 일어섰습니다.</PR.Interrupted.Saved>
+  <PR.Interrupted.Lost>싸울 일이 생겼습니다. 일어서다 판이 쏟아졌습니다.</PR.Interrupted.Lost>
+
+  <!-- 숙련도 -->
+  <PR.Mastery.Cleared>{1} · {0} 상대를 처음 이겼습니다. 숙련도 {2}/{3} · 여가와 경험치 +{4}%</PR.Mastery.Cleared>
+  <PR.Inspect.Saved>하던 판이 놓여 있음: {0}회차 · {1} 상대</PR.Inspect.Saved>
+  <PR.Inspect.Mastery>숙련도 {0}/{1}단계 (+{2}%)</PR.Inspect.Mastery>
+
+  <!-- 무효화 -->
+  <PR.Invalidation.Combat.Label>근처에서 전투가 벌어짐</PR.Invalidation.Combat.Label>
+  <PR.Invalidation.Cleaning.Label>식민자가 주변을 청소함</PR.Invalidation.Cleaning.Label>
+  <PR.Invalidation.Repair.Label>가구를 수리함</PR.Invalidation.Repair.Label>
+  <PR.Invalidation.Damaged.Label>가구가 손상됨</PR.Invalidation.Damaged.Label>
+  <PR.Invalidation.Moved.Label>가구를 옮김</PR.Invalidation.Moved.Label>
+  <PR.Invalidation.Expired.Label>오래 방치됨</PR.Invalidation.Expired.Label>
+
+  <PR.Invalidation.Combat.Msg>전투 중에 하던 판이 뒤집혔습니다.</PR.Invalidation.Combat.Msg>
+  <PR.Invalidation.Cleaning.Msg>청소하면서 하던 판이 쓸려나갔습니다.</PR.Invalidation.Cleaning.Msg>
+  <PR.Invalidation.Repair.Msg>수리하다 하던 판이 흐트러졌습니다.</PR.Invalidation.Repair.Msg>
+  <PR.Invalidation.Damaged.Msg>가구가 부서져 하던 판을 알아볼 수 없습니다.</PR.Invalidation.Damaged.Msg>
+  <PR.Invalidation.Moved.Msg>가구를 옮기면서 하던 판이 쏟아졌습니다.</PR.Invalidation.Moved.Msg>
+  <PR.Invalidation.Destroyed.Msg>가구가 사라졌습니다. 하던 승부도 함께.</PR.Invalidation.Destroyed.Msg>
+  <PR.Invalidation.Expired.Msg>오래 방치된 판을 아무도 기억하지 못합니다.</PR.Invalidation.Expired.Msg>
+
+  <PR.Invalidation.Letter.Label>흐트러진 판</PR.Invalidation.Letter.Label>
+  <PR.Invalidation.Letter.Text>{0}
+
+놓여 있던 것은 세이브가 아니라 그냥 물건입니다. 누가 지나가며 건드리면 그대로 흐트러지고, 어디에 뭐가 있었는지는 아무도 기억하지 못합니다.
+
+모드 설정에서 끌 수 있습니다.</PR.Invalidation.Letter.Text>
+
+  <!-- 기록 -->
+  <PR.Records.Title>기록</PR.Records.Title>
+  <PR.Records.NoGames>켜져 있는 게임이 없습니다.</PR.Records.NoGames>
+  <PR.Records.Tab.Player>나의 통산</PR.Records.Tab.Player>
+  <PR.Records.Tab.Colony>이 식민지</PR.Records.Tab.Colony>
+  <PR.Records.Col.Difficulty>난이도</PR.Records.Col.Difficulty>
+  <PR.Records.Col.Record>전적</PR.Records.Col.Record>
+  <PR.Records.Col.WinRate>승률</PR.Records.Col.WinRate>
+  <PR.Records.Col.Fastest>최속승</PR.Records.Col.Fastest>
+  <PR.Records.Col.Streak>최다연승</PR.Records.Col.Streak>
+  <PR.Records.Rounds>{0}회차</PR.Records.Rounds>
+  <PR.Records.Summary>통산 {0}승 {1}패 · 무효 {2} · 기권 {3}</PR.Records.Summary>
+  <PR.Records.Streak>완봉승 {0}회 · 최다연승 {1}</PR.Records.Streak>
+  <PR.Records.Time>누적 플레이 {0} · 무르기 {1}회</PR.Records.Time>
+  <PR.Records.HoursMinutes>{0}시간 {1}분</PR.Records.HoursMinutes>
+  <PR.Records.Minutes>{0}분</PR.Records.Minutes>
+  <PR.Records.Reset>기록 초기화</PR.Records.Reset>
+  <PR.Records.Reset.Confirm>{0} · [{1}] 기록을 모두 지울까요? 되돌릴 수 없습니다.</PR.Records.Reset.Confirm>
+  <PR.Records.Close>닫기</PR.Records.Close>
+
+  <!-- 설정 -->
+  <PR.Settings.Group.Games>게임</PR.Settings.Group.Games>
+  <PR.Settings.Games.Desc>끄면 그 가구에서 우클릭 메뉴가 사라집니다. 식민자의 자율 여가는 그대로입니다.</PR.Settings.Games.Desc>
+  <PR.Settings.Group.Play>플레이</PR.Settings.Group.Play>
+  <PR.Settings.Group.Mastery>숙련도와 콜로니</PR.Settings.Group.Mastery>
+  <PR.Settings.Group.Session>중단한 판</PR.Settings.Group.Session>
+
+  <PR.Settings.Pause>하는 동안 게임 시간 멈춤</PR.Settings.Pause>
+  <PR.Settings.Pause.Desc>끄면 하는 동안 콜로니 시간이 흐릅니다. 위협이 나타나면 창이 저절로 닫힙니다.</PR.Settings.Pause.Desc>
+  <PR.Settings.Immersion>몰입 모드 (폰이 가구까지 걸어간 뒤 시작)</PR.Settings.Immersion>
+  <PR.Settings.Immersion.Desc>선택한 식민자가 가구 앞에 선 뒤 창이 열립니다.</PR.Settings.Immersion.Desc>
+  <PR.Settings.LinkSkill>난이도를 식민자의 스킬로 자동 결정</PR.Settings.LinkSkill>
+  <PR.Settings.LinkSkill.Desc>난이도 선택 창을 건너뜁니다. 게임마다 기준 스킬이 다릅니다.</PR.Settings.LinkSkill.Desc>
+  <PR.Settings.Sounds>효과음</PR.Settings.Sounds>
+  <PR.Settings.ThinkTime>AI 뜸들이는 시간: {0}초 (난이도가 높을수록 짧아짐)</PR.Settings.ThinkTime>
+
+  <PR.Settings.Mastery.Explain>난이도를 처음 이길 때마다 한 단계. 단계당 +{0}%, 전부 깨면 +{1}%. 게임마다 따로 쌓입니다.</PR.Settings.Mastery.Explain>
+  <PR.Settings.Mastery.Current>{0} 숙련도: {1}/{2}단계 (+{3}%)</PR.Settings.Mastery.Current>
+  <PR.Settings.MasteryBonus>숙련도만큼 식민자의 여가·학습 증가</PR.Settings.MasteryBonus>
+  <PR.Settings.PlayThought>그 가구로 논 식민자에게 기분 생각 부여</PR.Settings.PlayThought>
+  <PR.Settings.PlayThought.Desc>문구는 숙련도를 따라 바뀝니다.</PR.Settings.PlayThought.Desc>
+  <PR.Settings.DisableImpact>콜로니 영향 전부 끄기</PR.Settings.DisableImpact>
+  <PR.Settings.NoImpact>콜로니에 아무 영향도 주지 않습니다.</PR.Settings.NoImpact>
+
+  <PR.Settings.SaveSessions>중단한 판을 가구에 저장</PR.Settings.SaveSessions>
+  <PR.Settings.SaveSessions.Desc>창을 닫아도 판이 가구에 남습니다.</PR.Settings.SaveSessions.Desc>
+  <PR.Settings.Invalidate>가구가 흔들리면 저장된 판 무효화</PR.Settings.Invalidate>
+  <PR.Settings.Invalidate.Desc>가구 주변에서 벌어진 일이 판을 흐트러뜨립니다.</PR.Settings.Invalidate.Desc>
+  <PR.Settings.ExpiryDays>마지막으로 손댄 뒤 {0}일이 지나면 잊음</PR.Settings.ExpiryDays>
+  <PR.Settings.UndoLimit>판당 무르기 횟수: {0}</PR.Settings.UndoLimit>
+  <PR.Settings.NoUndoHard>상급·명인 난이도에서는 무르기 금지</PR.Settings.NoUndoHard>
+
+</LanguageData>

@@ -1,0 +1,11 @@
+# 빌드 중간 산출물
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Assemblies/ 의 DLL 은 배포에 필요하므로 커밋한다. 심볼만 제외.
+Assemblies/*.pdb
+Assemblies/*.xml
+Assemblies/*.deps.json

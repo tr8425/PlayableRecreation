@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    가구 하나를 "직접 할 수 있는 것"으로 만드는 정의.
+    프레임워크는 여기까지만 안다 - 진입, 창, 세션, 기록, 숙련도.
+    규칙과 AI 와 그림은 전부 workerClass 안에 있다.
+  -->
+
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Ur</defName>
+    <label>game of Ur</label>
+    <description>Play a match of Ur against an AI opponent.</description>
+    <workerClass>RoyalGameOfUr.UrGameWorker</workerClass>
+    <targetThing>GameOfUrBoard</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>RGU.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>6</tutorialPages>
+    <tutorialKeyPrefix>RGU.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>true</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>RGU.Tally.Captures</li>
+      <li>RGU.Tally.CapturesTaken</li>
+      <li>RGU.Tally.Rosettes</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_GameOfUr</vanillaJob>
+    <playThought>PR_PlayedUr</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Intellectual</linkedSkill>
+
+    <windowSize>(980, 720)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Horseshoes</defName>
+    <label>horseshoes</label>
+    <description>Pitch horseshoes at the pin against an AI opponent.</description>
+    <workerClass>Throwing.ThrowGameWorker</workerClass>
+    <targetThing>HorseshoesPin</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>THR.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>3</tutorialPages>
+    <tutorialKeyPrefix>THR.Tut.HS</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>THR.Tally.Ringers</li>
+      <li>THR.Tally.PointsFor</li>
+      <li>THR.Tally.PointsAgainst</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_Horseshoes</vanillaJob>
+    <playThought>PR_PlayedHorseshoes</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Shooting</linkedSkill>
+
+    <windowSize>(860, 700)</windowSize>
+
+    <modExtensions>
+      <li Class="Throwing.ThrowRulesExtension">
+        <throwsPerInning>2</throwsPerInning>
+        <targetScore>21</targetScore>
+        <perThrowScoring>false</perThrowScoring>
+        <ringerRadius>0.16</ringerRadius>
+        <scoreRadius>0.55</scoreRadius>
+        <ringerPoints>3</ringerPoints>
+        <nearPoints>1</nearPoints>
+        <ringerKey>THR.Ringer.Shoe</ringerKey>
+      </li>
+    </modExtensions>
+  </PlayableRecreation.MiniGameDef>
+
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Hoopstone</defName>
+    <label>hoopstone</label>
+    <description>Toss stones through the ring against an AI opponent.</description>
+    <workerClass>Throwing.ThrowGameWorker</workerClass>
+    <targetThing>HoopstoneRing</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>THR.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>3</tutorialPages>
+    <tutorialKeyPrefix>THR.Tut.HP</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>THR.Tally.Throughs</li>
+      <li>THR.Tally.PointsFor</li>
+      <li>THR.Tally.PointsAgainst</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_Hoopstone</vanillaJob>
+    <playThought>PR_PlayedHoopstone</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Shooting</linkedSkill>
+
+    <windowSize>(860, 700)</windowSize>
+
+    <!-- 같은 워커, 다른 규칙. 던질 때마다 채점하고 점수도 판도 짧다. -->
+    <modExtensions>
+      <li Class="Throwing.ThrowRulesExtension">
+        <throwsPerInning>3</throwsPerInning>
+        <targetScore>15</targetScore>
+        <perThrowScoring>true</perThrowScoring>
+        <ringerRadius>0.20</ringerRadius>
+        <scoreRadius>0.34</scoreRadius>
+        <ringerPoints>2</ringerPoints>
+        <nearPoints>1</nearPoints>
+        <ringerKey>THR.Ringer.Through</ringerKey>
+      </li>
+    </modExtensions>
+  </PlayableRecreation.MiniGameDef>
+
+</Defs>

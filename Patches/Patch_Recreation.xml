@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  바닐라 가구에 우리 컴포넌트만 "추가"한다.
+  스탯/JobDef/JoyGiverDef 는 일절 건드리지 않으므로 폰의 자율 여가는 그대로 동작하고,
+  모드를 제거해도 가구는 바닐라 상태로 정상 복귀한다.
+-->
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="GameOfUrBoard"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Ur</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="HorseshoesPin"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Horseshoes</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="HoopstoneRing"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Hoopstone</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+</Patch>
