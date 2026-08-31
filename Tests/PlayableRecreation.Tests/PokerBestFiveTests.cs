@@ -2,7 +2,7 @@ using System;
 using Poker.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 일곱 장 중 실제로 쓰인 다섯 장.

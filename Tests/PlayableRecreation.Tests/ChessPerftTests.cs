@@ -1,7 +1,7 @@
 using Chess.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// perft. 수 생성이 맞는지 확인하는 것이 아니라 **증명하는** 테스트다 -

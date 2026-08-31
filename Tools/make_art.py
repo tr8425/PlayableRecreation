@@ -6,7 +6,7 @@
 import math, os
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = r'C:/Users/tr842/orca/projects/RoyalGameOfUr'
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 S = 3  # supersampling
 
 BITUMEN   = (0x16, 0x13, 0x0F)

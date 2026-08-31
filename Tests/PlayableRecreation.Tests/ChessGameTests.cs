@@ -1,7 +1,7 @@
 using Chess.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>판 위의 규칙이 아니라 한 판의 진행 — 기보, 무승부, 무르기.</summary>
     public class ChessGameTests

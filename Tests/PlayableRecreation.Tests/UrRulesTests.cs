@@ -1,9 +1,9 @@
 using System.Linq;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 using Xunit;
-using static RoyalGameOfUr.Tests.TestHelpers;
+using static PlayableRecreation.Tests.TestHelpers;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>DESIGN.md §4.4 의 R1~R11 을 1:1 로 검증한다.</summary>
     public class UrRulesTests

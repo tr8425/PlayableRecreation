@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Stargazing.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 하늘. 여기서 확인하는 것은 "예쁜가"가 아니라 두 가지다 -

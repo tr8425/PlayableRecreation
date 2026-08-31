@@ -1,6 +1,6 @@
-using RoyalGameOfUr.Core;
+using Ur.Core;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     internal static class TestHelpers
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RoyalGameOfUr
+namespace Ur
 {
     /// <summary>
     /// 절차적으로 생성하는 UI 텍스처. M2 단계에서는 아트 에셋 없이 도형만으로 판을 읽을 수 있게 한다.

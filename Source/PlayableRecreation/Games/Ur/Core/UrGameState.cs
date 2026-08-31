@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalGameOfUr.Core
+namespace Ur.Core
 {
     /// <summary>
     /// 한 시점의 판 전체. 점유는 비트마스크(bit i = 경로 인덱스 i)로 들고 있어

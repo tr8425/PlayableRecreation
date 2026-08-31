@@ -1,7 +1,7 @@
 using System;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 
-namespace RoyalGameOfUr.AI
+namespace Ur.AI
 {
     /// <summary>
     /// T1 견습. 한 수 앞만 보고 우선순위로 고른다: 잡기 &gt; 로제트 &gt; 골인 &gt; 전진 &gt; 투입.

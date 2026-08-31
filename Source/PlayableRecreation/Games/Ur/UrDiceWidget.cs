@@ -1,8 +1,8 @@
-using RoyalGameOfUr.Core;
+using Ur.Core;
 using UnityEngine;
 using Verse;
 
-namespace RoyalGameOfUr
+namespace Ur
 {
     /// <summary>
     /// 4면체 주사위 4개. 표시된 꼭짓점이 위로 오면 1(채워진 원), 아니면 0(빈 고리).

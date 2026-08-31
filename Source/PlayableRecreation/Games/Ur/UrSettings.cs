@@ -2,7 +2,7 @@ using PlayableRecreation;
 using UnityEngine;
 using Verse;
 
-namespace RoyalGameOfUr
+namespace Ur
 {
     /// <summary>
     /// 우르만의 설정. 프레임워크의 설정 자루에 이름표를 붙여 얹는다.

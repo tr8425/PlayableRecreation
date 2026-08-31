@@ -1,9 +1,9 @@
 using System;
-using RoyalGameOfUr.AI;
-using RoyalGameOfUr.Core;
+using Ur.AI;
+using Ur.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 매치 진행 모델 검증. UI 없이 한 판을 끝까지 돌릴 수 있어야 M2 의 조작 흐름이 성립한다.

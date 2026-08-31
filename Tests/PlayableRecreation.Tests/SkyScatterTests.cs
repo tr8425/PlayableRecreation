@@ -2,7 +2,7 @@ using System;
 using Stargazing.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 궤도에 뜨는 것들을 하늘에 흩는 일.

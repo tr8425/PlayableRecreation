@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Throwing.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 던지는 게임의 규칙. 우르와 아무것도 공유하지 않는 두 번째 구현이라,

@@ -1,7 +1,7 @@
 using Poker.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 상대. 세기를 공식이 아니라 시뮬레이션으로 재므로, 확인할 것은 두 가지뿐이다 -

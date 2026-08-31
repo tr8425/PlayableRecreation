@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     public class UrBoardLayoutTests
     {

@@ -1,7 +1,7 @@
 using Billiards.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 상대의 조준. 시뮬레이터가 결정적이므로 "이 단계는 이 배치를 넣을 수 있는가"를

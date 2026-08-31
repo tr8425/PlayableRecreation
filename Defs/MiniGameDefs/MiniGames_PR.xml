@@ -11,7 +11,7 @@
     <defName>PR_Ur</defName>
     <label>game of Ur</label>
     <description>Play a match of Ur against an AI opponent.</description>
-    <workerClass>RoyalGameOfUr.UrGameWorker</workerClass>
+    <workerClass>Ur.UrGameWorker</workerClass>
     <targetThing>GameOfUrBoard</targetThing>
 
     <difficultyCount>5</difficultyCount>

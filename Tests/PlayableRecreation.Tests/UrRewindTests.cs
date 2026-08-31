@@ -1,8 +1,8 @@
 using System;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 되감기(무르기)와 이어두기(세션 복원) 검증.

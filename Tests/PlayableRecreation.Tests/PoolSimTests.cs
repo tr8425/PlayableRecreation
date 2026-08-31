@@ -1,7 +1,7 @@
 using Billiards.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 당구는 규칙이 아니라 물리다. 난수가 한 톨도 없으므로 그대로 단위 테스트에 올라간다 -

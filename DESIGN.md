@@ -169,7 +169,7 @@ RimChess의 `Play chess...` 와 동일한 조작 관습. 이미 학습된 UX라 
   <xpath>/Defs/ThingDef[defName="GameOfUrBoard"]</xpath>
   <value>
     <comps>
-      <li Class="RoyalGameOfUr.CompProperties_UrBoard" />
+      <li Class="Ur.CompProperties_UrBoard" />
     </comps>
   </value>
 </Operation>
@@ -297,7 +297,7 @@ CompUrBoard.CompFloatMenuOptions
 ### 4.5 룰 엔진 인터페이스 (순수 C#, Verse 의존 0)
 
 ```csharp
-namespace RoyalGameOfUr.Core;
+namespace Ur.Core;
 
 public enum Side { Player, Bot }
 
@@ -523,7 +523,7 @@ Harmony 패치 없이 폴링으로 감지 → 버전/모드 호환성 최상.
 
 | 층위 | 범위 | 저장 위치 | 우선 |
 |---|---|---|---|
-| **나의 통산** | **세이브 무관, 플레이어 본인 누적** | `GenFilePaths.ConfigFolderPath/RoyalGameOfUr_Records.xml` | **주** |
+| **나의 통산** | **세이브 무관, 플레이어 본인 누적** | `GenFilePaths.ConfigFolderPath/PlayableRecreation_Records.xml` | **주** |
 | **이 식민지** | 현재 세이브의 판별 기록 (어느 식민자 이름으로 뒀는지 포함) | `GameComponent_Ur` (세이브에 포함) | 부 |
 
 > 상대가 AI 봇으로 고정되므로 "식민자 랭킹"은 의미가 약하다. **플레이어 본인의 난이도별 전적**이 핵심 지표.
@@ -707,7 +707,7 @@ ModSettings 는 Def 가 로드되기 **전에** 읽히므로, 게임별 설정�
 ### 12.2 폴더
 
 ```
-RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable Recreation)
+PlayableRecreation/                (저장소 이름 · 모드 폴더 이름 · 모드 이름이 모두 같다)
 ├─ About/                          (packageId: teamrostra.playablerecreation)
 ├─ Defs/
 │  ├─ MiniGameDefs/MiniGames_PR.xml   (PR_Ur · PR_Chess · PR_Poker · PR_Billiards
@@ -752,7 +752,7 @@ RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable 
          ├─ Core/                  ★ Verse 의존 0 — ThrowRules · ThrowMatch · ThrowAim
          └─ ThrowGameWorker.cs · ThrowRulesExtension.cs · ThrowSaveData.cs · ThrowTheme.cs
 
-Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
+Tests/PlayableRecreation.Tests/    (Core/AI 전용 — RimWorld 없이 실행)
 ```
 
 ### 12.3 게임을 하나 더 붙이려면
@@ -913,7 +913,8 @@ XML                       23종 유효
    - 한국어 오타 육안 확인 — 점검 스크립트는 키 짝만 보지 문장은 못 본다
 2. Steam Workshop 업로드
 
-개발용 정션: `RimWorld\Mods\RoyalGameOfUr` → 이 저장소 (해제하려면 그 폴더만 삭제)
+배포·인게임 확인: `python Tools/package.py --install` → `RimWorld\Mods\Playable Recreation`
+절차 전체는 `Workshop/RELEASE.md`
 웹 플레이테스트 벤치: `Tools/WebPreview/index.html` — 우르 룰·AI 이식본. 주사위는 C#과 **비트 단위 일치**
 
 **빌드 방법**
@@ -925,5 +926,5 @@ dotnet build Source/PlayableRecreation -c Release
 dotnet build Source/PlayableRecreation -c Release -p:RimWorldDir="D:\...\RimWorld"
 
 # 룰 엔진 · AI 테스트 (RimWorld 불필요)
-dotnet test Tests/RoyalGameOfUr.Tests
+dotnet test Tests/PlayableRecreation.Tests
 ```

@@ -1,4 +1,4 @@
-namespace RoyalGameOfUr.Core
+namespace Ur.Core
 {
     /// <summary>4면체 주사위 4개의 결과. 각 주사위는 0 또는 1.</summary>
     public readonly struct UrRoll

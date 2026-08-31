@@ -6,8 +6,8 @@
     <IsPackable>false</IsPackable>
     <Nullable>disable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <AssemblyName>RoyalGameOfUr.Tests</AssemblyName>
-    <RootNamespace>RoyalGameOfUr.Tests</RootNamespace>
+    <AssemblyName>PlayableRecreation.Tests</AssemblyName>
+    <RootNamespace>PlayableRecreation.Tests</RootNamespace>
   </PropertyGroup>
 
   <!--

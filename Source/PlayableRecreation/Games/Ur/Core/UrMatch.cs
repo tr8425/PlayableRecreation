@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RoyalGameOfUr.Core
+namespace Ur.Core
 {
     public enum UrPhase : byte
     {

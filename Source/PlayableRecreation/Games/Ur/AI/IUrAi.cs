@@ -1,6 +1,6 @@
-using RoyalGameOfUr.Core;
+using Ur.Core;
 
-namespace RoyalGameOfUr.AI
+namespace Ur.AI
 {
     /// <summary>
     /// AI 봇. Verse 의존이 없어 단위 테스트와 대량 대전 시뮬레이션이 가능하다.

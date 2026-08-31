@@ -1,7 +1,7 @@
 using Stargazing.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 해와, 해가 비추는 것들.

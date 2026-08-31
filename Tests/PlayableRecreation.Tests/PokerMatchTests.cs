@@ -2,7 +2,7 @@ using System;
 using Poker.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 판 자체. 규칙이 틀렸는지는 눈으로 잘 안 보이지만, 칩은 거짓말을 못 한다 -

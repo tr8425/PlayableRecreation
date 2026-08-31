@@ -1,7 +1,7 @@
 using Throwing.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 상대의 던지기는 (시드, 순번)으로 결정된다 — 우르의 주사위와 같은 원리다.

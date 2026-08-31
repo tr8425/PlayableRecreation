@@ -1,8 +1,8 @@
 using System;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// M1 완료 기준: 랜덤 대 랜덤 10,000판에서 예외 없이, 무한루프 없이, 반드시 승자가 나온다.

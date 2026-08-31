@@ -35,7 +35,8 @@ python Tools/package.py --install  굽고 나서 Mods 폴더로 복사한다
 
 ### 1. 개발용 심볼릭 링크를 없앤다
 
-지금 `Mods/RoyalGameOfUr` 는 이 저장소를 가리키는 링크다. 편하지만 배포에는 못 쓴다.
+`Mods/RoyalGameOfUr` 는 이 저장소를 가리키던 링크다. 저장소 폴더 이름이 바뀌었으므로
+이제는 끊어진 링크다. 그리고 링크는 애초에 배포에 못 쓴다 -
 링크와 설치본이 동시에 있으면 **같은 packageId 가 둘**이 되어 림월드가 하나를 버린다.
 
 ```
@@ -68,7 +69,7 @@ python Tools/package.py --install
 
 ```
 cd Source/PlayableRecreation && dotnet build -c Release   # 경고 0 개여야 한다
-cd ../.. && dotnet test Tests/RoyalGameOfUr.Tests          # 전부 통과
+cd ../.. && dotnet test Tests/PlayableRecreation.Tests          # 전부 통과
 python Tools/verify.py                                     # Def · 번역 키
 python Tools/guistate.py                                   # GUI 전역 상태 복원
 ```

@@ -1,7 +1,7 @@
 using PlayableRecreation.UI;
 using Verse;
 
-namespace RoyalGameOfUr
+namespace Ur
 {
     /// <summary>
     /// 전용 오디오 에셋은 없다. 바닐라 UI 사운드를 빌려 쓰되,

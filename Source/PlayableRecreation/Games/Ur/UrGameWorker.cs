@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using PlayableRecreation;
 using PlayableRecreation.UI;
-using RoyalGameOfUr.AI;
-using RoyalGameOfUr.Core;
+using Ur.AI;
+using Ur.Core;
 using UnityEngine;
 using Verse;
 
-namespace RoyalGameOfUr
+namespace Ur
 {
     /// <summary>
     /// 우르의 게임. 판과 주사위와 상대는 전부 여기 있다 - 프레임워크는 이 안을 들여다보지 않는다.

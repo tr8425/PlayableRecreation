@@ -1,8 +1,8 @@
 using PlayableRecreation;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 using Verse;
 
-namespace RoyalGameOfUr
+namespace Ur
 {
     /// <summary>
     /// 보드에 남는 우르 판. 저장 시점은 언제나 턴이 시작하는 순간이다.

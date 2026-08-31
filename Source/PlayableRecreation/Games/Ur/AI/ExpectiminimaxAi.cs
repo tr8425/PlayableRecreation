@@ -1,7 +1,7 @@
 using System;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 
-namespace RoyalGameOfUr.AI
+namespace Ur.AI
 {
     /// <summary>
     /// T2~T4. 주사위 확률 노드를 포함한 완전 탐색(Expectiminimax).

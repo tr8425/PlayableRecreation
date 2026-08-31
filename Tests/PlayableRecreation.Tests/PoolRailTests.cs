@@ -1,7 +1,7 @@
 using Billiards.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 레일 규칙.

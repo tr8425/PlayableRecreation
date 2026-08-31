@@ -1,7 +1,7 @@
 using Chess.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 죽은 판과, 없는 룩.

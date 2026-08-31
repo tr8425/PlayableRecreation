@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using RoyalGameOfUr.AI;
-using RoyalGameOfUr.Core;
+using Ur.AI;
+using Ur.Core;
 using UnityEngine;
 using Verse;
 
-namespace RoyalGameOfUr
+namespace Ur
 {
     /// <summary>
     /// 보드 + 말 + 대기/골인 트레이를 그리고, 플레이어가 클릭한 합법수 인덱스를 돌려준다.

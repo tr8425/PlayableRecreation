@@ -1,4 +1,4 @@
-namespace RoyalGameOfUr.Core
+namespace Ur.Core
 {
     /// <summary>대국의 두 진영. 상대는 항상 AI 봇이다.</summary>
     public enum Side : byte

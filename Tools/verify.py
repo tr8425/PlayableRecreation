@@ -7,7 +7,7 @@
 import io, os, re, sys
 import xml.etree.ElementTree as ET
 
-ROOT = u'C:/Users/tr842/orca/projects/RoyalGameOfUr'
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KEYED = {
     'KO': ROOT + u'/Languages/Korean (\ud55c\uad6d\uc5b4)/Keyed',
     'EN': ROOT + u'/Languages/English/Keyed',

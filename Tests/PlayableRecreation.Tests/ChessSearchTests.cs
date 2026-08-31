@@ -2,7 +2,7 @@ using System;
 using Chess.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 탐색이 실제로 수를 찾는지. perft 가 수 생성의 정확성을 증명한다면,

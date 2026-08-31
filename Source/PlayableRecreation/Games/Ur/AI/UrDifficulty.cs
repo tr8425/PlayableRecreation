@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalGameOfUr.AI
+namespace Ur.AI
 {
     /// <summary>플레이어가 판 시작 시 고르는 난이도. (DESIGN.md §5.1)</summary>
     public enum UrDifficulty : byte

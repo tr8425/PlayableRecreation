@@ -1,7 +1,7 @@
 using Billiards.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 나인볼의 규칙. 물리와 분리되어 있어서 배치를 손으로 세워 놓고 확인할 수 있다.

@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalGameOfUr.Core
+namespace Ur.Core
 {
     /// <summary>보드의 물리 좌표 하나. Row 0=상단(봇 진영), 1=중앙(공유), 2=하단(플레이어 진영).</summary>
     public readonly struct UrCell : IEquatable<UrCell>

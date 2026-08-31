@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RoyalGameOfUr.Core
+namespace Ur.Core
 {
     /// <summary>
     /// Finkel 룰 엔진. DESIGN.md §4.4 의 R1~R11 을 그대로 구현한다.

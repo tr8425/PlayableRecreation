@@ -1,6 +1,6 @@
-using RoyalGameOfUr.Core;
+using Ur.Core;
 
-namespace RoyalGameOfUr.AI
+namespace Ur.AI
 {
     /// <summary>
     /// 국면 평가. 진행도 + 요충지 점유 - 잡힐 기댓값. (DESIGN.md §5.2)

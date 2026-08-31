@@ -1,11 +1,11 @@
 using System;
 using System.Diagnostics;
-using RoyalGameOfUr.AI;
-using RoyalGameOfUr.Core;
+using Ur.AI;
+using Ur.Core;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     public class UrAiTests
     {

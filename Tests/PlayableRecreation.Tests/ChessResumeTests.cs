@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Chess.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 이어 두기.

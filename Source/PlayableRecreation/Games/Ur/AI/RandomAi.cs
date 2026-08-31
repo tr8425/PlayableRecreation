@@ -1,7 +1,7 @@
 using System;
-using RoyalGameOfUr.Core;
+using Ur.Core;
 
-namespace RoyalGameOfUr.AI
+namespace Ur.AI
 {
     /// <summary>
     /// T0 초보. 합법수 중 무작위로 고르되 즉시 골인만은 놓치지 않는다. (DESIGN.md §5.1)

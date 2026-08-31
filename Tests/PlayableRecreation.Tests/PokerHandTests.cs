@@ -1,7 +1,7 @@
 using Poker.Core;
 using Xunit;
 
-namespace RoyalGameOfUr.Tests
+namespace PlayableRecreation.Tests
 {
     /// <summary>
     /// 손의 값매김. 포커에서 조용히 틀리기 좋은 곳이 여기다 -

@@ -1,4 +1,4 @@
-namespace RoyalGameOfUr.Core
+namespace Ur.Core
 {
     /// <summary>한 수. 값 타입이라 탐색 중 복사 비용이 없다.</summary>
     public readonly struct UrMove
