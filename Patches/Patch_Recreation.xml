@@ -50,4 +50,15 @@
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="ChessTable"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Chess</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
 </Patch>

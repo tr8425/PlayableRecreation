@@ -706,12 +706,13 @@ ModSettings 는 Def 가 로드되기 **전에** 읽히므로, 게임별 설정�
 RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable Recreation)
 ├─ About/                          (packageId: tr8425.playablerecreation)
 ├─ Defs/
-│  ├─ MiniGameDefs/MiniGames_PR.xml   (PR_Ur · PR_Horseshoes · PR_Hoopstone)
+│  ├─ MiniGameDefs/MiniGames_PR.xml   (PR_Ur · PR_Chess · PR_Billiards · PR_Horseshoes · PR_Hoopstone)
 │  ├─ JobDefs/Jobs_PR.xml             (PR_GoToGame — 몰입 모드 전용)
 │  ├─ ThoughtDefs/Thoughts_PR.xml     (게임마다 6단계, 플레이어 숙련도를 따라감)
-│  └─ TaleDefs/Tales_PR.xml           (PR_WonMatch — 셋이 공용)
-├─ Patches/Patch_Recreation.xml    (세 가구에 CompProperties_MiniGame 주입 — 추가만)
-├─ Languages/{English,Korean}/Keyed/{PR,RGU,THR}.xml
+│  └─ TaleDefs/Tales_PR.xml           (PR_WonMatch — 다섯이 공용)
+├─ Patches/Patch_Recreation.xml    (다섯 가구에 CompProperties_MiniGame 주입 — 추가만)
+├─ Textures/PR/Chess/*.png         (기물 실루엣 6종. Tools/make_pieces.py 가 만든다)
+├─ Languages/{English,Korean}/Keyed/{PR,RGU,CHS,BIL,THR}.xml
 ├─ Assemblies/PlayableRecreation.dll
 └─ Source/PlayableRecreation/
    ├─ Framework/                   ★ 게임을 하나도 모른다
@@ -728,6 +729,12 @@ RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable 
       │  ├─ AI/                    ★ Verse 의존 0
       │  ├─ UrGameWorker.cs · UrSaveData.cs · UrSettings.cs
       │  └─ UrBoardRenderer.cs · UrDiceWidget.cs · UrTextures.cs · UrSounds.cs
+      ├─ Chess/
+      │  ├─ Core/                  ★ Verse 의존 0 — 판 · 규칙 · 평가 · 탐색 · 기보 · Zobrist
+      │  └─ ChessGameWorker.cs · ChessSaveData.cs · ChessSettings.cs · ChessTheme.cs
+      ├─ Billiards/
+      │  ├─ Core/                  ★ Verse 의존 0 — Vec2 · PoolTable · PoolSim · NineBall · PoolAi
+      │  └─ BilliardsGameWorker.cs · BilliardsSaveData.cs · BilliardsTheme.cs
       └─ Throwing/                 (편자막대 · 후프스톤 — 워커 하나, Def 둘)
          ├─ Core/                  ★ Verse 의존 0 — ThrowRules · ThrowMatch · ThrowAim
          └─ ThrowGameWorker.cs · ThrowRulesExtension.cs · ThrowSaveData.cs · ThrowTheme.cs
@@ -745,6 +752,10 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 프레임워크는 손대지 않는다. 후프스톤은 2번과 3번만으로 만들어졌다 — 편자막대와 같은 워커에
 `ThrowRulesExtension` 값만 달리 주었다(이닝당 던지기 3회, 15점 선취, 던질 때마다 채점).
 
+**이음매는 성격이 다른 게임 둘로 검증되었다.** 나인볼은 규칙이 아니라 물리로 굴러가고,
+체스는 상대가 오래 생각한다. 둘 다 프레임워크를 **한 줄도 고치지 않고** 붙었다 —
+공을 굴리는 것도, 탐색을 한 깊이씩 훑는 것도 워커가 `Tick(now)` 안에서 예산을 나눠 쓸 뿐이다.
+
 ---
 
 ## 13. 개발 로드맵
@@ -761,6 +772,8 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 | **M7 리더보드** ✅ | `UrRecord` · `UrRecords`(config 파일) · `Dialog_UrLeaderboard` | 나의 통산(세이브 무관) + 이 식민지 2탭 |
 | **M8 배포** ✅ | Preview.png · ModIcon.png · About 설명 · 점검 스크립트 | 빌드 경고 0 · 테스트 89개 · 번역 키 156개 한·영 일치 |
 | **M9 프레임워크** ✅ | `Framework/` 분리 · 우르 이식 · 편자막대 · 후프스톤 | 프레임워크가 게임을 참조하지 않음 · 게임끼리 서로 참조하지 않음 · 테스트 103개 · 번역 키 198개 |
+| **M10 나인볼** ✅ | 결정론적 물리(1/480초 고정 스텝) · 고스트볼 조준 · 후보 샷 예행 AI | 프레임워크 무수정 · 물리 테스트 22개 · 프레임당 후보 2개만 재 보므로 창이 끊기지 않음 |
+| **M11 체스** ✅ | 0x88 판 · 합법수 생성 · 알파베타+정지탐색 · SAN 기보 · Zobrist 되풀이 | **perft 5개 위치 전부 공표치 일치** · 테스트 35개 · 프레임당 한 깊이씩 훑어 뜸들이는 사이에 깊어짐 |
 
 **의존 관계**: M1은 M0과 병행 가능(Verse 무관). M3은 M1 필수. M6/M7은 M2 이후 어디든.
 **rev.1 대비**: JobDriver·joy 틱·폰 대 폰이 사라져 M4가 크게 가벼워졌다.
@@ -792,7 +805,7 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 
 ## 15. 현재 상태
 
-**M0 ~ M9 완료 (2026-08-31)**
+**M0 ~ M11 완료 (2026-08-31)**
 
 | | 산출물 |
 |---|---|
@@ -804,19 +817,28 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 | **M5 튜토리얼** | 6쪽 온보딩 — 매 쪽 실제 도식. 게임마다 처음 한 번 자동. 연습 판(최저 단계·미기록) |
 | **M6 세션/무효화** | `GameSession`(게임이 정한 지점에서 자동 저장) · 무효화 7종 · 60틱 폴링 · 무르기 · 재시도(하루 1회) · 기권 |
 | **M7 리더보드** | `GameRecord`/`RecordStore` — 나의 통산은 `Config/PlayableRecreation_Records.xml`, 이 식민지는 세이브 내부. 게임 탭 + 범위 탭 |
-| **M8 배포** | `About/Preview.png`(640×360, 3면 구성) · `ModIcon.png` · Workshop 설명(한/영) · 점검 스크립트 |
+| **M8 배포** | `About/Preview.png`(640×360, 5면 구성) · `ModIcon.png` · Workshop 설명(한/영) · 점검 스크립트 |
 | **M9 프레임워크** | 인게임 계층을 `Framework/` 와 `Games/` 로 분리. 우르 이식 + 편자막대 + 후프스톤 |
+| **M10 나인볼** | 물리로 굴러가는 첫 게임. 공은 `Tick(now)` 안에서 구르고, 상대의 조준은 프레임당 후보 2개씩 |
+| **M11 체스** | 상대가 오래 생각하는 첫 게임. 반복 심화를 프레임당 한 깊이씩. 기물 그림은 `Tools/make_pieces.py` 가 만든다 |
 
 **게임 셋**
 
 | | 가구 | 규칙 | 연동 스킬 | 무르기 |
 |---|---|---|---|---|
 | 우르의 게임 | `GameOfUrBoard` | 필켈 복원 룰. 말 7개, 4면 주사위 4개 | 지적 | ○ |
+| 체스 | `ChessTable` | 표준 룰 전부(캐슬링·앙파상·승격·스테일메이트·50수·3회 반복) | 지적 | ○ (두 수씩) |
+| 나인볼 | `BilliardsTable` | 낮은 번호를 먼저 맞힌다. 9번을 정당하게 넣으면 승 | 사격 | ✕ |
 | 편자 던지기 | `HorseshoesPin` | 이닝당 2번, 21점 선취. 이닝이 끝나면 한쪽만 득점 | 사격 | ✕ |
 | 후프스톤 | `HoopstoneRing` | 이닝당 3번, 15점 선취. 던질 때마다 채점 | 사격 | ✕ |
 
 던지기 두 종은 **워커 하나에 Def 둘**이다. 규칙 차이는 `ThrowRulesExtension` 값 네 개가 전부다.
 상대의 던지기는 `(시드, 순번)`으로 결정되므로 이어 던져도 같은 결과가 나온다 — 우르의 주사위와 같은 원리(P4).
+
+**나인볼**은 규칙이 아니라 물리다. 1/480초 고정 스텝이라 같은 샷은 언제나 같은 결과를 낳고,
+상대는 후보 샷을 **같은 시뮬레이터에 미리 넣어 보고** 고른다 — 재 본 것과 치는 것이 정확히 같다.
+**체스**의 위험은 AI가 아니라 수 생성의 정확성이었고, 그것은 perft 로 증명된다(5개 위치, 전부 공표치 일치).
+난이도는 탐색 깊이 1~5 와 "일부러 최선을 비켜 둘 확률" 0.55~0.0 으로 만든다.
 
 **보상 구조 (오너 방침 반영)**
 
@@ -829,20 +851,22 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 
 ```
 dotnet build -c Release   경고 0 · 오류 0
-dotnet test               103개 통과 (우르 룰·주사위·시뮬·되감기 89 + 던지기 규칙·조준 14)
-XML                       15종 유효
-번역 키                    198개 한·영 완전 일치 · 미사용 키 0 · 코드가 쓰는 키 누락 0
+dotnet test               160개 통과 (우르 89 + 던지기 14 + 당구 물리 22 + 체스 35)
+                          체스 35개 중 20개가 perft — 다섯 위치의 노드 수가 공표치와 일치
+XML                       19종 유효
+번역 키                    259개 한·영 완전 일치 · 미사용 키 0 · 코드가 쓰는 키 누락 0
 ```
 
 **인게임 검증**: 우르는 RimWorld 1.6 실환경에서 우클릭 → 난이도 선택 → 대국 진행 **동작 확인**(초보).
-튜토리얼 · 세션 무효화 · 리더보드 · **프레임워크 분리 이후 전 구간** · **던지기 두 종 전부**는
+튜토리얼 · 세션 무효화 · 리더보드 · **프레임워크 분리 이후 전 구간** · **던지기 · 나인볼 · 체스**는
 **아직 인게임 미확인** — 배포 전 클린 프로필 QA 필요.
 
 **남은 일 (배포 직전)**
 
 1. 클린 프로필(Core만) QA
-   - 세 가구 우클릭 · 기즈모 · 인스펙트 문자열
-   - 세이브/로드 후 이어하기 (우르 = 턴 경계, 던지기 = 이닝 경계)
+   - 다섯 가구 우클릭 · 기즈모 · 인스펙트 문자열
+   - 세이브/로드 후 이어하기 (우르 = 턴 경계, 던지기 = 이닝, 나인볼 = 샷 정산, 체스 = 한 수)
+   - 체스 기물 텍스처가 실제로 로드되는지(`Textures/PR/Chess/`), 흑 기물이 어두운 칸에서 읽히는지
    - 무효화 트리거 3종(청소 · 수리 · 전투) 실증
    - 게임별 튜토리얼 자동 1회, 게임별 숙련도 누적, 게임 on/off 토글
    - 한국어 오타 육안 확인 — 점검 스크립트는 키 짝만 보지 문장은 못 본다

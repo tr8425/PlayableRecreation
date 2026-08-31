@@ -9,3 +9,6 @@ obj/
 Assemblies/*.pdb
 Assemblies/*.xml
 Assemblies/*.deps.json
+
+# 파이썬 도구 캐시
+__pycache__/

@@ -72,4 +72,22 @@
 
   <PR_PlayedBilliards.stages.5.label>당구를 마스터했다</PR_PlayedBilliards.stages.5.label>
   <PR_PlayedBilliards.stages.5.description>공 아홉 개와 구멍 여섯 개. 첫 샷을 치기 전에 끝까지가 다 보인다.</PR_PlayedBilliards.stages.5.description>
+  <PR_PlayedChess.stages.0.label>말을 이리저리 옮겨는 봤어</PR_PlayedChess.stages.0.label>
+  <PR_PlayedChess.stages.0.description>말 대가리 모양인 건 ㄱ자로 간다길래 그렇게 움직였다. 졌다. 언제 진 건지는 모르겠고, 알았을 때는 이미 져 있었다.</PR_PlayedChess.stages.0.description>
+
+  <PR_PlayedChess.stages.1.label>배우는 중이야</PR_PlayedChess.stages.1.label>
+  <PR_PlayedChess.stages.1.description>그냥 먹히는 자리에 말을 두는 짓을 그만뒀다. 그것 하나로 게임이 완전히 달라졌다.</PR_PlayedChess.stages.1.description>
+
+  <PR_PlayedChess.stages.2.label>제법 한 판 뒀어</PR_PlayedChess.stages.2.label>
+  <PR_PlayedChess.stages.2.description>기물을 맞바꿔 가며 끝내기로 끌고 가서 폰 하나를 끝까지 밀었다. 그게 퀸이 되어 돌아오는 건 몇 번을 봐도 좋다.</PR_PlayedChess.stages.2.description>
+
+  <PR_PlayedChess.stages.3.label>둘 줄 안다는 소리는 들어</PR_PlayedChess.stages.3.label>
+  <PR_PlayedChess.stages.3.description>두 수 전에 포크가 보였고, 상대가 걸어 들어오도록 놔뒀다. 예순네 칸 중에 마흔 칸은 내 것이었다.</PR_PlayedChess.stages.3.description>
+
+  <PR_PlayedChess.stages.4.label>지는 판이 거의 없어</PR_PlayedChess.stages.4.label>
+  <PR_PlayedChess.stages.4.description>상대는 늘 같은 수로 시작한다. 나도 늘 같은 수로 받는다. 그리고 늘 서른 수쯤에서 돌을 던진다.</PR_PlayedChess.stages.4.description>
+
+  <PR_PlayedChess.stages.5.label>나는 체스를 마스터했다</PR_PlayedChess.stages.5.label>
+  <PR_PlayedChess.stages.5.description>요즘은 외통으로 가는 수를 두기 전에 미리 말해 준다. 나랑 두 번 앉는 사람은 없다.</PR_PlayedChess.stages.5.description>
+
 </LanguageData>

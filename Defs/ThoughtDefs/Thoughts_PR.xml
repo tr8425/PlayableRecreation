@@ -163,4 +163,43 @@
     </stages>
   </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>PR_PlayedChess</defName>
+    <thoughtClass>PlayableRecreation.Thought_Mastery</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>pushed chess pieces around</label>
+        <description>I moved the little horse in an L shape because someone told me that is what it does. I lost. I am not sure when I lost, only that it had already happened.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+      <li>
+        <label>learning chess</label>
+        <description>I stopped leaving pieces where they could be taken for free. That alone made the whole game feel different.</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>played a solid game of chess</label>
+        <description>I traded down into an endgame and pushed a pawn all the way. Watching it come back as a queen never gets old.</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+      <li>
+        <label>played chess well</label>
+        <description>I saw the fork two moves before it was there, and I let them walk into it. Sixty-four squares and I owned about forty of them.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>rarely loses at chess</label>
+        <description>They keep opening with the same thing. I keep answering with the same thing. They keep resigning around move thirty.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>mastered chess</label>
+        <description>I have started announcing the mate before I play the move that forces it. Nobody sits down with me twice.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
 </Defs>

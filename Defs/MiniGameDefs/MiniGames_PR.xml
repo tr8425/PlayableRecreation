@@ -158,4 +158,35 @@
     <windowSize>(1000, 720)</windowSize>
   </PlayableRecreation.MiniGameDef>
 
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Chess</defName>
+    <label>chess</label>
+    <description>Play a game of chess against an AI opponent.</description>
+    <workerClass>Chess.ChessGameWorker</workerClass>
+    <targetThing>ChessTable</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>CHS.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>4</tutorialPages>
+    <tutorialKeyPrefix>CHS.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>true</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>CHS.Tally.Captures</li>
+      <li>CHS.Tally.CapturesTaken</li>
+      <li>CHS.Tally.Checks</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_Chess</vanillaJob>
+    <playThought>PR_PlayedChess</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Intellectual</linkedSkill>
+
+    <windowSize>(1000, 760)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
 </Defs>

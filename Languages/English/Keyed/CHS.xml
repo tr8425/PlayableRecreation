@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Difficulty -->
+  <CHS.Difficulty.T0.Desc>Knows the rules. Misses what is right in front of it.</CHS.Difficulty.T0.Desc>
+  <CHS.Difficulty.T1.Desc>Takes what you leave hanging. Not much else.</CHS.Difficulty.T1.Desc>
+  <CHS.Difficulty.T2.Desc>Sees a few moves ahead. Still drops things.</CHS.Difficulty.T2.Desc>
+  <CHS.Difficulty.T3.Desc>Sets traps and waits for you.</CHS.Difficulty.T3.Desc>
+  <CHS.Difficulty.T4.Desc>Does not make mistakes. To win, neither can you.</CHS.Difficulty.T4.Desc>
+
+  <!-- Controls -->
+  <CHS.Promotion>Promote to what?</CHS.Promotion>
+
+  <!-- Status -->
+  <CHS.Status.Your>Your move.</CHS.Status.Your>
+  <CHS.Status.Check>Check. Deal with the king first.</CHS.Status.Check>
+  <CHS.Status.Promotion>Your pawn reached the far rank.</CHS.Status.Promotion>
+  <CHS.Status.Thinking>The opponent is thinking&#8230;</CHS.Status.Thinking>
+  <CHS.Status.WinPlayer>Checkmate. You win!</CHS.Status.WinPlayer>
+  <CHS.Status.WinOpponent>Checkmate. Your king has nowhere to go.</CHS.Status.WinOpponent>
+  <CHS.Status.Stalemate>Stalemate. Nobody wins this one.</CHS.Status.Stalemate>
+  <CHS.Status.FiftyMove>Fifty moves without a capture or a pawn push. Drawn.</CHS.Status.FiftyMove>
+  <CHS.Status.Repetition>The same position, three times over. Drawn.</CHS.Status.Repetition>
+  <CHS.Status.Material>Not enough left on the board to mate with. Drawn.</CHS.Status.Material>
+
+  <!-- Records -->
+  <CHS.Tally.Captures>Pieces taken {0}</CHS.Tally.Captures>
+  <CHS.Tally.CapturesTaken>Pieces lost {0}</CHS.Tally.CapturesTaken>
+  <CHS.Tally.Checks>Checks given {0}</CHS.Tally.Checks>
+
+  <!-- Settings -->
+  <CHS.Settings.Highlight>Show legal squares</CHS.Settings.Highlight>
+  <CHS.Settings.Coords>Show coordinates around the board</CHS.Settings.Coords>
+  <CHS.Settings.AlwaysWhite>Always play White</CHS.Settings.AlwaysWhite>
+  <CHS.Settings.AlwaysWhite.Desc>Off by default. Left off, your colour changes from game to game, and when you have Black the opponent moves first.</CHS.Settings.AlwaysWhite.Desc>
+
+  <!-- Tutorial -->
+  <CHS.Tut.P1.Title>1. Chess</CHS.Tut.P1.Title>
+  <CHS.Tut.P1.Body>There is one goal — **leave the enemy king with nowhere to go.** That is checkmate, and the game ends the moment it happens.\n\nThe king is never actually captured. Moves that would allow it are not legal moves at all. If you have no legal move and your king is under attack, you have lost; if you have no legal move and it is not, the game is drawn.\n\nThe figure shows White holding the back rank with a single rook. The king's own pawns block the way out.</CHS.Tut.P1.Body>
+
+  <CHS.Tut.P2.Title>2. How the pieces move</CHS.Tut.P2.Title>
+  <CHS.Tut.P2.Body>**Pawns** go one square forward, two on their first move, and capture only on the diagonal.\n\n**Rooks** run along ranks and files, **bishops** along diagonals, **queens** along both. The **king** moves one square in any direction.\n\nThe **knight** is the odd one — it jumps in an L and does not care what stands in between. The dots in the figure are every square one knight can reach.</CHS.Tut.P2.Body>
+
+  <CHS.Tut.P3.Title>3. Playing a move</CHS.Tut.P3.Title>
+  <CHS.Tut.P3.Body>Click a piece and its legal squares are marked with dots. A red ring means something of theirs is standing there. Click the square to play the move.\n\nTo castle, move the king two squares sideways; the rook follows on its own. En passant simply shows up as a legal square, so there is nothing extra to remember.\n\nWhen a pawn reaches the far rank you are asked what it becomes. Usually a queen. Usually.</CHS.Tut.P3.Body>
+
+  <CHS.Tut.P4.Title>4. Colours and taking it back</CHS.Tut.P4.Title>
+  <CHS.Tut.P4.Body>Your colour changes from game to game. With Black the opponent moves first and the board is shown from your side. You can pin yourself to White in the settings.\n\nUndo steps back two moves — yours and their answer. On the harder tiers it may be blocked, depending on your settings.\n\nAn unfinished game stays on the chess table. Sit down again and it picks up where it stopped.</CHS.Tut.P4.Body>
+
+</LanguageData>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 난이도 -->
+  <CHS.Difficulty.T0.Desc>규칙만 압니다. 눈앞에 놓인 것도 자주 놓칩니다.</CHS.Difficulty.T0.Desc>
+  <CHS.Difficulty.T1.Desc>공짜로 놓인 말은 집어갑니다. 그뿐입니다.</CHS.Difficulty.T1.Desc>
+  <CHS.Difficulty.T2.Desc>두어 수 앞을 봅니다. 가끔 흘립니다.</CHS.Difficulty.T2.Desc>
+  <CHS.Difficulty.T3.Desc>함정을 놓고 기다립니다.</CHS.Difficulty.T3.Desc>
+  <CHS.Difficulty.T4.Desc>실수하지 않습니다. 이기려면 당신도 그래야 합니다.</CHS.Difficulty.T4.Desc>
+
+  <!-- 조작 -->
+  <CHS.Promotion>무엇으로 바꿀까요?</CHS.Promotion>
+
+  <!-- 상태 -->
+  <CHS.Status.Your>당신 차례입니다.</CHS.Status.Your>
+  <CHS.Status.Check>체크입니다. 왕부터 건사하세요.</CHS.Status.Check>
+  <CHS.Status.Promotion>폰이 끝까지 갔습니다.</CHS.Status.Promotion>
+  <CHS.Status.Thinking>상대가 생각합니다…</CHS.Status.Thinking>
+  <CHS.Status.WinPlayer>외통입니다. 당신의 승리!</CHS.Status.WinPlayer>
+  <CHS.Status.WinOpponent>외통입니다. 당신의 왕이 갈 곳이 없습니다.</CHS.Status.WinOpponent>
+  <CHS.Status.Stalemate>스테일메이트. 둘 공기는 무승부입니다.</CHS.Status.Stalemate>
+  <CHS.Status.FiftyMove>서로 섬어지 50수 동안 아무 일도 없었습니다. 무승부입니다.</CHS.Status.FiftyMove>
+  <CHS.Status.Repetition>같은 자리에 세 번 왔습니다. 무승부입니다.</CHS.Status.Repetition>
+  <CHS.Status.Material>외통을 만들 기물이 없습니다. 무승부입니다.</CHS.Status.Material>
+
+  <!-- 기록 -->
+  <CHS.Tally.Captures>잡은 기물 {0}</CHS.Tally.Captures>
+  <CHS.Tally.CapturesTaken>잊힌 기물 {0}</CHS.Tally.CapturesTaken>
+  <CHS.Tally.Checks>체크 {0}번</CHS.Tally.Checks>
+
+  <!-- 설정 -->
+  <CHS.Settings.Highlight>갈 수 있는 칸 표시</CHS.Settings.Highlight>
+  <CHS.Settings.Coords>판 가장자리에 좌표 표시</CHS.Settings.Coords>
+  <CHS.Settings.AlwaysWhite>항상 백을 잡기</CHS.Settings.AlwaysWhite>
+  <CHS.Settings.AlwaysWhite.Desc>기본값은 꺼져 있습니다. 끄면 판마다 색이 바뀌고, 흑을 잡은 판은 상대가 먼저 둘니다.</CHS.Settings.AlwaysWhite.Desc>
+
+  <!-- 튜토리얼 -->
+  <CHS.Tut.P1.Title>1. 체스</CHS.Tut.P1.Title>
+  <CHS.Tut.P1.Body>목표는 하나입니다 — **상대의 왕을 빠져나갈 수 없게 만드는 것.** 그것을 외통이라고 하고, 그 순간 판이 끝납니다.
+
+왕을 실제로 잡지는 않습니다. 잡히게 두는 수는 애초에 둘 수 없고, 둘 수 있는 수가 하나도 없는데 왕이 공격받고 있으면 진 것입니다. 공격받고 있지 않은데 둘 수가 없다면 무승부입니다.
+
+그림은 백이 룩 하나로 왕을 뒷줄에 가둔 자리입니다. 앞은 자기 폰이 막고 있고, 옆으로는 갈 곳이 없습니다.</CHS.Tut.P1.Body>
+
+  <CHS.Tut.P2.Title>2. 기물이 가는 길</CHS.Tut.P2.Title>
+  <CHS.Tut.P2.Body>**폰**은 앞으로만 한 칸, 처음 움직일 때만 두 칸. 잡을 때만 대각선입니다.
+
+**룩**은 가로세로로 끝까지, **비숍**은 대각선으로 끝까지, **퀸**은 그 둘 다입니다. **왕**은 어느 쪽이든 한 칸.
+
+**나이트**만 다릅니다 — ㄱ자로 뛰고, 중간에 뭐가 있든 넘어갑니다. 그림의 점이 나이트 하나가 갈 수 있는 자리 전부입니다.</CHS.Tut.P2.Body>
+
+  <CHS.Tut.P3.Title>3. 두는 법</CHS.Tut.P3.Title>
+  <CHS.Tut.P3.Body>기물을 클릭하면 갈 수 있는 칸에 점이 찍힙니다. 붉은 고리가 그려진 칸은 거기 있는 것을 잡는다는 뜻입니다. 그 칸을 클릭하면 둡니다.
+
+캐슬링은 왕을 두 칸 옆으로 보내면 됩니다. 룩은 알아서 따라옵니다. 앙파상도 갈 수 있는 칸으로 표시되니 따로 외울 것은 없습니다.
+
+폰이 끝줄에 닿으면 무엇으로 바꿀지 물어봅니다. 보통은 퀸입니다. 보통은.</CHS.Tut.P3.Body>
+
+  <CHS.Tut.P4.Title>4. 색과 무르기</CHS.Tut.P4.Title>
+  <CHS.Tut.P4.Body>색은 판마다 바뀝니다. 흑을 잡으면 상대가 먼저 두고, 판도 뒤집혀 보입니다. 설정에서 항상 백을 잡도록 고정할 수 있습니다.
+
+무르기는 두 수씩 물러납니다 — 내 수와 상대의 답 하나. 높은 난이도에서는 설정에 따라 막힐 수 있습니다.
+
+두던 판은 체스판 위에 남습니다. 다시 앉으면 그 자리에서 이어집니다.</CHS.Tut.P4.Body>
+
+</LanguageData>

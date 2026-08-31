@@ -19,6 +19,7 @@
     <Compile Include="..\..\Source\PlayableRecreation\Games\Ur\AI\**\*.cs" LinkBase="UrAI" />
     <Compile Include="..\..\Source\PlayableRecreation\Games\Throwing\Core\**\*.cs" LinkBase="Throwing" />
     <Compile Include="..\..\Source\PlayableRecreation\Games\Billiards\Core\**\*.cs" LinkBase="Billiards" />
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Chess\Core\**\*.cs" LinkBase="Chess" />
     <Compile Include="*.cs" />
   </ItemGroup>
 

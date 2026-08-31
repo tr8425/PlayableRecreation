@@ -13,4 +13,7 @@
   <PR_Billiards.label>나인볼</PR_Billiards.label>
   <PR_Billiards.description>AI 상대와 당구 한 판. 낮은 번호부터 맞혀야 한다.</PR_Billiards.description>
 
+  <PR_Chess.label>체스</PR_Chess.label>
+  <PR_Chess.description>AI 상대와 체스 한 판. 색은 판마다 바뀐다.</PR_Chess.description>
+
 </LanguageData>

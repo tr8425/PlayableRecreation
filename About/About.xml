@@ -12,10 +12,12 @@
 식민자를 선택하고 가구를 우클릭하세요. 가구만 선택해도 됩니다.
 
 · 우르의 게임 — 기원전 2500년의 보드게임. 신나면서도 분통 터지는 그 판을 직접 둡니다
+· 체스 — 예순네 칸. 상대는 다섯 수 앞까지 봅니다
+· 나인볼 — 공은 실제로 굴러갑니다. 낮은 번호부터 맞혀야 합니다
 · 편자 던지기 — 막대에 편자를 붙입니다. 21점 선취
 · 후프스톤 — 고리에 돌을 통과시킵니다. 15점 선취
 
-셋 다 AI 상대 5단계, 규칙 안내와 연습 판, 난이도별 전적이 붙습니다. 하는 동안 콜로니 시간은 계속 흐릅니다. 위협이 나타나면 창이 닫히고, 하던 판은 가구에 남습니다 — 그 사이 아무도 건드리지 않았다면.
+다섯 다 AI 상대 5단계, 규칙 안내와 연습 판, 난이도별 전적이 붙습니다. 하는 동안 콜로니 시간은 계속 흐릅니다. 위협이 나타나면 창이 닫히고, 하던 판은 가구에 남습니다 — 그 사이 아무도 건드리지 않았다면.
 
 난이도를 처음 깰 때마다 그 가구에서 식민자가 얻는 여가와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다.
 
@@ -25,7 +27,7 @@ Harmony 패치를 쓰지 않고 바닐라 Def도 수정하지 않습니다. 기�
 
 The recreation your colonists have been enjoying, played by you instead.
 
-Select a colonist and right-click the furniture. Three games so far: the game of Ur, horseshoes, and hoopstone — five tiers of AI, a rules walkthrough, practice games, and a record per tier.
+Select a colonist and right-click the furniture. Five games: the game of Ur, chess, nine-ball, horseshoes, and hoopstone — five tiers of AI each, a rules walkthrough, practice games, and a record per tier.
 
 Colony time keeps running while you play. When trouble arrives the window closes and the position stays on the furniture, unless something knocks it over first.
 

@@ -1,0 +1,118 @@
+# -*- coding: utf-8 -*-
+"""체스 기물 실루엣. 0~1 좌표계에 그린 도형 하나가 흑백 두 벌을 겸한다.
+
+게임 안에서는 이 알파 한 장에 색을 두 번 입혀 테두리를 만든다 -
+그래서 여기서는 색을 정하지 않고 모양만 정한다.
+"""
+from PIL import Image, ImageDraw
+
+SOLID = (255, 255, 255, 255)
+CLEAR = (0, 0, 0, 0)
+SUPERSAMPLE = 4
+
+
+class Pen(object):
+    """0~1 좌표를 픽셀로 옮겨 주는 얇은 껍데기."""
+
+    def __init__(self, draw, span):
+        self.d = draw
+        self.span = span
+
+    def poly(self, points, fill=SOLID):
+        self.d.polygon([(x * self.span, y * self.span) for x, y in points], fill=fill)
+
+    def box(self, x0, y0, x1, y1, fill=SOLID, radius=None):
+        area = [x0 * self.span, y0 * self.span, x1 * self.span, y1 * self.span]
+        if radius:
+            self.d.rounded_rectangle(area, radius=radius * self.span, fill=fill)
+        else:
+            self.d.rectangle(area, fill=fill)
+
+    def ell(self, x0, y0, x1, y1, fill=SOLID):
+        self.d.ellipse([x0 * self.span, y0 * self.span, x1 * self.span, y1 * self.span], fill=fill)
+
+
+def _base(p):
+    p.box(0.16, 0.865, 0.84, 0.945, radius=0.02)
+    p.poly([(0.24, 0.80), (0.76, 0.80), (0.84, 0.875), (0.16, 0.875)])
+
+
+def pawn(p):
+    _base(p)
+    p.poly([(0.395, 0.50), (0.605, 0.50), (0.68, 0.80), (0.32, 0.80)])
+    p.ell(0.33, 0.455, 0.67, 0.545)
+    p.ell(0.355, 0.19, 0.645, 0.48)
+
+
+def rook(p):
+    _base(p)
+    p.poly([(0.315, 0.36), (0.685, 0.36), (0.735, 0.80), (0.265, 0.80)])
+    p.box(0.235, 0.285, 0.765, 0.375, radius=0.015)
+    p.box(0.235, 0.155, 0.765, 0.30)
+    p.box(0.345, 0.155, 0.425, 0.255, fill=CLEAR)
+    p.box(0.575, 0.155, 0.655, 0.255, fill=CLEAR)
+
+
+def bishop(p):
+    _base(p)
+    p.poly([(0.395, 0.52), (0.605, 0.52), (0.665, 0.80), (0.335, 0.80)])
+    p.ell(0.32, 0.475, 0.68, 0.565)
+    p.poly([(0.50, 0.135), (0.665, 0.36), (0.645, 0.50), (0.355, 0.50), (0.335, 0.36)])
+    p.ell(0.355, 0.29, 0.645, 0.53)
+    p.ell(0.455, 0.075, 0.545, 0.165)
+    p.poly([(0.52, 0.20), (0.615, 0.315), (0.575, 0.335), (0.485, 0.225)], fill=CLEAR)
+
+
+def knight(p):
+    _base(p)
+    p.poly([
+        (0.305, 0.80), (0.335, 0.60), (0.265, 0.52), (0.215, 0.415),
+        (0.245, 0.335), (0.335, 0.265), (0.395, 0.195), (0.395, 0.095),
+        (0.495, 0.155), (0.605, 0.135), (0.665, 0.245), (0.725, 0.415),
+        (0.745, 0.615), (0.715, 0.80),
+    ])
+    p.ell(0.455, 0.265, 0.515, 0.325, fill=CLEAR)                       # 눈
+    p.poly([(0.215, 0.415), (0.315, 0.405), (0.265, 0.475)], fill=CLEAR)  # 콧등
+    p.poly([(0.415, 0.115), (0.455, 0.185), (0.395, 0.185)], fill=CLEAR)  # 귀 사이
+
+
+def queen(p):
+    _base(p)
+    p.poly([(0.325, 0.40), (0.675, 0.40), (0.745, 0.80), (0.255, 0.80)])
+    p.box(0.275, 0.355, 0.725, 0.435, radius=0.015)
+    p.poly([
+        (0.225, 0.185), (0.325, 0.315), (0.375, 0.155), (0.50, 0.305),
+        (0.625, 0.155), (0.675, 0.315), (0.775, 0.185), (0.735, 0.375), (0.265, 0.375),
+    ])
+    for cx in (0.225, 0.375, 0.50, 0.625, 0.775):
+        p.ell(cx - 0.052, 0.105, cx + 0.052, 0.209)
+
+
+def king(p):
+    _base(p)
+    p.poly([(0.325, 0.42), (0.675, 0.42), (0.745, 0.80), (0.255, 0.80)])
+    p.box(0.275, 0.375, 0.725, 0.455, radius=0.015)
+    p.poly([(0.275, 0.395), (0.335, 0.245), (0.665, 0.245), (0.725, 0.395)])
+    p.box(0.455, 0.045, 0.545, 0.255)
+    p.box(0.375, 0.115, 0.625, 0.195)
+
+
+SHAPES = [('pawn', pawn), ('knight', knight), ('bishop', bishop),
+          ('rook', rook), ('queen', queen), ('king', king)]
+
+
+def render(name, size, colour=(255, 255, 255)):
+    """기물 한 장. 크게 그린 뒤 줄여서 가장자리를 부드럽게 만든다."""
+    shape = dict(SHAPES)[name]
+    span = size * SUPERSAMPLE
+
+    img = Image.new('RGBA', (span, span), CLEAR)
+    shape(Pen(ImageDraw.Draw(img), span))
+    img = img.resize((size, size), Image.LANCZOS)
+
+    if colour != (255, 255, 255):
+        tint = Image.new('RGBA', (size, size), tuple(colour) + (255,))
+        tint.putalpha(img.split()[3])
+        return tint
+
+    return img
