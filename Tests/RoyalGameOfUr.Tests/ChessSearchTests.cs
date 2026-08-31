@@ -76,18 +76,46 @@ namespace RoyalGameOfUr.Tests
         }
 
         [Fact]
-        public void 한_번에_한_깊이씩_깊어진다()
+        public void 깊이는_건너뛰지_않고_한_칸씩만_올라간다()
         {
+            // 나누는 단위는 뿌리의 수 하나이므로 한 Step 이 곧 한 깊이는 아니다.
+            // 그래도 완성된 깊이는 1, 2, 3, 4 순서로만 올라가야 한다 - 건너뛴 깊이의
+            // 결과를 쓰면 정렬되지 않은 목록에서 수를 고르게 된다.
             ChessBoard board = ChessBoard.Start();
             ChessSearch search = new ChessSearch(board, 4, 0.0, new Random(1));
 
-            for (int expected = 1; expected <= 4; expected++)
+            int seen = 0;
+            int steps = 0;
+
+            while (!search.Done && steps < 10000)
             {
                 search.Step();
-                Assert.Equal(expected, search.CompletedDepth);
+                steps++;
+
+                Assert.True(search.CompletedDepth == seen || search.CompletedDepth == seen + 1,
+                            "jumped " + seen + " -> " + search.CompletedDepth);
+
+                seen = search.CompletedDepth;
             }
 
             Assert.True(search.Done);
+            Assert.Equal(4, search.CompletedDepth);
+        }
+
+        [Fact]
+        public void 무거운_판도_깊이를_끝까지_판다()
+        {
+            // 예전에는 깊이 하나를 한 프레임이 통째로 떠맡았고, 그 한 프레임이 너무 무거우면
+            // 거기서 접었다. 이제는 여러 프레임에 나눠 지므로 접지 않고 끝까지 간다.
+            const string fen = "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1";
+
+            ChessSearch search = new ChessSearch(ChessBoard.FromFen(fen), 5, 0.0, new Random(1));
+
+            int steps = 0;
+            while (!search.Done && steps < 100000) { search.Step(); steps++; }
+
+            Assert.Equal(5, search.CompletedDepth);
+            Assert.True(steps > 1, "한 프레임에 다 해치웠다면 나누는 의미가 없다");
         }
 
         [Fact]

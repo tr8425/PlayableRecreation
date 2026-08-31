@@ -71,9 +71,15 @@ namespace Throwing.Core
             Turn = first;
         }
 
-        /// <summary>세이브에서 되살린다. 이닝 경계에서만 저장하므로 던지던 중간은 없다.</summary>
+        /// <summary>
+        /// 세이브에서 되살린다. 이닝 중간에 닫았어도 그 자리로 그대로 돌아온다 -
+        /// 이닝을 처음부터 다시 시작하게 해 주면 마음에 안 드는 발을 무르는 길이 열린다.
+        ///
+        /// 이번 이닝에 이미 던진 것들은 기록에서 그대로 꺼내 온다. 기록이 곧 상태다.
+        /// </summary>
         public static ThrowMatch Restore(ThrowRules rules, int seed, int inning, int throwIndex,
-                                         int scorePlayer, int scoreOpponent, int ringers, ThrowSide turn)
+                                         int scorePlayer, int scoreOpponent, int ringers, ThrowSide turn,
+                                         IEnumerable<ThrowEntry> entries)
         {
             ThrowMatch match = new ThrowMatch(rules, seed, turn)
             {
@@ -83,6 +89,21 @@ namespace Throwing.Core
                 ScoreOpponent = scoreOpponent,
                 Ringers = ringers,
             };
+
+            if (entries != null)
+            {
+                foreach (ThrowEntry entry in entries)
+                {
+                    match.log.Add(entry);
+                    if (entry.Inning != inning) continue;
+
+                    List<float> thrown = entry.Side == ThrowSide.Player
+                        ? match.playerThrows
+                        : match.opponentThrows;
+
+                    thrown.Add(entry.Distance);
+                }
+            }
 
             match.CheckOver();
             return match;

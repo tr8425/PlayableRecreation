@@ -26,6 +26,15 @@ namespace Poker
         /// <summary>핸드가 끝난 자리에서 저장되었는가. 그러면 되살릴 때 다음 핸드부터 시작한다.</summary>
         public bool freshHand;
 
+        /// <summary>지금까지 오간 행동 수. 상대의 시드가 여기서 나오므로 반드시 남겨야 한다.</summary>
+        public int actions;
+
+        /// <summary>창이 들고 있던 집계. 다시 세면 이어 열기 전의 판이 통째로 지워진다.</summary>
+        public int peakStack = HoldemMatch.StartingStack;
+        public int lowStack = HoldemMatch.StartingStack;
+        public int handsWon;
+        public int showdowns;
+
         public PokerSaveData()
         {
         }
@@ -33,6 +42,7 @@ namespace Poker
         public PokerSaveData(HoldemMatch match)
         {
             seed = match.Seed;
+            actions = match.Actions;
             playerStack = match.Stack(PokerSeat.Player);
             opponentStack = match.Stack(PokerSeat.Opponent);
 
@@ -62,11 +72,12 @@ namespace Poker
         public HoldemMatch ToMatch()
         {
             if (freshHand)
-                return HoldemMatch.RestoreAtHand(seed, hand, buttonIsOpponent, playerStack, opponentStack);
+                return HoldemMatch.RestoreAtHand(seed, hand, buttonIsOpponent,
+                                                 playerStack, opponentStack, actions);
 
             return HoldemMatch.Restore(seed, hand, buttonIsOpponent, playerStack, opponentStack,
                                        pot, playerBet, opponentBet, playerActed, opponentActed,
-                                       street, toActIsOpponent, lastRaise, boardCount);
+                                       street, toActIsOpponent, lastRaise, boardCount, actions);
         }
 
         public override void ExposeData()
@@ -86,6 +97,12 @@ namespace Poker
             Scribe_Values.Look(ref lastRaise, "lastRaise", 10);
             Scribe_Values.Look(ref boardCount, "boardCount", 0);
             Scribe_Values.Look(ref freshHand, "freshHand", false);
+            Scribe_Values.Look(ref actions, "actions", 0);
+
+            Scribe_Values.Look(ref peakStack, "peakStack", HoldemMatch.StartingStack);
+            Scribe_Values.Look(ref lowStack, "lowStack", HoldemMatch.StartingStack);
+            Scribe_Values.Look(ref handsWon, "handsWon", 0);
+            Scribe_Values.Look(ref showdowns, "showdowns", 0);
         }
     }
 }

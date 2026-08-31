@@ -197,9 +197,6 @@ namespace Billiards.Core
         {
             int shooter = (int)Turn;
 
-            bool wrongFirst = outcome.FirstContact != lowestAtShot;
-            bool foul = outcome.CueScratched || outcome.FirstContact < 0 || wrongFirst;
-
             bool nine = false;
             int pocketed = 0;
 
@@ -213,6 +210,14 @@ namespace Billiards.Core
             }
 
             pocketedBy[shooter] += pocketed;
+
+            bool wrongFirst = outcome.FirstContact != lowestAtShot;
+
+            // 제대로 맞혔더라도 그 뒤에 아무것도 떨어지지 않고 어느 공도 쿠션에 닿지 않으면
+            // 파울이다. 살짝 건드려 놓고 자리만 지키는 수를 막는, 나인볼의 레일 규칙이다.
+            bool noRail = pocketed == 0 && !outcome.RailAfterContact;
+
+            bool foul = outcome.CueScratched || outcome.FirstContact < 0 || wrongFirst || noRail;
 
             log.Add(new PoolLogEntry
             {

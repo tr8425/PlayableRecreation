@@ -273,7 +273,12 @@ namespace Chess.Core
             int kingRight = white ? Castle.WhiteKing : Castle.BlackKing;
             int queenRight = white ? Castle.WhiteQueen : Castle.BlackQueen;
 
+            // 권리 비트만 믿지 않는다. 정상 플레이에서는 늘 같이 가지만,
+            // 손상된 FEN 에는 룩 없이 권리만 남을 수 있고 그러면 빈 칸을 복사하게 된다.
+            sbyte rook = Piece.Make(Piece.Rook, side);
+
             if ((board.Castling & kingRight) != 0
+                && board.Squares[home + 3] == rook
                 && board.Squares[home + 1] == Piece.None
                 && board.Squares[home + 2] == Piece.None
                 && !IsAttacked(board, home + 1, enemy)
@@ -281,6 +286,7 @@ namespace Chess.Core
                 into[count++] = new ChessMove { From = home, To = home + 2, IsCastle = true };
 
             if ((board.Castling & queenRight) != 0
+                && board.Squares[home - 4] == rook
                 && board.Squares[home - 1] == Piece.None
                 && board.Squares[home - 2] == Piece.None
                 && board.Squares[home - 3] == Piece.None
@@ -306,12 +312,24 @@ namespace Chess.Core
         }
 
         /// <summary>
-        /// 어느 쪽도 이길 수 없는 잔여 기물. 폰·룩·퀸이 하나라도 남아 있으면 아니고,
-        /// 양쪽 다 마이너 하나 이하이면 그렇다.
+        /// 죽은 판. 규칙이 말하는 것은 "이길 가능성이 없다"가 아니라
+        /// "어떤 수순으로도 메이트가 나올 수 없다"이고, 그 둘은 다르다.
+        ///
+        /// 나이트 둘이 마주 본 판은 강제로 이길 수 없을 뿐 메이트 자체는 만들어진다.
+        /// 비숍끼리도 색이 다르면 마찬가지다. 그런 판을 무승부로 끊어 버리면
+        /// 아직 둘 수 있는 판을 뺏는 것이 된다.
+        ///
+        /// 진짜로 죽은 것은 넷뿐이다 - 킹만 남았거나, 한쪽에 마이너 하나뿐이거나,
+        /// 남은 비숍이 전부 같은 색 칸에 있는 경우다. 어두운 칸의 비숍은
+        /// 밝은 칸에 선 킹을 영원히 건드리지 못한다.
         /// </summary>
         public static bool InsufficientMaterial(ChessBoard board)
         {
-            int[] minors = { 0, 0 };
+            int knights = 0;
+            int bishops = 0;
+
+            bool light = false;
+            bool dark = false;
 
             for (int square = 0; square < 128; square++)
             {
@@ -325,10 +343,16 @@ namespace Chess.Core
 
                 if (kind == Piece.Pawn || kind == Piece.Rook || kind == Piece.Queen) return false;
 
-                if (++minors[(int)Piece.SideOf(piece)] > 1) return false;
+                if (kind == Piece.Knight) { knights++; continue; }
+
+                bishops++;
+                if (Chess88.IsLight(square)) light = true;
+                else dark = true;
             }
 
-            return true;
+            if (knights + bishops <= 1) return true;
+
+            return knights == 0 && !(light && dark);
         }
 
         /// <summary>

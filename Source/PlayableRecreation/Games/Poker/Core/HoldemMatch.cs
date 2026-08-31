@@ -475,7 +475,7 @@ namespace Poker.Core
                                           int pot, int playerBet, int opponentBet,
                                           bool playerActed, bool opponentActed,
                                           int street, bool toActIsOpponent,
-                                          int lastRaise, int boardCount)
+                                          int lastRaise, int boardCount, int actions)
         {
             HoldemMatch match = new HoldemMatch(seed, hand, buttonIsOpponent);
 
@@ -491,6 +491,10 @@ namespace Poker.Core
             match.lastRaiseSize = Math.Max(1, lastRaise);
             match.BoardCount = Math.Max(0, Math.Min(5, boardCount));
 
+            // 상대의 시드가 여기서 나온다. 이 숫자를 잃으면 같은 자리에서 다른 결정이 나오고,
+            // 그러면 창을 닫았다 여는 것만으로 상대의 수를 다시 굴릴 수 있게 된다.
+            match.Actions = Math.Max(0, actions);
+
             return match;
         }
 
@@ -499,7 +503,7 @@ namespace Poker.Core
         /// 팟은 이미 넘어갔고 보드는 다 깔려 있다 - 다음 핸드를 새로 돌리는 것이 맞다.
         /// </summary>
         public static HoldemMatch RestoreAtHand(int seed, int hand, bool buttonIsOpponent,
-                                                int playerStack, int opponentStack)
+                                                int playerStack, int opponentStack, int actions)
         {
             HoldemMatch match = new HoldemMatch(seed, 1, buttonIsOpponent);
 
@@ -507,6 +511,7 @@ namespace Poker.Core
             match.stacks[1] = opponentStack;
             match.Hand = Math.Max(0, hand - 1);
             match.BeginHand();
+            match.Actions = Math.Max(0, actions);
 
             return match;
         }

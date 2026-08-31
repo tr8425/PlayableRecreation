@@ -128,6 +128,34 @@ namespace Throwing
 
             stage = match.Turn == ThrowSide.Opponent ? Stage.Opponent : Stage.Aim;
             stageUntil = 0f;
+
+            RestoreLanded();
+        }
+
+        /// <summary>
+        /// 이어서 연 판이면 이번 이닝에 이미 떨어진 것들이 있다.
+        /// 각도는 저장하지 않는다 - (시드, 순번)에서 나오므로 다시 뽑으면 같은 자리에 놓인다.
+        /// </summary>
+        private void RestoreLanded()
+        {
+            IReadOnlyList<ThrowEntry> entries = match.Log;
+
+            int first = entries.Count;
+            while (first > 0 && entries[first - 1].Inning == match.Inning) first--;
+
+            int index = match.ThrowIndex - (entries.Count - first);
+
+            for (int i = first; i < entries.Count; i++)
+            {
+                landed.Add(new Landed
+                {
+                    Side = entries[i].Side,
+                    Distance = entries[i].Distance,
+                    Angle = ThrowAim.Uniform(match.Seed, index * 7 + 3) * Mathf.PI * 2f,
+                });
+
+                index++;
+            }
         }
 
         // ---------- 진행 ----------

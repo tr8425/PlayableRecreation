@@ -1,11 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Chess.Core
 {
     /// <summary>
-    /// 알파베타 + 정지 탐색. 한 번에 다 하지 않고 **깊이 하나씩** 훑는다 -
+    /// 알파베타 + 정지 탐색. 한 번에 다 하지 않고 조금씩 훑는다 -
     /// 창이 매 프레임 <c>Step</c> 을 한 번씩 부르면 뜸들이는 사이에 저절로 깊어진다.
+    ///
+    /// 나누는 단위는 깊이가 아니라 **뿌리의 수 하나**다. 깊이로 나누면 한 프레임이
+    /// 통째로 그 깊이를 떠맡게 되는데, 복잡한 중반에서 깊이 5는 3분의 1초가 넘는다 -
+    /// 그 한 프레임이 그대로 멈춤으로 보인다. 뿌리에서 나누면 프레임은 수 하나만 지고,
+    /// 나머지는 다음 프레임이 이어받는다. 깊이는 그대로 다 판다.
     ///
     /// 중간에 끊겨도 직전 깊이에서 찾은 수가 남아 있으므로 언제 멈춰도 둘 수는 있다.
     /// </summary>
@@ -13,8 +19,18 @@ namespace Chess.Core
     {
         private const int MaxPly = 40;
 
-        /// <summary>깊이 하나를 훑는 데 허용하는 노드 수. 한 프레임이 멈춰 보이지 않을 만큼.</summary>
-        private const long NodeCap = 220000;
+        /// <summary>깊이 하나에 허용하는 노드 수. 넘기면 그 깊이를 접고 직전 깊이의 수를 쓴다.</summary>
+        private const long NodeCap = 1200000;
+
+        /// <summary>한 프레임에 쓸 시간. 이 안에 끝낸 뿌리 수까지만 보고 나머지는 다음 프레임에 잇는다.</summary>
+        private const long BudgetMillis = 8;
+
+        /// <summary>
+        /// 뿌리 수 하나의 가지가 아무리 커도 여기서 자른다. 프레임을 지키는 마지막 선이다.
+        /// 잘린 수는 alpha 를 그대로 돌려주므로 "더 나을 것 없음"으로 보인다 -
+        /// 실제보다 좋아 보이는 쪽으로는 틀리지 않는다.
+        /// </summary>
+        private const long CeilingMillis = 25;
 
         private readonly ChessBoard board;
         private readonly int maxDepth;
@@ -31,6 +47,17 @@ namespace Chess.Core
         private bool exhausted;
         private bool chosen;
         private ChessMove choice;
+
+        // ---------- 한 깊이를 여러 프레임에 걸쳐 훑기 위한 자리 ----------
+
+        private readonly Stopwatch clock = new Stopwatch();
+        private readonly List<ChessMove> partial = new List<ChessMove>();
+        private readonly List<int> partialScores = new List<int>();
+
+        private int pendingDepth;
+        private int pendingCount;
+        private int pendingIndex;
+        private int pendingAlpha;
 
         public int CompletedDepth { get; private set; }
 
@@ -82,91 +109,111 @@ namespace Chess.Core
             return rootMoves[1];
         }
 
-        /// <summary>다음 깊이를 한 번 훑는다.</summary>
+        /// <summary>
+        /// 이번 프레임의 몫만큼 훑는다. 깊이 하나가 한 프레임에 안 끝나면 다음 프레임이 잇는다.
+        /// </summary>
         public void Step()
         {
             if (Done) return;
 
-            int depth = CompletedDepth + 1;
-            nodes = 0;
+            if (pendingDepth == 0) BeginDepth(CompletedDepth + 1);
 
-            if (!SearchRoot(depth))
+            clock.Reset();
+            clock.Start();
+
+            ChessMove[] moves = stack[0];
+
+            // 아무리 무거운 판에서도 한 수는 본다. 그래야 앞으로 나아간다.
+            do
             {
-                // 노드 예산을 넘겼다. 직전 깊이의 결과를 그대로 쓴다.
+                if (pendingIndex >= pendingCount) break;
+
+                ChessMove move = moves[pendingIndex++];
+                board.Make(ref move);
+                int score = -AlphaBeta(pendingDepth - 1, 1, -ChessEval.MateScore * 2, -pendingAlpha);
+                board.Unmake(in move);
+
+                partial.Add(move);
+                partialScores.Add(score);
+
+                if (score > pendingAlpha) pendingAlpha = score;
+
+                if (nodes <= NodeCap) continue;
+
+                // 이 깊이는 너무 무겁다. 직전 깊이에서 찾은 수를 그대로 쓴다.
                 exhausted = true;
+                pendingDepth = 0;
                 return;
             }
+            while (clock.ElapsedMilliseconds < BudgetMillis);
 
-            CompletedDepth = depth;
+            if (pendingIndex < pendingCount) return;   // 남은 것은 다음 프레임에
+
+            Commit();
+        }
+
+        private void BeginDepth(int depth)
+        {
+            pendingDepth = depth;
+            pendingIndex = 0;
+            pendingAlpha = -ChessEval.MateScore * 2;
+            nodes = 0;
+
+            partial.Clear();
+            partialScores.Clear();
+
+            pendingCount = ChessRules.GenerateLegal(board, stack[0]);
+            Order(stack[0], pendingCount, 0);
+        }
+
+        /// <summary>한 깊이를 다 훑었다. 여기서만 결과가 바뀐다 - 반쯤 훑은 목록은 절대 새지 않는다.</summary>
+        private void Commit()
+        {
+            // 점수 내림차순. 차선수를 고를 수 있어야 하므로 목록째 정렬해 둔다.
+            for (int i = 1; i < partial.Count; i++)
+            {
+                ChessMove move = partial[i];
+                int score = partialScores[i];
+                int j = i - 1;
+
+                while (j >= 0 && partialScores[j] < score)
+                {
+                    partial[j + 1] = partial[j];
+                    partialScores[j + 1] = partialScores[j];
+                    j--;
+                }
+
+                partial[j + 1] = move;
+                partialScores[j + 1] = score;
+            }
+
+            rootMoves.Clear();
+            rootScores.Clear();
+            rootMoves.AddRange(partial);
+            rootScores.AddRange(partialScores);
+
+            CompletedDepth = pendingDepth;
+            pendingDepth = 0;
 
             // 외통이 보이면 더 깊이 볼 이유가 없다.
             if (rootScores.Count > 0 && Math.Abs(rootScores[0]) > ChessEval.MateScore - 100) exhausted = true;
         }
 
-        private bool SearchRoot(int depth)
+        /// <summary>
+        /// 더 볼 수 있는가. 노드 수는 이 깊이 전체의 한도고, 시계는 이 프레임의 마지막 선이다.
+        /// 시계를 노드마다 읽으면 시계가 더 비싸므로 512 노드에 한 번만 본다.
+        /// </summary>
+        private bool OutOfTime()
         {
-            ChessMove[] moves = stack[0];
-            int count = ChessRules.GenerateLegal(board, moves);
+            if (nodes > NodeCap) return true;
 
-            if (count == 0)
-            {
-                rootMoves.Clear();
-                rootScores.Clear();
-                return true;
-            }
-
-            Order(moves, count, 0);
-
-            List<ChessMove> found = new List<ChessMove>(count);
-            List<int> scores = new List<int>(count);
-
-            int alpha = -ChessEval.MateScore * 2;
-
-            for (int i = 0; i < count; i++)
-            {
-                ChessMove move = moves[i];
-                board.Make(ref move);
-                int score = -AlphaBeta(depth - 1, 1, -ChessEval.MateScore * 2, -alpha);
-                board.Unmake(in move);
-
-                if (nodes > NodeCap) return false;
-
-                found.Add(move);
-                scores.Add(score);
-
-                if (score > alpha) alpha = score;
-            }
-
-            // 점수 내림차순. 차선수를 고를 수 있어야 하므로 목록째 정렬해 둔다.
-            for (int i = 1; i < found.Count; i++)
-            {
-                ChessMove move = found[i];
-                int score = scores[i];
-                int j = i - 1;
-
-                while (j >= 0 && scores[j] < score)
-                {
-                    found[j + 1] = found[j];
-                    scores[j + 1] = scores[j];
-                    j--;
-                }
-
-                found[j + 1] = move;
-                scores[j + 1] = score;
-            }
-
-            rootMoves.Clear();
-            rootScores.Clear();
-            rootMoves.AddRange(found);
-            rootScores.AddRange(scores);
-
-            return true;
+            return (nodes & 511L) == 0L && clock.ElapsedMilliseconds >= CeilingMillis;
         }
 
         private int AlphaBeta(int depth, int ply, int alpha, int beta)
         {
             nodes++;
-            if (nodes > NodeCap) return alpha;
+            if (OutOfTime()) return alpha;
 
             if (depth <= 0) return Quiesce(ply, alpha, beta);
             if (ply >= MaxPly - 2) return ChessEval.Evaluate(board);
@@ -191,7 +238,7 @@ namespace Chess.Core
                 int score = -AlphaBeta(depth - 1, ply + 1, -beta, -alpha);
                 board.Unmake(in move);
 
-                if (nodes > NodeCap) return alpha;
+                if (OutOfTime()) return alpha;
                 if (score <= alpha) continue;
 
                 alpha = score;
@@ -213,7 +260,7 @@ namespace Chess.Core
         private int Quiesce(int ply, int alpha, int beta)
         {
             nodes++;
-            if (nodes > NodeCap) return alpha;
+            if (OutOfTime()) return alpha;
 
             int stand = ChessEval.Evaluate(board);
             if (stand >= beta) return beta;
@@ -242,7 +289,7 @@ namespace Chess.Core
                 int score = -Quiesce(ply + 1, -beta, -alpha);
                 board.Unmake(in move);
 
-                if (nodes > NodeCap) return alpha;
+                if (OutOfTime()) return alpha;
                 if (score >= beta) return beta;
                 if (score > alpha) alpha = score;
             }

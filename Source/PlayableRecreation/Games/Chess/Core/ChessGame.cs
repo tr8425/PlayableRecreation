@@ -161,7 +161,27 @@ namespace Chess.Core
             get { return Board.ToFen(); }
         }
 
-        /// <summary>세이브에서 되살린다. 되풀이 판정을 위해 지나온 해시를 함께 받는다.</summary>
+        /// <summary>
+        /// 처음부터 다시 두어 되살린다.
+        ///
+        /// 위치만 복원하면 수순도 기보도 무르기도 함께 잃는다 - 한 판은 지금의 모습이 아니라
+        /// 지나온 수의 목록이기 때문이다. 다시 두면 되풀이 해시까지 저절로 같아진다.
+        ///
+        /// 한 수라도 둘 수 없으면 null 을 준다. 상한 기록으로 이상한 판을 만드느니
+        /// 위치만이라도 맞는 쪽으로 물러서는 편이 낫다.
+        /// </summary>
+        public static ChessGame Replay(ChessSide playerSide, IList<ChessMove> moves)
+        {
+            ChessGame game = new ChessGame(playerSide);
+            if (moves == null) return game;
+
+            for (int i = 0; i < moves.Count; i++)
+                if (!game.Play(moves[i].From, moves[i].To, moves[i].Promotion)) return null;
+
+            return game;
+        }
+
+        /// <summary>위치만 되살린다. 수순을 잃은 예전 세이브가 여기로 온다.</summary>
         public static ChessGame Restore(string fen, ChessSide playerSide, List<ulong> keys)
         {
             ChessGame game = new ChessGame(fen, playerSide);

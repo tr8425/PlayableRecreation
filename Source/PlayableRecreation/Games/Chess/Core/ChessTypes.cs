@@ -30,6 +30,12 @@ namespace Chess.Core
         public static int File(int square) { return square & 7; }
         public static int Rank(int square) { return square >> 4; }
 
+        /// <summary>밝은 칸인가. a1 이 어두운 칸이다.</summary>
+        public static bool IsLight(int square)
+        {
+            return ((File(square) + Rank(square)) & 1) != 0;
+        }
+
         /// <summary>0x88 칸을 0~63 으로 접는다. 저장과 해시에 쓴다.</summary>
         public static int ToIndex(int square)
         {

@@ -178,7 +178,7 @@ namespace RoyalGameOfUr.Tests
 
             // 판이 끝날 무렵에는 처음보다 커져 있어야 한다 - 그래서 판이 끝난다.
             HoldemMatch late = HoldemMatch.Restore(5, HoldemMatch.MaxHands, false,
-                                                   200, 200, 0, 0, 0, false, false, 0, false, 10, 0);
+                                                   200, 200, 0, 0, 0, false, false, 0, false, 10, 0, 0);
             Assert.True(late.BigBlind > first);
         }
 
@@ -196,7 +196,10 @@ namespace RoyalGameOfUr.Tests
             // 끝난 핸드를 그대로 담으면 팟도 없는 죽은 판 위에 앉게 된다.
             HoldemMatch next = HoldemMatch.RestoreAtHand(
                 match.Seed, hand + 1, !button,
-                match.Stack(PokerSeat.Player), match.Stack(PokerSeat.Opponent));
+                match.Stack(PokerSeat.Player), match.Stack(PokerSeat.Opponent), match.Actions);
+
+            // 상대의 시드는 행동 수에서 나온다. 여기서 끊기면 창을 여닫아 상대의 수를 굴릴 수 있다.
+            Assert.Equal(match.Actions, next.Actions);
 
             Assert.Equal(hand + 1, next.Hand);
             Assert.False(next.HandDone);
@@ -225,8 +228,9 @@ namespace RoyalGameOfUr.Tests
                 match.Pot, match.Bet(PokerSeat.Player), match.Bet(PokerSeat.Opponent),
                 match.ActedBy(PokerSeat.Player), match.ActedBy(PokerSeat.Opponent),
                 match.StreetIndex, match.ToActIsOpponent,
-                match.LastRaiseSize, match.BoardCount);
+                match.LastRaiseSize, match.BoardCount, match.Actions);
 
+            Assert.Equal(match.Actions, back.Actions);
             Assert.Equal(match.Street, back.Street);
             Assert.Equal(match.ToAct, back.ToAct);
             Assert.Equal(match.Pot, back.Pot);

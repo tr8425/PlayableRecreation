@@ -135,7 +135,9 @@ namespace RoyalGameOfUr.Tests
             match.Balls[0].Pos = new Vec2(0.4f, 0.5f);
             match.Balls[1].Pos = new Vec2(1.0f, 0.5f);
 
-            match.Shoot(new Vec2(0.9f, 0f));
+            // 제대로 맞힐 것만으로는 모자란다. 넣지 못했으면 어느 공이든
+            // 쿠션에는 닿아야 파울이 아니다 - 그래서 건드리는 정도로는 부족하다.
+            match.Shoot(new Vec2(2.0f, 0f));
             RollOut(match);
 
             Assert.Equal(0, match.Fouls(PoolSide.Player));

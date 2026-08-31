@@ -85,12 +85,29 @@ namespace Poker
 
             match = saved.ToMatch();
             Reset();
+
+            // 이어서 연 판의 집계는 저장된 것을 쓴다. 다시 세면 지나온 핸드가 통째로 지워진다.
+            peakStack = Mathf.Max(saved.peakStack, peakStack);
+            handsWon = saved.handsWon;
+            showdowns = saved.showdowns;
+
+            // 집계를 남기지 않던 예전 세이브는 여기서 걸린다 - 모르는 것을 무결점으로 쳐 주지 않는다.
+            lowStack = Mathf.Min(saved.lowStack, lowStack);
+
             BeginTurn(0f);
         }
 
         public override MiniGameSaveData MakeSaveData()
         {
-            return match != null && !match.IsOver ? new PokerSaveData(match) : null;
+            if (match == null || match.IsOver) return null;
+
+            return new PokerSaveData(match)
+            {
+                peakStack = peakStack,
+                lowStack = lowStack,
+                handsWon = handsWon,
+                showdowns = showdowns,
+            };
         }
 
         private void Reset()
@@ -103,8 +120,6 @@ namespace Poker
             int stack = match.Stack(PokerSeat.Player) + match.Bet(PokerSeat.Player);
 
             peakStack = stack;
-
-            // 이어서 한 판은 그전에 밀렸는지 알 수 없다. 모르는 것을 무결점으로 쳐 주지는 않는다.
             lowStack = Mathf.Min(stack, HoldemMatch.StartingStack);
             handsWon = 0;
             showdowns = 0;

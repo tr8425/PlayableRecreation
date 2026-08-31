@@ -26,6 +26,10 @@ namespace Billiards.Core
         public readonly List<int> Pocketed = new List<int>();
 
         public bool CueScratched;
+
+        /// <summary>첫 접촉 뒤에 어느 공이든 쿠션에 닿았는가. 나인볼의 레일 규칙이 이것만 본다.</summary>
+        public bool RailAfterContact;
+
         public float Seconds;
         public bool TimedOut;
     }
@@ -111,7 +115,7 @@ namespace Billiards.Core
 
             ResolveCollisions(balls, outcome);
             ResolvePockets(balls, outcome);
-            ResolveCushions(balls);
+            ResolveCushions(balls, outcome);
         }
 
         /// <summary>
@@ -222,7 +226,7 @@ namespace Billiards.Core
             }
         }
 
-        private static void ResolveCushions(Ball[] balls)
+        private static void ResolveCushions(Ball[] balls, ShotOutcome outcome)
         {
             const float r = PoolTable.BallRadius;
             const float e = PoolTable.CushionRestitution;
@@ -233,15 +237,19 @@ namespace Billiards.Core
 
                 Vec2 pos = balls[i].Pos;
                 Vec2 vel = balls[i].Vel;
+                bool bounced = false;
 
-                if (pos.X < r) { pos.X = r; if (vel.X < 0f) vel.X = -vel.X * e; }
-                else if (pos.X > PoolTable.Width - r) { pos.X = PoolTable.Width - r; if (vel.X > 0f) vel.X = -vel.X * e; }
+                if (pos.X < r) { pos.X = r; if (vel.X < 0f) { vel.X = -vel.X * e; bounced = true; } }
+                else if (pos.X > PoolTable.Width - r) { pos.X = PoolTable.Width - r; if (vel.X > 0f) { vel.X = -vel.X * e; bounced = true; } }
 
-                if (pos.Y < r) { pos.Y = r; if (vel.Y < 0f) vel.Y = -vel.Y * e; }
-                else if (pos.Y > PoolTable.Height - r) { pos.Y = PoolTable.Height - r; if (vel.Y > 0f) vel.Y = -vel.Y * e; }
+                if (pos.Y < r) { pos.Y = r; if (vel.Y < 0f) { vel.Y = -vel.Y * e; bounced = true; } }
+                else if (pos.Y > PoolTable.Height - r) { pos.Y = PoolTable.Height - r; if (vel.Y > 0f) { vel.Y = -vel.Y * e; bounced = true; } }
 
                 balls[i].Pos = pos;
                 balls[i].Vel = vel;
+
+                // 벽에 밀어붙여 세워 두는 것은 접촉이 아니다. 실제로 튕겨 나온 것만 센다.
+                if (bounced && outcome.FirstContact >= 0) outcome.RailAfterContact = true;
             }
         }
     }
