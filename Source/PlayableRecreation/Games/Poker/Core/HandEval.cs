@@ -68,6 +68,42 @@ namespace Poker.Core
             while (found < wanted) into[found++] = 0;
         }
 
+        /// <summary>
+        /// 일곱 장 중 실제로 손을 만든 다섯 장. 점수만으로는 어느 카드가 쓰였는지 알 수 없다 -
+        /// 쇼다운에서 "무엇으로 이겼는지"를 판 위에 보여 주려면 이것이 필요하다.
+        ///
+        /// 스물한 가지를 전부 재 본다. 규칙을 거꾸로 되짚어 카드를 골라내는 것보다
+        /// 스물한 번 세는 쪽이 짧고, 무엇보다 <see cref="Score"/> 와 어긋날 수가 없다.
+        /// </summary>
+        public static int BestFive(int[] cards, int count, int[] into)
+        {
+            if (cards == null || into == null || count < 5 || into.Length < 5) return -1;
+
+            int[] five = new int[5];
+            int best = -1;
+
+            for (int a = 0; a < count - 4; a++)
+            for (int b = a + 1; b < count - 3; b++)
+            for (int c = b + 1; c < count - 2; c++)
+            for (int d = c + 1; d < count - 1; d++)
+            for (int e = d + 1; e < count; e++)
+            {
+                five[0] = cards[a];
+                five[1] = cards[b];
+                five[2] = cards[c];
+                five[3] = cards[d];
+                five[4] = cards[e];
+
+                int score = Score(five, 5);
+                if (score <= best) continue;
+
+                best = score;
+                for (int i = 0; i < 5; i++) into[i] = five[i];
+            }
+
+            return best;
+        }
+
         public static int Score(int[] cards, int count)
         {
             int[] rankCount = new int[13];

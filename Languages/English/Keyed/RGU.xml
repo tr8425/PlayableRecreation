@@ -20,9 +20,9 @@
   <RGU.Status.Roll>Roll the dice.</RGU.Status.Roll>
   <RGU.Status.NoMove>Rolled {0} — no legal move. Passing the turn.</RGU.Status.NoMove>
   <RGU.Status.PickMove>Rolled {0} — choose a piece to move. ({1} options)</RGU.Status.PickMove>
-  <RGU.Status.BotThinking>The AI opponent is thinking...</RGU.Status.BotThinking>
+  <RGU.Status.BotThinking>They are thinking...</RGU.Status.BotThinking>
   <RGU.Status.WinPlayer>You win!</RGU.Status.WinPlayer>
-  <RGU.Status.WinBot>The AI opponent wins.</RGU.Status.WinBot>
+  <RGU.Status.WinBot>They win.</RGU.Status.WinBot>
 
   <!-- 수순 로그 -->
   <RGU.Log.Pass>pass</RGU.Log.Pass>

@@ -22,6 +22,8 @@
   <THR.Status.Opponent>상대가 던집니다…</THR.Status.Opponent>
   <THR.Status.Ringer>{0}!</THR.Status.Ringer>
   <THR.Status.Landed>빗나감 {0}</THR.Status.Landed>
+  <THR.Status.RingerThem>상대 · {0}!</THR.Status.RingerThem>
+  <THR.Status.LandedThem>상대 · 빗나감 {0}</THR.Status.LandedThem>
   <THR.Status.WinPlayer>당신의 승리! {0} 대 {1}</THR.Status.WinPlayer>
   <THR.Status.WinOpponent>상대의 승리. {0} 대 {1}</THR.Status.WinOpponent>
 

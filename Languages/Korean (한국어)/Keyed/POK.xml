@@ -24,6 +24,12 @@
   <POK.Label.Button>딜러</POK.Label.Button>
   <POK.Label.Bet>{0} 걸었습니다</POK.Label.Bet>
   <POK.Label.Took>가져갔습니다</POK.Label.Took>
+
+  <!-- 자리 옆에 남는 직전 행동 -->
+  <POK.Did.Fold>죽었습니다</POK.Did.Fold>
+  <POK.Did.Check>체크</POK.Did.Check>
+  <POK.Did.Call>콜</POK.Did.Call>
+  <POK.Did.Raise>레이즈</POK.Did.Raise>
   <POK.Label.Pot>팟 {0}</POK.Label.Pot>
   <POK.Label.YourHand>지금 당신의 손: {0}</POK.Label.YourHand>
 

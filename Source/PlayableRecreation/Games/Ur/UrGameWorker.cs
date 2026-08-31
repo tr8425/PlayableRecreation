@@ -25,6 +25,9 @@ namespace RoyalGameOfUr
         private UrTurnMark? undoTarget;
 
         private Side lastTurn;
+
+        /// <summary>직전 한 수. 상대가 무엇을 했는지 판 위에 남겨 두는 데만 쓴다.</summary>
+        private UrTrail trail;
         private float nextBotActionTime;
         private float pendingPassTime;
         private float pendingAutoMoveTime;
@@ -110,6 +113,7 @@ namespace RoyalGameOfUr
         private void ResetTiming()
         {
             lastTurn = match.Turn;
+            trail = UrTrail.None;
             nextBotActionTime = 0f;
             pendingPassTime = 0f;
             pendingAutoMoveTime = 0f;
@@ -204,6 +208,14 @@ namespace RoyalGameOfUr
             UrMove move = match.LegalMoves[index];
             match.PlayMove(index);
 
+            trail = new UrTrail
+            {
+                Has = true,
+                Side = byPlayer ? Side.Player : Side.Bot,
+                From = move.From,
+                To = move.To,
+            };
+
             if (byPlayer) undoTarget = mark;
 
             if (move.IsCapture) PRSounds.Play(UrSounds.Capture);
@@ -218,6 +230,9 @@ namespace RoyalGameOfUr
 
             match.RewindTo(undoTarget.Value);
             undoTarget = null;
+
+            // 무른 수는 없던 일이 된다. 자취만 남겨 두면 있지도 않은 수를 가리킨다.
+            trail = UrTrail.None;
 
             PRSounds.Play(UrSounds.Pass);
             ResetTiming();
@@ -267,7 +282,7 @@ namespace RoyalGameOfUr
 
             bool interactive = !match.IsOver && match.Turn == Side.Player;
 
-            int clicked = UrBoardRenderer.Draw(boardArea, match, interactive);
+            int clicked = UrBoardRenderer.Draw(boardArea, match, interactive, trail);
             if (clicked >= 0) PlayLegalMove(clicked);
 
             UrDiceWidget.Draw(diceRect, match.Roll, match.RollRevealed);

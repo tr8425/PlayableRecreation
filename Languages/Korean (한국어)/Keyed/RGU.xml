@@ -20,9 +20,9 @@
   <RGU.Status.Roll>주사위를 굴리세요.</RGU.Status.Roll>
   <RGU.Status.NoMove>눈 {0} — 둘 수 있는 수가 없습니다. 턴을 넘깁니다.</RGU.Status.NoMove>
   <RGU.Status.PickMove>눈 {0} — 움직일 말을 고르세요. ({1}가지)</RGU.Status.PickMove>
-  <RGU.Status.BotThinking>AI 봇이 생각 중…</RGU.Status.BotThinking>
+  <RGU.Status.BotThinking>상대가 생각합니다…</RGU.Status.BotThinking>
   <RGU.Status.WinPlayer>당신의 승리!</RGU.Status.WinPlayer>
-  <RGU.Status.WinBot>AI 봇의 승리.</RGU.Status.WinBot>
+  <RGU.Status.WinBot>상대의 승리.</RGU.Status.WinBot>
 
   <!-- 수순 로그 -->
   <RGU.Log.Pass>패스</RGU.Log.Pass>
@@ -59,7 +59,7 @@
   <RGU.Settings.Tooltips>칸에 마우스를 올리면 설명 표시</RGU.Settings.Tooltips>
   <RGU.Settings.RiskWarning>도착칸에 잡힐 확률 표시</RGU.Settings.RiskWarning>
   <RGU.Settings.RiskWarning.Desc>도착칸에 다음 턴 잡힐 확률을 표시합니다.</RGU.Settings.RiskWarning.Desc>
-  <RGU.Settings.AutoAdvance>합법수가 1개뿐이면 자동 진행</RGU.Settings.AutoAdvance>
+  <RGU.Settings.AutoAdvance>둘 수 있는 수가 하나뿐이면 자동으로</RGU.Settings.AutoAdvance>
   <RGU.Settings.RandomFirst>선공을 무작위로</RGU.Settings.RandomFirst>
   <RGU.Settings.RandomFirst.Desc>우르는 선공이 조금 유리합니다.</RGU.Settings.RandomFirst.Desc>
 

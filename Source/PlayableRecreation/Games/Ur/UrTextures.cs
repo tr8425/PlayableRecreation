@@ -96,6 +96,11 @@ namespace RoyalGameOfUr
         public static readonly Color CaptureBorder = new Color(0.92f, 0.44f, 0.38f);
         public static readonly Color BearOff = new Color(0.95f, 0.85f, 0.45f);
 
+        // 직전 한 수의 자취. 초록(합법수)이나 빨강(잡기)과 헷갈리지 않게 따뜻한 흰빛으로 둔다.
+        public static readonly Color TrailFrom = new Color(0.86f, 0.80f, 0.62f, 0.13f);
+        public static readonly Color TrailTo = new Color(0.86f, 0.80f, 0.62f, 0.28f);
+        public static readonly Color TrailBorder = new Color(0.88f, 0.82f, 0.60f, 0.60f);
+
         public static readonly Color DieMarked = new Color(0.93f, 0.86f, 0.62f);
         public static readonly Color DieBlank = new Color(1f, 1f, 1f, 0.28f);
         public static readonly Color DieHidden = new Color(1f, 1f, 1f, 0.13f);

@@ -15,7 +15,7 @@
   <PR.Window.Practice>연습</PR.Window.Practice>
   <PR.Header.You>당신</PR.Header.You>
   <PR.Header.YouNamed>당신 ({0})</PR.Header.YouNamed>
-  <PR.Header.Opponent>AI 상대 ({0})</PR.Header.Opponent>
+  <PR.Header.Opponent>상대 ({0})</PR.Header.Opponent>
   <PR.Log.Title>진행</PR.Log.Title>
   <PR.Side.You>당신</PR.Side.You>
   <PR.Side.Opponent>상대</PR.Side.Opponent>
@@ -118,12 +118,12 @@
 
   <PR.Settings.Pause>하는 동안 게임 시간 멈춤</PR.Settings.Pause>
   <PR.Settings.Pause.Desc>끄면 하는 동안 콜로니 시간이 흐릅니다. 위협이 나타나면 창이 저절로 닫힙니다.</PR.Settings.Pause.Desc>
-  <PR.Settings.Immersion>몰입 모드 (폰이 가구까지 걸어간 뒤 시작)</PR.Settings.Immersion>
+  <PR.Settings.Immersion>몰입 모드 (식민자가 가구까지 걸어간 뒤 시작)</PR.Settings.Immersion>
   <PR.Settings.Immersion.Desc>선택한 식민자가 가구 앞에 선 뒤 창이 열립니다.</PR.Settings.Immersion.Desc>
   <PR.Settings.LinkSkill>난이도를 식민자의 스킬로 자동 결정</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>난이도 선택 창을 건너뜁니다. 게임마다 기준 스킬이 다릅니다.</PR.Settings.LinkSkill.Desc>
   <PR.Settings.Sounds>효과음</PR.Settings.Sounds>
-  <PR.Settings.ThinkTime>AI 뜸들이는 시간: {0}초 (난이도가 높을수록 짧아짐)</PR.Settings.ThinkTime>
+  <PR.Settings.ThinkTime>상대가 뜸들이는 시간: {0}초 (난이도가 높을수록 짧아짐)</PR.Settings.ThinkTime>
 
   <PR.Settings.Mastery.Explain>난이도를 처음 이길 때마다 한 단계. 단계당 +{0}%, 전부 깨면 +{1}%. 게임마다 따로 쌓입니다.</PR.Settings.Mastery.Explain>
   <PR.Settings.Mastery.Current>{0} 숙련도: {1}/{2}단계 (+{3}%)</PR.Settings.Mastery.Current>

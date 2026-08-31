@@ -41,6 +41,9 @@ namespace Throwing
         private float lastDistance = -1f;
         private bool lastWasRinger;
 
+        /// <summary>방금 던진 쪽. 결과만 띄우면 그것이 누구 것인지 알 수 없다.</summary>
+        private ThrowSide lastThrower;
+
         /// <summary>이번 이닝에 떨어진 것들. 거리만 저장되므로 각도는 여기서 붙인다.</summary>
         private readonly List<Landed> landed = new List<Landed>();
         private int drawnInning = -1;
@@ -230,6 +233,7 @@ namespace Throwing
 
             lastDistance = distance;
             lastWasRinger = distance <= rules.RingerRadius;
+            lastThrower = thrower;
 
             match.Throw(distance);
 
@@ -426,11 +430,18 @@ namespace Throwing
                     case Stage.Opponent:
                         return "THR.Status.Opponent".Translate().ToString();
                     default:
-                        return lastDistance < 0f
-                            ? string.Empty
-                            : lastWasRinger
-                                ? "THR.Status.Ringer".Translate(RingerName).ToString()
-                                : "THR.Status.Landed".Translate(lastDistance.ToString("0.00")).ToString();
+                    {
+                        if (lastDistance < 0f) return string.Empty;
+
+                        bool mine = lastThrower == ThrowSide.Player;
+
+                        if (lastWasRinger)
+                            return (mine ? "THR.Status.Ringer" : "THR.Status.RingerThem")
+                                .Translate(RingerName).ToString();
+
+                        return (mine ? "THR.Status.Landed" : "THR.Status.LandedThem")
+                            .Translate(lastDistance.ToString("0.00")).ToString();
+                    }
                 }
             }
         }

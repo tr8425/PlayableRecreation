@@ -41,6 +41,10 @@ namespace Poker
         private readonly List<string> log = new List<string>();
         private int lastLogCount = -1;
 
+        /// <summary>쇼다운에서 실제로 쓰인 다섯 장. 핸드가 바뀔 때만 다시 센다.</summary>
+        private readonly List<int> madeHand = new List<int>();
+        private int madeForHand = -1;
+
         // ---------- 프레임워크에 답하는 것들 ----------
 
         public override int SavePoint
@@ -233,10 +237,57 @@ namespace Poker
             Rect middle = new Rect(inner.x, top.yMax, inner.width, bottom.y - top.yMax);
             Rect controls = new Rect(inner.x, inner.yMax - ControlHeight, inner.width, ControlHeight);
 
+            RefreshMadeHand();
+
             DrawSeat(top, PokerSeat.Opponent);
             DrawBoard(middle);
             DrawSeat(bottom, PokerSeat.Player);
             DrawControls(controls);
+        }
+
+        /// <summary>
+        /// 이긴 손을 만든 다섯 장을 찾아 둔다.
+        ///
+        /// 카드를 뒤집어 주는 것만으로는 부족하다 - 일곱 장 중 어느 다섯이 손이 되었는지는
+        /// 직접 세어야 알 수 있고, 그것이 곧 이긴 이유다. 진 사람이 왜 졌는지 볼 수 있어야 한다.
+        /// </summary>
+        private void RefreshMadeHand()
+        {
+            if (!match.HandDone || !match.ShowdownReached)
+            {
+                if (madeForHand < 0) return;
+
+                madeForHand = -1;
+                madeHand.Clear();
+                return;
+            }
+
+            if (madeForHand == match.Hand) return;
+
+            madeForHand = match.Hand;
+            madeHand.Clear();
+
+            // 나눠 가진 핸드는 어느 쪽을 짚어도 같은 다섯 장이 나온다.
+            PokerSeat seat = match.HandWinner ?? PokerSeat.Player;
+
+            int[] seven = new int[7];
+            seven[0] = match.Hole(seat, 0);
+            seven[1] = match.Hole(seat, 1);
+            for (int i = 0; i < 5; i++) seven[2 + i] = match.Board(i);
+
+            int[] five = new int[5];
+            if (HandEval.BestFive(seven, 7, five) < 0) return;
+
+            madeHand.AddRange(five);
+        }
+
+        private void MarkMade(Rect box, int card)
+        {
+            if (card < 0 || !madeHand.Contains(card)) return;
+
+            GUI.color = PokerTheme.Winner;
+            Widgets.DrawBox(box, 2);
+            GUI.color = Color.white;
         }
 
         private bool OpponentFaceUp
@@ -262,6 +313,7 @@ namespace Poker
             {
                 Rect box = new Rect(cards.x + i * (CardWidth + 8f), cards.y, CardWidth, CardHeight);
                 DrawCard(box, match.Hole(seat, i), !faceUp);
+                if (faceUp) MarkMade(box, match.Hole(seat, i));
             }
 
             Text.Anchor = TextAnchor.MiddleLeft;
@@ -295,6 +347,20 @@ namespace Poker
                 Widgets.Label(new Rect(row.xMax - 200f, row.y + 2f, 200f, 24f), "POK.Label.Took".Translate());
                 GUI.color = Color.white;
             }
+            else
+            {
+                // 칩만 보고 있으면 체크와 폴드는 아무것도 움직이지 않는다.
+                // 상대가 무엇을 했는지는 여기 한 줄로만 보인다.
+                string did = LastActionOf(seat);
+
+                if (!did.NullOrEmpty())
+                {
+                    Text.Anchor = TextAnchor.MiddleRight;
+                    GUI.color = PRTheme.Dim;
+                    Widgets.Label(new Rect(row.xMax - 200f, row.y + 2f, 200f, 24f), did);
+                    GUI.color = Color.white;
+                }
+            }
 
             Text.Anchor = TextAnchor.UpperLeft;
         }
@@ -309,7 +375,11 @@ namespace Poker
             {
                 Rect box = new Rect(cards.x + i * (CardWidth + 8f), cards.y, CardWidth, CardHeight);
 
-                if (i < match.BoardCount) DrawCard(box, match.Board(i), false);
+                if (i < match.BoardCount)
+                {
+                    DrawCard(box, match.Board(i), false);
+                    MarkMade(box, match.Board(i));
+                }
                 else Widgets.DrawBoxSolid(box, PokerTheme.Empty);
             }
 
@@ -493,6 +563,31 @@ namespace Poker
         private static string CategoryName(int score)
         {
             return ("POK.Hand." + HandEval.Category(score)).Translate().ToString();
+        }
+
+        /// <summary>그 자리가 이번 핸드에서 마지막으로 한 것. 이전 핸드까지 거슬러 가지 않는다.</summary>
+        private string LastActionOf(PokerSeat seat)
+        {
+            IReadOnlyList<PokerLogEntry> entries = match.Log;
+
+            for (int i = entries.Count - 1; i >= 0; i--)
+            {
+                PokerLogEntry entry = entries[i];
+
+                if (entry.Hand != match.Hand) return null;
+                if (entry.Kind != PokerEvent.Action || entry.Seat != seat) continue;
+
+                switch (entry.Action)
+                {
+                    case PokerAction.Fold: return "POK.Did.Fold".Translate().ToString();
+                    case PokerAction.Check: return "POK.Did.Check".Translate().ToString();
+                    // 액수는 바로 아래 걸린 칩 줄에 이미 있다. 여기서 또 말하지 않는다.
+                    case PokerAction.Call: return "POK.Did.Call".Translate().ToString();
+                    default: return "POK.Did.Raise".Translate().ToString();
+                }
+            }
+
+            return null;
         }
 
         private static string StreetName(PokerStreet street)

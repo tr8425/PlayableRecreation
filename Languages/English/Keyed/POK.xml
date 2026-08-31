@@ -24,6 +24,12 @@
   <POK.Label.Button>dealer</POK.Label.Button>
   <POK.Label.Bet>{0} in</POK.Label.Bet>
   <POK.Label.Took>took it</POK.Label.Took>
+
+  <!-- The last thing each seat did -->
+  <POK.Did.Fold>folded</POK.Did.Fold>
+  <POK.Did.Check>checked</POK.Did.Check>
+  <POK.Did.Call>called</POK.Did.Call>
+  <POK.Did.Raise>raised</POK.Did.Raise>
   <POK.Label.Pot>Pot {0}</POK.Label.Pot>
   <POK.Label.YourHand>You have: {0}</POK.Label.YourHand>
 

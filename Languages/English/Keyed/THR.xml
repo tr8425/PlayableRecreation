@@ -22,6 +22,8 @@
   <THR.Status.Opponent>They are lining it up...</THR.Status.Opponent>
   <THR.Status.Ringer>{0}!</THR.Status.Ringer>
   <THR.Status.Landed>Off by {0}</THR.Status.Landed>
+  <THR.Status.RingerThem>Theirs · {0}!</THR.Status.RingerThem>
+  <THR.Status.LandedThem>Theirs · off by {0}</THR.Status.LandedThem>
   <THR.Status.WinPlayer>You win! {0} to {1}</THR.Status.WinPlayer>
   <THR.Status.WinOpponent>They win. {0} to {1}</THR.Status.WinOpponent>
 

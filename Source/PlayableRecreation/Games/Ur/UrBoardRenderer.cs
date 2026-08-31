@@ -10,6 +10,20 @@ namespace RoyalGameOfUr
     /// 보드 + 말 + 대기/골인 트레이를 그리고, 플레이어가 클릭한 합법수 인덱스를 돌려준다.
     /// 한 수의 출발지는 유일하므로 "출발 말 클릭 = 그 수를 둔다" 로 원클릭 조작이 성립한다.
     /// </summary>
+    /// <summary>
+    /// 직전 한 수의 자취. 어느 편이 어디서 어디로 갔는가 -
+    /// 판을 그리는 데만 쓰이고 규칙에는 한 줄도 섮이지 않는다.
+    /// </summary>
+    public struct UrTrail
+    {
+        public bool Has;
+        public Side Side;
+        public int From;
+        public int To;
+
+        public static readonly UrTrail None = new UrTrail();
+    }
+
     public static class UrBoardRenderer
     {
         public const float CellSize = 52f;
@@ -38,7 +52,7 @@ namespace RoyalGameOfUr
         }
 
         /// <summary>클릭된 합법수 인덱스. 없으면 -1.</summary>
-        public static int Draw(Rect area, UrMatch match, bool interactive)
+        public static int Draw(Rect area, UrMatch match, bool interactive, UrTrail trail)
         {
             float x0 = area.x + (area.width - BoardWidth) / 2f;
             float y0 = area.y + Mathf.Max(0f, (area.height - TotalHeight) / 2f);
@@ -48,7 +62,7 @@ namespace RoyalGameOfUr
             Rect playerTray = new Rect(x0, grid.yMax + TrayGap, BoardWidth, TrayHeight);
 
             DrawTray(botTray, match, Side.Bot);
-            DrawGrid(grid, match);
+            DrawGrid(grid, match, trail);
             DrawTray(playerTray, match, Side.Player);
 
             if (UrSettings.ShowCellTooltips) DrawCellTooltips(grid);
@@ -58,12 +72,41 @@ namespace RoyalGameOfUr
 
         // ---------- 보드 ----------
 
-        private static void DrawGrid(Rect grid, UrMatch match)
+        private static void DrawGrid(Rect grid, UrMatch match, UrTrail trail)
         {
             DrawCells(grid, CellSize, null);
+            DrawTrail(grid, trail);
 
             DrawPiecesOnBoard(grid, match, Side.Bot);
             DrawPiecesOnBoard(grid, match, Side.Player);
+        }
+
+        /// <summary>
+        /// 직전 한 수가 지나간 자리. 이것이 없으면 상대의 차례가 지나간 뒤에 판이
+        /// 그냥 달라져 있고, 무엇이 움직였는지는 눈으로 찾아야 한다.
+        ///
+        /// 출발칸은 옅게, 도착칸은 진하게. 대기열에서 들어오거나 판 밖으로 나간 수는
+        /// 판 위에 칸이 없으므로 한쪽만 남는다 - 그래도 어느 쪽에서 왔는지는 보인다.
+        /// </summary>
+        private static void DrawTrail(Rect grid, UrTrail trail)
+        {
+            if (!trail.Has) return;
+
+            MarkTrail(grid, trail.Side, trail.From, UrTheme.TrailFrom);
+            MarkTrail(grid, trail.Side, trail.To, UrTheme.TrailTo);
+        }
+
+        private static void MarkTrail(Rect grid, Side side, int pathIndex, Color ink)
+        {
+            if (pathIndex < 1 || pathIndex >= UrBoardLayout.ScoredIndex) return;
+
+            Rect cell = CellRect(grid, UrBoardLayout.CellOf(side, pathIndex), CellSize);
+
+            Widgets.DrawBoxSolid(cell, ink);
+
+            GUI.color = UrTheme.TrailBorder;
+            Widgets.DrawBox(cell, 2);
+            GUI.color = Color.white;
         }
 
         private static void DrawCells(Rect grid, float cellSize, Dictionary<UrCell, Color> tint)

@@ -21,6 +21,12 @@ namespace Stargazing
         private const float Gap = 12f;
         private const float RefreshInterval = 0.15f;
 
+        /// <summary>
+        /// 아래 땅을 다시 읽는 간격. 하늘은 눈에 띄게 흐르지만 땅은 그렇지 않다 -
+        /// 명암 경계선이 한 칸 움직이는 데도 한참 걸리므로 자주 훑을 이유가 없다.
+        /// </summary>
+        private const float GroundInterval = 1.1f;
+
         /// <summary>처음부터 그어져 있는 별자리 수. 이름표가 그만큼 준비되어 있다.</summary>
         private const int KnownCount = 11;
         private const int NameCount = 14;
@@ -52,6 +58,7 @@ namespace Stargazing
         private readonly Dictionary<int, Vector2> where = new Dictionary<int, Vector2>();
 
         private float nextRefresh;
+        private float nextGround;
         private Rect lastDisc;
 
         private bool drawing;
@@ -149,16 +156,24 @@ namespace Stargazing
         {
             plots.Clear();
             where.Clear();
-            patch = null;
 
             if (field == null || view == null || radius <= 1f) return;
 
             // 아래를 보는 중이면 별을 셀 일이 없다.
             if (mode == SkyMode.Ground && view.InSpace)
             {
-                patch = GroundWatch.Observe(Here);
+                float now = Time.realtimeSinceStartup;
+
+                if (patch == null || now >= nextGround)
+                {
+                    nextGround = now + GroundInterval;
+                    patch = GroundWatch.Observe(Here);
+                }
+
                 return;
             }
+
+            patch = null;
 
             float limit = view.LimitMagnitude;
             float span = limit - StarField.BrightestMagnitude;
@@ -298,6 +313,7 @@ namespace Stargazing
             hovered = -1;
 
             Rebuild();
+            PRSounds.Play(StarSounds.Pick);
         }
 
         private void LayoutDisc(Rect sky)

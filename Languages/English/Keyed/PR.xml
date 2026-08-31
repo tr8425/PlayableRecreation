@@ -15,7 +15,7 @@
   <PR.Window.Practice>Practice</PR.Window.Practice>
   <PR.Header.You>You</PR.Header.You>
   <PR.Header.YouNamed>You ({0})</PR.Header.YouNamed>
-  <PR.Header.Opponent>AI opponent ({0})</PR.Header.Opponent>
+  <PR.Header.Opponent>Opponent ({0})</PR.Header.Opponent>
   <PR.Log.Title>Play by play</PR.Log.Title>
   <PR.Side.You>You</PR.Side.You>
   <PR.Side.Opponent>AI </PR.Side.Opponent>
@@ -123,7 +123,7 @@ You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
   <PR.Settings.LinkSkill>Set the tier from the colonist skill</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>Skips the picker. Each game uses its own skill.</PR.Settings.LinkSkill.Desc>
   <PR.Settings.Sounds>Sound effects</PR.Settings.Sounds>
-  <PR.Settings.ThinkTime>AI pause before acting: {0}s (shorter at higher tiers)</PR.Settings.ThinkTime>
+  <PR.Settings.ThinkTime>Pause before they act: {0}s (shorter at higher tiers)</PR.Settings.ThinkTime>
 
   <PR.Settings.Mastery.Explain>One step per tier you beat for the first time. +{0}% each, +{1}% for all of them. Tracked per game.</PR.Settings.Mastery.Explain>
   <PR.Settings.Mastery.Current>{0} mastery: {1}/{2} (+{3}%)</PR.Settings.Mastery.Current>
