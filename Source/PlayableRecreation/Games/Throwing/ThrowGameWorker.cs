@@ -264,8 +264,7 @@ namespace Throwing
 
         public override void HandleShortcuts()
         {
-            if (Event.current.type != EventType.KeyDown) return;
-            if (Event.current.keyCode != KeyCode.Space) return;
+            if (!PRKeys.ActionPressed()) return;
             if (!ActionEnabled) return;
 
             Lock(Time.realtimeSinceStartup);

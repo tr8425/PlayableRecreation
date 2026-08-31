@@ -9,8 +9,8 @@
   <BIL.Difficulty.T4.Desc>Knows it is going down before the cue moves.</BIL.Difficulty.T4.Desc>
 
   <!-- Controls -->
-  <BIL.Btn.Power>Set power  (Space)</BIL.Btn.Power>
-  <BIL.Btn.Strike>Strike  (Space)</BIL.Btn.Strike>
+  <BIL.Btn.Power>Set power  (Enter)</BIL.Btn.Power>
+  <BIL.Btn.Strike>Strike  (Enter)</BIL.Btn.Strike>
   <BIL.Btn.Waiting>Their turn</BIL.Btn.Waiting>
   <BIL.Btn.Rolling>Rolling</BIL.Btn.Rolling>
   <BIL.Bar.Power>Power</BIL.Bar.Power>

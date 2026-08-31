@@ -242,8 +242,7 @@ namespace RoyalGameOfUr
 
         public override void HandleShortcuts()
         {
-            if (Event.current.type != EventType.KeyDown) return;
-            if (Event.current.keyCode != KeyCode.Space) return;
+            if (!PRKeys.ActionPressed()) return;
             if (match == null || match.IsOver) return;
             if (match.Turn != Side.Player || match.Phase != UrPhase.AwaitingRoll) return;
 

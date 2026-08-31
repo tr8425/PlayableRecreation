@@ -10,12 +10,12 @@
 
   <!-- Controls -->
   <POK.Btn.Fold>Fold</POK.Btn.Fold>
-  <POK.Btn.Check>Check  (Space)</POK.Btn.Check>
-  <POK.Btn.Call>Call {0}  (Space)</POK.Btn.Call>
+  <POK.Btn.Check>Check  (Enter)</POK.Btn.Check>
+  <POK.Btn.Call>Call {0}  (Enter)</POK.Btn.Call>
   <POK.Btn.Raise>Raise to {0}</POK.Btn.Raise>
   <POK.Btn.Raise.None>Cannot raise</POK.Btn.Raise.None>
   <POK.Btn.AllIn>All in {0}</POK.Btn.AllIn>
-  <POK.Btn.Next>Next hand  (Space)</POK.Btn.Next>
+  <POK.Btn.Next>Next hand  (Enter)</POK.Btn.Next>
   <POK.Btn.Half>½ pot</POK.Btn.Half>
   <POK.Btn.PotBet>Pot</POK.Btn.PotBet>
   <POK.Btn.Max>All in</POK.Btn.Max>

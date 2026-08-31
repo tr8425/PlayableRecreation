@@ -2,7 +2,7 @@
 <LanguageData>
 
   <!-- 버튼 -->
-  <RGU.Btn.Roll>주사위 굴리기  (Space)</RGU.Btn.Roll>
+  <RGU.Btn.Roll>주사위 굴리기  (Enter)</RGU.Btn.Roll>
   <RGU.Btn.Waiting>상대 차례</RGU.Btn.Waiting>
 
   <!-- 난이도 설명 -->

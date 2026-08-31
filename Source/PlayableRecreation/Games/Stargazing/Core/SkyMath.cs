@@ -27,6 +27,28 @@ namespace Stargazing.Core
             return Wrap(value);
         }
 
+        /// <summary>
+        /// 정수 하나를 32비트에 골고루 흩는다.
+        ///
+        /// 이웃한 타일 번호는 이웃한 값이다. 그 번호를 그대로 하늘의 자리로 삼으면
+        /// 스물몇 개가 한 손바닥 안에 뭉쳐 뜬다 - 특히 위쪽 비트는 거의 움직이지 않아
+        /// 적위가 전부 같아진다. 여기서 위아래 비트를 섞어 그 이웃 관계를 끊는다.
+        ///
+        /// 무작위가 아니라 섞기다. 같은 번호는 언제나 같은 자리를 준다.
+        /// </summary>
+        public static int Scatter(int value)
+        {
+            uint x = (uint)value;
+
+            x ^= x >> 16;
+            x *= 0x7FEB352Du;
+            x ^= x >> 15;
+            x *= 0x846CA68Bu;
+            x ^= x >> 16;
+
+            return (int)x;
+        }
+
         public static float Wrap(float angle)
         {
             angle %= TwoPi;

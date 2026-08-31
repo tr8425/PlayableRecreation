@@ -219,7 +219,7 @@ namespace Stargazing
         {
             if (!view.InSpace) return;
 
-            int hash = Gen.HashCombineInt(tile.Valid ? tile.tileId : 0, 0x2545F491);
+            int hash = SkyMath.Scatter(tile.Valid ? tile.tileId : 0);
 
             view.HasPlanet = true;
             view.PlanetAzimuth = (hash & 0xFFFF) / 65535f * SkyMath.TwoPi;
@@ -295,7 +295,7 @@ namespace Stargazing
                 if (layer == null || layer.IsRootSurface) continue;
                 if (world.Tile == map.Tile) continue;   // 지금 서 있는 곳은 하늘이 아니다
 
-                int hash = Gen.HashCombineInt(world.Tile.tileId, 0x5BF03635);
+                int hash = SkyMath.Scatter(world.Tile.tileId);
 
                 view.Objects.Add(new SkyObject
                 {

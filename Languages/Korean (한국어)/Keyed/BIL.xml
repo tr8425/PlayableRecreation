@@ -9,8 +9,8 @@
   <BIL.Difficulty.T4.Desc>치기 전에 이미 들어갈 것을 알고 있습니다.</BIL.Difficulty.T4.Desc>
 
   <!-- 조작 -->
-  <BIL.Btn.Power>세기 정하기  (Space)</BIL.Btn.Power>
-  <BIL.Btn.Strike>치기  (Space)</BIL.Btn.Strike>
+  <BIL.Btn.Power>세기 정하기  (Enter)</BIL.Btn.Power>
+  <BIL.Btn.Strike>치기  (Enter)</BIL.Btn.Strike>
   <BIL.Btn.Waiting>상대 차례</BIL.Btn.Waiting>
   <BIL.Btn.Rolling>구르는 중</BIL.Btn.Rolling>
   <BIL.Bar.Power>세기</BIL.Bar.Power>

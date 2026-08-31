@@ -553,8 +553,7 @@ namespace Poker
 
         public override void HandleShortcuts()
         {
-            if (Event.current.type != EventType.KeyDown) return;
-            if (Event.current.keyCode != KeyCode.Space) return;
+            if (!PRKeys.ActionPressed()) return;
 
             if (stage == Stage.HandOver) { NextHand(Time.realtimeSinceStartup); Event.current.Use(); return; }
             if (stage != Stage.Player) return;

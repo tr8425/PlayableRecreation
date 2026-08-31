@@ -9,8 +9,8 @@
   <THR.Difficulty.T4.Desc>Dead centre nearly every throw.</THR.Difficulty.T4.Desc>
 
   <!-- Controls -->
-  <THR.Btn.LockAim>Lock aim  (Space)</THR.Btn.LockAim>
-  <THR.Btn.Throw>Throw  (Space)</THR.Btn.Throw>
+  <THR.Btn.LockAim>Lock aim  (Enter)</THR.Btn.LockAim>
+  <THR.Btn.Throw>Throw  (Enter)</THR.Btn.Throw>
   <THR.Btn.Waiting>Their turn</THR.Btn.Waiting>
   <THR.Bar.Aim>Aim</THR.Bar.Aim>
   <THR.Bar.Power>Power</THR.Bar.Power>
@@ -53,7 +53,7 @@ Each inning both sides throw twice, alternating.</THR.Tut.HS.P1.Body>
   <THR.Tut.HS.P2.Title>2. Throwing</THR.Tut.HS.P2.Title>
   <THR.Tut.HS.P2.Body>Stop two bars in turn and the shoe goes.
 
-Aim first, then power. The closer you stop to the green band, the truer the throw. Click or press Space.
+Aim first, then power. The closer you stop to the green band, the truer the throw. Click or press Enter.
 
 Higher tiers move the bars faster and throw better against you.</THR.Tut.HS.P2.Body>
 
@@ -75,7 +75,7 @@ Each inning both sides throw three times, alternating.</THR.Tut.HP.P1.Body>
   <THR.Tut.HP.P2.Title>2. Throwing</THR.Tut.HP.P2.Title>
   <THR.Tut.HP.P2.Body>Stop two bars in turn and the stone goes.
 
-Aim first, then power. The closer you stop to the green band, the truer the throw. Click or press Space.
+Aim first, then power. The closer you stop to the green band, the truer the throw. Click or press Enter.
 
 Higher tiers move the bars faster and throw better against you.</THR.Tut.HP.P2.Body>
 

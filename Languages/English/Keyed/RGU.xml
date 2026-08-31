@@ -2,7 +2,7 @@
 <LanguageData>
 
   <!-- 버튼 -->
-  <RGU.Btn.Roll>Roll the dice  (Space)</RGU.Btn.Roll>
+  <RGU.Btn.Roll>Roll the dice  (Enter)</RGU.Btn.Roll>
   <RGU.Btn.Waiting>Opponent's turn</RGU.Btn.Waiting>
 
   <!-- 난이도 설명 -->
