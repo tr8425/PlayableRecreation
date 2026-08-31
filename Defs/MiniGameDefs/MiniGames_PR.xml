@@ -234,7 +234,7 @@
     <hasMatch>false</hasMatch>
     <difficultyCount>1</difficultyCount>
 
-    <tutorialPages>4</tutorialPages>
+    <tutorialPages>5</tutorialPages>
     <tutorialKeyPrefix>STG.Tut</tutorialKeyPrefix>
 
     <supportsUndo>false</supportsUndo>

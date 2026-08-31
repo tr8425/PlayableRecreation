@@ -17,6 +17,11 @@
   <STG.Btn.NeedMore>Pick {0} more star(s)</STG.Btn.NeedMore>
   <STG.Btn.Name>Name it</STG.Btn.Name>
   <STG.Btn.Cancel>Stop tracing</STG.Btn.Cancel>
+  <STG.Btn.Sky>Look up</STG.Btn.Sky>
+
+  <!-- Only offered in orbit -->
+  <STG.Mode.Sky>Sky</STG.Mode.Sky>
+  <STG.Mode.Ground>Surface</STG.Mode.Ground>
 
   <STG.Name.Title>What do you call this one?</STG.Name.Title>
   <STG.Name.Accept>Name it</STG.Name.Accept>
@@ -26,7 +31,16 @@
   <!-- Panel -->
   <STG.Panel.Where>Observing from</STG.Panel.Where>
   <STG.Panel.Coords>Lat {0}° {1} · long {2}° {3}</STG.Panel.Coords>
+  <STG.Panel.CoordsOrbit>Orbit {0}° {1} · {2}° {3}</STG.Panel.CoordsOrbit>
   <STG.Panel.Time>{0}, day {1} · {2}h</STG.Panel.Time>
+
+  <STG.Panel.Below>Directly below</STG.Panel.Below>
+  <STG.Panel.BelowNamed>{0} · {1}</STG.Panel.BelowNamed>
+  <STG.Panel.BelowTime>{0}h down there · {1}</STG.Panel.BelowTime>
+
+  <STG.Ground.Nothing>Nothing down there to see.</STG.Ground.Nothing>
+  <STG.Ground.Lit>day</STG.Ground.Lit>
+  <STG.Ground.Dark>night</STG.Ground.Dark>
   <STG.Panel.Mine>Traced by you</STG.Panel.Mine>
   <STG.Panel.None>Nothing yet. Use the button below to join some stars.</STG.Panel.None>
   <STG.Panel.Erase>Erase this one.</STG.Panel.Erase>
@@ -35,7 +49,9 @@
   <STG.Seeing.Clear>Clear night · {0} stars</STG.Seeing.Clear>
   <STG.Seeing.Day>The sun is up · {0} stars</STG.Seeing.Day>
   <STG.Seeing.Poor>{0} · {1} stars</STG.Seeing.Poor>
-  <STG.Seeing.Space>Above the air · {0} stars</STG.Seeing.Space>
+  <STG.Seeing.Asteroid>On the asteroid · {0} stars</STG.Seeing.Asteroid>
+  <STG.Seeing.Station>In orbit · {0} stars</STG.Seeing.Station>
+  <STG.Seeing.Ground>{0} tiles below</STG.Seeing.Ground>
 
   <STG.Star.Tip>{0}\nmagnitude {1}</STG.Star.Tip>
 
@@ -44,6 +60,10 @@
   <STG.Status.Star>{0} · magnitude {1}</STG.Status.Star>
   <STG.Moon.Tip>moon
 {0}% lit</STG.Moon.Tip>
+  <STG.Planet.Tip>the planet
+{0}% lit</STG.Planet.Tip>
+  <STG.Status.Planet>The planet is {0}% lit.</STG.Status.Planet>
+  <STG.Status.Ground>Looking down. The dark tiles are the ones in night.</STG.Status.Ground>
   <STG.Status.WithMoon>The moon is {0}% lit. {1} object(s) in orbit.</STG.Status.WithMoon>
   <STG.Status.WithObjects>{0} object(s) passing overhead.</STG.Status.WithObjects>
   <STG.Status.Drawing>{0} picked. Three makes a constellation.</STG.Status.Drawing>
@@ -82,6 +102,9 @@
   <STG.Tut.P3.Body>Some constellations already carry names, drawn in blue. Those came from this world's seed as well.\n\nPress **Trace a constellation** and click stars in order. Three of them make a constellation. Clicking the last one again takes it back.\n\nName it and it joins the list on the right. Constellations belong to the **world**, not to the telescope, so they survive the telescope being destroyed or the colony moving on.</STG.Tut.P3.Body>
 
   <STG.Tut.P4.Title>4. Some nights show you nothing</STG.Tut.P4.Title>
-  <STG.Tut.P4.Body>In daylight only the brightest few are left, and rain or snow takes away more. The stars have not gone anywhere — you simply cannot see them.\n\nCome back on a clear night. If you would rather use this as a chart than as a telescope, the settings let you ignore weather and daylight.\n\nWith Odyssey installed you will also see what is in orbit — asteroids, platforms, a gravship on its way somewhere. Above the atmosphere there is no horizon, so the whole sky fits on the disc at once.</STG.Tut.P4.Body>
+  <STG.Tut.P4.Body>In daylight only the brightest few are left, and rain or snow takes away more. The stars have not gone anywhere — you simply cannot see them.\n\nCome back on a clear night. If you would rather use this as a chart than as a telescope, the settings let you ignore weather and daylight.\n\nWith Odyssey installed you will also see what passes overhead — asteroids, platforms, a gravship on its way somewhere.</STG.Tut.P4.Body>
+
+  <STG.Tut.P5.Title>5. Orbit is another sky</STG.Tut.P5.Title>
+  <STG.Tut.P5.Body>Ride a gravship up and the sky changes. There is no air to lose stars to, so all of them are there, and the sky turns once per orbit — sixteen times faster than a day on the ground.\n\n**The planet takes up one side of it.** Stars that pass behind it are hidden. Its lit half turns as the sun comes round, and up here that takes about ninety minutes.\n\nOn an asteroid there is rock under your feet, so half the sky is still cut off. On a platform there is nothing to cut it off and the whole sphere fits on the disc.\n\nUp here you can also point the telescope the other way. **Surface** shows the ground directly below — this world's own tiles, coloured by their real temperature and rainfall. The dark ones are simply where it is night.</STG.Tut.P5.Body>
 
 </LanguageData>

@@ -14,6 +14,9 @@ namespace Stargazing.Core
         public const float HalfPi = 1.57079637f;
         public const float Deg2Rad = 0.0174532924f;
 
+        /// <summary>자전축이 기울어진 정도. 계절이 있는 이유고, 해의 적위를 흔드는 항이다.</summary>
+        public const float Obliquity = 0.409f;
+
         /// <summary>
         /// 국지 항성시. 하루에 한 바퀴 돌고, 한 해에 한 바퀴를 더 돈다 -
         /// 같은 시각에 하늘을 봐도 계절이 바뀌면 다른 별이 떠 있는 이유가 이 한 항이다.
@@ -34,8 +37,23 @@ namespace Stargazing.Core
         public static void AltAz(float ra, float dec, float latitudeRad, float sidereal,
                                  out float altitude, out float azimuth)
         {
-            float hour = sidereal - ra;
+            FromHourAngle(sidereal - ra, dec, latitudeRad, out altitude, out azimuth);
+        }
 
+        /// <summary>
+        /// 해가 지금 어디 있는가. 정오에 남중하고, 적위는 한 해를 주기로 흔들린다 -
+        /// 계절이 생기는 이유가 그 흔들림이다. 행성의 명암 경계선을 정하는 것도 이 방향 하나다.
+        /// </summary>
+        public static void SunAltAz(float dayFraction, float hourFraction, float latitudeRad,
+                                    out float altitude, out float azimuth)
+        {
+            float dec = Obliquity * (float)Math.Sin(TwoPi * dayFraction);
+            FromHourAngle((hourFraction - 0.5f) * TwoPi, dec, latitudeRad, out altitude, out azimuth);
+        }
+
+        private static void FromHourAngle(float hour, float dec, float latitudeRad,
+                                          out float altitude, out float azimuth)
+        {
             float sinDec = (float)Math.Sin(dec);
             float cosDec = (float)Math.Cos(dec);
             float sinLat = (float)Math.Sin(latitudeRad);
@@ -91,6 +109,21 @@ namespace Stargazing.Core
         public static bool Circumpolar(float dec, float latitudeRad)
         {
             return Math.Abs(latitudeRad + dec) > HalfPi;
+        }
+
+        /// <summary>고도·방위로 주어진 두 방향 사이의 각. 구면 공식은 적경·적위 때와 똑같다.</summary>
+        public static float SeparationAltAz(float alt1, float az1, float alt2, float az2)
+        {
+            return Separation(az1, alt1, az2, alt2);
+        }
+
+        /// <summary>
+        /// 얼마나 차 있는가. 해에서 멀리 떨어져 보일수록 둥글다 -
+        /// 정반대편이면 보름이고, 해 쪽에 붙어 있으면 삭이다.
+        /// </summary>
+        public static float LitFraction(float elongation)
+        {
+            return 0.5f - 0.5f * (float)Math.Cos(elongation);
         }
 
         /// <summary>두 방향 사이의 각. 별을 이을 때 너무 먼 것끼리 묶이지 않게 하는 데 쓴다.</summary>

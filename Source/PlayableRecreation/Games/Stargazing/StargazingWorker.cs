@@ -35,9 +35,14 @@ namespace Stargazing
             public float Alpha;
         }
 
+        /// <summary>망원경을 어느 쪽으로 돌려 두었는가. 아래를 보는 것은 궤도에서만 된다.</summary>
+        private enum SkyMode { Stars, Ground }
+
         private StarField field;
         private readonly List<Constellation> known = new List<Constellation>();
         private SkyView view;
+        private GroundPatch patch;
+        private SkyMode mode;
 
         private Rect disc;
         private Vector2 center;
@@ -73,6 +78,7 @@ namespace Stargazing
 
             drawing = false;
             chain.Clear();
+            mode = SkyMode.Stars;
             nextRefresh = 0f;
         }
 
@@ -133,13 +139,26 @@ namespace Stargazing
             Rebuild();
         }
 
+        private Map Here
+        {
+            get { return Board != null ? Board.Map : Find.CurrentMap; }
+        }
+
         /// <summary>지금 이 순간 어느 별이 어디에 찍히는가. 매 프레임 다시 셀 필요는 없다.</summary>
         private void Rebuild()
         {
             plots.Clear();
             where.Clear();
+            patch = null;
 
             if (field == null || view == null || radius <= 1f) return;
+
+            // 아래를 보는 중이면 별을 셀 일이 없다.
+            if (mode == SkyMode.Ground && view.InSpace)
+            {
+                patch = GroundWatch.Observe(Here);
+                return;
+            }
 
             float limit = view.LimitMagnitude;
             float span = limit - StarField.BrightestMagnitude;
@@ -153,13 +172,12 @@ namespace Stargazing
                 float altitude, azimuth;
                 SkyMath.AltAz(star.Ra, star.Dec, view.LatitudeRad, view.Sidereal, out altitude, out azimuth);
 
-                if (!view.InSpace && altitude <= 0f) continue;
+                // 행성 뒤로 들어간 별은 가려진다. 하늘에서 가장 큰 것이 하는 일이다.
+                if (Occulted(altitude, azimuth)) continue;
 
-                float x, y;
-                if (view.InSpace) SkyMath.ProjectFull(altitude, azimuth, out x, out y);
-                else SkyMath.Project(altitude, azimuth, out x, out y);
+                Vector2 at;
+                if (!ProjectSky(altitude, azimuth, out at)) continue;
 
-                Vector2 at = center + new Vector2(x, y) * radius;
                 float bright = Mathf.Clamp01((limit - star.Magnitude) / span);
 
                 plots.Add(new Plot
@@ -171,6 +189,57 @@ namespace Stargazing
                 });
 
                 where[i] = at;
+            }
+        }
+
+        // ---------- 투영 ----------
+
+        /// <summary>
+        /// 이 자리에서 쓰는 투영. 발밑에 무언가 있으면 지평선 위만 담고,
+        /// 갑판뿐인 정거장에서는 구 전체를 담는다. 이 판단이 필요한 곳은 전부 여기를 지난다.
+        /// </summary>
+        private bool ProjectSky(float altitude, float azimuth, out Vector2 at)
+        {
+            bool horizon = view.HasHorizon;
+            if (horizon && altitude <= 0f) { at = Vector2.zero; return false; }
+
+            float x, y;
+            if (horizon) SkyMath.Project(altitude, azimuth, out x, out y);
+            else SkyMath.ProjectFull(altitude, azimuth, out x, out y);
+
+            at = center + new Vector2(x, y) * radius;
+            return true;
+        }
+
+        /// <summary>각도 하나가 화면에서 몇 픽셀인가. 투영에 따라 눈금이 다르다.</summary>
+        private float ScreenAngle(float radians)
+        {
+            float span = view.HasHorizon ? SkyMath.HalfPi : SkyMath.HalfPi * 2f;
+            return radians / span * radius;
+        }
+
+        /// <summary>행성 뒤인가. 하늘에서 가장 큰 것은 그 뒤의 것을 가린다.</summary>
+        private bool Occulted(float altitude, float azimuth)
+        {
+            if (!view.HasPlanet) return false;
+
+            return SkyMath.SeparationAltAz(altitude, azimuth, view.PlanetAltitude, view.PlanetAzimuth)
+                 < view.PlanetRadiusRad;
+        }
+
+        private static Rect Square(Vector2 at, float half)
+        {
+            return new Rect(at.x - half, at.y - half, half * 2f, half * 2f);
+        }
+
+        /// <summary>하늘의 바탕색. 그림자를 밀어 넣을 때 이 색으로 덮는다.</summary>
+        private Color Backdrop
+        {
+            get
+            {
+                return view.InSpace
+                    ? StarTheme.Void
+                    : Color.Lerp(StarTheme.Sky, StarTheme.SkyDay, view.Glow);
             }
         }
 
@@ -194,8 +263,20 @@ namespace Stargazing
                 Rebuild();
             }
 
+            // 지상에서는 아래를 볼 것이 없다. 발밑이 곧 아래다.
+            if (!view.InSpace) Switch(SkyMode.Stars);
+
+            if (mode == SkyMode.Ground) DrawGroundArea();
+            else DrawSkyArea();
+
+            DrawPanel(panel);
+        }
+
+        private void DrawSkyArea()
+        {
             DrawDisc();
             TrackPointer();
+            DrawPlanet();
             DrawKnown();
             DrawMine();
             DrawChain();
@@ -204,7 +285,19 @@ namespace Stargazing
             DrawObjects();
             DrawCompass();
             HandleClicks();
-            DrawPanel(panel);
+        }
+
+        /// <summary>모드를 바꾼다. 별을 잇던 중이었다면 거기서 손을 뗀다.</summary>
+        private void Switch(SkyMode next)
+        {
+            if (mode == next) return;
+
+            mode = next;
+            drawing = false;
+            chain.Clear();
+            hovered = -1;
+
+            Rebuild();
         }
 
         private void LayoutDisc(Rect sky)
@@ -219,11 +312,7 @@ namespace Stargazing
         private void DrawDisc()
         {
             // 낮에는 하늘이 밝다. 별이 사라진 것이 아니라 안 보이는 것이라는 표시다.
-            Color ground = view.InSpace
-                ? new Color(0.02f, 0.02f, 0.035f)
-                : Color.Lerp(StarTheme.Sky, StarTheme.SkyDay, view.Glow);
-
-            GUI.color = ground;
+            GUI.color = Backdrop;
             GUI.DrawTexture(disc, PRTextures.Dot);
 
             GUI.color = StarTheme.Grid;
@@ -240,9 +329,13 @@ namespace Stargazing
             GUI.color = Color.white;
         }
 
+        /// <summary>
+        /// 방위. 궤도에서 하늘을 볼 때는 뜻이 없어 빼지만,
+        /// 아래를 볼 때는 다시 뜻이 생긴다 - 지도의 위가 북쪽이다.
+        /// </summary>
         private void DrawCompass()
         {
-            if (view.InSpace) return;
+            if (view.InSpace && mode != SkyMode.Ground) return;
 
             Text.Font = GameFont.Tiny;
             Text.Anchor = TextAnchor.MiddleCenter;
@@ -335,6 +428,50 @@ namespace Stargazing
         }
 
         /// <summary>
+        /// 행성. 궤도에서 하늘을 보면 가장 큰 것은 별이 아니라 방금 떠나온 곳이다.
+        ///
+        /// 차고 기우는 것은 달과 같은 방법으로 만든다. 다른 것은 주기뿐이다 -
+        /// 궤도에서는 해가 한 시간 반마다 뜨므로, 명암 경계선도 그만큼 빨리 돈다.
+        /// </summary>
+        private void DrawPlanet()
+        {
+            if (!view.HasPlanet) return;
+
+            Vector2 at;
+            if (!ProjectSky(view.PlanetAltitude, view.PlanetAzimuth, out at)) return;
+
+            float size = ScreenAngle(view.PlanetRadiusRad);
+            if (size < 4f) return;
+
+            GUI.color = StarTheme.Planet;
+            GUI.DrawTexture(Square(at, size), PRTextures.Dot);
+
+            float shift = (1f - view.PlanetLit) * 2f * size;
+
+            GUI.color = Backdrop;
+            GUI.DrawTexture(Square(at + Nightward(at) * shift, size), PRTextures.Dot);
+
+            // 어두운 쪽도 테두리는 남는다. 거기 있다는 것까지 지울 이유는 없다.
+            GUI.color = StarTheme.PlanetRim;
+            GUI.DrawTexture(Square(at, size), PRTextures.Outline);
+            GUI.color = Color.white;
+
+            TooltipHandler.TipRegion(Square(at, size),
+                "STG.Planet.Tip".Translate(Mathf.RoundToInt(view.PlanetLit * 100f)));
+        }
+
+        /// <summary>해의 반대쪽. 그림자는 언제나 이쪽으로 밀린다.</summary>
+        private Vector2 Nightward(Vector2 at)
+        {
+            float x, y;
+            if (view.HasHorizon) SkyMath.Project(view.SunAltitude, view.SunAzimuth, out x, out y);
+            else SkyMath.ProjectFull(view.SunAltitude, view.SunAzimuth, out x, out y);
+
+            Vector2 away = at - (center + new Vector2(x, y) * radius);
+            return away.sqrMagnitude < 1f ? Vector2.left : away.normalized;
+        }
+
+        /// <summary>
         /// 달. 차고 기우는 것은 그림자를 덧그려 만든다 -
         /// 밝은 원 위에 하늘색 원을 밀어 얹으면 그 경계가 그대로 명암 경계선이 된다.
         /// </summary>
@@ -346,29 +483,22 @@ namespace Stargazing
             SkyMath.AltAz(view.MoonRa, view.MoonDec, view.LatitudeRad, view.Sidereal,
                           out altitude, out azimuth);
 
-            if (!view.InSpace && altitude <= 0f) return;
+            Vector2 at;
+            if (!ProjectSky(altitude, azimuth, out at)) return;
 
-            float x, y;
-            if (view.InSpace) SkyMath.ProjectFull(altitude, azimuth, out x, out y);
-            else SkyMath.Project(altitude, azimuth, out x, out y);
-
-            Vector2 at = center + new Vector2(x, y) * radius;
             float size = Mathf.Max(11f, radius * 0.055f);
 
             GUI.color = StarTheme.Moon;
-            GUI.DrawTexture(new Rect(at.x - size, at.y - size, size * 2f, size * 2f), PRTextures.Dot);
+            GUI.DrawTexture(Square(at, size), PRTextures.Dot);
 
             // 초승달일수록 그림자를 더 많이 밀어 넣는다.
             float shift = (1f - view.MoonLit) * 2f * size;
 
-            GUI.color = view.InSpace
-                ? new Color(0.02f, 0.02f, 0.035f)
-                : Color.Lerp(StarTheme.Sky, StarTheme.SkyDay, view.Glow);
-
-            GUI.DrawTexture(new Rect(at.x - size - shift, at.y - size, size * 2f, size * 2f), PRTextures.Dot);
+            GUI.color = Backdrop;
+            GUI.DrawTexture(Square(at + Vector2.left * shift, size), PRTextures.Dot);
             GUI.color = Color.white;
 
-            TooltipHandler.TipRegion(new Rect(at.x - size, at.y - size, size * 2f, size * 2f),
+            TooltipHandler.TipRegion(Square(at, size),
                 "STG.Moon.Tip".Translate(Mathf.RoundToInt(view.MoonLit * 100f)));
         }
 
@@ -387,18 +517,96 @@ namespace Stargazing
                 float altitude, azimuth;
                 SkyMath.AltAz(item.Ra, item.Dec, view.LatitudeRad, view.Sidereal, out altitude, out azimuth);
 
-                if (!view.InSpace && altitude <= 0f) continue;
+                Vector2 at;
+                if (!ProjectSky(altitude, azimuth, out at)) continue;
+                if (Occulted(altitude, azimuth)) continue;
 
-                float x, y;
-                if (view.InSpace) SkyMath.ProjectFull(altitude, azimuth, out x, out y);
-                else SkyMath.Project(altitude, azimuth, out x, out y);
-
-                Vector2 at = center + new Vector2(x, y) * radius;
                 Color ink = item.Craft ? StarTheme.Craft : StarTheme.Rock;
 
                 GUI.color = ink;
                 GUI.DrawTexture(new Rect(at.x - 5f, at.y - 5f, 10f, 10f), PRTextures.Outline);
                 Widgets.Label(new Rect(at.x + 8f, at.y - 9f, 120f, 18f), item.Label);
+                GUI.color = Color.white;
+            }
+
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
+        }
+
+        // ---------- 아래 보기 ----------
+
+        /// <summary>
+        /// 망원경을 아래로 돌린다. 지어낸 지형이 아니라 이 세계가 가지고 있는 타일들이다 -
+        /// 색은 그 타일의 기온·강수·고도에서 나오고, 어두운 칸은 그냥 그쪽이 밤인 것이다.
+        /// 운이 좋으면 명암 경계선이 화면을 가로지르는 것을 본다.
+        /// </summary>
+        private void DrawGroundArea()
+        {
+            GUI.color = StarTheme.Void;
+            GUI.DrawTexture(disc, PRTextures.Dot);
+            GUI.color = Color.white;
+
+            if (patch == null || !patch.Valid)
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                GUI.color = PRTheme.Dim;
+                Widgets.Label(disc, "STG.Ground.Nothing".Translate());
+                GUI.color = Color.white;
+                Text.Anchor = TextAnchor.UpperLeft;
+                return;
+            }
+
+            float reach = radius * 0.92f;
+            float half = Mathf.Max(4f, patch.Spacing * reach * 0.56f);
+
+            for (int i = 0; i < patch.Cells.Count; i++)
+            {
+                GroundCell cell = patch.Cells[i];
+                if (cell.At.magnitude > 1.04f) continue;
+
+                Rect box = Square(center + cell.At * reach, half);
+
+                GUI.color = StarTheme.GroundInk(cell);
+                GUI.DrawTexture(box, PRTextures.Dot);
+                GUI.color = Color.white;
+
+                if (!cell.Label.NullOrEmpty()) TooltipHandler.TipRegion(box, cell.Label);
+            }
+
+            DrawGroundMarks(reach, half);
+
+            GUI.color = StarTheme.Horizon;
+            GUI.DrawTexture(Square(center, radius), PRTextures.Outline);
+            GUI.color = Color.white;
+
+            DrawCompass();
+        }
+
+        /// <summary>바로 아래에 과녁을 두고, 사람이 사는 곳에는 이름을 단다.</summary>
+        private void DrawGroundMarks(float reach, float half)
+        {
+            Text.Font = GameFont.Tiny;
+            Text.Anchor = TextAnchor.MiddleLeft;
+
+            for (int i = 0; i < patch.Cells.Count; i++)
+            {
+                GroundCell cell = patch.Cells[i];
+                if (cell.At.magnitude > 1.04f) continue;
+
+                Vector2 at = center + cell.At * reach;
+
+                if (cell.Center)
+                {
+                    GUI.color = StarTheme.Pick;
+                    GUI.DrawTexture(Square(at, half + 2.5f), PRTextures.Outline);
+                    GUI.color = Color.white;
+                }
+
+                if (cell.Mark.NullOrEmpty()) continue;
+
+                GUI.color = StarTheme.MineInk;
+                GUI.DrawTexture(Square(at, 3.5f), PRTextures.Dot);
+                Widgets.Label(new Rect(at.x + 7f, at.y - 9f, 110f, 18f), cell.Mark);
                 GUI.color = Color.white;
             }
 
@@ -515,6 +723,7 @@ namespace Stargazing
         {
             get
             {
+                if (mode == SkyMode.Ground) return "STG.Btn.Sky".Translate().ToString();
                 if (!drawing) return "STG.Btn.Draw".Translate().ToString();
                 if (chain.Count < 3) return "STG.Btn.NeedMore".Translate(3 - chain.Count).ToString();
 
@@ -524,11 +733,13 @@ namespace Stargazing
 
         public override bool ActionEnabled
         {
-            get { return !drawing || chain.Count >= 3; }
+            get { return mode == SkyMode.Ground || !drawing || chain.Count >= 3; }
         }
 
         public override void DoAction()
         {
+            if (mode == SkyMode.Ground) { Switch(SkyMode.Stars); return; }
+
             if (!drawing)
             {
                 drawing = true;
@@ -562,19 +773,29 @@ namespace Stargazing
 
             float y = inner.y;
 
+            bool below = mode == SkyMode.Ground;
+
+            // 고를 것은 궤도에 올라와야 생긴다. 지상에서는 아래를 볼 수 없다.
+            if (view.InSpace)
+            {
+                DrawModes(new Rect(inner.x, y, inner.width, 26f));
+                y += 34f;
+            }
+
             Text.Font = GameFont.Tiny;
             GUI.color = PRTheme.Dim;
-            Widgets.Label(new Rect(inner.x, y, inner.width, 18f), "STG.Panel.Where".Translate());
+            Widgets.Label(new Rect(inner.x, y, inner.width, 18f),
+                below ? "STG.Panel.Below".Translate() : "STG.Panel.Where".Translate());
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
             y += 20f;
 
-            Widgets.Label(new Rect(inner.x, y, inner.width, 22f), PlaceText);
+            Widgets.Label(new Rect(inner.x, y, inner.width, 22f), below ? BelowText : PlaceText);
             y += 22f;
-            Widgets.Label(new Rect(inner.x, y, inner.width, 22f), TimeText);
+            Widgets.Label(new Rect(inner.x, y, inner.width, 22f), below ? BelowTimeText : TimeText);
             y += 26f;
 
-            GUI.color = view.Clear ? PRTheme.ActiveTurn : PRTheme.Dim;
+            GUI.color = below || view.Clear ? PRTheme.ActiveTurn : PRTheme.Dim;
             Widgets.Label(new Rect(inner.x, y, inner.width, 22f), SeeingText);
             GUI.color = Color.white;
             y += 30f;
@@ -600,6 +821,20 @@ namespace Stargazing
             y += 20f;
 
             DrawMineList(new Rect(inner.x, y, inner.width, inner.yMax - y));
+        }
+
+        /// <summary>하늘이냐 지표냐. 보고 있는 쪽에는 표시가 남는다.</summary>
+        private void DrawModes(Rect row)
+        {
+            float half = (row.width - 4f) * 0.5f;
+
+            Rect sky = new Rect(row.x, row.y, half, row.height);
+            Rect ground = new Rect(row.xMax - half, row.y, half, row.height);
+
+            if (Widgets.ButtonText(sky, "STG.Mode.Sky".Translate())) Switch(SkyMode.Stars);
+            if (Widgets.ButtonText(ground, "STG.Mode.Ground".Translate())) Switch(SkyMode.Ground);
+
+            Widgets.DrawHighlightSelected(mode == SkyMode.Stars ? sky : ground);
         }
 
         private void DrawMineList(Rect area)
@@ -656,9 +891,35 @@ namespace Stargazing
                 string north = latitude >= 0f ? "STG.Dir.North".Translate() : "STG.Dir.South".Translate();
                 string east = view.LongitudeDeg >= 0f ? "STG.Dir.East".Translate() : "STG.Dir.West".Translate();
 
-                return "STG.Panel.Coords".Translate(
+                // 궤도 좌표는 행성 위의 자리가 아니라 그 상공의 자리다. 표시도 그렇게 한다.
+                string key = view.InSpace ? "STG.Panel.CoordsOrbit" : "STG.Panel.Coords";
+
+                return key.Translate(
                     Mathf.Abs(latitude).ToString("0.0"), north,
                     Mathf.Abs(view.LongitudeDeg).ToString("0.0"), east);
+            }
+        }
+
+        private string BelowText
+        {
+            get
+            {
+                if (patch == null || !patch.Valid) return "STG.Ground.Nothing".Translate().ToString();
+                if (patch.BelowRegion.NullOrEmpty()) return patch.BelowLabel ?? string.Empty;
+
+                return "STG.Panel.BelowNamed".Translate(patch.BelowLabel, patch.BelowRegion).ToString();
+            }
+        }
+
+        private string BelowTimeText
+        {
+            get
+            {
+                if (patch == null || !patch.Valid) return string.Empty;
+
+                return "STG.Panel.BelowTime".Translate(
+                    Mathf.FloorToInt(patch.BelowHour),
+                    (patch.BelowLit ? "STG.Ground.Lit" : "STG.Ground.Dark").Translate()).ToString();
             }
         }
 
@@ -675,7 +936,15 @@ namespace Stargazing
         {
             get
             {
-                if (view.InSpace) return "STG.Seeing.Space".Translate(plots.Count).ToString();
+                if (mode == SkyMode.Ground)
+                    return "STG.Seeing.Ground".Translate(patch != null ? patch.Cells.Count : 0).ToString();
+
+                if (view.Place == SkyPlace.Asteroid)
+                    return "STG.Seeing.Asteroid".Translate(plots.Count).ToString();
+
+                if (view.Place == SkyPlace.Station)
+                    return "STG.Seeing.Station".Translate(plots.Count).ToString();
+
                 if (view.Glow > 0.55f) return "STG.Seeing.Day".Translate(plots.Count).ToString();
                 if (!view.Clear) return "STG.Seeing.Poor".Translate(view.WeatherLabel, plots.Count).ToString();
 
@@ -689,6 +958,8 @@ namespace Stargazing
             {
                 if (view == null) return string.Empty;
 
+                if (mode == SkyMode.Ground) return "STG.Status.Ground".Translate().ToString();
+
                 if (drawing)
                     return chain.Count < 3
                         ? "STG.Status.Drawing".Translate(chain.Count).ToString()
@@ -697,6 +968,10 @@ namespace Stargazing
                 if (hovered >= 0)
                     return "STG.Status.Star".Translate(
                         field.Designation(hovered), field.Stars[hovered].Magnitude.ToString("0.0")).ToString();
+
+                if (view.HasPlanet)
+                    return "STG.Status.Planet".Translate(
+                        Mathf.RoundToInt(view.PlanetLit * 100f)).ToString();
 
                 if (view.HasMoon)
                     return "STG.Status.WithMoon".Translate(
@@ -725,6 +1000,7 @@ namespace Stargazing
             Rebuild();
 
             DrawDisc();
+            DrawPlanet();
 
             if (page >= 1) DrawKnown();
             DrawStars();

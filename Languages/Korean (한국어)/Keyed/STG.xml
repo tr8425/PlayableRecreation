@@ -17,6 +17,11 @@
   <STG.Btn.NeedMore>별을 {0}개 더 고르세요</STG.Btn.NeedMore>
   <STG.Btn.Name>이름 붙이기</STG.Btn.Name>
   <STG.Btn.Cancel>그만두기</STG.Btn.Cancel>
+  <STG.Btn.Sky>하늘 보기</STG.Btn.Sky>
+
+  <!-- 궤도에서만 나오는 전환 -->
+  <STG.Mode.Sky>하늘</STG.Mode.Sky>
+  <STG.Mode.Ground>지표</STG.Mode.Ground>
 
   <STG.Name.Title>이 별자리를 뭐라고 부를까요?</STG.Name.Title>
   <STG.Name.Accept>이름 붙이기</STG.Name.Accept>
@@ -26,7 +31,16 @@
   <!-- 옆 패널 -->
   <STG.Panel.Where>관측 지점</STG.Panel.Where>
   <STG.Panel.Coords>위도 {0}° {1} · 경도 {2}° {3}</STG.Panel.Coords>
+  <STG.Panel.CoordsOrbit>궤도 {0}° {1} · {2}° {3}</STG.Panel.CoordsOrbit>
   <STG.Panel.Time>{0} {1}일 · {2}시</STG.Panel.Time>
+
+  <STG.Panel.Below>바로 아래</STG.Panel.Below>
+  <STG.Panel.BelowNamed>{0} · {1}</STG.Panel.BelowNamed>
+  <STG.Panel.BelowTime>그곳은 {0}시 · {1}</STG.Panel.BelowTime>
+
+  <STG.Ground.Nothing>아래에 잡히는 것이 없습니다.</STG.Ground.Nothing>
+  <STG.Ground.Lit>낮</STG.Ground.Lit>
+  <STG.Ground.Dark>밤</STG.Ground.Dark>
   <STG.Panel.Mine>내가 이은 것</STG.Panel.Mine>
   <STG.Panel.None>아직 없습니다. 아래 버튼으로 별을 이어 보세요.</STG.Panel.None>
   <STG.Panel.Erase>지웁니다.</STG.Panel.Erase>
@@ -35,7 +49,9 @@
   <STG.Seeing.Clear>맑은 밤 · 별 {0}개</STG.Seeing.Clear>
   <STG.Seeing.Day>해가 떠 있습니다 · 별 {0}개</STG.Seeing.Day>
   <STG.Seeing.Poor>{0} · 별 {1}개</STG.Seeing.Poor>
-  <STG.Seeing.Space>대기 밖 · 별 {0}개</STG.Seeing.Space>
+  <STG.Seeing.Asteroid>소행성 표면 · 별 {0}개</STG.Seeing.Asteroid>
+  <STG.Seeing.Station>궤도 · 별 {0}개</STG.Seeing.Station>
+  <STG.Seeing.Ground>지표 {0}칸</STG.Seeing.Ground>
 
   <STG.Star.Tip>{0}\n{1}등급</STG.Star.Tip>
 
@@ -44,6 +60,10 @@
   <STG.Status.Star>{0} · {1}등급</STG.Status.Star>
   <STG.Moon.Tip>위성
 밝은 면 {0}%</STG.Moon.Tip>
+  <STG.Planet.Tip>행성
+밝은 면 {0}%</STG.Planet.Tip>
+  <STG.Status.Planet>행성이 {0}% 차 있습니다.</STG.Status.Planet>
+  <STG.Status.Ground>아래를 봅니다. 어두운 칸은 그쪽이 밤입니다.</STG.Status.Ground>
   <STG.Status.WithMoon>위성이 {0}% 차 있습니다. 궤도 위에 {1}개.</STG.Status.WithMoon>
   <STG.Status.WithObjects>궤도 위에 {0}개가 지나갑니다.</STG.Status.WithObjects>
   <STG.Status.Drawing>{0}개 골랐습니다. 세 개부터 별자리가 됩니다.</STG.Status.Drawing>
@@ -98,6 +118,15 @@
 
 제대로 보려면 맑은 밤에 오세요. 그냥 성도로 쓰고 싶다면 설정에서 날씨와 낮을 무시할 수 있습니다.
 
-오디세이가 있다면 궤도 위의 것들도 함께 보입니다 — 소행성, 정거장, 지나가는 중력선. 대기 밖에서 보면 지평선이 없어 하늘 전체가 한 번에 들어옵니다.</STG.Tut.P4.Body>
+오디세이가 있다면 궤도 위를 지나가는 것들도 함께 보입니다 — 소행성, 정거장, 지나가는 중력선.</STG.Tut.P4.Body>
+
+  <STG.Tut.P5.Title>5. 궤도에서는 다릅니다</STG.Tut.P5.Title>
+  <STG.Tut.P5.Body>중력선을 타고 올라가면 하늘이 달라집니다. 가릴 대기가 없어 별이 전부 보이고, 하늘은 한 공전마다 한 바퀴 — 지상의 열여섯 배로 돕니다.
+
+**행성이 하늘 한쪽을 차지합니다.** 그 뒤로 들어간 별은 가려집니다. 밝은 쪽은 해가 도는 대로 돌고, 여기서는 그 한 바퀴가 한 시간 반입니다.
+
+소행성에서는 발밑이 바위라 하늘의 절반이 여전히 잘리고, 정거장에서는 잘릴 것이 없어 구 전체가 원판에 들어옵니다.
+
+여기서는 망원경을 반대로 돌릴 수도 있습니다. **지표**를 누르면 바로 아래의 땅이 보입니다 — 지어낸 그림이 아니라 이 세계가 가진 타일이고, 그 타일의 기온과 강수대로 칠해집니다. 어두운 칸은 그쪽이 밤인 것입니다.</STG.Tut.P5.Body>
 
 </LanguageData>

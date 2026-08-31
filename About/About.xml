@@ -21,7 +21,7 @@
 
 여섯 게임에는 AI 상대 5단계, 규칙 안내와 연습 판, 난이도별 전적이 붙습니다. 하는 동안 콜로니 시간은 계속 흐릅니다. 위협이 나타나면 창이 닫히고, 하던 판은 가구에 남습니다 — 그 사이 아무도 건드리지 않았다면.
 
-별 보기는 다릅니다. 별은 세계를 만들 때 쓴 시드가 정하므로 세계마다 하늘이 다르고, 무엇이 보이는지는 정착지의 실제 위도·경도와 시각과 날씨가 정합니다. 북쪽 끝에서는 남쪽 별이 아예 뜨지 않습니다. 별 몇 개를 이어 이름을 붙일 수 있고, 그 별자리는 망원경이 아니라 세계에 남습니다. 오디세이가 있다면 궤도 위의 소행성과 정거장, 위성도 함께 보입니다 — 중력선을 타고 옮겨 가면 위도가 바뀌고 하늘도 따라 바뀝니다.
+별 보기는 다릅니다. 별은 세계를 만들 때 쓴 시드가 정하므로 세계마다 하늘이 다르고, 무엇이 보이는지는 정착지의 실제 위도·경도와 시각과 날씨가 정합니다. 북쪽 끝에서는 남쪽 별이 아예 뜨지 않습니다. 별 몇 개를 이어 이름을 붙일 수 있고, 그 별자리는 망원경이 아니라 세계에 남습니다. 중력선을 타고 옮겨 가면 위도가 바뀌고 하늘도 따라 바뀝니다. 오디세이가 있다면 궤도 위를 지나가는 소행성과 정거장도 보이고, 소행성이나 정거장에 올라가면 하늘이 아예 달라집니다 — 행성이 하늘 한쪽을 차지하고, 망원경을 아래로 돌려 지표를 볼 수도 있습니다.
 
 난이도를 처음 깰 때마다 그 가구에서 식민자가 얻는 여가와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다.
 
@@ -35,7 +35,7 @@ Select a colonist and right-click the furniture. Seven things to do: the game of
 
 The six games each have five tiers of AI, a rules walkthrough, practice games, and a record per tier. Colony time keeps running while you play. When trouble arrives the window closes and the position stays on the furniture, unless something knocks it over first.
 
-The telescope is the one thing here you cannot win. The stars come from the seed your world was generated from, so every world has its own sky, and what you can see depends on your settlement's real latitude and longitude, the hour, and the weather. Join stars into constellations and name them; those belong to the world, not to the telescope. With Odyssey installed, asteroids, orbital platforms and the moon show up too — and moving the gravship changes your latitude, and with it the sky.
+The telescope is the one thing here you cannot win. The stars come from the seed your world was generated from, so every world has its own sky, and what you can see depends on your settlement's real latitude and longitude, the hour, and the weather. Join stars into constellations and name them; those belong to the world, not to the telescope. Moving the gravship changes your latitude, and with it the sky. With Odyssey installed you also see what passes overhead, and standing on an asteroid or a platform gives you a different sky altogether — the planet fills one side of it, and you can point the telescope down at the surface instead.
 
 No Harmony patches. No vanilla Defs modified. Safe to add to and remove from existing saves. Each entry can be switched off in the mod settings. Korean and English.</description>
 </ModMetaData>
