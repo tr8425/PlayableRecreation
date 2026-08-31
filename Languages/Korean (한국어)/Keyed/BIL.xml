@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 난이도 -->
+  <BIL.Difficulty.T0.Desc>겨누는 시늉만 합니다. 들어가면 운입니다.</BIL.Difficulty.T0.Desc>
+  <BIL.Difficulty.T1.Desc>구멍을 보고 치긴 합니다. 자주 빗나갑니다.</BIL.Difficulty.T1.Desc>
+  <BIL.Difficulty.T2.Desc>칠 샷을 몇 개 재 보고 고릅니다.</BIL.Difficulty.T2.Desc>
+  <BIL.Difficulty.T3.Desc>열 갈래를 재 보고 가장 확실한 것을 칩니다.</BIL.Difficulty.T3.Desc>
+  <BIL.Difficulty.T4.Desc>치기 전에 이미 들어갈 것을 알고 있습니다.</BIL.Difficulty.T4.Desc>
+
+  <!-- 조작 -->
+  <BIL.Btn.Power>세기 정하기  (Space)</BIL.Btn.Power>
+  <BIL.Btn.Strike>치기  (Space)</BIL.Btn.Strike>
+  <BIL.Btn.Waiting>상대 차례</BIL.Btn.Waiting>
+  <BIL.Btn.Rolling>구르는 중</BIL.Btn.Rolling>
+  <BIL.Bar.Power>세기</BIL.Bar.Power>
+  <BIL.Scoreboard>{0}번째 샷 · 다음은 {1}번</BIL.Scoreboard>
+
+  <!-- 상태 -->
+  <BIL.Status.Aim>{0}번을 먼저 맞혀야 합니다. 마우스로 겨누세요.</BIL.Status.Aim>
+  <BIL.Status.Power>세기를 맞추세요.</BIL.Status.Power>
+  <BIL.Status.Opponent>상대가 겨눕니다…</BIL.Status.Opponent>
+  <BIL.Status.Rolling>구르는 중…</BIL.Status.Rolling>
+  <BIL.Status.WinPlayer>9번을 넣었습니다. 당신의 승리!</BIL.Status.WinPlayer>
+  <BIL.Status.WinOpponent>상대가 9번을 넣었습니다.</BIL.Status.WinOpponent>
+
+  <!-- 진행 -->
+  <BIL.Log.Pocketed>{0}개</BIL.Log.Pocketed>
+  <BIL.Log.Miss>빈 손</BIL.Log.Miss>
+  <BIL.Log.Foul>파울</BIL.Log.Foul>
+  <BIL.Log.Scratch>스크래치</BIL.Log.Scratch>
+
+  <!-- 기록 -->
+  <BIL.Tally.PocketedFor>넣은 공 {0}</BIL.Tally.PocketedFor>
+  <BIL.Tally.PocketedAgainst>상대가 넣은 공 {0}</BIL.Tally.PocketedAgainst>
+  <BIL.Tally.Fouls>파울 {0}</BIL.Tally.Fouls>
+
+  <!-- 튜토리얼 -->
+  <BIL.Tut.P1.Title>1. 나인볼</BIL.Tut.P1.Title>
+  <BIL.Tut.P1.Body>흰 공으로 1번부터 9번까지를 구멍에 넣는 게임입니다.\n\n규칙은 한 줄입니다 — **테이블에 남은 가장 낮은 번호를 먼저 맞혀야 합니다.** 노란 테두리가 쳐진 공이 그것입니다. 맞히기만 하면 되고, 그 공이 들어갈 필요는 없습니다.\n\n9번을 정당하게 넣으면 그 자리에서 이깁니다. 순서대로 다 넣을 필요는 없습니다.</BIL.Tut.P1.Body>
+
+  <BIL.Tut.P2.Title>2. 겨누는 법</BIL.Tut.P2.Title>
+  <BIL.Tut.P2.Body>마우스를 움직여 방향을 잡고, 클릭하면 세기 막대가 돌아갑니다. 한 번 더 누르면 칩니다.\n\n흰 선이 흰 공이 갈 길이고, 그 끝의 흐릿한 원이 처음 닿을 자리입니다. 목적구를 구멍 쪽으로 보내려면 그 원이 공의 **반대편**에 오도록 겨누세요 — 노란 선이 목적구가 갈 길입니다.\n\n공은 실제로 굴러갑니다. 쿠션도 튕기고 서로 부딪히기도 합니다.</BIL.Tut.P2.Body>
+
+  <BIL.Tut.P3.Title>3. 파울</BIL.Tut.P3.Title>
+  <BIL.Tut.P3.Body>가장 낮은 번호가 아닌 것을 먼저 맞히거나, 아무것도 못 맞히거나, 흰 공이 빠지면 파울입니다.\n\n파울이면 흰 공이 제자리로 돌아가고 차례가 넘어갑니다. 파울로 넣은 9번은 다시 놓입니다.\n\n하나라도 넣으면 계속 칩니다. 못 넣으면 넘깁니다. 무르기는 없습니다.</BIL.Tut.P3.Body>
+
+</LanguageData>

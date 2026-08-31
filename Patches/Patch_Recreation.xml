@@ -39,4 +39,15 @@
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="BilliardsTable"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Billiards</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
 </Patch>

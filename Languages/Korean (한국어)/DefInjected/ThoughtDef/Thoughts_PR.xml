@@ -54,4 +54,22 @@
 
   <PR_PlayedHoopstone.stages.5.label>후프스톤을 마스터했다</PR_PlayedHoopstone.stages.5.label>
   <PR_PlayedHoopstone.stages.5.description>돌 하나, 고리 하나, 그 사이의 거리. 못 넣어 본 지 오래됐다.</PR_PlayedHoopstone.stages.5.description>
+
+  <PR_PlayedBilliards.stages.0.label>공만 굴려 봤어</PR_PlayedBilliards.stages.0.label>
+  <PR_PlayedBilliards.stages.0.description>흰 공을 쳤더니 다른 공들이 어딘가로 갔다. 그게 게임의 전부는 아니라고 한다.</PR_PlayedBilliards.stages.0.description>
+
+  <PR_PlayedBilliards.stages.1.label>대를 익히는 중</PR_PlayedBilliards.stages.1.label>
+  <PR_PlayedBilliards.stages.1.description>공을 겨누는 게 아니라 공이 맞아야 할 자리를 겨누는 거였다. 그걸 아는 데 한참 걸렸다.</PR_PlayedBilliards.stages.1.description>
+
+  <PR_PlayedBilliards.stages.2.label>몇 개는 넣어</PR_PlayedBilliards.stages.2.label>
+  <PR_PlayedBilliards.stages.2.description>같은 쿠션으로 세 개 연속. 지나가던 사람이 멈춰서 봤다.</PR_PlayedBilliards.stages.2.description>
+
+  <PR_PlayedBilliards.stages.3.label>제법 쳐</PR_PlayedBilliards.stages.3.label>
+  <PR_PlayedBilliards.stages.3.description>이제 이 샷이 들어가는지만 보지 않고 흰 공이 어디 서는지를 생각한다.</PR_PlayedBilliards.stages.3.description>
+
+  <PR_PlayedBilliards.stages.4.label>거의 안 놓쳐</PR_PlayedBilliards.stages.4.label>
+  <PR_PlayedBilliards.stages.4.description>아무도 나랑 브레이크를 안 하려 한다. 계속 권하는 중이다.</PR_PlayedBilliards.stages.4.description>
+
+  <PR_PlayedBilliards.stages.5.label>당구를 마스터했다</PR_PlayedBilliards.stages.5.label>
+  <PR_PlayedBilliards.stages.5.description>공 아홉 개와 구멍 여섯 개. 첫 샷을 치기 전에 끝까지가 다 보인다.</PR_PlayedBilliards.stages.5.description>
 </LanguageData>

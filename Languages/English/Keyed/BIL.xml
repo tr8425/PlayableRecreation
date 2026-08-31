@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Difficulty -->
+  <BIL.Difficulty.T0.Desc>Points the cue somewhere and hits it. Pots by accident.</BIL.Difficulty.T0.Desc>
+  <BIL.Difficulty.T1.Desc>Aims at a pocket, at least. Misses a lot.</BIL.Difficulty.T1.Desc>
+  <BIL.Difficulty.T2.Desc>Tries a few shots in their head before committing.</BIL.Difficulty.T2.Desc>
+  <BIL.Difficulty.T3.Desc>Weighs ten lines and takes the surest one.</BIL.Difficulty.T3.Desc>
+  <BIL.Difficulty.T4.Desc>Knows it is going down before the cue moves.</BIL.Difficulty.T4.Desc>
+
+  <!-- Controls -->
+  <BIL.Btn.Power>Set power  (Space)</BIL.Btn.Power>
+  <BIL.Btn.Strike>Strike  (Space)</BIL.Btn.Strike>
+  <BIL.Btn.Waiting>Their turn</BIL.Btn.Waiting>
+  <BIL.Btn.Rolling>Rolling</BIL.Btn.Rolling>
+  <BIL.Bar.Power>Power</BIL.Bar.Power>
+  <BIL.Scoreboard>Shot {0} - {1} is on</BIL.Scoreboard>
+
+  <!-- Status -->
+  <BIL.Status.Aim>Hit the {0} first. Aim with the mouse.</BIL.Status.Aim>
+  <BIL.Status.Power>Stop the power bar.</BIL.Status.Power>
+  <BIL.Status.Opponent>They are lining it up...</BIL.Status.Opponent>
+  <BIL.Status.Rolling>Rolling...</BIL.Status.Rolling>
+  <BIL.Status.WinPlayer>The nine drops. You win!</BIL.Status.WinPlayer>
+  <BIL.Status.WinOpponent>They put the nine down.</BIL.Status.WinOpponent>
+
+  <!-- Play by play -->
+  <BIL.Log.Pocketed>{0} down</BIL.Log.Pocketed>
+  <BIL.Log.Miss>nothing</BIL.Log.Miss>
+  <BIL.Log.Foul>foul</BIL.Log.Foul>
+  <BIL.Log.Scratch>scratch</BIL.Log.Scratch>
+
+  <!-- Records -->
+  <BIL.Tally.PocketedFor>Balls potted {0}</BIL.Tally.PocketedFor>
+  <BIL.Tally.PocketedAgainst>Balls potted against you {0}</BIL.Tally.PocketedAgainst>
+  <BIL.Tally.Fouls>Fouls {0}</BIL.Tally.Fouls>
+
+  <!-- Tutorial -->
+  <BIL.Tut.P1.Title>1. Nine-ball</BIL.Tut.P1.Title>
+  <BIL.Tut.P1.Body>You use the white ball to put the one through the nine into the pockets.\n\nThe rule is one line long: **the lowest ball left on the table must be hit first.** That is the one with the gold ring around it. You only have to hit it — it does not have to go down.\n\nPot the nine legally and you win on the spot. You do not have to clear the table in order.</BIL.Tut.P1.Body>
+
+  <BIL.Tut.P2.Title>2. Aiming</BIL.Tut.P2.Title>
+  <BIL.Tut.P2.Body>Move the mouse to set the line, click to start the power bar, click again to strike.\n\nThe white line is where the cue ball goes and the faint circle at its end is what it will touch first. To send the object ball toward a pocket, put that circle on the **far side** of it — the gold line is the path the object ball will take.\n\nThe balls actually roll. They come off the cushions and they hit each other.</BIL.Tut.P2.Body>
+
+  <BIL.Tut.P3.Title>3. Fouls</BIL.Tut.P3.Title>
+  <BIL.Tut.P3.Body>Hitting anything but the lowest ball first, hitting nothing at all, or sinking the cue ball is a foul.\n\nA foul puts the cue ball back on its spot and hands over the table. A nine potted on a foul goes back on the table.\n\nPot anything and you keep shooting. Pot nothing and it is their turn. There is no undo.</BIL.Tut.P3.Body>
+
+</LanguageData>

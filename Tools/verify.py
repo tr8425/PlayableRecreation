@@ -67,10 +67,16 @@ for k in sorted(en_keys - ko_keys):
     problems.append('missing in KO: ' + k)
 
 # ---------- 3. 코드가 쓰는 키 ----------
+# 접두사는 Keyed 파일 이름에서 뽑는다 - 게임을 더 붙여도 이 파일은 고치지 않는다.
+PREFIXES = sorted(set(os.path.splitext(os.path.basename(p))[0]
+                      for p in walk(KEYED['KO'], '.xml')))
+PREFIX_RE = r'"((?:%s)\.[A-Za-z0-9_.]+)"' % '|'.join(PREFIXES)
+print('key prefixes: %s' % ', '.join(PREFIXES))
+
 used = set()
 for path in walk(ROOT + u'/Source', '.cs'):
     src = io.open(path, encoding='utf-8').read()
-    for m in re.finditer(r'"((?:PR|RGU|THR)\.[A-Za-z0-9_.]+)"', src):
+    for m in re.finditer(PREFIX_RE, src):
         used.add(m.group(1))
 
 # 프레임워크가 조립하는 키
@@ -100,7 +106,7 @@ for game in ET.parse(GAMES).getroot():
 
 # Def 안에 문자열로 박혀 있는 키(tallyKeys, modExtensions 의 ringerKey 등)
 for node in ET.parse(GAMES).getroot().iter():
-    if node.text and re.match(r'^(PR|RGU|THR)\.[A-Za-z0-9_.]+$', node.text.strip()):
+    if node.text and re.match(r'^(?:%s)\.[A-Za-z0-9_.]+$' % '|'.join(PREFIXES), node.text.strip()):
         used.add(node.text.strip())
 
 # 조립용 조각은 그 자체로 키가 아니다 - 다른 키의 앞자리이기만 하면 걸러낸다.

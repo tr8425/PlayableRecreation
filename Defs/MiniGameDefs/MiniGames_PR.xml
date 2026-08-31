@@ -127,4 +127,35 @@
     </modExtensions>
   </PlayableRecreation.MiniGameDef>
 
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Billiards</defName>
+    <label>nine-ball</label>
+    <description>Run the table against an AI opponent.</description>
+    <workerClass>Billiards.BilliardsGameWorker</workerClass>
+    <targetThing>BilliardsTable</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>BIL.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>3</tutorialPages>
+    <tutorialKeyPrefix>BIL.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>BIL.Tally.PocketedFor</li>
+      <li>BIL.Tally.PocketedAgainst</li>
+      <li>BIL.Tally.Fouls</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_Billiards</vanillaJob>
+    <playThought>PR_PlayedBilliards</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Shooting</linkedSkill>
+
+    <windowSize>(1000, 720)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
 </Defs>

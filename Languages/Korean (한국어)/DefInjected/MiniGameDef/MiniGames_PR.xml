@@ -10,4 +10,7 @@
   <PR_Hoopstone.label>후프스톤</PR_Hoopstone.label>
   <PR_Hoopstone.description>AI 상대와 돌을 고리에 통과시킨다.</PR_Hoopstone.description>
 
+  <PR_Billiards.label>나인볼</PR_Billiards.label>
+  <PR_Billiards.description>AI 상대와 당구 한 판. 낮은 번호부터 맞혀야 한다.</PR_Billiards.description>
+
 </LanguageData>
