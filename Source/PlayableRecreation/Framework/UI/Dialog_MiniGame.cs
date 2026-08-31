@@ -131,7 +131,7 @@ namespace PlayableRecreation.UI
             AccumulatePlayTime();
 
             // 이긴 그 프레임에 바로 창을 닫아도 기록은 남아야 한다.
-            if (worker != null && worker.IsOver) FinishMatch();
+            if (game.hasMatch && worker != null && worker.IsOver) FinishMatch();
 
             GameComponent_Recreation component = GameComponent_Recreation.Current;
             if (component == null) return;
@@ -219,7 +219,7 @@ namespace PlayableRecreation.UI
 
             // 판은 Tick 에서 끝날 수도, 판을 클릭하는 순간 끝날 수도 있다.
             // 정리는 어느 쪽이든 다음 프레임의 여기서 한 번만 일어난다.
-            if (worker.IsOver) { FinishMatch(); return; }
+            if (game.hasMatch && worker.IsOver) { FinishMatch(); return; }
 
             float now = Time.realtimeSinceStartup;
 
@@ -298,7 +298,7 @@ namespace PlayableRecreation.UI
             Widgets.Label(line, you);
 
             Text.Anchor = TextAnchor.MiddleRight;
-            Widgets.Label(line, "PR.Header.Opponent".Translate(game.TierLabel(tier)));
+            if (game.hasMatch) Widgets.Label(line, "PR.Header.Opponent".Translate(game.TierLabel(tier)));
 
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
@@ -321,7 +321,7 @@ namespace PlayableRecreation.UI
             const float width = 230f;
             Rect button = new Rect(row.x + (row.width - width) / 2f, row.y, width, row.height);
 
-            if (worker.IsOver)
+            if (game.hasMatch && worker.IsOver)
             {
                 if (Widgets.ButtonText(button, "PR.Btn.NewMatch".Translate())) StartAnotherMatch();
                 return;
@@ -347,7 +347,7 @@ namespace PlayableRecreation.UI
             const float gap = 6f;
             float x = row.x;
 
-            if (!worker.IsOver)
+            if (game.hasMatch && !worker.IsOver)
             {
                 if (game.supportsUndo
                     && SmallButton(ref x, row, "PR.Btn.Undo".Translate(), UndoAvailable, UndoTooltip()))
@@ -370,6 +370,8 @@ namespace PlayableRecreation.UI
                 TooltipHandler.TipRegion(help, "PR.Btn.Help.Tip".Translate());
                 if (Widgets.ButtonText(help, "?")) Find.WindowStack.Add(new Dialog_Tutorial(game, null));
             }
+
+            if (!game.hasMatch) return;
 
             Rect records = new Rect(right - 90f, row.y, 90f, row.height);
             TooltipHandler.TipRegion(records, "PR.Btn.Records.Tip".Translate());
@@ -580,7 +582,7 @@ namespace PlayableRecreation.UI
 
         private void RecordResult(bool won, bool byResignation)
         {
-            if (practice || worker == null || worker.Rounds <= 1) return;
+            if (!game.hasMatch || practice || worker == null || worker.Rounds <= 1) return;
 
             AccumulatePlayTime();
 

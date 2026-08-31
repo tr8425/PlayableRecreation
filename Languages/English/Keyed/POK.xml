@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Difficulty -->
+  <POK.Difficulty.T0.Desc>Cannot tell a good hand from a bad one. Almost never folds.</POK.Difficulty.T0.Desc>
+  <POK.Difficulty.T1.Desc>Knows a good hand when it sees one. Not what to do next.</POK.Difficulty.T1.Desc>
+  <POK.Difficulty.T2.Desc>Counts its outs, and sometimes bets with nothing.</POK.Difficulty.T2.Desc>
+  <POK.Difficulty.T3.Desc>Knows what the pot is paying. Attacks you when you are weak.</POK.Difficulty.T3.Desc>
+  <POK.Difficulty.T4.Desc>Has a fair idea what you are holding. Waits for the mistake.</POK.Difficulty.T4.Desc>
+
+  <!-- Controls -->
+  <POK.Btn.Fold>Fold</POK.Btn.Fold>
+  <POK.Btn.Check>Check  (Space)</POK.Btn.Check>
+  <POK.Btn.Call>Call {0}  (Space)</POK.Btn.Call>
+  <POK.Btn.Raise>Raise to {0}</POK.Btn.Raise>
+  <POK.Btn.Raise.None>Cannot raise</POK.Btn.Raise.None>
+  <POK.Btn.AllIn>All in {0}</POK.Btn.AllIn>
+  <POK.Btn.Next>Next hand  (Space)</POK.Btn.Next>
+  <POK.Btn.Half>½ pot</POK.Btn.Half>
+  <POK.Btn.PotBet>Pot</POK.Btn.PotBet>
+  <POK.Btn.Max>All in</POK.Btn.Max>
+
+  <!-- Table -->
+  <POK.Label.Button>dealer</POK.Label.Button>
+  <POK.Label.Bet>{0} in</POK.Label.Bet>
+  <POK.Label.Took>took it</POK.Label.Took>
+  <POK.Label.Pot>Pot {0}</POK.Label.Pot>
+  <POK.Label.YourHand>You have: {0}</POK.Label.YourHand>
+
+  <!-- Status -->
+  <POK.Status.Your>{0} · blinds {1}. Your move.</POK.Status.Your>
+  <POK.Status.Thinking>The opponent is thinking&#8230;</POK.Status.Thinking>
+  <POK.Status.WonHand>You won it with {0}.</POK.Status.WonHand>
+  <POK.Status.LostHand>They took it with {0}.</POK.Status.LostHand>
+  <POK.Status.WonFold>They folded.</POK.Status.WonFold>
+  <POK.Status.LostFold>You folded.</POK.Status.LostFold>
+  <POK.Status.Split>Same hand. The pot is split.</POK.Status.Split>
+  <POK.Status.WinMatch>You cleaned them out. {0} to {1} — you win!</POK.Status.WinMatch>
+  <POK.Status.LoseMatch>You are out of chips. {0} to {1}.</POK.Status.LoseMatch>
+  <POK.Status.DrawMatch>Dead even. Nobody wins this one.</POK.Status.DrawMatch>
+
+  <!-- Hands -->
+  <POK.Hand.HighCard>high card</POK.Hand.HighCard>
+  <POK.Hand.Pair>a pair</POK.Hand.Pair>
+  <POK.Hand.TwoPair>two pair</POK.Hand.TwoPair>
+  <POK.Hand.Trips>three of a kind</POK.Hand.Trips>
+  <POK.Hand.Straight>a straight</POK.Hand.Straight>
+  <POK.Hand.Flush>a flush</POK.Hand.Flush>
+  <POK.Hand.FullHouse>a full house</POK.Hand.FullHouse>
+  <POK.Hand.Quads>four of a kind</POK.Hand.Quads>
+  <POK.Hand.StraightFlush>a straight flush</POK.Hand.StraightFlush>
+
+  <!-- Streets -->
+  <POK.Street.Preflop>preflop</POK.Street.Preflop>
+  <POK.Street.Flop>flop</POK.Street.Flop>
+  <POK.Street.Turn>turn</POK.Street.Turn>
+  <POK.Street.River>river</POK.Street.River>
+  <POK.Street.Showdown>showdown</POK.Street.Showdown>
+
+  <!-- Log -->
+  <POK.Log.Fold>folds</POK.Log.Fold>
+  <POK.Log.Check>checks</POK.Log.Check>
+  <POK.Log.Call>calls {0}</POK.Log.Call>
+  <POK.Log.Raise>raises to {0}</POK.Log.Raise>
+  <POK.Log.WonShowdown>{0} +{1} · {2}</POK.Log.WonShowdown>
+  <POK.Log.WonFold>{0} +{1}</POK.Log.WonFold>
+  <POK.Log.Split>split {0}</POK.Log.Split>
+
+  <!-- Records -->
+  <POK.Tally.HandsWon>Hands won {0}</POK.Tally.HandsWon>
+  <POK.Tally.Showdowns>Showdowns {0}</POK.Tally.Showdowns>
+  <POK.Tally.PeakStack>Best stack {0}</POK.Tally.PeakStack>
+
+  <!-- Settings -->
+  <POK.Settings.HandName>Name the hand you are holding</POK.Settings.HandName>
+  <POK.Settings.AutoNext>Deal the next hand automatically</POK.Settings.AutoNext>
+  <POK.Settings.Reveal>Show their cards even when a hand is folded</POK.Settings.Reveal>
+  <POK.Settings.Reveal.Desc>For practice. It tells you what they were betting with, so it is off by default.</POK.Settings.Reveal.Desc>
+
+  <!-- Tutorial -->
+  <POK.Tut.P1.Title>1. Heads-up hold'em</POK.Tut.P1.Title>
+  <POK.Tut.P1.Body>Two players. Each of you gets **two cards only you can see**, and **five shared cards** come down in the middle of the table.\n\nThe best five-card hand out of those seven takes the pot. You do not have to use both of your own cards.\n\nTake all of their chips and you win. If nobody is broke after twenty-four hands, the bigger stack wins.</POK.Tut.P1.Body>
+
+  <POK.Tut.P2.Title>2. How a hand unfolds</POK.Tut.P2.Title>
+  <POK.Tut.P2.Body>Every hand starts with forced bets — the blinds. Whoever has the dealer button posts the smaller one and acts **first**.\n\nThere is a round of betting on your two cards, another after three shared cards (the flop), another on the fourth (the turn), and a last one on the fifth (the river).\n\nThe blinds double every eight hands. That is what makes the game end.</POK.Tut.P2.Body>
+
+  <POK.Tut.P3.Title>3. What to do on your turn</POK.Tut.P3.Title>
+  <POK.Tut.P3.Body>With nothing to match you **check**. If they have bet, you **call** it or **fold**. To put in more, you **raise**.\n\nThere is one thing worth remembering — compare what the call costs against what the pot is paying you. If the pot holds 100 and the call is 20, winning one time in five breaks even.\n\nYou cannot bet more than the other player can cover, which is why there are no side pots here.</POK.Tut.P3.Body>
+
+  <POK.Tut.P4.Title>4. What beats what</POK.Tut.P4.Title>
+  <POK.Tut.P4.Body>Weakest first: high card, a pair, two pair, three of a kind, a straight, a flush, a full house, four of a kind, a straight flush.\n\nWithin a rank the higher cards win, and if those tie the leftover cards (the kickers) decide it. Suits never break a tie.\n\nAn unfinished game stays on the table. The cards are not saved — the deal comes from a seed — so closing the window brings back the very same hand.</POK.Tut.P4.Body>
+
+</LanguageData>

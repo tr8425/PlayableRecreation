@@ -90,4 +90,25 @@
   <PR_PlayedChess.stages.5.label>나는 체스를 마스터했다</PR_PlayedChess.stages.5.label>
   <PR_PlayedChess.stages.5.description>요즘은 외통으로 가는 수를 두기 전에 미리 말해 준다. 나랑 두 번 앉는 사람은 없다.</PR_PlayedChess.stages.5.description>
 
+  <PR_PlayedPoker.stages.0.label>포커에서 탈탈 털렸어</PR_PlayedPoker.stages.0.label>
+  <PR_PlayedPoker.stages.0.description>누가 뭐가 뭘 이기는지 설명해 줬다. 고개를 끄덕였다. 그리고 제대로 보지도 않은 두 장으로 칩을 전부 밀어 넣었다.</PR_PlayedPoker.stages.0.description>
+
+  <PR_PlayedPoker.stages.1.label>배우는 중이야</PR_PlayedPoker.stages.1.label>
+  <PR_PlayedPoker.stages.1.description>이미 지고 있는 걸 아는 판의 끝을 돈 내고 보는 짓을 그만뒀다. 알고 보니 그게 이 게임의 거의 전부였다.</PR_PlayedPoker.stages.1.description>
+
+  <PR_PlayedPoker.stages.2.label>이제 밀리진 않아</PR_PlayedPoker.stages.2.label>
+  <PR_PlayedPoker.stages.2.description>제법 괜찮은 손을 접었다. 베팅이 앞뒤가 안 맞았기 때문이고, 그게 맞았다. 아무도 눈치 못 챘다는 게 핵심이다.</PR_PlayedPoker.stages.2.description>
+
+  <PR_PlayedPoker.stages.3.label>칠 줄 안다는 소리는 들어</PR_PlayedPoker.stages.3.label>
+  <PR_PlayedPoker.stages.3.description>콜에 얼마가 드는지, 팟이 나에게 얼마를 쳐 주는지 안다. 칩에 손을 대기 전에 계산이 먼저 끝난다.</PR_PlayedPoker.stages.3.description>
+
+  <PR_PlayedPoker.stages.4.label>지는 판이 거의 없어</PR_PlayedPoker.stages.4.label>
+  <PR_PlayedPoker.stages.4.description>사람들이 내 얼굴 대신 내 손을 보기 시작했다. 별 도움은 안 됐다.</PR_PlayedPoker.stages.4.description>
+
+  <PR_PlayedPoker.stages.5.label>나는 포커를 마스터했다</PR_PlayedPoker.stages.5.label>
+  <PR_PlayedPoker.stages.5.description>카드는 한참 전부터 중요하지 않았다. 나는 카드를 치는 게 아니라 맞은편에 앉은 사람을 친다.</PR_PlayedPoker.stages.5.description>
+
+  <PR_Stargazed.stages.0.label>하늘을 봤어</PR_Stargazed.stages.0.label>
+  <PR_Stargazed.stages.0.description>추운 데 한참 서서, 아직 아무도 이름 붙이지 않은 하늘을 올려다봤다. 오늘 하루가 제 크기로 돌아왔다.</PR_Stargazed.stages.0.description>
+
 </LanguageData>

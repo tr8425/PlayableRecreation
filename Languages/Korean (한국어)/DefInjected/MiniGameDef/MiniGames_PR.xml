@@ -16,4 +16,10 @@
   <PR_Chess.label>체스</PR_Chess.label>
   <PR_Chess.description>AI 상대와 체스 한 판. 색은 판마다 바뀐다.</PR_Chess.description>
 
+  <PR_Poker.label>포커</PR_Poker.label>
+  <PR_Poker.description>AI 상대와 일대일 텍사스 홀덤. 상대를 파산시키면 이긴다.</PR_Poker.description>
+
+  <PR_Stargazing.label>별 보기</PR_Stargazing.label>
+  <PR_Stargazing.description>이 행성의 하늘을 본다. 아직 아무도 이름 붙이지 않은 별들이다.</PR_Stargazing.description>
+
 </LanguageData>

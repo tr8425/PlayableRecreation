@@ -20,6 +20,12 @@ namespace PlayableRecreation
         /// <summary>이 게임이 붙는 가구. 실제 부착은 XML 패치가 하고, 이 값은 조회용이다.</summary>
         public string targetThing;
 
+        /// <summary>
+        /// 승부인가. false 면 이기고 지는 것이 없다 - 기록도, 무르기도, 기권도, 상대도 없다.
+        /// 그냥 앉아서 하는 것이다. 프레임워크는 그런 항목도 받는다.
+        /// </summary>
+        public bool hasMatch = true;
+
         /// <summary>난이도 단계 수. 1이면 난이도 선택 창을 건너뛴다.</summary>
         public int difficultyCount = 5;
 
@@ -104,6 +110,12 @@ namespace PlayableRecreation
 
             if (difficultyCount < 1 || difficultyCount > GameRecord.MaxTiers)
                 yield return "difficultyCount must be 1.." + GameRecord.MaxTiers;
+
+            if (!hasMatch && difficultyCount != 1)
+                yield return "hasMatch=false requires difficultyCount 1";
+
+            if (!hasMatch && supportsUndo)
+                yield return "hasMatch=false cannot support undo";
 
             if (tallyKeys != null && tallyKeys.Count > GameRecord.TallyCount)
                 yield return "tallyKeys holds at most " + GameRecord.TallyCount + " entries";

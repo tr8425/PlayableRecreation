@@ -20,6 +20,8 @@
     <Compile Include="..\..\Source\PlayableRecreation\Games\Throwing\Core\**\*.cs" LinkBase="Throwing" />
     <Compile Include="..\..\Source\PlayableRecreation\Games\Billiards\Core\**\*.cs" LinkBase="Billiards" />
     <Compile Include="..\..\Source\PlayableRecreation\Games\Chess\Core\**\*.cs" LinkBase="Chess" />
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Poker\Core\**\*.cs" LinkBase="Poker" />
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Stargazing\Core\**\*.cs" LinkBase="Stargazing" />
     <Compile Include="*.cs" />
   </ItemGroup>
 

@@ -61,4 +61,26 @@
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="PokerTable"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Poker</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="Telescope"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Stargazing</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
 </Patch>

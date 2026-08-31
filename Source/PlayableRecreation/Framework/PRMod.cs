@@ -109,7 +109,7 @@ namespace PlayableRecreation
             {
                 foreach (MiniGameDef game in Games)
                 {
-                    if (!Settings.IsEnabled(game)) continue;
+                    if (!game.hasMatch || !Settings.IsEnabled(game)) continue;
 
                     int tier = component.MasteryTier(game);
                     if (tier <= 0) continue;

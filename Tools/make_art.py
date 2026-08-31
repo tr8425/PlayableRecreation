@@ -37,6 +37,10 @@ def font(names, size):
     return ImageFont.load_default()
 
 
+CARD_FONT = None
+TAG_FONT = None
+
+
 def rosette(draw, cx, cy, r, colour, petals=8):
     pts = []
     for i in range(360):
@@ -103,11 +107,9 @@ def chess_panel(img, d, box):
     """체스 - 8x8 과 기물 몇 개. 기물 그림은 게임에 들어가는 것과 같은 도형이다."""
     import chess_pieces
 
-    x0, y0, x1, y1 = box
-    cell = int(11 * S)
+    cell = int(9 * S)
     span = cell * 8
-    bx = int((x0 + x1) / 2 - span / 2)
-    by = int(y0 + (y1 - y0 - span) / 2 - 8 * S)
+    bx, by = art_origin(box, span, span)
 
     for row in range(8):
         for col in range(8):
@@ -118,13 +120,13 @@ def chess_panel(img, d, box):
 
     d.rectangle([bx - 1, by - 1, bx + span, by + span], outline=(0x5C, 0x4C, 0x35), width=max(1, S))
 
-    # 게임 안에서와 같은 방식 - 실루엣을 조금 키워 테두리색으로 한 번 깔고 그 위에 제 색으로.
+    # 게임 안에서와 같은 방식 - 실루엣을 조금 키워 테두리색으로 깔고 그 위에 제 색으로.
     placed = [('king', 4, 7, SHELL, (0x2A, 0x24, 0x1C)),
               ('knight', 2, 5, SHELL, (0x2A, 0x24, 0x1C)),
               ('queen', 3, 1, (0x18, 0x16, 0x15), (0xB4, 0xA8, 0x94)),
               ('pawn', 5, 3, (0x18, 0x16, 0x15), (0xB4, 0xA8, 0x94))]
 
-    edge = max(2, int(S * 0.8))
+    edge = max(2, int(S * 0.7))
 
     for name, col, row, colour, rim in placed:
         under = chess_pieces.render(name, cell + edge * 2, rim)
@@ -134,37 +136,101 @@ def chess_panel(img, d, box):
         img.paste(piece, (bx + col * cell, by + row * cell), piece)
 
 
+def poker_panel(img, d, box):
+    """포커 - 판에 깔린 다섯 장. 무늬는 게임에 들어가는 것과 같은 알파다."""
+    import card_suits
+
+    width = int(15 * S)
+    height = int(21 * S)
+    gap = int(2 * S)
+    span = width * 5 + gap * 4
+
+    bx, by = art_origin(box, span, height)
+
+    faces = [('spade', 'A'), ('heart', 'K'), ('diamond', '7'), ('club', '7'), ('spade', '2')]
+
+    for i, (suit, rank) in enumerate(faces):
+        x = bx + i * (width + gap)
+        d.rounded_rectangle([x, by, x + width, by + height], radius=2 * S, fill=(0xEF, 0xEA, 0xDC))
+
+        ink = (0xBD, 0x33, 0x2C) if suit in ('heart', 'diamond') else (0x22, 0x20, 0x22)
+        pip = card_suits.render(suit, int(width * 0.52), ink)
+        img.paste(pip, (int(x + width * 0.24), int(by + height * 0.38)), pip)
+
+        d.text((x + 2 * S, by + 1 * S), rank, font=CARD_FONT, fill=ink)
+
+    d.text((bx, by + height + 4 * S), 'POT 240', font=TAG_FONT, fill=OCHRE)
+
+
 def pool_panel(d, box):
     """당구 - 천과 쿠션, 그리고 다음에 맞혀야 할 공."""
     x0, y0, x1, y1 = box
-    width = (x1 - x0) - 16 * S
+    width = (x1 - x0) - 14 * S
     height = width / 2
-    tx = x0 + 8 * S
-    ty = y0 + ((y1 - y0) - height) / 2 - 8 * S
 
-    d.rounded_rectangle([tx - 4 * S, ty - 4 * S, tx + width + 4 * S, ty + height + 4 * S],
-                        radius=5 * S, fill=(0x42, 0x2B, 0x1C))
+    tx, ty = art_origin(box, width, height)
+
+    d.rounded_rectangle([tx - 3 * S, ty - 3 * S, tx + width + 3 * S, ty + height + 3 * S],
+                        radius=4 * S, fill=(0x42, 0x2B, 0x1C))
     d.rectangle([tx, ty, tx + width, ty + height], fill=(0x22, 0x4F, 0x36))
 
-    hole = 4 * S
+    hole = 3.4 * S
     for fx in (0.0, 0.5, 1.0):
         for fy in (0.0, 1.0):
             cx, cy = tx + width * fx, ty + height * fy
             d.ellipse([cx - hole, cy - hole, cx + hole, cy + hole], fill=(0x0D, 0x0D, 0x0D))
 
+    d.line([(tx + width * 0.20, ty + height * 0.52), (tx + width * 0.58, ty + height * 0.40)],
+           fill=(0xC8, 0xC0, 0xB0), width=max(1, S))
+
     balls = [(0.20, 0.52, SHELL), (0.58, 0.40, OCHRE), (0.66, 0.62, (0xC4, 0x40, 0x38)),
              (0.80, 0.30, LAPIS), (0.88, 0.66, OCHRE)]
-    r = 3.4 * S
-
-    d.line([(tx + width * 0.20, ty + height * 0.52), (tx + width * 0.58, ty + height * 0.40)],
-           fill=(0xE8, 0xE0, 0xD0, 90), width=max(1, S))
+    r = 2.8 * S
 
     for fx, fy, colour in balls:
         cx, cy = tx + width * fx, ty + height * fy
         d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=colour)
 
 
+def sky_panel(d, box):
+    """별 보기 - 원판 하나에 별을 뿌리고 넷을 이어 둔다. 게임 안에서 하는 그대로다."""
+    import math
+    import random
+
+    x0, y0, x1, y1 = box
+    size = min((x1 - x0) - 14 * S, (y1 - y0) - 26 * S)
+    cx = (x0 + x1) / 2
+    cy = y0 + (y1 - y0 - 22 * S) / 2
+    r = size / 2
+
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(0x09, 0x0C, 0x14))
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(0x4A, 0x52, 0x62), width=max(1, S))
+
+    rng = random.Random(20260831)
+    for _ in range(70):
+        a = rng.random() * math.tau
+        rad = r * math.sqrt(rng.random()) * 0.97
+        px, py = cx + rad * math.cos(a), cy + rad * math.sin(a)
+        dot = S * rng.choice([0.5, 0.5, 0.7, 1.0, 1.5])
+        d.ellipse([px - dot, py - dot, px + dot, py + dot], fill=(0xE6, 0xEC, 0xFA))
+
+    shape = [(-0.44, -0.30), (-0.16, -0.44), (0.12, -0.22), (0.30, 0.14), (0.06, 0.36)]
+    points = [(cx + fx * r, cy + fy * r) for fx, fy in shape]
+
+    d.line(points, fill=(0xE0, 0xB4, 0x54), width=max(1, S))
+    for px, py in points:
+        d.ellipse([px - 2.2 * S, py - 2.2 * S, px + 2.2 * S, py + 2.2 * S], fill=(0xF4, 0xDC, 0x9A))
+
+
+def art_origin(box, width, height):
+    """그림을 칸 안에서 가운데에, 이름표 자리를 남기고 앉힌다."""
+    x0, y0, x1, y1 = box
+    return (int((x0 + x1) / 2 - width / 2), int(y0 + (y1 - y0 - 22 * S - height) / 2))
+
+
 def preview():
+    global CARD_FONT, TAG_FONT
+
     W, H = 640 * S, 360 * S
     img = Image.new('RGB', (W, H), BITUMEN)
     d = ImageDraw.Draw(img)
@@ -175,58 +241,91 @@ def preview():
         v = int(10 * t * t)
         d.line([(0, i), (W, i)], fill=(BITUMEN[0] + v, BITUMEN[1] + v, BITUMEN[2] + v))
 
-    title_f = font(['georgiab.ttf', 'timesbd.ttf', 'malgunbd.ttf'], 40 * S)
-    sub_f = font(['malgun.ttf', 'georgia.ttf'], 18 * S)
-    tag_f = font(['malgun.ttf', 'georgia.ttf'], 14 * S)
-    cap_f = font(['malgun.ttf', 'georgia.ttf'], 11 * S)
+    title_f = font(['georgiab.ttf', 'timesbd.ttf', 'malgunbd.ttf'], 34 * S)
+    sub_f = font(['malgun.ttf', 'georgia.ttf'], 15 * S)
+    cap_f = font(['malgun.ttf', 'georgia.ttf'], 10 * S)
+    CARD_FONT = font(['georgiab.ttf', 'timesbd.ttf'], 8 * S)
+    TAG_FONT = font(['malgun.ttf', 'georgia.ttf'], 8 * S)
 
-    d.text((44 * S, 30 * S), 'PLAYABLE RECREATION', font=title_f, fill=SHELL)
-    d.text((46 * S, 78 * S), u'오락은 식민자에게 맡기고 당신은 구경만 했다면',
+    d.text((44 * S, 20 * S), 'PLAYABLE RECREATION', font=title_f, fill=SHELL)
+    d.text((46 * S, 60 * S), u'오락은 식민자에게 맡기고 당신은 구경만 했다면',
            font=sub_f, fill=GOLD)
-    d.line([(46 * S, 110 * S), (300 * S, 110 * S)], fill=(0x4A, 0x40, 0x31), width=max(1, S))
+    d.line([(46 * S, 86 * S), (280 * S, 86 * S)], fill=(0x4A, 0x40, 0x31), width=max(1, S))
 
-    top, bottom = 132 * S, 306 * S
-    gap = 9 * S
+    # 네 칸씩 두 줄. 마지막 한 칸은 그림 대신 한 줄 요약이 들어간다.
     left = 44 * S
-    width = (W - 88 * S - gap * 4) / 5.0
+    gap = 9 * S
+    width = (W - 88 * S - gap * 3) / 4.0
+    height = 112 * S
+    top = 100 * S
+    second = top + height + gap
 
-    boxes = [(left + i * (width + gap), top, left + i * (width + gap) + width, bottom)
-             for i in range(5)]
+    def cell(index):
+        row, col = divmod(index, 4)
+        x = left + col * (width + gap)
+        y = top if row == 0 else second
+        return (x, y, x + width, y + height)
 
-    # 1. 우르 - 축소한 판
-    panel(d, boxes[0], u'우르의 게임', cap_f)
-    cell, cgap = 9 * S, 2 * S
-    bw = COLS * (cell + cgap) - cgap
-    bh = ROWS * (cell + cgap) - cgap
-    draw_board(d, boxes[0][0] + (width - bw) / 2, top + (bottom - top - bh) / 2 - 8 * S,
-               cell, cgap, {(2, 2): 'p', (1, 4): 'p', (0, 2): 'b', (1, 7): 'b'})
+    # 1. 우르
+    box = cell(0)
+    panel(d, box, u'우르의 게임', cap_f)
+    bw = COLS * (7 * S + 2 * S) - 2 * S
+    bh = ROWS * (7 * S + 2 * S) - 2 * S
+    bx, by = art_origin(box, bw, bh)
+    draw_board(d, bx, by, 7 * S, 2 * S, {(2, 2): 'p', (1, 4): 'p', (0, 2): 'b', (1, 7): 'b'})
 
     # 2. 체스
-    panel(d, boxes[1], u'체스', cap_f)
-    chess_panel(img, d, boxes[1])
+    box = cell(1)
+    panel(d, box, u'체스', cap_f)
+    chess_panel(img, d, box)
 
-    # 3. 당구
-    panel(d, boxes[2], u'나인볼', cap_f)
-    pool_panel(d, boxes[2])
+    # 3. 포커
+    box = cell(2)
+    panel(d, box, u'포커', cap_f)
+    poker_panel(img, d, box)
 
-    # 4. 편자 - 넓은 과녁, 양쪽이 흔어져 있다
-    panel(d, boxes[3], u'편자 던지기', cap_f)
-    cx = (boxes[3][0] + boxes[3][2]) / 2
-    cy = top + (bottom - top) / 2 - 8 * S
-    rings(d, cx, cy, [42 * S, 16 * S],
+    # 4. 별 보기
+    box = cell(3)
+    panel(d, box, u'별 보기', cap_f)
+    sky_panel(d, box)
+
+    # 5. 나인볼
+    box = cell(4)
+    panel(d, box, u'나인볼', cap_f)
+    pool_panel(d, box)
+
+    # 6. 편자
+    box = cell(5)
+    panel(d, box, u'편자 던지기', cap_f)
+    cx = (box[0] + box[2]) / 2
+    cy = box[1] + (height - 22 * S) / 2
+    rings(d, cx, cy, [36 * S, 14 * S],
           [(0.90, 200, 'b'), (0.55, 40, 'p'), (0.28, 310, 'p'), (0.72, 130, 'b')])
     d.ellipse([cx - 3 * S, cy - 3 * S, cx + 3 * S, cy + 3 * S], fill=SHELL)
 
-    # 5. 후프스톤 - 좁은 과녁, 가운데가 고리다
-    panel(d, boxes[4], u'후프스톤', cap_f)
-    cx = (boxes[4][0] + boxes[4][2]) / 2
-    rings(d, cx, cy, [42 * S, 22 * S],
+    # 7. 후프스톤
+    box = cell(6)
+    panel(d, box, u'후프스톤', cap_f)
+    cx = (box[0] + box[2]) / 2
+    rings(d, cx, cy, [36 * S, 19 * S],
           [(0.95, 165, 'b'), (0.44, 20, 'p'), (0.12, 255, 'p')])
-    d.ellipse([cx - 7 * S, cy - 7 * S, cx + 7 * S, cy + 7 * S], outline=SHELL, width=max(1, int(S * 1.6)))
+    d.ellipse([cx - 6 * S, cy - 6 * S, cx + 6 * S, cy + 6 * S], outline=SHELL, width=max(1, int(S * 1.4)))
 
-    d.text((44 * S, 324 * S),
-           '5 games  ·  5 AI tiers each  ·  no Harmony patches  ·  vanilla Defs untouched',
-           font=tag_f, fill=DIM)
+    # 8. 그림 대신 한 줄
+    box = cell(7)
+    d.rounded_rectangle(box, radius=8 * S, fill=BOARD_BG, outline=(0x5C, 0x4C, 0x35), width=max(1, S))
+
+    lines = [(u'7', title_f, GOLD, 16 * S),
+             (u'가구, 전부', sub_f, SHELL, 52 * S),
+             (u'AI 5단계 · 규칙 안내', cap_f, DIM, 76 * S),
+             (u'Harmony 패치 없음', cap_f, DIM, 90 * S)]
+
+    for text, face, colour, offset in lines:
+        d.text((box[0] + 14 * S, box[1] + offset), text, font=face, fill=colour)
+
+    d.text((44 * S, 340 * S),
+           '7 recreations  ·  no Harmony patches  ·  vanilla Defs untouched',
+           font=cap_f, fill=DIM)
 
     img.resize((640, 360), Image.LANCZOS).save(ROOT + '/About/Preview.png')
     print('Preview.png')

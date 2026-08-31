@@ -48,7 +48,7 @@ namespace PlayableRecreation.UI
                 List<MiniGameDef> games = new List<MiniGameDef>();
 
                 foreach (MiniGameDef def in DefDatabase<MiniGameDef>.AllDefsListForReading)
-                    if (PRMod.Settings.IsEnabled(def)) games.Add(def);
+                    if (def.hasMatch && PRMod.Settings.IsEnabled(def)) games.Add(def);
 
                 return games;
             }

@@ -189,4 +189,63 @@
     <windowSize>(1000, 760)</windowSize>
   </PlayableRecreation.MiniGameDef>
 
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Poker</defName>
+    <label>poker</label>
+    <description>Play heads-up Texas hold'em against an AI opponent.</description>
+    <workerClass>Poker.PokerGameWorker</workerClass>
+    <targetThing>PokerTable</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>POK.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>4</tutorialPages>
+    <tutorialKeyPrefix>POK.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>POK.Tally.HandsWon</li>
+      <li>POK.Tally.Showdowns</li>
+      <li>POK.Tally.PeakStack</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_Poker</vanillaJob>
+    <playThought>PR_PlayedPoker</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Intellectual</linkedSkill>
+
+    <windowSize>(1020, 780)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
+  <!--
+    망원경은 승부가 아니다. hasMatch 를 끄면 이기고 지는 것도, 전적도, 무르기도,
+    난이도 선택도 사라진다 - 프레임워크가 그냥 창만 열어 준다.
+  -->
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Stargazing</defName>
+    <label>stargazing</label>
+    <description>Look at the sky over this world and name what you find in it.</description>
+    <workerClass>Stargazing.StargazingWorker</workerClass>
+    <targetThing>Telescope</targetThing>
+
+    <hasMatch>false</hasMatch>
+    <difficultyCount>1</difficultyCount>
+
+    <tutorialPages>4</tutorialPages>
+    <tutorialKeyPrefix>STG.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>false</supportsSave>
+    <showLog>false</showLog>
+
+    <vanillaJob>UseTelescope</vanillaJob>
+    <playThought>PR_Stargazed</playThought>
+    <linkedSkill>Intellectual</linkedSkill>
+
+    <windowSize>(1180, 800)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
 </Defs>

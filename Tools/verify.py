@@ -109,6 +109,12 @@ for node in ET.parse(GAMES).getroot().iter():
     if node.text and re.match(r'^(?:%s)\.[A-Za-z0-9_.]+$' % '|'.join(PREFIXES), node.text.strip()):
         used.add(node.text.strip())
 
+# 코드가 이어 붙이는 키. "POK.Hand." + category 처럼 조각만 소스에 남으므로,
+# 그 조각으로 시작하는 키는 전부 쓰인 것으로 본다.
+stems = set(k for k in used if k.endswith('.') and k.count('.') >= 2)
+for stem in stems:
+    used |= set(k for k in ko_keys if k.startswith(stem))
+
 # 조립용 조각은 그 자체로 키가 아니다 - 다른 키의 앞자리이기만 하면 걸러낸다.
 used = set(k for k in used if not k.endswith('.'))
 used = set(k for k in used

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 난이도 -->
+  <POK.Difficulty.T0.Desc>손이 좋은지 나쁜지도 잘 모릅니다. 웬만해선 안 죽습니다.</POK.Difficulty.T0.Desc>
+  <POK.Difficulty.T1.Desc>좋은 손은 알아봅니다. 그 다음을 모릅니다.</POK.Difficulty.T1.Desc>
+  <POK.Difficulty.T2.Desc>승산을 셈하고, 가끔 없는 손으로 걸어 봅니다.</POK.Difficulty.T2.Desc>
+  <POK.Difficulty.T3.Desc>팟이 쳐 주는 값을 압니다. 당신이 약할 때를 노립니다.</POK.Difficulty.T3.Desc>
+  <POK.Difficulty.T4.Desc>당신이 무엇을 들었는지 거의 압니다. 실수를 기다립니다.</POK.Difficulty.T4.Desc>
+
+  <!-- 조작 -->
+  <POK.Btn.Fold>죽기</POK.Btn.Fold>
+  <POK.Btn.Check>체크  (Space)</POK.Btn.Check>
+  <POK.Btn.Call>콜 {0}  (Space)</POK.Btn.Call>
+  <POK.Btn.Raise>레이즈 {0}</POK.Btn.Raise>
+  <POK.Btn.Raise.None>레이즈 불가</POK.Btn.Raise.None>
+  <POK.Btn.AllIn>올인 {0}</POK.Btn.AllIn>
+  <POK.Btn.Next>다음 핸드  (Space)</POK.Btn.Next>
+  <POK.Btn.Half>½ 팟</POK.Btn.Half>
+  <POK.Btn.PotBet>팟</POK.Btn.PotBet>
+  <POK.Btn.Max>올인</POK.Btn.Max>
+
+  <!-- 판 위의 표시 -->
+  <POK.Label.Button>딜러</POK.Label.Button>
+  <POK.Label.Bet>{0} 걸었습니다</POK.Label.Bet>
+  <POK.Label.Took>가져갔습니다</POK.Label.Took>
+  <POK.Label.Pot>팟 {0}</POK.Label.Pot>
+  <POK.Label.YourHand>지금 당신의 손: {0}</POK.Label.YourHand>
+
+  <!-- 상태 -->
+  <POK.Status.Your>{0} · 블라인드 {1}. 당신 차례입니다.</POK.Status.Your>
+  <POK.Status.Thinking>상대가 생각합니다…</POK.Status.Thinking>
+  <POK.Status.WonHand>{0}(으)로 이겼습니다.</POK.Status.WonHand>
+  <POK.Status.LostHand>상대가 {0}(으)로 가져갔습니다.</POK.Status.LostHand>
+  <POK.Status.WonFold>상대가 죽었습니다.</POK.Status.WonFold>
+  <POK.Status.LostFold>죽었습니다.</POK.Status.LostFold>
+  <POK.Status.Split>같은 손입니다. 팟을 나눕니다.</POK.Status.Split>
+  <POK.Status.WinMatch>상대를 털었습니다. {0} 대 {1}, 당신의 승리!</POK.Status.WinMatch>
+  <POK.Status.LoseMatch>칩이 떨어졌습니다. {0} 대 {1}.</POK.Status.LoseMatch>
+  <POK.Status.DrawMatch>칩이 똑같습니다. 무승부입니다.</POK.Status.DrawMatch>
+
+  <!-- 손 -->
+  <POK.Hand.HighCard>하이카드</POK.Hand.HighCard>
+  <POK.Hand.Pair>원페어</POK.Hand.Pair>
+  <POK.Hand.TwoPair>투페어</POK.Hand.TwoPair>
+  <POK.Hand.Trips>트리플</POK.Hand.Trips>
+  <POK.Hand.Straight>스트레이트</POK.Hand.Straight>
+  <POK.Hand.Flush>플러시</POK.Hand.Flush>
+  <POK.Hand.FullHouse>풀하우스</POK.Hand.FullHouse>
+  <POK.Hand.Quads>포카드</POK.Hand.Quads>
+  <POK.Hand.StraightFlush>스트레이트 플러시</POK.Hand.StraightFlush>
+
+  <!-- 스트리트 -->
+  <POK.Street.Preflop>프리플랍</POK.Street.Preflop>
+  <POK.Street.Flop>플랍</POK.Street.Flop>
+  <POK.Street.Turn>턴</POK.Street.Turn>
+  <POK.Street.River>리버</POK.Street.River>
+  <POK.Street.Showdown>쇼다운</POK.Street.Showdown>
+
+  <!-- 진행 -->
+  <POK.Log.Fold>죽음</POK.Log.Fold>
+  <POK.Log.Check>체크</POK.Log.Check>
+  <POK.Log.Call>콜 {0}</POK.Log.Call>
+  <POK.Log.Raise>레이즈 {0}</POK.Log.Raise>
+  <POK.Log.WonShowdown>{0} 승 {1} · {2}</POK.Log.WonShowdown>
+  <POK.Log.WonFold>{0} 승 {1}</POK.Log.WonFold>
+  <POK.Log.Split>분할 {0}</POK.Log.Split>
+
+  <!-- 기록 -->
+  <POK.Tally.HandsWon>이긴 핸드 {0}</POK.Tally.HandsWon>
+  <POK.Tally.Showdowns>쇼다운 {0}</POK.Tally.Showdowns>
+  <POK.Tally.PeakStack>최고 칩 {0}</POK.Tally.PeakStack>
+
+  <!-- 설정 -->
+  <POK.Settings.HandName>지금 내 손이 무엇인지 표시</POK.Settings.HandName>
+  <POK.Settings.AutoNext>핸드가 끝나면 저절로 다음 핸드로</POK.Settings.AutoNext>
+  <POK.Settings.Reveal>죽은 핸드에서도 상대 손을 보여주기</POK.Settings.Reveal>
+  <POK.Settings.Reveal.Desc>연습용입니다. 상대가 무엇으로 걸었는지 알게 되므로 기본은 꺼져 있습니다.</POK.Settings.Reveal.Desc>
+
+  <!-- 튜토리얼 -->
+  <POK.Tut.P1.Title>1. 일대일 홀덤</POK.Tut.P1.Title>
+  <POK.Tut.P1.Body>둘이서만 칩니다. 각자 **자기만 보는 두 장**을 받고, 판 가운데 **모두가 쓰는 다섯 장**이 차례로 깔립니다.
+
+일곱 장 중 다섯 장으로 가장 좋은 손을 만든 쪽이 팟을 가져갑니다. 두 장을 꼭 다 쓸 필요는 없습니다.
+
+상대의 칩을 전부 가져오면 이깁니다. 스물네 핸드가 지나도 안 끝나면 칩이 많은 쪽이 이깁니다.</POK.Tut.P1.Body>
+
+  <POK.Tut.P2.Title>2. 판이 커지는 순서</POK.Tut.P2.Title>
+  <POK.Tut.P2.Body>매 핸드 시작에 강제로 내는 돈이 있습니다 — 블라인드입니다. 딜러 표시가 있는 쪽이 적게 내고 **먼저** 칩니다.
+
+두 장만 보고 한 번, 세 장이 깔린 뒤(플랍) 한 번, 넉 장(턴)에서 한 번, 다섯 장(리버)에서 한 번. 네 번 걸 기회가 있습니다.
+
+블라인드는 여덟 핸드마다 두 배가 됩니다. 그래서 판은 반드시 끝납니다.</POK.Tut.P2.Body>
+
+  <POK.Tut.P3.Title>3. 무엇을 고를 것인가</POK.Tut.P3.Title>
+  <POK.Tut.P3.Body>낼 것이 없으면 **체크**, 상대가 걸었으면 **콜**로 맞추거나 **죽고**, 더 걸려면 **레이즈**입니다.
+
+한 가지만 기억하면 됩니다 — 콜에 드는 값과 팟이 쳐 주는 값을 비교하세요. 팟이 100인데 콜이 20이면, 다섯 번에 한 번만 이겨도 본전입니다.
+
+상대가 받을 수 없는 액수는 애초에 걸 수 없습니다. 사이드 팟이 없는 이유입니다.</POK.Tut.P3.Body>
+
+  <POK.Tut.P4.Title>4. 손의 순서</POK.Tut.P4.Title>
+  <POK.Tut.P4.Body>약한 것부터: 하이카드 · 원페어 · 투페어 · 트리플 · 스트레이트 · 플러시 · 풀하우스 · 포카드 · 스트레이트 플러시.
+
+같은 등급이면 숫자가 높은 쪽이, 그것도 같으면 남는 카드(킥커)가 가릅니다. 무늬는 순위를 가르지 않습니다.
+
+두던 판은 테이블에 남습니다. 카드는 저장되지 않고 시드가 정하므로, 창을 닫았다 열어도 같은 패가 돌아옵니다.</POK.Tut.P4.Body>
+
+</LanguageData>

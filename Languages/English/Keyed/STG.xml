@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Compass -->
+  <STG.Compass.N>N</STG.Compass.N>
+  <STG.Compass.S>S</STG.Compass.S>
+  <STG.Compass.E>E</STG.Compass.E>
+  <STG.Compass.W>W</STG.Compass.W>
+
+  <STG.Dir.North>N</STG.Dir.North>
+  <STG.Dir.South>S</STG.Dir.South>
+  <STG.Dir.East>E</STG.Dir.East>
+  <STG.Dir.West>W</STG.Dir.West>
+
+  <!-- Controls -->
+  <STG.Btn.Draw>Trace a constellation</STG.Btn.Draw>
+  <STG.Btn.NeedMore>Pick {0} more star(s)</STG.Btn.NeedMore>
+  <STG.Btn.Name>Name it</STG.Btn.Name>
+  <STG.Btn.Cancel>Stop tracing</STG.Btn.Cancel>
+
+  <STG.Name.Title>What do you call this one?</STG.Name.Title>
+  <STG.Name.Accept>Name it</STG.Name.Accept>
+  <STG.Name.Cancel>Cancel</STG.Name.Cancel>
+  <STG.Name.Suggestion>Unnamed constellation</STG.Name.Suggestion>
+
+  <!-- Panel -->
+  <STG.Panel.Where>Observing from</STG.Panel.Where>
+  <STG.Panel.Coords>Lat {0}° {1} · long {2}° {3}</STG.Panel.Coords>
+  <STG.Panel.Time>{0}, day {1} · {2}h</STG.Panel.Time>
+  <STG.Panel.Mine>Traced by you</STG.Panel.Mine>
+  <STG.Panel.None>Nothing yet. Use the button below to join some stars.</STG.Panel.None>
+  <STG.Panel.Erase>Erase this one.</STG.Panel.Erase>
+
+  <!-- Seeing -->
+  <STG.Seeing.Clear>Clear night · {0} stars</STG.Seeing.Clear>
+  <STG.Seeing.Day>The sun is up · {0} stars</STG.Seeing.Day>
+  <STG.Seeing.Poor>{0} · {1} stars</STG.Seeing.Poor>
+  <STG.Seeing.Space>Above the air · {0} stars</STG.Seeing.Space>
+
+  <STG.Star.Tip>{0}\nmagnitude {1}</STG.Star.Tip>
+
+  <!-- Status -->
+  <STG.Status.Idle>Point at a star. The sky turns as the day does.</STG.Status.Idle>
+  <STG.Status.Star>{0} · magnitude {1}</STG.Status.Star>
+  <STG.Moon.Tip>moon
+{0}% lit</STG.Moon.Tip>
+  <STG.Status.WithMoon>The moon is {0}% lit. {1} object(s) in orbit.</STG.Status.WithMoon>
+  <STG.Status.WithObjects>{0} object(s) passing overhead.</STG.Status.WithObjects>
+  <STG.Status.Drawing>{0} picked. Three makes a constellation.</STG.Status.Drawing>
+  <STG.Status.DrawingReady>{0} stars joined. Name it, or keep going.</STG.Status.DrawingReady>
+
+  <!-- Names already attached to this sky -->
+  <STG.Const.0>The Hunter</STG.Const.0>
+  <STG.Const.1>The Broken Ship</STG.Const.1>
+  <STG.Const.2>The Three Sisters</STG.Const.2>
+  <STG.Const.3>The Starving One</STG.Const.3>
+  <STG.Const.4>The Sickle</STG.Const.4>
+  <STG.Const.5>The Lantern</STG.Const.5>
+  <STG.Const.6>The Chain</STG.Const.6>
+  <STG.Const.7>The Watcher</STG.Const.7>
+  <STG.Const.8>The River of Ash</STG.Const.8>
+  <STG.Const.9>The Mechanoid Hand</STG.Const.9>
+  <STG.Const.10>The Forgotten Name</STG.Const.10>
+  <STG.Const.11>The Ark</STG.Const.11>
+  <STG.Const.12>The Wolf's Tooth</STG.Const.12>
+  <STG.Const.13>The Last Courier</STG.Const.13>
+
+  <!-- Settings -->
+  <STG.Settings.Known>Show constellations that already have names</STG.Settings.Known>
+  <STG.Settings.Labels>Label the bright stars</STG.Settings.Labels>
+  <STG.Settings.Ignore>Ignore weather and daylight</STG.Settings.Ignore>
+  <STG.Settings.Ignore.Desc>Treats the view as a star chart rather than an observation. You can trace constellations at noon.</STG.Settings.Ignore.Desc>
+
+  <!-- Tutorial -->
+  <STG.Tut.P1.Title>1. The sky over this world</STG.Tut.P1.Title>
+  <STG.Tut.P1.Body>These stars came out of the seed this world was generated from. **Every world has its own sky, and within one world it never changes.**\n\nThe middle of the disc is straight overhead, the rim is the horizon. North is up.\n\nLeave the window open and the sky really does turn — colony time is still running.</STG.Tut.P1.Body>
+
+  <STG.Tut.P2.Title>2. Latitude decides what you see</STG.Tut.P2.Title>
+  <STG.Tut.P2.Body>Which stars are up depends on **where you are standing**. The settlement's own latitude and longitude are used.\n\nFar north, the southern stars never rise at all, while the ones near the pole never set and circle all day. At the equator the whole sky passes over you.\n\nMove the gravship and the latitude changes with it, so the sky changes too. Seasons shift it as well: the same hour looks different a quadrum later.</STG.Tut.P2.Body>
+
+  <STG.Tut.P3.Title>3. Joining the dots</STG.Tut.P3.Title>
+  <STG.Tut.P3.Body>Some constellations already carry names, drawn in blue. Those came from this world's seed as well.\n\nPress **Trace a constellation** and click stars in order. Three of them make a constellation. Clicking the last one again takes it back.\n\nName it and it joins the list on the right. Constellations belong to the **world**, not to the telescope, so they survive the telescope being destroyed or the colony moving on.</STG.Tut.P3.Body>
+
+  <STG.Tut.P4.Title>4. Some nights show you nothing</STG.Tut.P4.Title>
+  <STG.Tut.P4.Body>In daylight only the brightest few are left, and rain or snow takes away more. The stars have not gone anywhere — you simply cannot see them.\n\nCome back on a clear night. If you would rather use this as a chart than as a telescope, the settings let you ignore weather and daylight.\n\nWith Odyssey installed you will also see what is in orbit — asteroids, platforms, a gravship on its way somewhere. Above the atmosphere there is no horizon, so the whole sky fits on the disc at once.</STG.Tut.P4.Body>
+
+</LanguageData>

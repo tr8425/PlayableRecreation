@@ -700,19 +700,25 @@ public sealed class UrRecord : IExposable {
 게임별 설정은 `PRSettings` 의 이름표 자루(`GetBool("PR_Ur.highlight", …)`)에 실린다.
 ModSettings 는 Def 가 로드되기 **전에** 읽히므로, 게임별 설정을 타입으로 나누면 불러올 시점에 그 타입이 없다.
 
+**승부가 아닌 항목**은 `hasMatch=false` 하나로 갈린다. 끄면 이기고 지는 것도, 전적도,
+무르기·재시도·기권도, 난이도 선택도 사라진다 — 프레임워크는 창만 열어 준다.
+망원경이 그 첫 사례이고, 프레임워크는 여전히 "별"이라는 말을 모른다.
+
 ### 12.2 폴더
 
 ```
 RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable Recreation)
 ├─ About/                          (packageId: tr8425.playablerecreation)
 ├─ Defs/
-│  ├─ MiniGameDefs/MiniGames_PR.xml   (PR_Ur · PR_Chess · PR_Billiards · PR_Horseshoes · PR_Hoopstone)
+│  ├─ MiniGameDefs/MiniGames_PR.xml   (PR_Ur · PR_Chess · PR_Poker · PR_Billiards
+│  │                                    PR_Horseshoes · PR_Hoopstone · PR_Stargazing)
 │  ├─ JobDefs/Jobs_PR.xml             (PR_GoToGame — 몰입 모드 전용)
 │  ├─ ThoughtDefs/Thoughts_PR.xml     (게임마다 6단계, 플레이어 숙련도를 따라감)
 │  └─ TaleDefs/Tales_PR.xml           (PR_WonMatch — 다섯이 공용)
-├─ Patches/Patch_Recreation.xml    (다섯 가구에 CompProperties_MiniGame 주입 — 추가만)
+├─ Patches/Patch_Recreation.xml    (일곱 가구에 CompProperties_MiniGame 주입 — 추가만)
 ├─ Textures/PR/Chess/*.png         (기물 실루엣 6종. Tools/make_pieces.py 가 만든다)
-├─ Languages/{English,Korean}/Keyed/{PR,RGU,CHS,BIL,THR}.xml
+├─ Textures/PR/Cards/*.png         (카드 무늬 4종. Tools/card_suits.py 가 만든다)
+├─ Languages/{English,Korean}/Keyed/{PR,RGU,CHS,POK,BIL,THR,STG}.xml
 ├─ Assemblies/PlayableRecreation.dll
 └─ Source/PlayableRecreation/
    ├─ Framework/                   ★ 게임을 하나도 모른다
@@ -732,9 +738,16 @@ RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable 
       ├─ Chess/
       │  ├─ Core/                  ★ Verse 의존 0 — 판 · 규칙 · 평가 · 탐색 · 기보 · Zobrist
       │  └─ ChessGameWorker.cs · ChessSaveData.cs · ChessSettings.cs · ChessTheme.cs
+      ├─ Poker/
+      │  ├─ Core/                  ★ Verse 의존 0 — Cards · HandEval · HoldemMatch · PokerAi
+      │  └─ PokerGameWorker.cs · PokerSaveData.cs · PokerSettings.cs · PokerTheme.cs
       ├─ Billiards/
       │  ├─ Core/                  ★ Verse 의존 0 — Vec2 · PoolTable · PoolSim · NineBall · PoolAi
       │  └─ BilliardsGameWorker.cs · BilliardsSaveData.cs · BilliardsTheme.cs
+      ├─ Stargazing/               (승부가 아닌 첫 항목)
+      │  ├─ Core/                  ★ Verse 의존 0 — SkyMath · StarField · Constellations
+      │  └─ StargazingWorker.cs · SkyWatch.cs · StargazingComponent.cs
+      │     StargazingSettings.cs · StarTheme.cs · Dialog_NameConstellation.cs
       └─ Throwing/                 (편자막대 · 후프스톤 — 워커 하나, Def 둘)
          ├─ Core/                  ★ Verse 의존 0 — ThrowRules · ThrowMatch · ThrowAim
          └─ ThrowGameWorker.cs · ThrowRulesExtension.cs · ThrowSaveData.cs · ThrowTheme.cs
@@ -752,9 +765,13 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 프레임워크는 손대지 않는다. 후프스톤은 2번과 3번만으로 만들어졌다 — 편자막대와 같은 워커에
 `ThrowRulesExtension` 값만 달리 주었다(이닝당 던지기 3회, 15점 선취, 던질 때마다 채점).
 
-**이음매는 성격이 다른 게임 둘로 검증되었다.** 나인볼은 규칙이 아니라 물리로 굴러가고,
-체스는 상대가 오래 생각한다. 둘 다 프레임워크를 **한 줄도 고치지 않고** 붙었다 —
-공을 굴리는 것도, 탐색을 한 깊이씩 훑는 것도 워커가 `Tick(now)` 안에서 예산을 나눠 쓸 뿐이다.
+**이음매는 성격이 다른 게임들로 검증되었다.** 나인볼은 규칙이 아니라 물리로 굴러가고,
+체스는 상대가 오래 생각하고, 포커는 상대가 승률을 시뮬레이션으로 잰다. 셋 다 프레임워크를
+**한 줄도 고치지 않고** 붙었다 — 공을 굴리는 것도, 탐색을 한 깊이씩 훑는 것도,
+표본을 프레임당 90개씩 뽑는 것도 워커가 `Tick(now)` 안에서 예산을 나눠 쓸 뿐이다.
+
+프레임워크가 **딱 한 번** 늘어난 것은 망원경 때문이다. 이길 수 없는 항목이 있다는 사실은
+게임의 성질이 아니라 프레임워크의 개념이므로, `hasMatch` 플래그 하나로 받았다.
 
 ---
 
@@ -774,6 +791,8 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 | **M9 프레임워크** ✅ | `Framework/` 분리 · 우르 이식 · 편자막대 · 후프스톤 | 프레임워크가 게임을 참조하지 않음 · 게임끼리 서로 참조하지 않음 · 테스트 103개 · 번역 키 198개 |
 | **M10 나인볼** ✅ | 결정론적 물리(1/480초 고정 스텝) · 고스트볼 조준 · 후보 샷 예행 AI | 프레임워크 무수정 · 물리 테스트 22개 · 프레임당 후보 2개만 재 보므로 창이 끊기지 않음 |
 | **M11 체스** ✅ | 0x88 판 · 합법수 생성 · 알파베타+정지탐색 · SAN 기보 · Zobrist 되풀이 | **perft 5개 위치 전부 공표치 일치** · 테스트 35개 · 프레임당 한 깊이씩 훑어 뜸들이는 사이에 깊어짐 |
+| **M12 포커** ✅ | 일대일 노리밋 홀덤 · 7장 값매김 · 몬테카를로 승률 AI | 250판 무작위 대국에서 **칩 총합 불변** · 테스트 32개 · 사이드 팟 없음(받을 수 없는 몫은 반환) |
+| **M13 별 보기** ✅ | 시드 하늘 · 위도/경도/시각 투영 · 별자리 잇기 · 오디세이 궤도 물체 | 프레임워크에 `hasMatch` **한 줄 추가** · 테스트 13개 · 위도가 보이는 별을 실제로 가름 |
 
 **의존 관계**: M1은 M0과 병행 가능(Verse 무관). M3은 M1 필수. M6/M7은 M2 이후 어디든.
 **rev.1 대비**: JobDriver·joy 틱·폰 대 폰이 사라져 M4가 크게 가벼워졌다.
@@ -805,7 +824,7 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 
 ## 15. 현재 상태
 
-**M0 ~ M11 완료 (2026-08-31)**
+**M0 ~ M13 완료 (2026-08-31)**
 
 | | 산출물 |
 |---|---|
@@ -821,6 +840,8 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 | **M9 프레임워크** | 인게임 계층을 `Framework/` 와 `Games/` 로 분리. 우르 이식 + 편자막대 + 후프스톤 |
 | **M10 나인볼** | 물리로 굴러가는 첫 게임. 공은 `Tick(now)` 안에서 구르고, 상대의 조준은 프레임당 후보 2개씩 |
 | **M11 체스** | 상대가 오래 생각하는 첫 게임. 반복 심화를 프레임당 한 깊이씩. 기물 그림은 `Tools/make_pieces.py` 가 만든다 |
+| **M12 포커** | 상대가 자기 손을 시뮬레이션으로 재는 첫 게임. 표본을 프레임당 90개씩 |
+| **M13 별 보기** | 이길 수 없는 첫 항목. 하늘은 세계 시드가, 보이는 것은 위도·시각·날씨가 정한다 |
 
 **게임 셋**
 
@@ -828,12 +849,26 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 |---|---|---|---|---|
 | 우르의 게임 | `GameOfUrBoard` | 필켈 복원 룰. 말 7개, 4면 주사위 4개 | 지적 | ○ |
 | 체스 | `ChessTable` | 표준 룰 전부(캐슬링·앙파상·승격·스테일메이트·50수·3회 반복) | 지적 | ○ (두 수씩) |
+| 포커 | `PokerTable` | 일대일 노리밋 홀덤. 24핸드, 블라인드는 8핸드마다 두 배 | 지적 | ✕ |
 | 나인볼 | `BilliardsTable` | 낮은 번호를 먼저 맞힌다. 9번을 정당하게 넣으면 승 | 사격 | ✕ |
 | 편자 던지기 | `HorseshoesPin` | 이닝당 2번, 21점 선취. 이닝이 끝나면 한쪽만 득점 | 사격 | ✕ |
 | 후프스톤 | `HoopstoneRing` | 이닝당 3번, 15점 선취. 던질 때마다 채점 | 사격 | ✕ |
+| 별 보기 | `Telescope` | **승부 아님.** 하늘을 보고 별자리에 이름을 붙인다 | — | — |
 
 던지기 두 종은 **워커 하나에 Def 둘**이다. 규칙 차이는 `ThrowRulesExtension` 값 네 개가 전부다.
 상대의 던지기는 `(시드, 순번)`으로 결정되므로 이어 던져도 같은 결과가 나온다 — 우르의 주사위와 같은 원리(P4).
+
+**포커**의 위험한 곳은 AI 가 아니라 두 군데였다 — 손의 값매김(킥커 하나를 빠뜨려도 게임은 잘 돌아간다)과
+올인 처리다. 앞은 등급·킥커·트립 두 벌까지 케이스로 묶었고, 뒤는 **칩 총합 불변**으로 잡았다.
+250판을 무작위로 돌려 매 수마다 `스택+팟+베팅 == 800` 을 확인한다. 이 검사가 블라인드가 스택보다 클 때
+받을 수 없는 칩을 돌려주지 않아 무한 체크에 빠지던 버그를 잡아냈다.
+
+**별 보기**는 이 모드에서 유일하게 이길 수 없는 항목이다. 별은 `World.info.Seed` 가 정하므로
+저장할 것이 없고, 무엇이 보이는지는 `WorldGrid.LongLatOf(map.Tile)` 의 실제 위도·경도와
+`GenLocalDate` 의 시각·계절, `skyManager.CurSkyGlow` 와 강수량이 정한다. 고도·방위 계산은
+진짜 천문 공식이고 값만 이 행성의 것이다 — 그래서 북쪽 끝에서는 남쪽 별이 아예 뜨지 않고,
+극 근처의 별은 지지 않고 하루 종일 돈다. 중력선이 움직이면 타일이 바뀌고 하늘도 따라 바뀐다.
+플레이어가 이은 별자리는 가구가 아니라 `GameComponent` 에 남는다 — 하늘은 세계의 것이기 때문이다.
 
 **나인볼**은 규칙이 아니라 물리다. 1/480초 고정 스텝이라 같은 샷은 언제나 같은 결과를 낳고,
 상대는 후보 샷을 **같은 시뮬레이터에 미리 넣어 보고** 고른다 — 재 본 것과 치는 것이 정확히 같다.
@@ -851,22 +886,28 @@ Tests/RoyalGameOfUr.Tests/         (Core/AI 전용 — RimWorld 없이 실행)
 
 ```
 dotnet build -c Release   경고 0 · 오류 0
-dotnet test               160개 통과 (우르 89 + 던지기 14 + 당구 물리 22 + 체스 35)
+dotnet test               205개 통과 (우르 89 + 던지기 14 + 당구 22 + 체스 35 + 포커 32 + 하늘 13)
                           체스 35개 중 20개가 perft — 다섯 위치의 노드 수가 공표치와 일치
-XML                       19종 유효
-번역 키                    259개 한·영 완전 일치 · 미사용 키 0 · 코드가 쓰는 키 누락 0
+XML                       23종 유효
+번역 키                    385개 한·영 완전 일치 · 미사용 키 0 · 코드가 쓰는 키 누락 0
 ```
 
 **인게임 검증**: 우르는 RimWorld 1.6 실환경에서 우클릭 → 난이도 선택 → 대국 진행 **동작 확인**(초보).
-튜토리얼 · 세션 무효화 · 리더보드 · **프레임워크 분리 이후 전 구간** · **던지기 · 나인볼 · 체스**는
-**아직 인게임 미확인** — 배포 전 클린 프로필 QA 필요.
+튜토리얼 · 세션 무효화 · 리더보드 · **프레임워크 분리 이후 전 구간** · **던지기 · 나인볼 · 체스 ·
+포커 · 별 보기**는 **아직 인게임 미확인** — 배포 전 클린 프로필 QA 필요.
+별 보기는 특히 그렇다. 위도·시각·날씨·오디세이 궤도 물체는 전부 실제 게임 상태를 읽으므로
+단위 테스트가 닿지 않는다 — 하늘 계산이 맞다는 것과 그 값이 실제로 들어온다는 것은 다른 문제다.
 
 **남은 일 (배포 직전)**
 
 1. 클린 프로필(Core만) QA
-   - 다섯 가구 우클릭 · 기즈모 · 인스펙트 문자열
-   - 세이브/로드 후 이어하기 (우르 = 턴 경계, 던지기 = 이닝, 나인볼 = 샷 정산, 체스 = 한 수)
-   - 체스 기물 텍스처가 실제로 로드되는지(`Textures/PR/Chess/`), 흑 기물이 어두운 칸에서 읽히는지
+   - 일곱 가구 우클릭 · 기즈모 · 인스펙트 문자열
+   - 세이브/로드 후 이어하기 (우르 = 턴, 던지기 = 이닝, 나인볼 = 샷 정산, 체스 = 한 수, 포커 = 한 액션)
+   - 텍스처가 실제로 로드되는지(`Textures/PR/Chess/`, `Textures/PR/Cards/`)
+   - **별 보기**: 위도가 다른 두 정착지의 하늘이 실제로 다른가 · 낮/밤/비에 보이는 별이 바뀌는가 ·
+     별자리를 이어 이름 붙인 뒤 세이브/로드로 남는가 · 망원경을 부숴도 남는가
+   - **오디세이**: 궤도 물체가 뜨는가 · 위성 궤도층이 있으면 달이 차고 기우는가 ·
+     중력선으로 이동한 뒤 하늘이 바뀌는가 · 우주 맵에서 지평선 없이 보이는가
    - 무효화 트리거 3종(청소 · 수리 · 전투) 실증
    - 게임별 튜토리얼 자동 1회, 게임별 숙련도 누적, 게임 on/off 토글
    - 한국어 오타 육안 확인 — 점검 스크립트는 키 짝만 보지 문장은 못 본다

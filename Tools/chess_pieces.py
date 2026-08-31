@@ -4,32 +4,7 @@
 게임 안에서는 이 알파 한 장에 색을 두 번 입혀 테두리를 만든다 -
 그래서 여기서는 색을 정하지 않고 모양만 정한다.
 """
-from PIL import Image, ImageDraw
-
-SOLID = (255, 255, 255, 255)
-CLEAR = (0, 0, 0, 0)
-SUPERSAMPLE = 4
-
-
-class Pen(object):
-    """0~1 좌표를 픽셀로 옮겨 주는 얇은 껍데기."""
-
-    def __init__(self, draw, span):
-        self.d = draw
-        self.span = span
-
-    def poly(self, points, fill=SOLID):
-        self.d.polygon([(x * self.span, y * self.span) for x, y in points], fill=fill)
-
-    def box(self, x0, y0, x1, y1, fill=SOLID, radius=None):
-        area = [x0 * self.span, y0 * self.span, x1 * self.span, y1 * self.span]
-        if radius:
-            self.d.rounded_rectangle(area, radius=radius * self.span, fill=fill)
-        else:
-            self.d.rectangle(area, fill=fill)
-
-    def ell(self, x0, y0, x1, y1, fill=SOLID):
-        self.d.ellipse([x0 * self.span, y0 * self.span, x1 * self.span, y1 * self.span], fill=fill)
+from shapes import Pen, SOLID, CLEAR, bake
 
 
 def _base(p):
@@ -102,17 +77,4 @@ SHAPES = [('pawn', pawn), ('knight', knight), ('bishop', bishop),
 
 
 def render(name, size, colour=(255, 255, 255)):
-    """기물 한 장. 크게 그린 뒤 줄여서 가장자리를 부드럽게 만든다."""
-    shape = dict(SHAPES)[name]
-    span = size * SUPERSAMPLE
-
-    img = Image.new('RGBA', (span, span), CLEAR)
-    shape(Pen(ImageDraw.Draw(img), span))
-    img = img.resize((size, size), Image.LANCZOS)
-
-    if colour != (255, 255, 255):
-        tint = Image.new('RGBA', (size, size), tuple(colour) + (255,))
-        tint.putalpha(img.split()[3])
-        return tint
-
-    return img
+    return bake(dict(SHAPES)[name], size, colour)
