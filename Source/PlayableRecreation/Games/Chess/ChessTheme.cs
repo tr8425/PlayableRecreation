@@ -29,16 +29,33 @@ namespace Chess
         public static readonly Color Overlay = new Color(0f, 0f, 0f, 0.62f);
 
         /// <summary><see cref="Core.Piece.Kind"/> 로 색인한다. 0번은 빈 칸이라 비워 둔다.</summary>
-        public static readonly Texture2D[] Pieces =
+        private static readonly string[] PieceNames =
         {
-            null,
-            ContentFinder<Texture2D>.Get("PR/Chess/pawn"),
-            ContentFinder<Texture2D>.Get("PR/Chess/knight"),
-            ContentFinder<Texture2D>.Get("PR/Chess/bishop"),
-            ContentFinder<Texture2D>.Get("PR/Chess/rook"),
-            ContentFinder<Texture2D>.Get("PR/Chess/queen"),
-            ContentFinder<Texture2D>.Get("PR/Chess/king"),
+            null, "pawn", "knight", "bishop", "rook", "queen", "king",
         };
+
+        /// <summary>기물 그림. 그릴 때마다 찾는다 - 이유는 <see cref="PRContent"/> 에 적었다.</summary>
+        public static Texture2D Piece(int kind)
+        {
+            if (kind <= 0 || kind >= PieceNames.Length) return null;
+
+            return PRContent.Texture("PR/Chess/" + PieceNames[kind]);
+        }
+
+        /// <summary>그림이 없을 때 대신 세울 글자. 판이 통째로 비는 것보다는 낫다.</summary>
+        public static string Letter(int kind)
+        {
+            switch (kind)
+            {
+                case Core.Piece.Pawn: return "P";
+                case Core.Piece.Knight: return "N";
+                case Core.Piece.Bishop: return "B";
+                case Core.Piece.Rook: return "R";
+                case Core.Piece.Queen: return "Q";
+                case Core.Piece.King: return "K";
+                default: return "";
+            }
+        }
     }
 
     /// <summary>바닐라 UI 사운드를 빌려 쓴다.</summary>

@@ -15,6 +15,7 @@ namespace Poker.Core
         public const int Spades = 3;
 
         public const string RankLetters = "23456789TJQKA";
+        public const string SuitLetters = "cdhs";
 
         public static int Rank(int card) { return card % 13; }
         public static int Suit(int card) { return card / 13; }
@@ -23,7 +24,7 @@ namespace Poker.Core
         public static string Name(int card)
         {
             if (card < 0 || card >= Count) return "??";
-            return RankLetters[Rank(card)].ToString() + "cdhs"[Suit(card)];
+            return RankLetters[Rank(card)].ToString() + SuitLetters[Suit(card)];
         }
     }
 

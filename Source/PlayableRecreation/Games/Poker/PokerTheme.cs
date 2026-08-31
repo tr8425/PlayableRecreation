@@ -28,13 +28,15 @@ namespace Poker
         public static readonly Color Winner = new Color(0.42f, 0.72f, 0.46f);
 
         /// <summary><see cref="Core.Cards.Suit"/> 순서 - 클럽 · 다이아 · 하트 · 스페이드.</summary>
-        public static readonly Texture2D[] Suits =
+        private static readonly string[] SuitNames = { "club", "diamond", "heart", "spade" };
+
+        /// <summary>무늬 그림. 그릴 때마다 찾는다 - 이유는 <see cref="PRContent"/> 에 적었다.</summary>
+        public static Texture2D Suit(int suit)
         {
-            ContentFinder<Texture2D>.Get("PR/Cards/club"),
-            ContentFinder<Texture2D>.Get("PR/Cards/diamond"),
-            ContentFinder<Texture2D>.Get("PR/Cards/heart"),
-            ContentFinder<Texture2D>.Get("PR/Cards/spade"),
-        };
+            if (suit < 0 || suit >= SuitNames.Length) return null;
+
+            return PRContent.Texture("PR/Cards/" + SuitNames[suit]);
+        }
 
         public static Color InkFor(int suit)
         {

@@ -429,9 +429,20 @@ namespace Poker
             Widgets.Label(new Rect(face.x + 4f, face.y - 1f, 22f, 22f),
                 Cards.RankLetters[Cards.Rank(card)].ToString());
 
-            float pip = face.width * 0.52f;
-            GUI.DrawTexture(new Rect(face.center.x - pip * 0.5f, face.center.y - pip * 0.34f, pip, pip),
-                PokerTheme.Suits[suit]);
+            Texture2D pip = PokerTheme.Suit(suit);
+            if (pip != null)
+            {
+                float size = face.width * 0.52f;
+                GUI.DrawTexture(new Rect(face.center.x - size * 0.5f, face.center.y - size * 0.34f, size, size), pip);
+            }
+            else
+            {
+                // 무늬를 못 찾았을 때. 빨강·검정만으로도 두 벌은 갈린다.
+                Text.Anchor = TextAnchor.MiddleCenter;
+                Widgets.Label(face, Cards.SuitLetters[suit].ToString());
+                Text.Anchor = TextAnchor.UpperLeft;
+            }
+
             GUI.color = Color.white;
         }
 

@@ -7,7 +7,7 @@
 **rev.3 변경 요약**
 - 인게임 계층을 **게임을 모르는 프레임워크**와 **게임별 워커**로 분리 (§12)
 - 편자막대 · 후프스톤 추가 — 워커 하나에 Def 둘
-- 모드 이름과 packageId 변경: `tr8425.playablerecreation` (Workshop 미배포 상태라 안전)
+- 모드 이름과 packageId 변경: `teamrostra.playablerecreation` (Workshop 미배포 상태라 안전)
 - 이 문서의 §1~§11 은 **우르 한 게임의 명세**로 읽는다. 프레임워크가 무엇을 가져갔는지는 §12
 
 **rev.2 변경 요약**
@@ -137,7 +137,7 @@
 | UI | RimWorld `Window` / `Widgets` / `Verse.Text` 기본 API. 외부 UI 라이브러리 없음 |
 | 저장 | `IExposable` + `GameComponent`(세션) / `ModSettings` + config 파일(개인 전적) |
 | 네트워크 | **없음.** 전부 로컬. 멀티플레이/온라인 랭킹은 **범위 외** |
-| packageId | `tr8425.royalgameofur` (예정) |
+| packageId | `teamrostra.playablerecreation` |
 
 ---
 
@@ -708,7 +708,7 @@ ModSettings 는 Def 가 로드되기 **전에** 읽히므로, 게임별 설정�
 
 ```
 RoyalGameOfUr/                     (저장소 이름. 모드 이름은 Playable Recreation)
-├─ About/                          (packageId: tr8425.playablerecreation)
+├─ About/                          (packageId: teamrostra.playablerecreation)
 ├─ Defs/
 │  ├─ MiniGameDefs/MiniGames_PR.xml   (PR_Ur · PR_Chess · PR_Poker · PR_Billiards
 │  │                                    PR_Horseshoes · PR_Hoopstone · PR_Stargazing)

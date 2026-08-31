@@ -392,11 +392,13 @@ namespace Chess
         /// <summary>실루엣 한 장을 두 번 그린다 - 조금 키워 테두리색으로, 그 위에 제 색으로.</summary>
         private static void DrawPiece(Rect box, sbyte piece)
         {
-            Texture2D texture = ChessTheme.Pieces[Piece.Kind(piece)];
-            if (texture == null) return;
+            int kind = Piece.Kind(piece);
+            Texture2D texture = ChessTheme.Piece(kind);
+            bool white = Piece.IsWhite(piece);
+
+            if (texture == null) { DrawPieceLetter(box, kind, white); return; }
 
             Rect inner = box.ContractedBy(box.width * 0.07f);
-            bool white = Piece.IsWhite(piece);
 
             GUI.color = white ? ChessTheme.WhiteEdge : ChessTheme.BlackEdge;
             GUI.DrawTexture(inner.ExpandedBy(inner.width * 0.035f), texture);
@@ -404,6 +406,20 @@ namespace Chess
             GUI.color = white ? ChessTheme.WhitePiece : ChessTheme.BlackPiece;
             GUI.DrawTexture(inner, texture);
 
+            GUI.color = Color.white;
+        }
+
+        /// <summary>그림을 못 찾았을 때. 예쁘지는 않아도 판은 읽힌다.</summary>
+        private static void DrawPieceLetter(Rect box, int kind, bool white)
+        {
+            GUI.color = white ? ChessTheme.WhitePiece : ChessTheme.BlackPiece;
+            Text.Font = GameFont.Medium;
+            Text.Anchor = TextAnchor.MiddleCenter;
+
+            Widgets.Label(box, ChessTheme.Letter(kind));
+
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
             GUI.color = Color.white;
         }
 

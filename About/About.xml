@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Playable Recreation</name>
-  <author>tr8425</author>
-  <packageId>tr8425.playablerecreation</packageId>
+  <author>Team Rostra</author>
+  <packageId>teamrostra.playablerecreation</packageId>
   <modVersion>0.2.0</modVersion>
   <supportedVersions>
     <li>1.6</li>
