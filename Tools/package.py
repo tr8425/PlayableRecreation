@@ -146,15 +146,23 @@ def install(out):
     if not os.path.isdir(MODS):
         fail('Mods 폴더를 찾지 못했다: %s' % MODS)
 
-    stale = [n for n in os.listdir(MODS)
-             if os.path.islink(os.path.join(MODS, n))
-             and os.path.realpath(os.path.join(MODS, n)) == os.path.realpath(ROOT)]
+    # 이 저장소를 가리키는 링크, 그리고 아무 데도 가리키지 못하는 링크.
+    # 앞은 packageId 가 둘이 되고, 뒤는 폴더 이름을 바꾼 흔적이다. 둘 다 치워야 한다.
+    stale = []
+    for name in os.listdir(MODS):
+        path = os.path.join(MODS, name)
+        if not os.path.islink(path):
+            continue
+
+        if not os.path.exists(path) or os.path.realpath(path) == os.path.realpath(ROOT):
+            stale.append(name)
 
     if stale:
         print()
-        print('!! Mods 안에 이 저장소를 가리키는 링크가 있다: ' + ', '.join(stale))
-        print('   그대로 두면 같은 packageId 가 둘이 되어 림월드가 하나를 버린다.')
-        print('   먼저 지워라:  rm "%s"' % os.path.join(MODS, stale[0]))
+        print('!! Mods 안에 치워야 할 링크가 있다: ' + ', '.join(stale))
+        print('   이 저장소를 가리키면 같은 packageId 가 둘이 되고, 끊어진 링크면 쓰레기다.')
+        for name in stale:
+            print('   rm "%s"' % os.path.join(MODS, name))
         sys.exit(1)
 
     target = os.path.join(MODS, NAME)
