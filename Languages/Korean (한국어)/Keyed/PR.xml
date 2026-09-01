@@ -11,7 +11,7 @@
 
   <!-- 창 -->
   <PR.Window.Paused>일시정지 중</PR.Window.Paused>
-  <PR.Window.Running>콜로니 시간 진행 중</PR.Window.Running>
+  <PR.Window.Running>정착지 시간 진행 중</PR.Window.Running>
   <PR.Window.Practice>연습</PR.Window.Practice>
   <PR.Header.You>당신</PR.Header.You>
   <PR.Header.YouNamed>당신 ({0})</PR.Header.YouNamed>
@@ -62,13 +62,13 @@
   <PR.Interrupted.Lost>싸울 일이 생겼습니다. 일어서다 판이 쏟아졌습니다.</PR.Interrupted.Lost>
 
   <!-- 숙련도 -->
-  <PR.Mastery.Cleared>{1} · {0} 상대를 처음 이겼습니다. 숙련도 {2}/{3} · 여가와 경험치 +{4}%</PR.Mastery.Cleared>
+  <PR.Mastery.Cleared>{1} · {0} 상대를 처음 이겼습니다. 숙련도 {2}/{3} · 재미와 경험치 +{4}%</PR.Mastery.Cleared>
   <PR.Inspect.Saved>하던 판이 놓여 있음: {0}회차 · {1} 상대</PR.Inspect.Saved>
   <PR.Inspect.Mastery>숙련도 {0}/{1}단계 (+{2}%)</PR.Inspect.Mastery>
 
   <!-- 무효화 -->
   <PR.Invalidation.Combat.Label>근처에서 전투가 벌어짐</PR.Invalidation.Combat.Label>
-  <PR.Invalidation.Cleaning.Label>식민자가 주변을 청소함</PR.Invalidation.Cleaning.Label>
+  <PR.Invalidation.Cleaning.Label>정착민이 주변을 청소함</PR.Invalidation.Cleaning.Label>
   <PR.Invalidation.Repair.Label>가구를 수리함</PR.Invalidation.Repair.Label>
   <PR.Invalidation.Damaged.Label>가구가 손상됨</PR.Invalidation.Damaged.Label>
   <PR.Invalidation.Moved.Label>가구를 옮김</PR.Invalidation.Moved.Label>
@@ -93,7 +93,7 @@
   <PR.Records.Title>기록</PR.Records.Title>
   <PR.Records.NoGames>켜져 있는 게임이 없습니다.</PR.Records.NoGames>
   <PR.Records.Tab.Player>나의 통산</PR.Records.Tab.Player>
-  <PR.Records.Tab.Colony>이 식민지</PR.Records.Tab.Colony>
+  <PR.Records.Tab.Colony>이 정착지</PR.Records.Tab.Colony>
   <PR.Records.Col.Difficulty>난이도</PR.Records.Col.Difficulty>
   <PR.Records.Col.Record>전적</PR.Records.Col.Record>
   <PR.Records.Col.WinRate>승률</PR.Records.Col.WinRate>
@@ -111,27 +111,27 @@
 
   <!-- 설정 -->
   <PR.Settings.Group.Games>게임</PR.Settings.Group.Games>
-  <PR.Settings.Games.Desc>끄면 그 가구에서 우클릭 메뉴가 사라집니다. 식민자의 자율 여가는 그대로입니다.</PR.Settings.Games.Desc>
+  <PR.Settings.Games.Desc>끄면 그 가구에서 우클릭 메뉴가 사라집니다. 정착민이 스스로 하는 재미 활동은 그대로입니다.</PR.Settings.Games.Desc>
   <PR.Settings.Group.Play>플레이</PR.Settings.Group.Play>
-  <PR.Settings.Group.Mastery>숙련도와 콜로니</PR.Settings.Group.Mastery>
+  <PR.Settings.Group.Mastery>숙련도와 정착지</PR.Settings.Group.Mastery>
   <PR.Settings.Group.Session>중단한 판</PR.Settings.Group.Session>
 
   <PR.Settings.Pause>하는 동안 게임 시간 멈춤</PR.Settings.Pause>
-  <PR.Settings.Pause.Desc>끄면 하는 동안 콜로니 시간이 흐릅니다. 위협이 나타나면 창이 저절로 닫힙니다.</PR.Settings.Pause.Desc>
-  <PR.Settings.Immersion>몰입 모드 (식민자가 가구까지 걸어간 뒤 시작)</PR.Settings.Immersion>
-  <PR.Settings.Immersion.Desc>선택한 식민자가 가구 앞에 선 뒤 창이 열립니다.</PR.Settings.Immersion.Desc>
-  <PR.Settings.LinkSkill>난이도를 식민자의 스킬로 자동 결정</PR.Settings.LinkSkill>
-  <PR.Settings.LinkSkill.Desc>난이도 선택 창을 건너뜁니다. 게임마다 기준 스킬이 다릅니다.</PR.Settings.LinkSkill.Desc>
+  <PR.Settings.Pause.Desc>끄면 하는 동안 정착지 시간이 흐릅니다. 위협이 나타나면 창이 저절로 닫힙니다.</PR.Settings.Pause.Desc>
+  <PR.Settings.Immersion>몰입 모드 (정착민이 가구까지 걸어간 뒤 시작)</PR.Settings.Immersion>
+  <PR.Settings.Immersion.Desc>선택한 정착민이 가구 앞에 선 뒤 창이 열립니다.</PR.Settings.Immersion.Desc>
+  <PR.Settings.LinkSkill>난이도를 정착민의 기술로 자동 결정</PR.Settings.LinkSkill>
+  <PR.Settings.LinkSkill.Desc>난이도 선택 창을 건너뜁니다. 게임마다 기준 기술이 다릅니다.</PR.Settings.LinkSkill.Desc>
   <PR.Settings.Sounds>효과음</PR.Settings.Sounds>
   <PR.Settings.ThinkTime>상대가 뜸들이는 시간: {0}초 (난이도가 높을수록 짧아짐)</PR.Settings.ThinkTime>
 
   <PR.Settings.Mastery.Explain>난이도를 처음 이길 때마다 한 단계. 단계당 +{0}%, 전부 깨면 +{1}%. 게임마다 따로 쌓입니다.</PR.Settings.Mastery.Explain>
   <PR.Settings.Mastery.Current>{0} 숙련도: {1}/{2}단계 (+{3}%)</PR.Settings.Mastery.Current>
-  <PR.Settings.MasteryBonus>숙련도만큼 식민자의 여가·학습 증가</PR.Settings.MasteryBonus>
-  <PR.Settings.PlayThought>그 가구로 논 식민자에게 기분 생각 부여</PR.Settings.PlayThought>
+  <PR.Settings.MasteryBonus>숙련도만큼 정착민의 재미·학습 증가</PR.Settings.MasteryBonus>
+  <PR.Settings.PlayThought>그 가구로 논 정착민에게 기분 생각 부여</PR.Settings.PlayThought>
   <PR.Settings.PlayThought.Desc>문구는 숙련도를 따라 바뀝니다.</PR.Settings.PlayThought.Desc>
-  <PR.Settings.DisableImpact>콜로니 영향 전부 끄기</PR.Settings.DisableImpact>
-  <PR.Settings.NoImpact>콜로니에 아무 영향도 주지 않습니다.</PR.Settings.NoImpact>
+  <PR.Settings.DisableImpact>정착지 영향 전부 끄기</PR.Settings.DisableImpact>
+  <PR.Settings.NoImpact>정착지에 아무 영향도 주지 않습니다.</PR.Settings.NoImpact>
 
   <PR.Settings.SaveSessions>중단한 판을 가구에 저장</PR.Settings.SaveSessions>
   <PR.Settings.SaveSessions.Desc>창을 닫아도 판이 가구에 남습니다.</PR.Settings.SaveSessions.Desc>
