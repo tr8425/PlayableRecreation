@@ -23,20 +23,20 @@
   <!-- Difficulty -->
   <PR.Difficulty.Title>{0} - pick your opponent</PR.Difficulty.Title>
   <PR.Difficulty.Hint>You cannot change this once the game starts.</PR.Difficulty.Hint>
-  <PR.Difficulty.Practice>Practice game</PR.Difficulty.Practice>
+  <PR.Difficulty.Practice>Practice against an awful opponent</PR.Difficulty.Practice>
   <PR.Difficulty.Practice.Desc>Lowest tier. Nothing is recorded.</PR.Difficulty.Practice.Desc>
-  <PR.Difficulty.T0.Label>Novice</PR.Difficulty.T0.Label>
-  <PR.Difficulty.T1.Label>Apprentice</PR.Difficulty.T1.Label>
-  <PR.Difficulty.T2.Label>Skilled</PR.Difficulty.T2.Label>
-  <PR.Difficulty.T3.Label>Expert</PR.Difficulty.T3.Label>
-  <PR.Difficulty.T4.Label>Master</PR.Difficulty.T4.Label>
+  <PR.Difficulty.T0.Label>Poor</PR.Difficulty.T0.Label>
+  <PR.Difficulty.T1.Label>Normal</PR.Difficulty.T1.Label>
+  <PR.Difficulty.T2.Label>Good</PR.Difficulty.T2.Label>
+  <PR.Difficulty.T3.Label>Excellent</PR.Difficulty.T3.Label>
+  <PR.Difficulty.T4.Label>Masterwork</PR.Difficulty.T4.Label>
 
   <!-- Buttons -->
   <PR.Btn.NewMatch>New game</PR.Btn.NewMatch>
   <PR.Btn.Help.Tip>How to play.</PR.Btn.Help.Tip>
   <PR.Btn.Undo>Undo</PR.Btn.Undo>
   <PR.Btn.Undo.Tip>Back to your last turn. {0} of {1} left.</PR.Btn.Undo.Tip>
-  <PR.Btn.Undo.Blocked>No undo above Skilled.</PR.Btn.Undo.Blocked>
+  <PR.Btn.Undo.Blocked>No undo above Good.</PR.Btn.Undo.Blocked>
   <PR.Btn.Undo.Practice>Unlimited in practice.</PR.Btn.Undo.Practice>
   <PR.Btn.Retry>Retry</PR.Btn.Retry>
   <PR.Btn.Retry.Tip>Start over. Once a day.</PR.Btn.Retry.Tip>
@@ -139,6 +139,6 @@ You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
   <PR.Settings.Invalidate.Desc>Whatever happens around the furniture happens to the game.</PR.Settings.Invalidate.Desc>
   <PR.Settings.ExpiryDays>Forget it {0} days after you last touched it</PR.Settings.ExpiryDays>
   <PR.Settings.UndoLimit>Undos per game: {0}</PR.Settings.UndoLimit>
-  <PR.Settings.NoUndoHard>No undo at Expert and Master</PR.Settings.NoUndoHard>
+  <PR.Settings.NoUndoHard>No undo at Excellent and Masterwork</PR.Settings.NoUndoHard>
 
 </LanguageData>

@@ -34,7 +34,7 @@ All seven are base-game buildings. No DLC required.
 
 Select a colonist and right-click the furniture. Selecting the furniture alone works too.
 
-The six games each have five tiers of AI — novice to master — plus a rules walkthrough, practice games, and a record per tier, counted both all-time and for this colony.
+The six games each have five tiers of AI — poor to masterwork — plus a rules walkthrough, practice games against an awful opponent, and a record per tier, counted both all-time and for this colony.
 
 Colony time keeps running. The mod never touches your game speed: space still pauses, exactly as it always did. Enter is the key that moves the board. If you would rather the colony held still, the mod can pause for you while a window is open.
 
@@ -147,7 +147,7 @@ RimWorld is owned by Tynan Sylvester.
 
 정착민을 선택하고 가구를 우클릭하세요. 가구만 선택해도 됩니다.
 
-여섯 게임에는 초보부터 명인까지 AI 5단계와 규칙 안내, 연습 판, 난이도별 전적이 붙습니다. 전적은 전체와 이번 정착지를 따로 셉니다.
+여섯 게임에는 빈약부터 걸작까지 AI 5단계와 규칙 안내, 끔찍한 상대와의 연습 판, 난이도별 전적이 붙습니다. 전적은 전체와 이번 정착지를 따로 셉니다.
 
 판을 두는 동안에도 정착지 시간은 흐릅니다. 게임 속도는 건드리지 않습니다. 판을 진행시키는 키는 엔터입니다. 멈춰 두고 싶으면 모드 설정에서 판을 여는 동안 자동으로 멈추게 할 수 있습니다.
 

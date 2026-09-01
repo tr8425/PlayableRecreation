@@ -23,20 +23,20 @@
   <!-- 난이도 -->
   <PR.Difficulty.Title>{0} · 상대 고르기</PR.Difficulty.Title>
   <PR.Difficulty.Hint>판이 시작되면 도중에 바꿀 수 없습니다.</PR.Difficulty.Hint>
-  <PR.Difficulty.Practice>연습 판으로 하기</PR.Difficulty.Practice>
+  <PR.Difficulty.Practice>끔찍한 상대로 연습하기</PR.Difficulty.Practice>
   <PR.Difficulty.Practice.Desc>가장 낮은 단계. 기록에 남지 않습니다.</PR.Difficulty.Practice.Desc>
-  <PR.Difficulty.T0.Label>초보</PR.Difficulty.T0.Label>
-  <PR.Difficulty.T1.Label>견습</PR.Difficulty.T1.Label>
-  <PR.Difficulty.T2.Label>숙련</PR.Difficulty.T2.Label>
-  <PR.Difficulty.T3.Label>상급</PR.Difficulty.T3.Label>
-  <PR.Difficulty.T4.Label>명인</PR.Difficulty.T4.Label>
+  <PR.Difficulty.T0.Label>빈약</PR.Difficulty.T0.Label>
+  <PR.Difficulty.T1.Label>평범</PR.Difficulty.T1.Label>
+  <PR.Difficulty.T2.Label>상급</PR.Difficulty.T2.Label>
+  <PR.Difficulty.T3.Label>완벽</PR.Difficulty.T3.Label>
+  <PR.Difficulty.T4.Label>걸작</PR.Difficulty.T4.Label>
 
   <!-- 버튼 -->
   <PR.Btn.NewMatch>새 판 시작</PR.Btn.NewMatch>
   <PR.Btn.Help.Tip>규칙 안내.</PR.Btn.Help.Tip>
   <PR.Btn.Undo>무르기</PR.Btn.Undo>
   <PR.Btn.Undo.Tip>직전 내 차례로. 남은 횟수 {0}/{1}.</PR.Btn.Undo.Tip>
-  <PR.Btn.Undo.Blocked>상급 이상에서는 무르기를 쓸 수 없습니다.</PR.Btn.Undo.Blocked>
+  <PR.Btn.Undo.Blocked>완벽 이상에서는 무르기를 쓸 수 없습니다.</PR.Btn.Undo.Blocked>
   <PR.Btn.Undo.Practice>연습 판은 무제한.</PR.Btn.Undo.Practice>
   <PR.Btn.Retry>재시도</PR.Btn.Retry>
   <PR.Btn.Retry.Tip>처음부터 다시. 하루 한 번.</PR.Btn.Retry.Tip>
@@ -139,6 +139,6 @@
   <PR.Settings.Invalidate.Desc>가구 주변에서 벌어진 일이 판을 흐트러뜨립니다.</PR.Settings.Invalidate.Desc>
   <PR.Settings.ExpiryDays>마지막으로 손댄 뒤 {0}일이 지나면 잊음</PR.Settings.ExpiryDays>
   <PR.Settings.UndoLimit>판당 무르기 횟수: {0}</PR.Settings.UndoLimit>
-  <PR.Settings.NoUndoHard>상급·명인 난이도에서는 무르기 금지</PR.Settings.NoUndoHard>
+  <PR.Settings.NoUndoHard>완벽·걸작 난이도에서는 무르기 금지</PR.Settings.NoUndoHard>
 
 </LanguageData>
