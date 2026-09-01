@@ -1,8 +1,8 @@
 [h1]Playable Recreation[/h1]
 
-The recreation your colonists have been enjoying, played by you instead.
+[i]Your colonists have all the fun. Take it back.[/i]
 
-Select a colonist and right-click the furniture. Selecting the furniture alone works too.
+The recreation they have been enjoying, played by you instead.
 
 [h2]Seven things to do[/h2]
 [list]
@@ -17,7 +17,22 @@ Select a colonist and right-click the furniture. Selecting the furniture alone w
 
 All seven are base-game buildings. No DLC required.
 
-[h2]While you play[/h2]
+[table]
+[tr][th]Game[/th][th]Recreation[/th][th]Skill[/th][/tr]
+[tr][td]Game of Ur[/td][td]Cerebral[/td][td]Intellectual[/td][/tr]
+[tr][td]Chess[/td][td]Cerebral[/td][td]Intellectual[/td][/tr]
+[tr][td]Poker[/td][td]Cerebral[/td][td]Intellectual[/td][/tr]
+[tr][td]Nine-ball[/td][td]Dexterity[/td][td]Shooting[/td][/tr]
+[tr][td]Horseshoes[/td][td]Dexterity[/td][td]Shooting[/td][/tr]
+[tr][td]Hoopstone[/td][td]Dexterity[/td][td]Shooting[/td][/tr]
+[tr][td]Stargazing[/td][td]Telescope[/td][td]Intellectual[/td][/tr]
+[/table]
+
+[img]{{SS1: 일곱 오락 창을 한눈에 보여주는 콜라주 (원재료: 창 일곱 개 각각의 스크린샷)}}[/img]
+
+[h2]How it works[/h2]
+
+Select a colonist and right-click the furniture. Selecting the furniture alone works too.
 
 The six games each have five tiers of AI — novice to master — plus a rules walkthrough, practice games, and a record per tier, counted both all-time and for this colony.
 
@@ -26,6 +41,8 @@ Colony time keeps running. The mod never touches your game speed: space still pa
 When trouble arrives the window closes and the position stays on the furniture. Sit down again and you pick up where you left off, unless someone moved it, broke it, or cleaned it in the meantime. You choose which of those spoil a position.
 
 You also choose how many undos you get. Set it to zero and there are none.
+
+[img]{{SS2: 체스 창 — 대국 중반, 기물이 잡힌 상태와 AI 난이도가 보이게}}[/img]
 
 [h2]The telescope is different[/h2]
 
@@ -37,75 +54,172 @@ Join stars into constellations and name them. Those belong to the world, not to 
 
 With [b]Odyssey[/b] installed you also see what passes overhead. Standing on an asteroid or an orbital platform gives you a different sky altogether — the planet fills one side of it, and you can turn the telescope down and look at the surface instead.
 
+[img]{{SS3: 별 보기 창 — 직접 이은 별자리와 붙인 이름이 함께 보이는 밤하늘}}[/img]
+
+[img]{{SS4: 오디세이 궤도/소행성 하늘 — 행성이 하늘 한쪽을 채운 장면}}[/img]
+
 [h2]Mastery[/h2]
 
 The first time you clear a difficulty, colonists get a little more recreation and a little more skill from that piece of furniture. It accrues per game. Switch it off in the settings if you would rather it didn't.
 
-[h2]Under the hood[/h2]
+[img]{{SS5: 모드 설정 화면 — 자동 일시정지, 무효화 조건, 되돌리기, 항목별 켜고 끄기}}[/img]
+
+[h2]Compatibility and saves[/h2]
 [list]
+[*]RimWorld 1.6
+[*]No DLC required. Odyssey adds more to stargazing
+[*]Safe to add to and remove from existing saves. Remove it and the furniture goes back to vanilla
 [*]No Harmony patches
 [*]No vanilla Defs modified — one component is [i]added[/i] to the furniture, nothing else
-[*]Safe to add to and remove from existing saves. Remove it and the furniture goes back to vanilla
 [*]Every entry can be switched off. Switching one off only removes the right-click option; colonists still use the furniture on their own
 [*]English · 한국어
 [*]No multiplayer support
 [/list]
 
-RimWorld 1.6.
+[h2]FAQ[/h2]
+
+[b]Q. Can I add this to an existing save? Can I remove it later?[/b]
+
+Yes. It is safe to add and remove. Remove it and the furniture goes back to vanilla.
+
+[b]Q. Do I need any DLC?[/b]
+
+No. All seven buildings are from the base game. Odyssey adds more to stargazing.
+
+[b]Q. Will colonists still use recreation furniture on their own?[/b]
+
+Yes. Even switching an entry off only removes its right-click option.
+
+[b]Q. Does it change game speed or pause controls?[/b]
+
+No. It never touches game speed, and space remains the usual pause key. Automatic pausing while a window is open is optional, in the mod settings.
+
+[b]Q. Does it support multiplayer?[/b]
+
+No.
+
+[b]Q. What about other mods, including Combat Extended?[/b]
+
+There are no Harmony patches and no vanilla Defs are modified — one component is added to seven pieces of furniture. That leaves very little surface for conflict, but no promises beyond that.
+
+[h2]Found a problem?[/h2]
+
+Leave a comment. A screenshot and your mod list make it quick to fix.
+
+[h2]Credits[/h2]
+
+Team Rostra.
+RimWorld is owned by Tynan Sylvester.
 
 [hr][/hr]
 
 [h1]직접 하는 오락[/h1]
 
-식민자가 하던 오락을, 이제 당신이 직접 합니다.
+정착민이 하던 오락을 이제 직접 합니다.
 
-식민자를 선택하고 가구를 우클릭하세요. 가구만 선택해도 됩니다.
-
-[h2]일곱 가지[/h2]
+[h2]7가지 게임[/h2]
 [list]
-[*][b]우르의 게임[/b] — 기원전 2500년의 보드게임. 신나면서도 분통 터지는 그 판을 직접 둡니다
-[*][b]체스[/b] — 예순네 칸. 상대는 다섯 수 앞까지 내다봅니다
+[*][b]우르의 게임[/b] — 기원전 2500년의 보드게임. 보기보다 쉽고, 생각보다 약이 오릅니다
+[*][b]체스[/b] — 너무나도 유명한 그 게임. 상대는 다섯 수 앞을 내다봅니다
 [*][b]포커[/b] — 일대일 텍사스 홀덤. 상대를 파산시키면 이깁니다
 [*][b]나인볼[/b] — 공은 실제로 굴러갑니다. 낮은 번호부터 맞혀야 합니다
-[*][b]편자 던지기[/b] — 막대에 편자를 붙입니다. 21점 선취
+[*][b]편자 던지기[/b] — 막대에 편자를 던져 가까이 붙입니다. 21점 선취
 [*][b]후프스톤[/b] — 고리에 돌을 통과시킵니다. 15점 선취
-[*][b]별 보기[/b] — 망원경으로 이 행성의 하늘을 봅니다. 이기고 지는 것이 없는 유일한 항목입니다
+[*][b]별 보기[/b] — 그냥 별하늘을 감상합니다
 [/list]
 
 일곱 가지 모두 바닐라 가구입니다. DLC 없이도 전부 됩니다.
 
-[h2]판을 두는 동안[/h2]
+[table]
+[tr][th]오락[/th][th]재미[/th][th]기술[/th][/tr]
+[tr][td]우르의 게임[/td][td]지적 놀이[/td][td]연구[/td][/tr]
+[tr][td]체스[/td][td]지적 놀이[/td][td]연구[/td][/tr]
+[tr][td]포커[/td][td]지적 놀이[/td][td]연구[/td][/tr]
+[tr][td]나인볼[/td][td]육체적 놀이[/td][td]사격[/td][/tr]
+[tr][td]편자 던지기[/td][td]육체적 놀이[/td][td]사격[/td][/tr]
+[tr][td]후프스톤[/td][td]육체적 놀이[/td][td]사격[/td][/tr]
+[tr][td]별 보기[/td][td]망원경 관찰[/td][td]연구[/td][/tr]
+[/table]
 
-여섯 게임에는 AI 상대 5단계 — 초보부터 명인까지 — 와 규칙 안내, 연습 판, 난이도별 전적이 붙습니다. 전적은 전체와 이번 콜로니를 따로 셉니다.
+[img]{{SS1: 일곱 오락 창을 한눈에 보여주는 콜라주 (원재료: 창 일곱 개 각각의 스크린샷)}}[/img]
 
-하는 동안 콜로니 시간은 계속 흐릅니다. 게임 속도는 건드리지 않습니다 — 스페이스는 늘 그랬듯 일시정지고, 판을 진행시키는 키는 엔터입니다. 멈춰 두고 싶으면 모드 설정에서 판을 여는 동안 자동으로 멈추게 할 수 있습니다.
+[h2]플레이 방법[/h2]
 
-위협이 나타나면 창이 닫히고, 하던 판은 가구에 남습니다. 다시 앉으면 그 자리에서 이어집니다 — 그 사이 아무도 가구를 옮기거나 부수거나 닦지 않았다면. 무엇이 판을 무르게 할지는 설정에서 하나씩 고를 수 있습니다.
+정착민을 선택하고 가구를 우클릭하세요. 가구만 선택해도 됩니다.
 
-무르기 횟수도 설정에서 정합니다. 0으로 두면 물릴 수 없습니다.
+여섯 게임에는 초보부터 명인까지 AI 5단계와 규칙 안내, 연습 판, 난이도별 전적이 붙습니다. 전적은 전체와 이번 정착지를 따로 셉니다.
 
-[h2]별 보기는 다릅니다[/h2]
+판을 두는 동안에도 정착지 시간은 흐릅니다. 게임 속도는 건드리지 않습니다. 판을 진행시키는 키는 엔터입니다. 멈춰 두고 싶으면 모드 설정에서 판을 여는 동안 자동으로 멈추게 할 수 있습니다.
 
-별은 세계를 만들 때 쓴 시드가 정합니다. 세계마다 하늘이 다릅니다.
+위협이 나타나면 창이 닫히고, 하던 판은 가구에 남습니다. 그 사이 누가 가구를 옮기거나 부수거나 청소하지 않았다면, 다시 앉았을 때 그 자리에서 이어집니다. 무엇이 판을 무효로 만들지는 설정에서 직접 고를 수 있습니다.
 
-무엇이 보이는지는 정착지의 실제 위도·경도와 시각과 날씨가 정합니다. 북쪽 끝에서는 남쪽 별이 아예 뜨지 않습니다. 낮에는 해가 별을 지웁니다.
+되돌리기 횟수도 정할 수 있습니다. 0으로 두면 없습니다.
 
-별 몇 개를 이어 이름을 붙일 수 있습니다. 그 별자리는 망원경이 아니라 세계에 남습니다. 중력선을 타고 옮겨 가면 위도가 바뀌고, 하늘도 따라 바뀝니다.
+[img]{{SS2: 체스 창 — 대국 중반, 기물이 잡힌 상태와 AI 난이도가 보이게}}[/img]
 
-[b]오디세이[/b]가 있다면 궤도 위를 지나가는 소행성과 정거장도 보입니다. 소행성이나 정거장에 올라가면 하늘이 아예 달라집니다 — 행성이 하늘 한쪽을 차지하고, 망원경을 아래로 돌려 지표를 볼 수도 있습니다.
+[h2]별 보기는 조금 다릅니다[/h2]
+
+별 배치는 월드 생성 시드로 정해집니다. 월드마다 하늘이 다릅니다.
+
+어떤 별이 보이는지는 정착지의 실제 위도·경도와 시각과 날씨가 정합니다. 세계 북쪽 끝에서는 남쪽 별이 아예 뜨지 않습니다. 낮에는 해 때문에 별이 안 보이고, 비가 오면 관측이 어렵습니다.
+
+별을 이어 별자리를 만들고 이름을 붙일 수 있습니다. 별자리는 망원경이 아니라 월드에 남습니다. 중력부양선을 타고 이동하면 위도가 바뀌니 하늘도 달라집니다.
+
+[b]오디세이[/b]가 있다면 궤도를 지나가는 소행성과 궤도 플랫폼도 보입니다. 소행성이나 궤도 플랫폼에 올라가면 하늘이 아예 달라집니다. 행성이 하늘 한쪽을 크게 차지하고, 망원경을 아래로 돌려 지표를 볼 수도 있습니다.
+
+[img]{{SS3: 별 보기 창 — 직접 이은 별자리와 붙인 이름이 함께 보이는 밤하늘}}[/img]
+
+[img]{{SS4: 오디세이 궤도/소행성 하늘 — 행성이 하늘 한쪽을 채운 장면}}[/img]
 
 [h2]숙련[/h2]
 
-난이도를 처음 깰 때마다 그 가구에서 식민자가 얻는 여가와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다. 이게 싫으면 설정에서 끄면 됩니다.
+난이도를 처음 깰 때마다 그 가구에서 정착민이 얻는 재미와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다. 싫으면 설정에서 끄면 됩니다.
 
-[h2]속사정[/h2]
+[img]{{SS5: 모드 설정 화면 — 자동 일시정지, 무효화 조건, 되돌리기, 항목별 켜고 끄기}}[/img]
+
+[h2]호환성과 세이브[/h2]
 [list]
-[*]Harmony 패치를 쓰지 않습니다
-[*]바닐라 Def 를 수정하지 않습니다. 가구에 컴포넌트 하나를 [i]더할[/i] 뿐입니다
+[*]RimWorld 1.6
+[*]DLC는 필요 없습니다. 오디세이가 있으면 별 보기에서 볼 게 늘어납니다
 [*]기존 세이브에 넣고 빼도 안전합니다. 빼면 가구는 바닐라 상태로 돌아갑니다
-[*]항목은 하나씩 끌 수 있습니다. 끄면 우클릭 메뉴만 사라지고, 식민자의 자율 여가는 그대로입니다
+[*]Harmony 패치를 쓰지 않습니다
+[*]바닐라 Def를 수정하지 않습니다. 가구에 컴포넌트 하나를 [i]더할[/i] 뿐입니다
+[*]항목은 하나씩 끌 수 있습니다. 끄면 우클릭 메뉴만 사라지고, 정착민이 스스로 하는 재미 활동은 그대로입니다
 [*]English · 한국어
 [*]멀티플레이어는 지원하지 않습니다
 [/list]
 
-RimWorld 1.6.
+[h2]자주 묻는 질문[/h2]
+
+[b]Q. 하던 세이브에 넣어도 되나요? 나중에 빼도 되나요?[/b]
+
+네. 넣고 빼도 안전합니다. 빼면 가구는 바닐라 상태로 돌아갑니다.
+
+[b]Q. DLC가 필요한가요?[/b]
+
+아니요. 일곱 개 모두 본편 가구입니다. 오디세이가 있으면 별 보기에서 볼 게 늘어납니다.
+
+[b]Q. 정착민은 여전히 알아서 오락을 하나요?[/b]
+
+네. 항목을 꺼도 우클릭 메뉴만 사라집니다. 정착민이 스스로 하는 재미 활동은 그대로입니다.
+
+[b]Q. 게임 속도나 일시정지를 건드리나요?[/b]
+
+아니요. 게임 속도를 건드리지 않고, 스페이스도 원래대로 일시정지 키입니다. 창이 열린 동안의 자동 일시정지는 설정에서 선택할 수 있습니다.
+
+[b]Q. 멀티플레이를 지원하나요?[/b]
+
+아니요.
+
+[b]Q. Combat Extended 같은 다른 모드와 호환되나요?[/b]
+
+Harmony 패치나 바닐라 Def 수정 없이 가구에 컴포넌트를 하나씩 더할 뿐이라 충돌 가능성은 낮습니다. 다만 모든 모드와의 호환을 보장하지는 않습니다.
+
+[h2]문제가 생겼다면[/h2]
+
+댓글로 알려주세요. 스크린샷과 모드 목록이 함께 있으면 원인을 찾기 쉽습니다.
+
+[h2]크레딧[/h2]
+
+Team Rostra.
+RimWorld is owned by Tynan Sylvester.
