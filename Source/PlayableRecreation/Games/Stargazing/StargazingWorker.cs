@@ -620,7 +620,18 @@ namespace Stargazing
 
                 if (cell.Mark.NullOrEmpty()) continue;
 
-                GUI.color = StarTheme.MineInk;
+                if (!cell.Lit)
+                {
+                    // 밤 쪽에 사람이 살면 불빛이 먼저 보인다.
+                    GUI.color = StarTheme.NightHalo;
+                    GUI.DrawTexture(Square(at, 8f), PRTextures.Dot);
+                    GUI.color = StarTheme.NightLight;
+                }
+                else
+                {
+                    GUI.color = StarTheme.MineInk;
+                }
+
                 GUI.DrawTexture(Square(at, 3.5f), PRTextures.Dot);
                 Widgets.Label(new Rect(at.x + 7f, at.y - 9f, 110f, 18f), cell.Mark);
                 GUI.color = Color.white;

@@ -31,10 +31,15 @@ namespace Stargazing
         public static readonly Color Craft = new Color(0.58f, 0.92f, 0.70f);
         public static readonly Color Rock = new Color(0.82f, 0.66f, 0.45f);
 
+        /// <summary>밤 쪽 정착지의 불빛. 위성 야경 사진의 그것이다.</summary>
+        public static readonly Color NightLight = new Color(1.00f, 0.84f, 0.52f);
+        public static readonly Color NightHalo = new Color(1.00f, 0.78f, 0.42f, 0.22f);
+
         /// <summary>
         /// 땅의 색. 지어낸 색표가 아니라 그 타일이 실제로 가진 기온·강수·고도에서 나온다 -
         /// 추운 곳은 희고, 더운 데다 젖으면 푸르고, 더운 데다 마르면 누렇다.
-        /// 밤인 칸은 그대로 어둡게 눌러 준다. 명암 경계선이 화면을 가로지르는 이유다.
+        /// 밤인 칸은 달빛으로 식힌다 - 어둡되, 밤에도 바다와 사막은 다른 색이어야 한다.
+        /// 명암 경계선이 화면을 가로지르는 이유다.
         /// </summary>
         public static Color GroundInk(GroundCell cell)
         {
@@ -60,7 +65,8 @@ namespace Stargazing
                 ink = Color.Lerp(ink, new Color(0.48f, 0.45f, 0.43f), cell.High * 0.60f);
             }
 
-            if (!cell.Lit) ink *= 0.34f;
+            if (!cell.Lit)
+                ink = Color.Lerp(ink * 0.52f, new Color(0.20f, 0.24f, 0.36f), 0.35f);
 
             ink.a = 1f;
             return ink;
