@@ -16,3 +16,6 @@ __pycache__/
 # 배포용으로 구운 폴더
 dist/
 Tools/vanilla/
+
+# 스크린샷 고르기 작업장. 최종본만 screenshots/ 에 커밋한다.
+Workshop/screenshots/candidates/
