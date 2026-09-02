@@ -109,7 +109,6 @@ namespace PlayableRecreation.UI
 
         // ---------- 창 수명 ----------
 
-        /// <summary>처음 여는 사람에게는 규칙 안내를 먼저 한 번 보여준다.</summary>
         public override void PreOpen()
         {
             base.PreOpen();
@@ -119,6 +118,16 @@ namespace PlayableRecreation.UI
             // 열 때 이미 싸우고 있었다면 그 위협으로는 끊지 않는다. 새로 닥친 것만 판을 끊는다.
             threatAtOpen = ThreatPresent();
             nextThreatCheck = openedAt + ThreatCheckInterval;
+        }
+
+        /// <summary>
+        /// 처음 여는 사람에게는 규칙 안내를 먼저 한 번 보여준다.
+        /// PreOpen 에서 넣으면 이 창이 아직 스택에 없어 안내가 이 창 밑에 깔린다 -
+        /// 판을 닫고 나서야 규칙이 나타나는 셈이 된다. 스택에 오른 뒤에 얹어야 한다.
+        /// </summary>
+        public override void PostOpen()
+        {
+            base.PostOpen();
 
             if (game.tutorialPages > 0 && !Dialog_Tutorial.SeenFor(game))
                 Find.WindowStack.Add(new Dialog_Tutorial(game, null));

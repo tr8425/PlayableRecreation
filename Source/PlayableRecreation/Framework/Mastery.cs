@@ -42,7 +42,7 @@ namespace PlayableRecreation
 
             Messages.Message(
                 "PR.Mastery.Cleared".Translate(
-                    game.TierLabel(tier), game.label, now, game.difficultyCount, BonusPercentText(now)),
+                    game.TierLabel(tier), game.LabelCap, now, game.difficultyCount, BonusPercentText(now)),
                 MessageTypeDefOf.PositiveEvent, false);
         }
     }

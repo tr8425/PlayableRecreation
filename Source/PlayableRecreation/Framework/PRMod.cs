@@ -115,7 +115,7 @@ namespace PlayableRecreation
                     if (tier <= 0) continue;
 
                     Note(list, "PR.Settings.Mastery.Current".Translate(
-                        game.label, tier, game.difficultyCount, Mastery.BonusPercentText(tier)));
+                        game.LabelCap, tier, game.difficultyCount, Mastery.BonusPercentText(tier)));
                 }
             }
 

@@ -87,7 +87,7 @@ namespace PlayableRecreation
             }
 
             yield return new FloatMenuOption(
-                "PR.Play.Label".Translate(Game.label),
+                "PR.Play.Label".Translate(Game.LabelCap),
                 delegate { GameEntry.Begin(Game, parent, selPawn); });
         }
 
@@ -102,7 +102,7 @@ namespace PlayableRecreation
             {
                 defaultLabel = session != null
                     ? "PR.Play.Resume".Translate(session.rounds, Game.TierLabel(session.tier))
-                    : "PR.Play.Label".Translate(Game.label),
+                    : "PR.Play.Label".Translate(Game.LabelCap),
                 defaultDesc = Game.description,
                 icon = parent.def.uiIcon,
                 action = delegate

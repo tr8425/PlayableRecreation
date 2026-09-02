@@ -43,7 +43,7 @@ namespace PlayableRecreation.UI
         {
             Text.Font = GameFont.Medium;
             Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 34f),
-                "PR.Difficulty.Title".Translate(game.label));
+                "PR.Difficulty.Title".Translate(game.LabelCap));
             Text.Font = GameFont.Small;
 
             GUI.color = PRTheme.Dim;
