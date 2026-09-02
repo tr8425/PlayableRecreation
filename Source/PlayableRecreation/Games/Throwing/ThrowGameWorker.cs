@@ -41,6 +41,10 @@ namespace Throwing
         private float lastDistance = -1f;
         private bool lastWasRinger;
 
+        /// <summary>이번 발의 정타 구간. [0]이 좌우, [1]이 세기.</summary>
+        private readonly float[] zoneCenter = new float[2];
+        private readonly float[] zoneHalf = new float[2];
+
         /// <summary>방금 던진 쪽. 결과만 띄우면 그것이 누구 것인지 알 수 없다.</summary>
         private ThrowSide lastThrower;
 
@@ -56,6 +60,7 @@ namespace Throwing
             public ThrowSide Side;
             public float Distance;
             public float Angle;
+            public bool Ringer;
         }
 
         private ThrowRulesExtension Extension
@@ -132,7 +137,21 @@ namespace Throwing
             stage = match.Turn == ThrowSide.Opponent ? Stage.Opponent : Stage.Aim;
             stageUntil = 0f;
 
+            RollZones();
             RestoreLanded();
+        }
+
+        /// <summary>
+        /// 이번 발의 초록 구간을 뽑는다. (시드, 순번)에서 나오므로
+        /// 창을 닫았다 열어도 같은 자리다 - 마음에 안 드는 구간을 무를 길은 없다.
+        /// </summary>
+        private void RollZones()
+        {
+            for (int axis = 0; axis < 2; axis++)
+            {
+                zoneHalf[axis] = ThrowAim.ZoneHalf(match.Seed, match.ThrowIndex, axis, Tier, rules.RingerRadius);
+                zoneCenter[axis] = ThrowAim.ZoneCenter(match.Seed, match.ThrowIndex, axis, Tier, zoneHalf[axis]);
+            }
         }
 
         /// <summary>
@@ -155,6 +174,7 @@ namespace Throwing
                     Side = entries[i].Side,
                     Distance = entries[i].Distance,
                     Angle = ThrowAim.Uniform(match.Seed, index * 7 + 3) * Mathf.PI * 2f,
+                    Ringer = entries[i].Ringer,
                 });
 
                 index++;
@@ -196,10 +216,11 @@ namespace Throwing
             else if (sweep <= 0f) { sweep = 0f; sweepDirection = 1f; }
         }
 
-        /// <summary>막대를 멈춘다. 가운데에서 벗어난 만큼이 그대로 오차가 된다.</summary>
+        /// <summary>막대를 멈춘다. 초록 구간에서 벗어난 만큼이 그대로 오차가 된다.</summary>
         private void Lock(float now)
         {
-            float error = (sweep - 0.5f) * 2f * ThrowAim.MaxAxisError;
+            int axis = stage == Stage.Aim ? 0 : 1;
+            float error = ThrowAim.AxisError(sweep, zoneCenter[axis], zoneHalf[axis], rules.RingerRadius);
 
             if (stage == Stage.Aim)
             {
@@ -223,16 +244,18 @@ namespace Throwing
         private void Resolve(float distance, float now)
         {
             ThrowSide thrower = match.Turn;
+            bool ringer = distance <= rules.RingerRadius;
 
             landed.Add(new Landed
             {
                 Side = thrower,
                 Distance = distance,
                 Angle = ThrowAim.Uniform(match.Seed, match.ThrowIndex * 7 + 3) * Mathf.PI * 2f,
+                Ringer = ringer,
             });
 
             lastDistance = distance;
-            lastWasRinger = distance <= rules.RingerRadius;
+            lastWasRinger = ringer;
             lastThrower = thrower;
 
             match.Throw(distance);
@@ -258,6 +281,8 @@ namespace Throwing
             sweepDirection = 1f;
             stageUntil = 0f;
             stage = match.Turn == ThrowSide.Opponent ? Stage.Opponent : Stage.Aim;
+
+            RollZones();
         }
 
         // ---------- 조작 ----------
@@ -307,9 +332,10 @@ namespace Throwing
             DrawTarget(target);
 
             float y = area.yMax - barsHeight;
-            DrawBar(new Rect(area.x, y, area.width, BarHeight), "THR.Bar.Aim".Translate(), stage == Stage.Aim);
+            DrawBar(new Rect(area.x, y, area.width, BarHeight), "THR.Bar.Aim".Translate(),
+                    stage == Stage.Aim, zoneCenter[0], zoneHalf[0]);
             DrawBar(new Rect(area.x, y + BarHeight + BarGap, area.width, BarHeight),
-                    "THR.Bar.Power".Translate(), stage == Stage.Power);
+                    "THR.Bar.Power".Translate(), stage == Stage.Power, zoneCenter[1], zoneHalf[1]);
         }
 
         private void DrawScoreboard(Rect row)
@@ -355,18 +381,35 @@ namespace Throwing
                 rules.PerThrowScoring ? PRTextures.Ring : PRTextures.Dot);
             GUI.color = Color.white;
 
-            float mark = Mathf.Max(8f, size * 0.045f);
+            // 편자는 편자 모양으로, 후프스톤의 돌은 점으로.
+            bool shoes = !rules.PerThrowScoring;
+            float mark = Mathf.Max(8f, size * 0.045f) * (shoes ? 1.35f : 1f);
 
             for (int i = 0; i < landed.Count; i++)
             {
                 Landed item = landed[i];
                 float distance = Mathf.Min(item.Distance, outer) * scale;
 
-                Vector2 point = center + new Vector2(Mathf.Cos(item.Angle), Mathf.Sin(item.Angle)) * distance;
+                // 링거 편자는 잰 거리와 상관없이 막대를 감싼 채여야 한다.
+                Vector2 point = shoes && item.Ringer
+                    ? center
+                    : center + new Vector2(Mathf.Cos(item.Angle), Mathf.Sin(item.Angle)) * distance;
+                Rect spot = new Rect(point.x - mark / 2f, point.y - mark / 2f, mark, mark);
 
                 GUI.color = item.Side == ThrowSide.Player ? ThrowTheme.PlayerMark : ThrowTheme.OpponentMark;
-                GUI.DrawTexture(new Rect(point.x - mark / 2f, point.y - mark / 2f, mark, mark),
-                    item.Side == ThrowSide.Player ? PRTextures.Dot : PRTextures.Ring);
+
+                if (shoes)
+                {
+                    // 트인 쪽이 막대를 향하게 돌린다. 맨 GUIUtility 회전은 UI 배율을 모르므로
+                    // 배율까지 보정하는 림월드 쪽 회전을 쓴다.
+                    Widgets.DrawTextureRotated(spot,
+                        item.Side == ThrowSide.Player ? ThrowTextures.Shoe : ThrowTextures.ShoeThin,
+                        item.Angle * Mathf.Rad2Deg + 180f);
+                }
+                else
+                {
+                    GUI.DrawTexture(spot, item.Side == ThrowSide.Player ? PRTextures.Dot : PRTextures.Ring);
+                }
             }
 
             GUI.color = Color.white;
@@ -380,8 +423,8 @@ namespace Throwing
             GUI.color = Color.white;
         }
 
-        /// <summary>좌우 · 세기 막대. 가운데에 가까울수록 잘 던진 것이다.</summary>
-        private void DrawBar(Rect row, string label, bool live)
+        /// <summary>좌우 · 세기 막대. 초록 구간에 가까울수록 잘 던진 것이다.</summary>
+        private void DrawBar(Rect row, string label, bool live, float center, float half)
         {
             Rect labelRect = new Rect(row.x, row.y, 60f, row.height);
             Text.Anchor = TextAnchor.MiddleLeft;
@@ -395,9 +438,9 @@ namespace Throwing
             Rect bar = new Rect(labelRect.xMax + 6f, row.y + 6f, row.width - labelRect.width - 6f, row.height - 12f);
             Widgets.DrawBoxSolid(bar, ThrowTheme.BarBack);
 
-            // 가운데의 좁은 구간이 정타다.
-            float sweet = bar.width * (rules.RingerRadius / ThrowAim.MaxAxisError) * 0.5f;
-            Widgets.DrawBoxSolid(new Rect(bar.center.x - sweet / 2f, bar.y, sweet, bar.height), ThrowTheme.BarSweet);
+            // 좁은 초록 구간이 정타다. 발마다 옮겨 다닌다.
+            Widgets.DrawBoxSolid(new Rect(bar.x + bar.width * (center - half), bar.y,
+                bar.width * half * 2f, bar.height), ThrowTheme.BarSweet);
 
             if (!live) return;
 
@@ -530,21 +573,23 @@ namespace Throwing
             GUI.color = Color.white;
         }
 
-        /// <summary>2쪽 - 멈춰 세운 두 막대.</summary>
+        /// <summary>2쪽 - 멈춰 세운 두 막대. 구간이 가운데 있지 않다는 것까지 보여준다.</summary>
         private void DrawFigureBars(Rect area)
         {
             float y = area.center.y - BarHeight;
+            float half = rules.RingerRadius / ThrowAim.MaxAxisError * 0.25f;
             float savedSweep = sweep;
             Stage savedStage = stage;
 
-            sweep = 0.5f;
+            sweep = 0.63f;
             stage = Stage.Aim;
-            DrawBar(new Rect(area.x + 40f, y, area.width - 80f, BarHeight), "THR.Bar.Aim".Translate(), true);
+            DrawBar(new Rect(area.x + 40f, y, area.width - 80f, BarHeight), "THR.Bar.Aim".Translate(),
+                    true, 0.62f, half);
 
-            sweep = 0.32f;
+            sweep = 0.34f;
             stage = Stage.Power;
             DrawBar(new Rect(area.x + 40f, y + BarHeight + BarGap, area.width - 80f, BarHeight),
-                    "THR.Bar.Power".Translate(), true);
+                    "THR.Bar.Power".Translate(), true, 0.38f, half);
 
             sweep = savedSweep;
             stage = savedStage;

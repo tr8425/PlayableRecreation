@@ -66,7 +66,7 @@ namespace PlayableRecreation
 
         public int undoLimit = 3;
 
-        /// <summary>상급 이상 난이도에서는 무르기를 막는다.</summary>
+        /// <summary>완벽 이상 난이도에서는 무르기를 막는다.</summary>
         public bool noUndoOnHardDifficulty = true;
 
         // ---------- 게임별 ----------
