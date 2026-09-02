@@ -28,7 +28,7 @@ All seven are base-game buildings. No DLC required.
 [tr][td]Stargazing[/td][td]Telescope[/td][td]Intellectual[/td][/tr]
 [/table]
 
-[img]{{SS1: 일곱 오락 창을 한눈에 보여주는 콜라주 (원재료: 창 일곱 개 각각의 스크린샷)}}[/img]
+[img]https://images.steamusercontent.com/ugc/16014880060053952877/B59E5914B757C5AFC96D7FEF078083F65D61FACC/[/img]
 
 [h2]How it works[/h2]
 
@@ -42,7 +42,7 @@ When trouble arrives the window closes and the position stays on the furniture. 
 
 You also choose how many undos you get. Set it to zero and there are none.
 
-[img]{{SS2: 체스 창 — 대국 중반, 기물이 잡힌 상태와 AI 난이도가 보이게}}[/img]
+[img]https://images.steamusercontent.com/ugc/12618045191316701357/466F586F6C1033773B4EEB1E9A867DE9600DE4C2/[/img]
 
 [h2]The telescope is different[/h2]
 
@@ -54,15 +54,15 @@ Join stars into constellations and name them. Those belong to the world, not to 
 
 With [b]Odyssey[/b] installed you also see what passes overhead. Standing on an asteroid or an orbital platform gives you a different sky altogether — the planet fills one side of it, and you can turn the telescope down and look at the surface instead.
 
-[img]{{SS3: 별 보기 창 — 직접 이은 별자리와 붙인 이름이 함께 보이는 밤하늘}}[/img]
+[img]https://images.steamusercontent.com/ugc/15931543110730214251/0D815D42369E92AC60D87F87C97EEECBAFF9946B/[/img]
 
-[img]{{SS4: 오디세이 궤도/소행성 하늘 — 행성이 하늘 한쪽을 채운 장면}}[/img]
+[img]https://images.steamusercontent.com/ugc/11943859427531556545/269B2B54768F1EC529BE99D5CB31C0FA109530DC/[/img]
 
 [h2]Mastery[/h2]
 
 The first time you clear a difficulty, colonists get a little more recreation and a little more skill from that piece of furniture. It accrues per game. Switch it off in the settings if you would rather it didn't.
 
-[img]{{SS5: 모드 설정 화면 — 자동 일시정지, 무효화 조건, 되돌리기, 항목별 켜고 끄기}}[/img]
+[img]https://images.steamusercontent.com/ugc/18299372653310041799/0E2BAB3687B7CADA8C3585DA8D84F58958B5C909/[/img]
 
 [h2]Compatibility and saves[/h2]
 [list]
@@ -77,26 +77,6 @@ The first time you clear a difficulty, colonists get a little more recreation an
 [/list]
 
 [h2]FAQ[/h2]
-
-[b]Q. Can I add this to an existing save? Can I remove it later?[/b]
-
-Yes. It is safe to add and remove. Remove it and the furniture goes back to vanilla.
-
-[b]Q. Do I need any DLC?[/b]
-
-No. All seven buildings are from the base game. Odyssey adds more to stargazing.
-
-[b]Q. Will colonists still use recreation furniture on their own?[/b]
-
-Yes. Even switching an entry off only removes its right-click option.
-
-[b]Q. Does it change game speed or pause controls?[/b]
-
-No. It never touches game speed, and space remains the usual pause key. Automatic pausing while a window is open is optional, in the mod settings.
-
-[b]Q. Does it support multiplayer?[/b]
-
-No.
 
 [b]Q. What about other mods, including Combat Extended?[/b]
 
@@ -141,8 +121,6 @@ RimWorld is owned by Tynan Sylvester.
 [tr][td]별 보기[/td][td]망원경 관찰[/td][td]연구[/td][/tr]
 [/table]
 
-[img]{{SS1: 일곱 오락 창을 한눈에 보여주는 콜라주 (원재료: 창 일곱 개 각각의 스크린샷)}}[/img]
-
 [h2]플레이 방법[/h2]
 
 정착민을 선택하고 가구를 우클릭하세요. 가구만 선택해도 됩니다.
@@ -155,8 +133,6 @@ RimWorld is owned by Tynan Sylvester.
 
 되돌리기 횟수도 정할 수 있습니다. 0으로 두면 없습니다.
 
-[img]{{SS2: 체스 창 — 대국 중반, 기물이 잡힌 상태와 AI 난이도가 보이게}}[/img]
-
 [h2]별 보기는 조금 다릅니다[/h2]
 
 별 배치는 월드 생성 시드로 정해집니다. 월드마다 하늘이 다릅니다.
@@ -167,15 +143,9 @@ RimWorld is owned by Tynan Sylvester.
 
 [b]오디세이[/b]가 있다면 궤도를 지나가는 소행성과 궤도 플랫폼도 보입니다. 소행성이나 궤도 플랫폼에 올라가면 하늘이 아예 달라집니다. 행성이 하늘 한쪽을 크게 차지하고, 망원경을 아래로 돌려 지표를 볼 수도 있습니다.
 
-[img]{{SS3: 별 보기 창 — 직접 이은 별자리와 붙인 이름이 함께 보이는 밤하늘}}[/img]
-
-[img]{{SS4: 오디세이 궤도/소행성 하늘 — 행성이 하늘 한쪽을 채운 장면}}[/img]
-
 [h2]숙련[/h2]
 
 난이도를 처음 깰 때마다 그 가구에서 정착민이 얻는 재미와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다. 싫으면 설정에서 끄면 됩니다.
-
-[img]{{SS5: 모드 설정 화면 — 자동 일시정지, 무효화 조건, 되돌리기, 항목별 켜고 끄기}}[/img]
 
 [h2]호환성과 세이브[/h2]
 [list]
@@ -190,26 +160,6 @@ RimWorld is owned by Tynan Sylvester.
 [/list]
 
 [h2]자주 묻는 질문[/h2]
-
-[b]Q. 하던 세이브에 넣어도 되나요? 나중에 빼도 되나요?[/b]
-
-네. 넣고 빼도 안전합니다. 빼면 가구는 바닐라 상태로 돌아갑니다.
-
-[b]Q. DLC가 필요한가요?[/b]
-
-아니요. 일곱 개 모두 본편 가구입니다. 오디세이가 있으면 별 보기에서 볼 게 늘어납니다.
-
-[b]Q. 정착민은 여전히 알아서 오락을 하나요?[/b]
-
-네. 항목을 꺼도 우클릭 메뉴만 사라집니다. 정착민이 스스로 하는 재미 활동은 그대로입니다.
-
-[b]Q. 게임 속도나 일시정지를 건드리나요?[/b]
-
-아니요. 게임 속도를 건드리지 않고, 스페이스도 원래대로 일시정지 키입니다. 창이 열린 동안의 자동 일시정지는 설정에서 선택할 수 있습니다.
-
-[b]Q. 멀티플레이를 지원하나요?[/b]
-
-아니요.
 
 [b]Q. Combat Extended 같은 다른 모드와 호환되나요?[/b]
 
