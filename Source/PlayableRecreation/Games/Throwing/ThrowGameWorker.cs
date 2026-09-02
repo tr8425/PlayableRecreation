@@ -48,7 +48,7 @@ namespace Throwing
         /// <summary>방금 던진 쪽. 결과만 띄우면 그것이 누구 것인지 알 수 없다.</summary>
         private ThrowSide lastThrower;
 
-        /// <summary>이번 이닝에 떨어진 것들. 거리만 저장되므로 각도는 여기서 붙인다.</summary>
+        /// <summary>이번 이닝에 떨어진 것들.</summary>
         private readonly List<Landed> landed = new List<Landed>();
         private int drawnInning = -1;
 
@@ -58,8 +58,13 @@ namespace Throwing
         private struct Landed
         {
             public ThrowSide Side;
-            public float Distance;
+
+            /// <summary>말뚝 기준 착지점(게임 단위, +x 오른쪽 · +y 아래). 크기가 곧 잰 거리다.</summary>
+            public Vector2 Offset;
+
+            /// <summary>착지 방향. 링거를 말뚝에 씌울 때의 회전과 자리에 쓴다.</summary>
             public float Angle;
+
             public bool Ringer;
         }
 
@@ -156,7 +161,7 @@ namespace Throwing
 
         /// <summary>
         /// 이어서 연 판이면 이번 이닝에 이미 떨어진 것들이 있다.
-        /// 각도는 저장하지 않는다 - (시드, 순번)에서 나오므로 다시 뽑으면 같은 자리에 놓인다.
+        /// 저장되는 것은 거리뿐이라 방향은 (시드, 순번)에서 결정론으로 다시 뽑는다.
         /// </summary>
         private void RestoreLanded()
         {
@@ -169,11 +174,13 @@ namespace Throwing
 
             for (int i = first; i < entries.Count; i++)
             {
+                float angle = ThrowAim.Uniform(match.Seed, index * 7 + 3) * Mathf.PI * 2f;
+
                 landed.Add(new Landed
                 {
                     Side = entries[i].Side,
-                    Distance = entries[i].Distance,
-                    Angle = ThrowAim.Uniform(match.Seed, index * 7 + 3) * Mathf.PI * 2f,
+                    Offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * entries[i].Distance,
+                    Angle = angle,
                     Ringer = entries[i].Ringer,
                 });
 
@@ -232,16 +239,19 @@ namespace Throwing
                 return;
             }
 
-            Resolve(ThrowAim.Distance(lockedLateral, error), now);
+            // 조준 오차는 좌우로, 세기 오차는 앞뒤로 - 세게 던지면 말뚝 너머(위)에 떨어진다.
+            Resolve(ThrowAim.Distance(lockedLateral, error), new Vector2(lockedLateral, -error), now);
         }
 
         private void OpponentThrow(float now)
         {
             float distance = ThrowAim.BotThrow(match.Seed, match.ThrowIndex, ThrowAim.SigmaFor(Tier));
-            Resolve(distance, now);
+            float angle = ThrowAim.Uniform(match.Seed, match.ThrowIndex * 7 + 3) * Mathf.PI * 2f;
+
+            Resolve(distance, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * distance, now);
         }
 
-        private void Resolve(float distance, float now)
+        private void Resolve(float distance, Vector2 offset, float now)
         {
             ThrowSide thrower = match.Turn;
             bool ringer = distance <= rules.RingerRadius;
@@ -249,7 +259,7 @@ namespace Throwing
             landed.Add(new Landed
             {
                 Side = thrower,
-                Distance = distance,
+                Offset = offset,
                 Angle = ThrowAim.Uniform(match.Seed, match.ThrowIndex * 7 + 3) * Mathf.PI * 2f,
                 Ringer = ringer,
             });
@@ -388,28 +398,34 @@ namespace Throwing
             for (int i = 0; i < landed.Count; i++)
             {
                 Landed item = landed[i];
-                float distance = Mathf.Min(item.Distance, outer) * scale;
 
-                // 링거 편자는 잰 거리와 상관없이 막대를 감싼 채여야 한다.
-                Vector2 point = shoes && item.Ringer
-                    ? center
-                    : center + new Vector2(Mathf.Cos(item.Angle), Mathf.Sin(item.Angle)) * distance;
-                Rect spot = new Rect(point.x - mark / 2f, point.y - mark / 2f, mark, mark);
+                Vector2 offset = item.Offset;
+                if (offset.magnitude > outer) offset *= outer / offset.magnitude;
 
-                GUI.color = item.Side == ThrowSide.Player ? ThrowTheme.PlayerMark : ThrowTheme.OpponentMark;
+                Vector2 point;
+                float facing;
 
-                if (shoes)
+                if (item.Ringer)
                 {
-                    // 트인 쪽이 막대를 향하게 돌린다. 맨 GUIUtility 회전은 UI 배율을 모르므로
-                    // 배율까지 보정하는 림월드 쪽 회전을 쓴다.
-                    Widgets.DrawTextureRotated(spot,
-                        item.Side == ThrowSide.Player ? ThrowTextures.Shoe : ThrowTextures.ShoeThin,
-                        item.Angle * Mathf.Rad2Deg + 180f);
+                    // 꽂힌 것은 잰 거리와 상관없이 막대의 것이다.
+                    // 편자는 말뚝을 감싸고, 후프스톤의 돌은 고리에 걸린 자리에 놓는다.
+                    Vector2 direction = new Vector2(Mathf.Cos(item.Angle), Mathf.Sin(item.Angle));
+                    point = center + (shoes ? Vector2.zero : direction * pin * 0.45f);
+                    facing = item.Angle;
                 }
                 else
                 {
-                    GUI.DrawTexture(spot, item.Side == ThrowSide.Player ? PRTextures.Dot : PRTextures.Ring);
+                    point = center + offset * scale;
+                    // 말뚝을 향해 미끄러져 온 것처럼, 트인 쪽이 말뚝을 본다.
+                    facing = Mathf.Atan2(center.y - point.y, center.x - point.x);
                 }
+
+                Rect spot = new Rect(point.x - mark / 2f, point.y - mark / 2f, mark, mark);
+
+                GUI.color = item.Side == ThrowSide.Player ? ThrowTheme.PlayerMark : ThrowTheme.OpponentMark;
+                GUI.DrawTexture(spot, shoes
+                    ? ThrowTextures.For(item.Side == ThrowSide.Player, facing)
+                    : item.Side == ThrowSide.Player ? PRTextures.Dot : PRTextures.Ring);
             }
 
             GUI.color = Color.white;
