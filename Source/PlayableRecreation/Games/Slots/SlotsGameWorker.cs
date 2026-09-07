@@ -1,6 +1,6 @@
 using PlayableRecreation;
-using PlayableRecreation.UI;
 using PlayableRecreation.Core;
+using PlayableRecreation.UI;
 using UnityEngine;
 using Verse;
 
@@ -11,18 +11,44 @@ namespace Slots
     /// 난이도와 전적을 붙이는 것은 거짓말이라서다. 세션 칩 스무 닢으로 어디까지 가는지,
     /// 그것이 전부다. 진짜 은화는 한 닢도 걸리지 않는다 - 도박 경제는 카지노 모드의 몫이다.
     ///
+    /// 릴의 그림은 이 행성의 물건들이다 - 금, 은, 옥, 산딸기. 그림 파일을 만들지 않고
+    /// 바닐라 아이콘을 빌려 쓴다.
+    ///
     /// 릴은 (시드, 순번)으로 결정된다. 당기는 순간 결과는 이미 정해져 있다 -
     /// 원래 슬롯머신이 그런 물건이다.
     /// </summary>
     public class SlotsGameWorker : MiniGameWorker
     {
         private const int StartCredits = 20;
-        private const int Symbols = 4;          // 7 · BAR · 동전 · 자두
+        private const int Symbols = 4;          // 금 · 은 · 옥 · 산딸기
         private const float ReelStop0 = 0.55f;
         private const float ReelStopGap = 0.4f;
+        private const float JackpotSeconds = 3.2f;
 
         private static readonly int[] Pay3 = { 100, 25, 10, 5 };
-        private const int PayPairSevens = 2;
+        private const int PayPairGold = 2;
+
+        /// <summary>릴에 도는 물건들. 좋은 것일수록 드물다.</summary>
+        private static ThingDef[] symbolDefs;
+
+        private static ThingDef[] SymbolDefs
+        {
+            get
+            {
+                if (symbolDefs == null)
+                {
+                    symbolDefs = new[]
+                    {
+                        DefDatabase<ThingDef>.GetNamedSilentFail("Gold"),
+                        DefDatabase<ThingDef>.GetNamedSilentFail("Silver"),
+                        DefDatabase<ThingDef>.GetNamedSilentFail("Jade"),
+                        DefDatabase<ThingDef>.GetNamedSilentFail("RawBerries"),
+                    };
+                }
+
+                return symbolDefs;
+            }
+        }
 
         private int seed;
         private int spinIndex;
@@ -36,9 +62,17 @@ namespace Slots
         private bool spinning;
         private float spinStart;
         private float now;
+        private float lastNow;
         private int stopped;
+        private readonly float[] stopAt = new float[3];
+
+        /// <summary>칩 표시는 실제 값을 천천히 따라간다 - 잭팟은 한 닢씩 세면서 올라야 잭팟이다.</summary>
+        private float shownCredits = StartCredits;
 
         private float winFlashUntil;
+        private float jackpotUntil;
+        private float nextDing;
+        private int dingsLeft;
 
         // ---------- 프레임워크에 답하는 것들 ----------
 
@@ -81,11 +115,15 @@ namespace Slots
             seed = newSeed;
             spinIndex = 0;
             credits = StartCredits;
+            shownCredits = StartCredits;
             peak = StartCredits;
             lastWin = 0;
             spins = 0;
             spinning = false;
             stopped = 0;
+            winFlashUntil = 0f;
+            jackpotUntil = 0f;
+            dingsLeft = 0;
         }
 
         public override void Resume(MiniGameSaveData data)
@@ -98,6 +136,22 @@ namespace Slots
         public override void Tick(float timeNow)
         {
             now = timeNow;
+            float delta = lastNow <= 0f ? 0f : Mathf.Min(0.1f, now - lastNow);
+            lastNow = now;
+
+            // 칩 표시가 실제 값을 쫓아간다. 딴 것이 클수록 빨리, 그래도 한동안은 센다.
+            float gap = Mathf.Abs(credits - shownCredits);
+            if (gap > 0.001f)
+                shownCredits = Mathf.MoveTowards(shownCredits, credits, delta * Mathf.Max(6f, gap * 2.2f));
+
+            // 잭팟의 종소리는 몇 번에 나눠 울린다.
+            if (dingsLeft > 0 && now >= nextDing)
+            {
+                PRSounds.Play(SlotsSounds.Win);
+                dingsLeft--;
+                nextDing = now + 0.28f;
+            }
+
             if (!spinning) return;
 
             float elapsed = now - spinStart;
@@ -105,6 +159,7 @@ namespace Slots
 
             while (stopped < shouldStop)
             {
+                stopAt[stopped] = now;
                 stopped++;
                 PRSounds.Play(SlotsSounds.Stop);
             }
@@ -118,7 +173,7 @@ namespace Slots
 
         private int SymbolAt(int spin, int reel)
         {
-            // 가중치 - 자두 4 · 동전 3 · BAR 2 · 7 하나. 좋은 것일수록 드물다.
+            // 가중치 - 산딸기 4 · 옥 3 · 은 2 · 금 하나. 좋은 것일수록 드물다.
             float u = AimMath.Uniform(seed, spin * 3 + reel);
             if (u < 0.1f) return 0;
             if (u < 0.3f) return 1;
@@ -150,20 +205,27 @@ namespace Slots
             if (reels[0] == reels[1] && reels[1] == reels[2]) win = Pay3[reels[0]];
             else
             {
-                int sevens = 0;
-                for (int i = 0; i < 3; i++) if (reels[i] == 0) sevens++;
-                if (sevens == 2) win = PayPairSevens;
+                int golds = 0;
+                for (int i = 0; i < 3; i++) if (reels[i] == 0) golds++;
+                if (golds == 2) win = PayPairGold;
             }
 
-            if (win > 0)
+            if (win <= 0) return;
+
+            credits += win;
+            lastWin = win;
+            winFlashUntil = now + 1.1f;
+            if (credits > peak) peak = credits;
+
+            if (win >= Pay3[0])
             {
-                credits += win;
-                lastWin = win;
-                winFlashUntil = now + 0.8f;
-                if (credits > peak) peak = credits;
-
-                PRSounds.Play(win >= Pay3[0] ? SlotsSounds.Jackpot : SlotsSounds.Win);
+                // 잭팟. 기계가 아는 가장 화려한 3초.
+                jackpotUntil = now + JackpotSeconds;
+                dingsLeft = 8;
+                nextDing = now + 0.2f;
+                PRSounds.Play(SlotsSounds.Jackpot);
             }
+            else PRSounds.Play(SlotsSounds.Win);
         }
 
         // ---------- 조작 ----------
@@ -200,7 +262,7 @@ namespace Slots
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = SlotsTheme.Credits;
             Widgets.Label(new Rect(area.x, area.y, area.width / 2f, 40f),
-                "SLT.Credits".Translate(credits).ToString());
+                "SLT.Credits".Translate(Mathf.FloorToInt(shownCredits)).ToString());
 
             Text.Anchor = TextAnchor.MiddleRight;
             GUI.color = PRTheme.Dim;
@@ -220,7 +282,21 @@ namespace Slots
             float windowHeight = Mathf.Min(120f, area.height * 0.5f);
             Rect cabinet = new Rect(area.x, area.y, area.width,
                                     Mathf.Min(area.height, windowHeight + 60f));
+
+            bool jackpot = now < jackpotUntil;
+
             Widgets.DrawBoxSolid(cabinet, SlotsTheme.Cabinet);
+
+            // 잭팟이면 캐비닛 테두리가 금색으로 번쩍인다.
+            if (jackpot)
+            {
+                float pulse = 0.5f + 0.5f * Mathf.Sin(now * 10f);
+                Color edge = Color.Lerp(SlotsTheme.WinFlash, SlotsTheme.JackpotEdge, pulse);
+                Widgets.DrawBoxSolid(new Rect(cabinet.x, cabinet.y, cabinet.width, 4f), edge);
+                Widgets.DrawBoxSolid(new Rect(cabinet.x, cabinet.yMax - 4f, cabinet.width, 4f), edge);
+                Widgets.DrawBoxSolid(new Rect(cabinet.x, cabinet.y, 4f, cabinet.height), edge);
+                Widgets.DrawBoxSolid(new Rect(cabinet.xMax - 4f, cabinet.y, 4f, cabinet.height), edge);
+            }
 
             float slotWidth = (cabinet.width - 4f * 16f) / 3f;
 
@@ -231,59 +307,127 @@ namespace Slots
                 Widgets.DrawBoxSolid(window.ExpandedBy(2f), SlotsTheme.WindowEdge);
                 Widgets.DrawBoxSolid(window, SlotsTheme.WindowBack);
 
-                int symbol;
-                if (spinning && reel >= stopped)
-                {
-                    // 도는 릴은 그냥 빠르게 넘어가는 그림이다. 결과는 이미 정해져 있다.
-                    symbol = (int)((now - spinStart) * (14f + reel * 3f)) % Symbols;
-                }
-                else symbol = reels[reel];
-
-                DrawSymbol(window, symbol);
+                DrawReel(window, reel);
             }
 
-            if (now < winFlashUntil && !spinning)
+            if (now < winFlashUntil && !spinning && !jackpot)
                 Widgets.DrawBoxSolid(cabinet, SlotsTheme.WinFlash);
+
+            // 딴 만큼이 캐비닛 위로 떠오른다.
+            if (lastWin > 0 && now < winFlashUntil && !spinning)
+            {
+                float t = 1f - (winFlashUntil - now) / 1.1f;
+                Text.Font = GameFont.Medium;
+                Text.Anchor = TextAnchor.MiddleCenter;
+                GUI.color = new Color(SlotsTheme.Credits.r, SlotsTheme.Credits.g, SlotsTheme.Credits.b, 1f - t * 0.7f);
+                Widgets.Label(new Rect(cabinet.x, cabinet.y - 34f - t * 10f, cabinet.width, 30f), "+" + lastWin);
+                GUI.color = Color.white;
+                Text.Font = GameFont.Small;
+                Text.Anchor = TextAnchor.UpperLeft;
+            }
+
+            if (jackpot) DrawJackpot(cabinet);
         }
 
-        private static void DrawSymbol(Rect window, int symbol)
+        /// <summary>릴 하나. 도는 동안은 물건들이 실제로 흘러내려가고, 멈추면 살짝 튄다.</summary>
+        private void DrawReel(Rect window, int reel)
         {
-            Vector2 center = window.center;
+            float icon = Mathf.Min(window.width, window.height) * 0.62f;
 
-            switch (symbol)
+            if (spinning && reel >= stopped)
             {
-                case 0:
-                    Text.Font = GameFont.Medium;
-                    Text.Anchor = TextAnchor.MiddleCenter;
-                    GUI.color = SlotsTheme.Seven;
-                    Widgets.Label(window, "7");
-                    GUI.color = Color.white;
-                    Text.Font = GameFont.Small;
-                    Text.Anchor = TextAnchor.UpperLeft;
-                    break;
+                // 흘러내려가는 릴. 결과는 이미 정해져 있고, 이것은 그냥 구경거리다.
+                float speed = 9f + reel * 2.5f;
+                float position = (now - spinStart) * speed;
+                int index = Mathf.FloorToInt(position);
+                float fraction = position - index;
 
-                case 1:
-                    GUI.color = SlotsTheme.Bar;
-                    for (int i = -1; i <= 1; i++)
-                        Widgets.DrawBoxSolid(new Rect(center.x - window.width * 0.28f,
-                            center.y + i * 12f - 4f, window.width * 0.56f, 8f), SlotsTheme.Bar);
-                    GUI.color = Color.white;
-                    break;
-
-                case 2:
-                    GUI.color = SlotsTheme.Coin;
-                    GUI.DrawTexture(new Rect(center.x - 18f, center.y - 18f, 36f, 36f), PRTextures.Dot);
-                    GUI.color = Color.white;
-                    break;
-
-                default:
-                    GUI.color = SlotsTheme.Plum;
-                    GUI.DrawTexture(new Rect(center.x - 16f, center.y - 16f, 32f, 32f), PRTextures.Dot);
-                    GUI.color = SlotsTheme.Cabinet;
-                    Widgets.DrawBoxSolid(new Rect(center.x - 1f, center.y - 24f, 2f, 10f), SlotsTheme.Plum);
-                    GUI.color = Color.white;
-                    break;
+                Widgets.BeginGroup(window);
+                DrawScrollSymbol(window, index % Symbols, fraction * window.height, icon);
+                DrawScrollSymbol(window, (index + 1) % Symbols, fraction * window.height - window.height, icon);
+                Widgets.EndGroup();
+                return;
             }
+
+            // 멈춘 직후 0.15초는 살짝 주저앉았다 돌아온다.
+            float bounce = 0f;
+            if (reel < stopped)
+            {
+                float since = now - stopAt[reel];
+                if (since < 0.15f) bounce = Mathf.Sin(since / 0.15f * Mathf.PI) * 6f;
+            }
+
+            Rect target = new Rect(window.center.x - icon / 2f,
+                                   window.center.y - icon / 2f + bounce, icon, icon);
+            DrawSymbol(target, reels[reel]);
+        }
+
+        /// <summary>그룹 좌표계 안에서 릴 창의 한 칸. 창 밖으로 나가는 부분은 잘린다.</summary>
+        private static void DrawScrollSymbol(Rect window, int symbol, float yOffset, float icon)
+        {
+            Rect target = new Rect(window.width / 2f - icon / 2f,
+                                   window.height / 2f - icon / 2f + yOffset, icon, icon);
+            DrawSymbol(target, symbol);
+        }
+
+        private static void DrawSymbol(Rect rect, int symbol)
+        {
+            ThingDef def = SymbolDefs[symbol];
+
+            if (def != null)
+            {
+                Widgets.ThingIcon(rect, def);
+                return;
+            }
+
+            // 어떤 이유로 바닐라 def 가 없다면 - 그림 없는 판보다는 동그라미가 낫다.
+            GUI.color = SlotsTheme.Credits;
+            GUI.DrawTexture(rect, PRTextures.Dot);
+            GUI.color = Color.white;
+        }
+
+        /// <summary>잭팟 - 금덩이가 쏟아지고 글자가 고동친다.</summary>
+        private void DrawJackpot(Rect cabinet)
+        {
+            ThingDef gold = SymbolDefs[0];
+            float remain = jackpotUntil - now;
+
+            // 쏟아지는 금. 열마다 자리와 박자가 달라 비처럼 보인다.
+            Rect rain = new Rect(cabinet.x, cabinet.y, cabinet.width, cabinet.height + 46f);
+            for (int i = 0; i < 22; i++)
+            {
+                float u = AimMath.Uniform(spinIndex * 31, i);
+                float v = AimMath.Uniform(spinIndex * 31, i + 100);
+
+                float x = rain.x + u * (rain.width - 18f);
+                float fall = ((now * (0.55f + v * 0.5f) + v * 3f) % 1f);
+                float y = rain.y - 10f + fall * rain.height;
+
+                float size = 12f + v * 8f;
+                Rect coin = new Rect(x, y, size, size);
+
+                if (gold != null) Widgets.ThingIcon(coin, gold);
+                else
+                {
+                    GUI.color = SlotsTheme.JackpotEdge;
+                    GUI.DrawTexture(coin, PRTextures.Dot);
+                    GUI.color = Color.white;
+                }
+            }
+
+            // 고동치는 글자. 마지막 0.6초에 잦아든다.
+            float pulse = 0.75f + 0.25f * Mathf.Sin(now * 12f);
+            float fade = Mathf.Clamp01(remain / 0.6f);
+
+            Text.Font = GameFont.Medium;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            GUI.color = new Color(SlotsTheme.JackpotEdge.r * pulse, SlotsTheme.JackpotEdge.g * pulse,
+                                  SlotsTheme.JackpotEdge.b * pulse, fade);
+            Widgets.Label(new Rect(cabinet.x, cabinet.yMax + 8f, cabinet.width, 34f),
+                "SLT.Jackpot".Translate().ToString());
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.UpperLeft;
         }
 
         // ---------- 튜토리얼 도식 ----------
@@ -292,7 +436,7 @@ namespace Slots
         {
             if (page == 0)
             {
-                // 릴 세 개를 그대로 보여준다.
+                // 릴 세 개를 그대로 보여준다 - 전부 금으로.
                 Rect machine = new Rect(area.x + area.width * 0.15f, area.center.y - 80f,
                                         area.width * 0.7f, 160f);
                 int[] saved = { reels[0], reels[1], reels[2] };
@@ -308,11 +452,11 @@ namespace Slots
             Listing_Standard list = new Listing_Standard();
             list.Begin(new Rect(area.x + area.width * 0.16f, area.y + 24f, area.width * 0.68f, area.height - 24f));
 
-            list.Label("SLT.Tut.Pay.Sevens".Translate(Pay3[0]));
-            list.Label("SLT.Tut.Pay.Bars".Translate(Pay3[1]));
-            list.Label("SLT.Tut.Pay.Coins".Translate(Pay3[2]));
-            list.Label("SLT.Tut.Pay.Plums".Translate(Pay3[3]));
-            list.Label("SLT.Tut.Pay.Pair".Translate(PayPairSevens));
+            list.Label("SLT.Tut.Pay.Gold".Translate(Pay3[0]));
+            list.Label("SLT.Tut.Pay.Silver".Translate(Pay3[1]));
+            list.Label("SLT.Tut.Pay.Jade".Translate(Pay3[2]));
+            list.Label("SLT.Tut.Pay.Berries".Translate(Pay3[3]));
+            list.Label("SLT.Tut.Pay.Pair".Translate(PayPairGold));
 
             list.End();
         }

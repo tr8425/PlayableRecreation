@@ -22,13 +22,17 @@ namespace Punching
         public static readonly Color NoteKo = new Color(0.93f, 0.75f, 0.38f);
     }
 
-    /// <summary>바닐라 소리를 빌려 쓴다. 주먹은 진짜 주먹 소리다.</summary>
+    /// <summary>
+    /// 바닐라 소리를 빌려 쓴다. 진짜 주먹 소리(Pawn_Melee_Punch_*)는 월드 사운드라
+    /// 카메라 재생용 서브사운드가 없다 - 빨간 로그만 남기고 소리는 안 난다.
+    /// 그래서 다른 게임들이 검증한 UI 사운드로만 고른다.
+    /// </summary>
     [StaticConstructorOnStartup]
     public static class PunchingSounds
     {
         public static readonly SoundDef Cue = PRSounds.Lookup("Tick_Low");
-        public static readonly SoundDef Hit = PRSounds.Lookup("Pawn_Melee_Punch_HitPawn");
-        public static readonly SoundDef Whiff = PRSounds.Lookup("Pawn_Melee_Punch_Miss");
+        public static readonly SoundDef Hit = PRSounds.Lookup("Crunch");
+        public static readonly SoundDef Whiff = PRSounds.Lookup("ClickReject");
         public static readonly SoundDef Ko = PRSounds.Lookup("TinyBell");
     }
 }

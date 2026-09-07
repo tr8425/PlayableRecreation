@@ -5,6 +5,7 @@
   <SLT.Btn.Pull>Pull  (Enter)</SLT.Btn.Pull>
   <SLT.Credits>Tokens {0}</SLT.Credits>
   <SLT.Peak>best {0}</SLT.Peak>
+  <SLT.Jackpot>JACKPOT!</SLT.Jackpot>
 
   <!-- Status -->
   <SLT.Status.Idle>One token a pull.</SLT.Status.Idle>
@@ -13,22 +14,22 @@
   <SLT.Status.Broke>Out of tokens. The machine thanks you - best stack {0}.</SLT.Status.Broke>
 
   <!-- Paytable -->
-  <SLT.Tut.Pay.Sevens>Three sevens: {0}</SLT.Tut.Pay.Sevens>
-  <SLT.Tut.Pay.Bars>Three bars: {0}</SLT.Tut.Pay.Bars>
-  <SLT.Tut.Pay.Coins>Three coins: {0}</SLT.Tut.Pay.Coins>
-  <SLT.Tut.Pay.Plums>Three plums: {0}</SLT.Tut.Pay.Plums>
-  <SLT.Tut.Pay.Pair>Two sevens: {0}</SLT.Tut.Pay.Pair>
+  <SLT.Tut.Pay.Gold>Three gold: {0}</SLT.Tut.Pay.Gold>
+  <SLT.Tut.Pay.Silver>Three silver: {0}</SLT.Tut.Pay.Silver>
+  <SLT.Tut.Pay.Jade>Three jade: {0}</SLT.Tut.Pay.Jade>
+  <SLT.Tut.Pay.Berries>Three berries: {0}</SLT.Tut.Pay.Berries>
+  <SLT.Tut.Pay.Pair>Two gold: {0}</SLT.Tut.Pay.Pair>
 
   <!-- Tutorial -->
   <SLT.Tut.P1.Title>1. Slot machine</SLT.Tut.P1.Title>
   <SLT.Tut.P1.Body>Twenty house tokens, a lever, and three reels that already know the answer.
 
-No real silver changes hands - the tokens are the house's, and they go home when you do. This is the one thing in the rec room where skill will not help you.
+The reels carry this planet's valuables - gold, silver, jade, and berries for the optimists. No real silver changes hands: the tokens are the house's, and they go home when you do. This is the one thing in the rec room where skill will not help you.
 
 See how tall the stack gets before the machine wins. The machine always wins.</SLT.Tut.P1.Body>
 
   <SLT.Tut.P2.Title>2. Paytable</SLT.Tut.P2.Title>
-  <SLT.Tut.P2.Body>A pull costs one token. Three of a kind pays - sevens best, plums least - and a pair of sevens gets you a consolation.
+  <SLT.Tut.P2.Body>A pull costs one token. Three of a kind pays - gold best, berries least - and a pair of gold gets you a consolation.
 
 That is the whole rulebook. Pull.</SLT.Tut.P2.Body>
 
