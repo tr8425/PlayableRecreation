@@ -69,13 +69,18 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 ## 3. 지금 상태
 
 - 빌드 경고 0 · 오류 0
-- 테스트 264 개 전부 통과 (다트 · 펀칭백 Core 포함)
-- `Tools/verify.py` — 번역 키 487 짝, 안 쓰는 키 0, Def 참조 성함
+- 테스트 281 개 전부 통과 (다트 · 펀칭백 · 룰렛 Core 포함)
+- `Tools/verify.py` — 번역 키 526 짝, 안 쓰는 키 0, Def 참조 성함
   (ModSupport 의 Def · 패치 · 지원 모드 defName 까지 검사한다)
 - `Tools/guistate.py` — GUI 전역 상태를 되돌리지 않는 메서드 0
-- `Tools/package.py` — 통과 (57 파일 · 578 KB, LoadFolders.xml 과 ModSupport 포함)
-- 인게임 확인: 기존 일곱 창은 확인 완료. **신작 넷(다트·펀칭백·슬롯·Gloomy 패치)은
+- `Tools/package.py` — 통과 (59 파일 · 605 KB, LoadFolders.xml 과 ModSupport 포함)
+- 인게임 확인: 기존 일곱 창은 확인 완료. **신작 다섯(다트·펀칭백·슬롯·룰렛·Gloomy 패치)은
   인게임 확인 전이다** — v1.1.0 재업로드 전에 반드시 확인할 것
+- 룰렛은 뱅크롤 런이다 — 칩 20 시작, 난이도 = 목표 배수(×1.5~×5 → 30/40/60/80/100),
+  테이블 리밋 10 (이게 없으면 ×1.5 와 ×2 가 "올인 한 방"으로 같은 난이도가 된다).
+  최적 전략 몬테카를로 승률 65/47/31/23/18% — 사다리 단조 확인.
+  Rounds 는 스핀 수 +1 로 답한다 - 첫 스핀 올인으로 끝난 판도 전적에 남기기 위함
+  (기권 보호 Rounds≤1 은 스핀 0에서만 걸리면 된다)
 - 슬롯 칩은 세이브 지갑이다 — `GameComponent_Recreation` 의 범용 카운터
   (`GetCounter`/`SetCounter`, `Slots/…` 키)에 저장. 은 200 → 칩 20 충전,
   천 닢 도달 시 콜로니당 한 번 `PR_SlotsThousandClub` 생각 + 연출.
@@ -90,7 +95,8 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 ## 4. 다음에 할 일
 
 1. **v1.1.0 인게임 QA** — 다트(조준 클릭 + 두 막대, 세이브·복원), 펀칭백(리듬 판정,
-   시작 게이트), 슬롯(릴 연출), Gloomy 가구 3종에서 기존 게임 진입. VFE·Gloomy·Casino
+   시작 게이트), 슬롯(릴 연출 · 지갑 · 충전), 룰렛(베팅 클릭 · 휠 연출 · 세이브·복원),
+   Gloomy 가구 3종에서 기존 게임 진입. VFE·Gloomy·Casino
    를 켠 판과 끈 판 양쪽에서 (끈 쪽은 로그에 빨간 줄이 없어야 한다)
 2. **v1.1.0 재업로드** — 목요일 저녁 소프트 런칭으로 결정됨. 재업로드는 웹의 언어별
    설명을 건드리지 않는다. 갱신 노트에 "Mod support" 요지를 쓸 것
@@ -113,7 +119,7 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 About/           About.xml · Preview.png (640x360, 영문) · ModIcon.png
 Assemblies/      PlayableRecreation.dll  ← 커밋한다. 배포에 필요하다
 Defs/            MiniGameDefs 가 핵심. 게임 하나 = MiniGameDef 하나
-Languages/       English · Korean. Keyed 487 키씩
+Languages/       English · Korean. Keyed 526 키씩
 LoadFolders.xml  본체("/") + ModSupport 조건부 로드. 배포에 반드시 포함 (package.py 가 챙긴다)
 ModSupport/      VFE · Gloomy · Casino. 각각 Defs/Patches/Languages 미니 트리
 Patches/         PatchOperationAdd 일곱 개. 이 파일이 모드의 진입점이다

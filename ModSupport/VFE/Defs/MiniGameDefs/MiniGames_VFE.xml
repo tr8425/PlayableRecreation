@@ -71,4 +71,40 @@
     <windowSize>(760, 680)</windowSize>
   </PlayableRecreation.MiniGameDef>
 
+  <!--
+    룰렛은 뱅크롤 런이다. 스핀 하나는 순수 운이지만 판 전체는 아니다 -
+    난이도가 목표 배수(×1.5~×5)를 정하고, 변동성(빨강이냐 숫자 하나냐)을
+    고르는 것이 플레이어의 조작이다. 상대는 수학이라 AI 가 없다.
+  -->
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Roulette</defName>
+    <label>roulette</label>
+    <description>Run a bankroll against the wheel. Pick your variance, reach the target.</description>
+    <workerClass>Roulette.RouletteGameWorker</workerClass>
+    <targetThing>Joy_RouletteTable</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>RLT.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>3</tutorialPages>
+    <tutorialKeyPrefix>RLT.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>RLT.Tally.BestWin</li>
+      <li>RLT.Tally.Straights</li>
+      <li>RLT.Tally.Peak</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_Roulette</vanillaJob>
+    <playThought>PR_PlayedRoulette</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Social</linkedSkill>
+
+    <windowSize>(900, 700)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
 </Defs>

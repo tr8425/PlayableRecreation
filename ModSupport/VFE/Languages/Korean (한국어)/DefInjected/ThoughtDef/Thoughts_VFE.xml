@@ -37,4 +37,22 @@
   <PR_PlayedPunchingBag.stages.5.label>펀칭백을 마스터했다</PR_PlayedPunchingBag.stages.5.label>
   <PR_PlayedPunchingBag.stages.5.description>백이 흔들리면 내가 답한다. 운동이기를 그만두고, 내가 항상 이기는 대화가 되었다.</PR_PlayedPunchingBag.stages.5.description>
 
+  <PR_PlayedRoulette.stages.0.label>휠에 칩을 먹였어</PR_PlayedRoulette.stages.0.label>
+  <PR_PlayedRoulette.stages.0.description>행운의 숫자에 전부 걸었다. 휠의 행운의 숫자는 다른 것이었다.</PR_PlayedRoulette.stages.0.description>
+
+  <PR_PlayedRoulette.stages.1.label>테이블을 배우는 중이야</PR_PlayedRoulette.stages.1.label>
+  <PR_PlayedRoulette.stages.1.description>빨강은 두 배를 주고 반은 거짓말을 한다. 숫자는 큰돈을 주고 거의 항상 거짓말을 한다. 판의 생김새가 보이기 시작한다.</PR_PlayedRoulette.stages.1.description>
+
+  <PR_PlayedRoulette.stages.2.label>차분하게 돌렸어</PR_PlayedRoulette.stages.2.label>
+  <PR_PlayedRoulette.stages.2.description>계획을 들고 앉았고, 계획이 아직 통할 때 일어났다. 휠이 제일 싫어하는 짓이다.</PR_PlayedRoulette.stages.2.description>
+
+  <PR_PlayedRoulette.stages.3.label>휠을 잘 다뤘어</PR_PlayedRoulette.stages.3.label>
+  <PR_PlayedRoulette.stages.3.description>목표가 가까우면 작게 걸고, 멀면 크게 부른다. 운이 아니라 운의 외투를 입은 산수다.</PR_PlayedRoulette.stages.3.description>
+
+  <PR_PlayedRoulette.stages.4.label>빈손으로 잘 안 일어나</PR_PlayedRoulette.stages.4.label>
+  <PR_PlayedRoulette.stages.4.description>사람들이 내 비법을 묻는다. 사실대로 말해 준다 - 숫자를 알고, 일어날 때를 알라고. 다들 실망해서 돌아간다.</PR_PlayedRoulette.stages.4.description>
+
+  <PR_PlayedRoulette.stages.5.label>휠을 마스터했다</PR_PlayedRoulette.stages.5.label>
+  <PR_PlayedRoulette.stages.5.description>하우스 몫은 잠들지 않는다. 하지만 하룻밤 정도는 앞지를 수 있다. 나는 그 하룻밤을 습관으로 만들었다.</PR_PlayedRoulette.stages.5.description>
+
 </LanguageData>

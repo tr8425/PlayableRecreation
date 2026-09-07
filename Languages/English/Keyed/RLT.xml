@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Difficulty = target multiplier -->
+  <RLT.Difficulty.T0.Desc>Leave half up - turn 20 chips into 30.</RLT.Difficulty.T0.Desc>
+  <RLT.Difficulty.T1.Desc>Double the buy-in - 20 chips into 40.</RLT.Difficulty.T1.Desc>
+  <RLT.Difficulty.T2.Desc>Triple it - 20 chips into 60. Even money alone rarely gets there.</RLT.Difficulty.T2.Desc>
+  <RLT.Difficulty.T3.Desc>Quadruple it - 20 chips into 80. The dozens start calling.</RLT.Difficulty.T3.Desc>
+  <RLT.Difficulty.T4.Desc>Five times the buy-in - 20 chips into 100. Somebody has to pick a number.</RLT.Difficulty.T4.Desc>
+
+  <!-- Board -->
+  <RLT.Bankroll>Chips {0}</RLT.Bankroll>
+  <RLT.Target>target {0}</RLT.Target>
+
+  <!-- Bets -->
+  <RLT.Bet.Red>RED</RLT.Bet.Red>
+  <RLT.Bet.Black>BLACK</RLT.Bet.Black>
+  <RLT.Bet.Odd>ODD</RLT.Bet.Odd>
+  <RLT.Bet.Even>EVEN</RLT.Bet.Even>
+  <RLT.Bet.Dozen1>1st 12</RLT.Bet.Dozen1>
+  <RLT.Bet.Dozen2>2nd 12</RLT.Bet.Dozen2>
+  <RLT.Bet.Dozen3>3rd 12</RLT.Bet.Dozen3>
+  <RLT.Bet.Current>{0} × {1} - pays {2}:1</RLT.Bet.Current>
+
+  <!-- Controls -->
+  <RLT.Stake>Bet</RLT.Stake>
+  <RLT.Btn.Max>MAX</RLT.Btn.Max>
+  <RLT.Btn.Spin>Spin  (Enter)</RLT.Btn.Spin>
+  <RLT.Btn.Spinning>Spinning...</RLT.Btn.Spinning>
+
+  <!-- Status -->
+  <RLT.Status.Idle>Pick a bet on the table, then spin.</RLT.Status.Idle>
+  <RLT.Status.Spinning>The ball is making up its mind...</RLT.Status.Spinning>
+  <RLT.Status.Hit>{0}! Paid {1}.</RLT.Status.Hit>
+  <RLT.Status.Miss>{0}. The house keeps {1}.</RLT.Status.Miss>
+  <RLT.Status.Won>Target reached - {0} chips in {1} spins. Walk away.</RLT.Status.Won>
+  <RLT.Status.Bust>Bust in {0} spins. The wheel thanks you.</RLT.Status.Bust>
+
+  <!-- Records -->
+  <RLT.Tally.BestWin>Best win {0}</RLT.Tally.BestWin>
+  <RLT.Tally.Straights>Straight hits {0}</RLT.Tally.Straights>
+  <RLT.Tally.Peak>Peak {0}</RLT.Tally.Peak>
+
+  <!-- Paytable -->
+  <RLT.Tut.Pay.Straight>One number: pays 35 to 1.</RLT.Tut.Pay.Straight>
+  <RLT.Tut.Pay.Dozen>A dozen (1-12, 13-24, 25-36): pays 2 to 1.</RLT.Tut.Pay.Dozen>
+  <RLT.Tut.Pay.Even>Red, black, odd, even: pays 1 to 1.</RLT.Tut.Pay.Even>
+  <RLT.Tut.Pay.Zero>Zero beats every bet except the one that picked it.</RLT.Tut.Pay.Zero>
+  <RLT.Tut.Pay.Run>You start with {0} chips, the table takes at most {1} a spin. Reach the target before the chips run out.</RLT.Tut.Pay.Run>
+
+  <!-- Tutorial -->
+  <RLT.Tut.P1.Title>1. The wheel</RLT.Tut.P1.Title>
+  <RLT.Tut.P1.Body>Thirty-seven pockets - eighteen red, eighteen black, and one green zero that belongs to the house.
+
+Every bet on this table loses the same sliver to that zero, about three chips in a hundred. There is no clever bet. There is no dumb bet. The wheel does not care where your chips sit.
+
+What it cannot choose for you is how much and how wild - and that is the whole game.</RLT.Tut.P1.Body>
+
+  <RLT.Tut.P2.Title>2. The table</RLT.Tut.P2.Title>
+  <RLT.Tut.P2.Body>Click the table to place your bet, set the size, spin.
+
+Red or black pays even and lands almost half the time. A dozen pays two to one and lands a third of the time. A single number pays thirty-five to one and lands once in thirty-seven spins - and when the zero comes up, everything else on the table drowns.
+
+Same edge, different weather. Calm bets drift, wild bets jump.</RLT.Tut.P2.Body>
+
+  <RLT.Tut.P3.Title>3. The run</RLT.Tut.P3.Title>
+  <RLT.Tut.P3.Body>You sit down with twenty chips. The difficulty names a target - half up, doubled, up to five times the buy-in. Reach it and the run is won; go broke and the wheel wins.
+
+The table limit is ten a spin, so no single flip of red settles it. A low target likes calm bets and a quick exit. A high target cannot be ground out on even money - the arithmetic says pick a dozen, or a number, and mean it.
+
+There is no undo. The ball does not come back.</RLT.Tut.P3.Body>
+
+</LanguageData>

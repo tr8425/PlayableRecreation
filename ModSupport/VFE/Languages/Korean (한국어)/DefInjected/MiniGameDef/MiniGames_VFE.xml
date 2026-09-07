@@ -7,4 +7,7 @@
   <PR_PunchingBag.label>펀칭백</PR_PunchingBag.label>
   <PR_PunchingBag.description>박자에 맞춰 백을 친다. 상대는 리듬이다.</PR_PunchingBag.description>
 
+  <PR_Roulette.label>룰렛</PR_Roulette.label>
+  <PR_Roulette.description>휠을 상대로 뱅크롤을 굴린다. 변동성을 골라 목표액까지.</PR_Roulette.description>
+
 </LanguageData>

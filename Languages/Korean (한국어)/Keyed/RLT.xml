@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 난이도 = 목표 배수 -->
+  <RLT.Difficulty.T0.Desc>절반만 불려서 일어난다 - 칩 20을 30으로.</RLT.Difficulty.T0.Desc>
+  <RLT.Difficulty.T1.Desc>두 배로 불린다 - 칩 20을 40으로.</RLT.Difficulty.T1.Desc>
+  <RLT.Difficulty.T2.Desc>세 배 - 칩 20을 60으로. 짝수배당만으로는 좀처럼 닿지 않는다.</RLT.Difficulty.T2.Desc>
+  <RLT.Difficulty.T3.Desc>네 배 - 칩 20을 80으로. 다즌이 부르기 시작한다.</RLT.Difficulty.T3.Desc>
+  <RLT.Difficulty.T4.Desc>다섯 배 - 칩 20을 100으로. 누군가는 숫자 하나를 집어야 한다.</RLT.Difficulty.T4.Desc>
+
+  <!-- 판 -->
+  <RLT.Bankroll>칩 {0}</RLT.Bankroll>
+  <RLT.Target>목표 {0}</RLT.Target>
+
+  <!-- 거는 곳 -->
+  <RLT.Bet.Red>빨강</RLT.Bet.Red>
+  <RLT.Bet.Black>검정</RLT.Bet.Black>
+  <RLT.Bet.Odd>홀수</RLT.Bet.Odd>
+  <RLT.Bet.Even>짝수</RLT.Bet.Even>
+  <RLT.Bet.Dozen1>1-12</RLT.Bet.Dozen1>
+  <RLT.Bet.Dozen2>13-24</RLT.Bet.Dozen2>
+  <RLT.Bet.Dozen3>25-36</RLT.Bet.Dozen3>
+  <RLT.Bet.Current>{0} × {1} - 배당 {2}:1</RLT.Bet.Current>
+
+  <!-- 조작 -->
+  <RLT.Stake>베팅</RLT.Stake>
+  <RLT.Btn.Max>최대</RLT.Btn.Max>
+  <RLT.Btn.Spin>돌리기  (Enter)</RLT.Btn.Spin>
+  <RLT.Btn.Spinning>도는 중…</RLT.Btn.Spinning>
+
+  <!-- 상태 -->
+  <RLT.Status.Idle>테이블에서 걸 곳을 고르고 돌리세요.</RLT.Status.Idle>
+  <RLT.Status.Spinning>공이 마음을 정하는 중입니다…</RLT.Status.Spinning>
+  <RLT.Status.Hit>{0}! {1}닢 나왔습니다.</RLT.Status.Hit>
+  <RLT.Status.Miss>{0}. 하우스가 {1}닢을 가져갑니다.</RLT.Status.Miss>
+  <RLT.Status.Won>목표 달성 - {1}번 만에 칩 {0}닢. 일어날 시간입니다.</RLT.Status.Won>
+  <RLT.Status.Bust>{0}번 만에 빈털터리. 휠이 감사를 표합니다.</RLT.Status.Bust>
+
+  <!-- 기록 -->
+  <RLT.Tally.BestWin>최고 적중 {0}</RLT.Tally.BestWin>
+  <RLT.Tally.Straights>스트레이트 적중 {0}</RLT.Tally.Straights>
+  <RLT.Tally.Peak>최고 잔고 {0}</RLT.Tally.Peak>
+
+  <!-- 배당표 -->
+  <RLT.Tut.Pay.Straight>숫자 하나: 배당 35:1.</RLT.Tut.Pay.Straight>
+  <RLT.Tut.Pay.Dozen>다즌 (1-12 · 13-24 · 25-36): 배당 2:1.</RLT.Tut.Pay.Dozen>
+  <RLT.Tut.Pay.Even>빨강 · 검정 · 홀수 · 짝수: 배당 1:1.</RLT.Tut.Pay.Even>
+  <RLT.Tut.Pay.Zero>0 은 0 을 집은 사람 말고는 모두를 이깁니다.</RLT.Tut.Pay.Zero>
+  <RLT.Tut.Pay.Run>칩 {0}닢으로 시작하고, 한 번에 많아야 {1}닢을 받습니다. 칩이 마르기 전에 목표액에 닿으세요.</RLT.Tut.Pay.Run>
+
+  <!-- 튜토리얼 -->
+  <RLT.Tut.P1.Title>1. 휠</RLT.Tut.P1.Title>
+  <RLT.Tut.P1.Body>서른일곱 칸 - 빨강 열여덟, 검정 열여덟, 그리고 하우스의 것인 초록 0 하나.
+
+이 테이블의 어떤 베팅이든 그 0 에게 똑같은 몫을 떼입니다. 백 닢에 세 닢쯤. 영리한 베팅도, 멍청한 베팅도 없습니다. 휠은 당신의 칩이 어디 놓였는지에 관심이 없습니다.
+
+휠이 대신 정해 주지 못하는 것은 얼마를, 얼마나 사납게 거느냐입니다 - 그게 이 게임의 전부입니다.</RLT.Tut.P1.Body>
+
+  <RLT.Tut.P2.Title>2. 테이블</RLT.Tut.P2.Title>
+  <RLT.Tut.P2.Body>테이블을 눌러 걸 곳을 정하고, 액수를 맞추고, 돌립니다.
+
+빨강이나 검정은 두 배를 주고 거의 절반은 맞습니다. 다즌은 세 배를 주고 세 번에 한 번 맞습니다. 숫자 하나는 서른여섯 배를 주고 서른일곱 번에 한 번 맞습니다 - 그리고 0 이 나오는 날엔 테이블 위의 다른 모든 것이 가라앉습니다.
+
+떼이는 몫은 같고, 날씨만 다릅니다. 차분한 베팅은 떠내려가고, 사나운 베팅은 뜁니다.</RLT.Tut.P2.Body>
+
+  <RLT.Tut.P3.Title>3. 런</RLT.Tut.P3.Title>
+  <RLT.Tut.P3.Body>칩 스무 닢을 들고 앉습니다. 난이도가 목표액을 정합니다 - 절반 불리기부터 다섯 배까지. 닿으면 이기고, 다 잃으면 휠이 이깁니다.
+
+테이블 리밋은 한 번에 열 닢 - 빨강 한 방으로 끝나는 판은 없습니다. 낮은 목표는 차분한 베팅과 빠른 퇴장을 좋아합니다. 높은 목표는 짝수배당으로 갈아서는 산수가 안 나옵니다 - 다즌이나 숫자 하나를 집고, 진심이어야 합니다.
+
+무르기는 없습니다. 공은 돌아오지 않습니다.</RLT.Tut.P3.Body>
+
+</LanguageData>
