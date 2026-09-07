@@ -3,15 +3,22 @@
 
   <!-- Controls -->
   <SLT.Btn.Pull>Pull  (Enter)</SLT.Btn.Pull>
+  <SLT.Btn.Charge>Charge +{0}  ({1} silver)</SLT.Btn.Charge>
+  <SLT.Btn.Charge.Tip>Turns {0} silver from around the map into {1} tokens. The machine does not make change, and it does not pay silver back out.</SLT.Btn.Charge.Tip>
   <SLT.Credits>Tokens {0}</SLT.Credits>
   <SLT.Peak>best {0}</SLT.Peak>
   <SLT.Jackpot>JACKPOT!</SLT.Jackpot>
+  <SLT.Club>THOUSAND CLUB!</SLT.Club>
 
   <!-- Status -->
   <SLT.Status.Idle>One token a pull.</SLT.Status.Idle>
   <SLT.Status.Spinning>The reels are thinking...</SLT.Status.Spinning>
   <SLT.Status.Won>Paid {0}!</SLT.Status.Won>
-  <SLT.Status.Broke>Out of tokens. The machine thanks you - best stack {0}.</SLT.Status.Broke>
+  <SLT.Status.Broke>Out of tokens - best stack {0}. The machine takes silver: 200 buys 20.</SLT.Status.Broke>
+
+  <!-- Messages -->
+  <SLT.Msg.NoSilver>Not enough silver on the map - charging tokens takes {0}.</SLT.Msg.NoSilver>
+  <SLT.Msg.Club>{0} stacked a thousand tokens. The machine will remember this.</SLT.Msg.Club>
 
   <!-- Paytable -->
   <SLT.Tut.Pay.Seven>Three sevens: {0}</SLT.Tut.Pay.Seven>
@@ -21,14 +28,16 @@
 
   <!-- Tutorial -->
   <SLT.Tut.P1.Title>1. Slot machine</SLT.Tut.P1.Title>
-  <SLT.Tut.P1.Body>Twenty house tokens, a lever, and three reels that already know the answer.
+  <SLT.Tut.P1.Body>A lever, three reels that already know the answer, and a machine with a long memory: your tokens are kept between visits, saved with the colony.
 
-The reels wear the classic faces, rimworld edition - lucky sevens, gold, BAR, strawberries, and where the lemons used to be, skulls. No real silver changes hands: the tokens are the house's, and they go home when you do. This is the one thing in the rec room where skill will not help you.
+The reels wear the classic faces, rimworld edition - lucky sevens, gold, BAR, strawberries, and where the lemons used to be, skulls. The house spots a new colony twenty tokens; after that, 200 silver buys 20 more. Silver goes in. It does not come back out. This is the one thing in the rec room where skill will not help you.
 
 See how tall the stack gets before the machine wins. The machine always wins.</SLT.Tut.P1.Body>
 
   <SLT.Tut.P2.Title>2. Paytable</SLT.Tut.P2.Title>
   <SLT.Tut.P2.Body>A pull costs one token. Three of a kind pays - sevens best, skulls least - and a pair of sevens gets you a consolation.
+
+Rumor has it the machine remembers whoever stacks a thousand.
 
 That is the whole rulebook. Pull.</SLT.Tut.P2.Body>
 

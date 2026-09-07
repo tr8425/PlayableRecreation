@@ -16,6 +16,7 @@ namespace PlayableRecreation
         private Dictionary<string, int> clearedMasks = new Dictionary<string, int>();
         private Dictionary<string, int> lastRetryTicks = new Dictionary<string, int>();
         private Dictionary<string, GameRecord> colonyRecords = new Dictionary<string, GameRecord>();
+        private Dictionary<string, int> counters = new Dictionary<string, int>();
         private List<GameSession> sessions = new List<GameSession>();
 
         /// <summary>지금 창이 열려 있는 판. 두는 중에는 절대 무효화하지 않는다.</summary>
@@ -46,6 +47,23 @@ namespace PlayableRecreation
             }
 
             return record;
+        }
+
+        // ---------- 게임이 남기는 작은 숫자들 ----------
+
+        /// <summary>
+        /// 세이브에 함께 저장되는 이름 붙은 정수 - 슬롯의 칩 지갑 같은 것들.
+        /// 프레임워크는 열쇠의 뜻을 모른다. 게임이 자기 접두사로 알아서 쓴다.
+        /// </summary>
+        public int GetCounter(string key, int fallback = 0)
+        {
+            int value;
+            return counters.TryGetValue(key, out value) ? value : fallback;
+        }
+
+        public void SetCounter(string key, int value)
+        {
+            counters[key] = value;
         }
 
         // ---------- 숙련도 ----------
@@ -168,6 +186,7 @@ namespace PlayableRecreation
             Scribe_Collections.Look(ref clearedMasks, "clearedMasks", LookMode.Value, LookMode.Value);
             Scribe_Collections.Look(ref lastRetryTicks, "lastRetryTicks", LookMode.Value, LookMode.Value);
             Scribe_Collections.Look(ref colonyRecords, "colonyRecords", LookMode.Value, LookMode.Deep);
+            Scribe_Collections.Look(ref counters, "counters", LookMode.Value, LookMode.Value);
             Scribe_Collections.Look(ref sessions, "sessions", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
@@ -175,6 +194,7 @@ namespace PlayableRecreation
                 if (clearedMasks == null) clearedMasks = new Dictionary<string, int>();
                 if (lastRetryTicks == null) lastRetryTicks = new Dictionary<string, int>();
                 if (colonyRecords == null) colonyRecords = new Dictionary<string, GameRecord>();
+                if (counters == null) counters = new Dictionary<string, int>();
                 if (sessions == null) sessions = new List<GameSession>();
 
                 // 참조가 끊긴(가구나 게임 정의가 사라진) 판은 조용히 정리한다.

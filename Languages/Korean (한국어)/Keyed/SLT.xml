@@ -3,15 +3,22 @@
 
   <!-- 조작 -->
   <SLT.Btn.Pull>당기기  (Enter)</SLT.Btn.Pull>
+  <SLT.Btn.Charge>충전 +{0}  (은 {1})</SLT.Btn.Charge>
+  <SLT.Btn.Charge.Tip>지도 위의 은 {0}닢을 칩 {1}닢으로 바꿉니다. 기계는 거스름돈을 주지 않고, 은을 도로 내주지도 않습니다.</SLT.Btn.Charge.Tip>
   <SLT.Credits>칩 {0}</SLT.Credits>
   <SLT.Peak>최고 {0}</SLT.Peak>
   <SLT.Jackpot>잭팟!</SLT.Jackpot>
+  <SLT.Club>천 닢 클럽!</SLT.Club>
 
   <!-- 상태 -->
   <SLT.Status.Idle>한 번에 칩 하나.</SLT.Status.Idle>
   <SLT.Status.Spinning>릴이 생각 중입니다…</SLT.Status.Spinning>
   <SLT.Status.Won>{0}닢 나왔습니다!</SLT.Status.Won>
-  <SLT.Status.Broke>칩이 떨어졌습니다. 기계가 감사를 표합니다 - 최고 {0}닢.</SLT.Status.Broke>
+  <SLT.Status.Broke>칩이 떨어졌습니다 - 최고 {0}닢. 기계는 은을 받습니다: 200닢에 스무 닢.</SLT.Status.Broke>
+
+  <!-- 알림 -->
+  <SLT.Msg.NoSilver>지도에 은이 부족합니다 - 칩 충전에는 은 {0}닢이 필요합니다.</SLT.Msg.NoSilver>
+  <SLT.Msg.Club>{0} - 칩 천 닢을 쌓았습니다. 기계가 이 일을 기억할 것입니다.</SLT.Msg.Club>
 
   <!-- 배당표 -->
   <SLT.Tut.Pay.Seven>7 셋: {0}</SLT.Tut.Pay.Seven>
@@ -21,14 +28,16 @@
 
   <!-- 튜토리얼 -->
   <SLT.Tut.P1.Title>1. 슬롯머신</SLT.Tut.P1.Title>
-  <SLT.Tut.P1.Body>하우스 칩 스무 닢, 레버 하나, 그리고 답을 이미 알고 있는 릴 세 개.
+  <SLT.Tut.P1.Body>레버 하나, 답을 이미 알고 있는 릴 세 개, 그리고 기억력 좋은 기계 - 칩은 자리를 떠도 사라지지 않고, 콜로니 세이브에 함께 저장됩니다.
 
-릴에는 그 얼굴들이 림월드판으로 돕니다 - 행운의 7, 금, BAR, 딸기, 그리고 레몬이 있던 자리엔 이 행성답게 해골. 진짜 은화는 오가지 않습니다. 칩은 하우스의 것이고, 당신이 일어나면 제자리로 돌아갑니다. 오락실에서 실력이 도와주지 않는 유일한 물건입니다.
+릴에는 그 얼굴들이 림월드판으로 돕니다 - 행운의 7, 금, BAR, 딸기, 그리고 레몬이 있던 자리엔 이 행성답게 해골. 처음 온 콜로니에게는 하우스가 칩 스무 닢을 내주고, 그 다음부터는 은 200닢에 스무 닢을 충전합니다. 은은 들어가기만 합니다. 나오지는 않습니다. 오락실에서 실력이 도와주지 않는 유일한 물건입니다.
 
 기계가 이기기 전에 칩이 얼마나 쌓이는지 보세요. 기계는 결국 이깁니다.</SLT.Tut.P1.Body>
 
   <SLT.Tut.P2.Title>2. 배당표</SLT.Tut.P2.Title>
   <SLT.Tut.P2.Body>한 번 당기는 데 칩 하나. 같은 그림 셋이면 배당이 나옵니다 - 7이 가장 크고 해골이 가장 작습니다. 7 두 개는 위로금입니다.
+
+칩 천 닢을 쌓은 사람은 기계가 기억해 준다는 소문이 있습니다.
 
 규칙은 그게 전부입니다. 당기세요.</SLT.Tut.P2.Body>
 

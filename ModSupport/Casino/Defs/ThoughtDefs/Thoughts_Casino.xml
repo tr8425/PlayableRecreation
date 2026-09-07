@@ -16,4 +16,19 @@
     </stages>
   </ThoughtDef>
 
+  <!-- 콜로니당 한 번뿐인 기억. 지갑이 천 닢에 닿은 그 자리에 있던 사람이 받는다. -->
+
+  <ThoughtDef>
+    <defName>PR_SlotsThousandClub</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>joined the thousand club</label>
+        <description>A thousand tokens in the machine's memory, and my name on the stack. Somewhere in that cabinet, a lever is proud of me.</description>
+        <baseMoodEffect>4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
 </Defs>

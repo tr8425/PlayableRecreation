@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using PlayableRecreation;
 using PlayableRecreation.Core;
 using PlayableRecreation.UI;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -8,8 +10,11 @@ namespace Slots
 {
     /// <summary>
     /// 슬롯머신. 별 보기처럼 승부가 아니다 (hasMatch=false) - 의사결정이 없는 게임에
-    /// 난이도와 전적을 붙이는 것은 거짓말이라서다. 세션 칩 스무 닢으로 어디까지 가는지,
-    /// 그것이 전부다. 진짜 은화는 한 닢도 걸리지 않는다 - 도박 경제는 카지노 모드의 몫이다.
+    /// 난이도와 전적을 붙이는 것은 거짓말이라서다.
+    ///
+    /// 칩은 식민지의 것이다 - 기계가 지갑을 기억하고(세이브에 저장), 은 200닢으로
+    /// 스무 닢을 충전한다. 나가는 길은 없다 - 은을 도로 뱉는 순간 이 창은 오락이
+    /// 아니라 환전소가 된다. 천 닢을 쌓으면 기계가 그것을 기억해 준다.
     ///
     /// 릴은 슬롯머신의 그 얼굴들이다 - 7, 코인 자리엔 금, BAR, 체리 자리엔 딸기,
     /// 레몬 자리엔 이 행성답게 해골. 7과 BAR 는 굽고, 나머지는 바닐라 아이콘을 빌려 쓴다.
@@ -26,6 +31,16 @@ namespace Slots
         private const float ReelStop0 = 0.55f;
         private const float ReelStopGap = 0.4f;
         private const float JackpotSeconds = 3.2f;
+
+        private const int ChargeCost = 200;
+        private const int ChargeTokens = 20;
+        private const int ClubThreshold = 1000;
+
+        /// <summary>세이브에 남는 지갑. 번역 키와 헷갈리지 않게 빗금 꼴을 쓴다.</summary>
+        private const string KeyInit = "Slots/Init";
+        private const string KeyTokens = "Slots/Tokens";
+        private const string KeyPeak = "Slots/Peak";
+        private const string KeyClub = "Slots/Club";
 
         private static readonly int[] Pay3 = { 150, 50, 20, 10, 5 };
         private const int PayPairSeven = 5;
@@ -77,6 +92,9 @@ namespace Slots
         private float nextDing;
         private int dingsLeft;
 
+        /// <summary>천 닢 클럽 연출 중이면 잭팟 현수막 대신 클럽 현수막을 건다.</summary>
+        private bool clubBanner;
+
         // ---------- 프레임워크에 답하는 것들 ----------
 
         public override int SavePoint
@@ -117,9 +135,6 @@ namespace Slots
         {
             seed = newSeed;
             spinIndex = 0;
-            credits = StartCredits;
-            shownCredits = StartCredits;
-            peak = StartCredits;
             lastWin = 0;
             spins = 0;
             spinning = false;
@@ -127,6 +142,30 @@ namespace Slots
             winFlashUntil = 0f;
             jackpotUntil = 0f;
             dingsLeft = 0;
+            clubBanner = false;
+
+            // 지갑은 세이브의 것이다. 처음 앉는 식민지에게만 하우스가 스무 닢을 내준다.
+            GameComponent_Recreation store = GameComponent_Recreation.Current;
+            if (store != null && store.GetCounter(KeyInit) == 0)
+            {
+                store.SetCounter(KeyInit, 1);
+                store.SetCounter(KeyTokens, StartCredits);
+                store.SetCounter(KeyPeak, StartCredits);
+            }
+
+            credits = store != null ? store.GetCounter(KeyTokens, StartCredits) : StartCredits;
+            peak = store != null ? store.GetCounter(KeyPeak, StartCredits) : StartCredits;
+            shownCredits = credits;
+        }
+
+        /// <summary>칩이 움직일 때마다 지갑에 적어 둔다. 창이 어떻게 닫혀도 잃지 않는다.</summary>
+        private void Persist()
+        {
+            GameComponent_Recreation store = GameComponent_Recreation.Current;
+            if (store == null) return;
+
+            store.SetCounter(KeyTokens, credits);
+            store.SetCounter(KeyPeak, peak);
         }
 
         public override void Resume(MiniGameSaveData data)
@@ -192,6 +231,7 @@ namespace Slots
             credits--;
             lastWin = 0;
             spins++;
+            Persist();
 
             for (int reel = 0; reel < 3; reel++) reels[reel] = SymbolAt(spinIndex, reel);
             spinIndex++;
@@ -220,16 +260,90 @@ namespace Slots
             lastWin = win;
             winFlashUntil = now + 1.1f;
             if (credits > peak) peak = credits;
+            Persist();
 
             if (win >= Pay3[0])
             {
                 // 잭팟. 기계가 아는 가장 화려한 3초.
                 jackpotUntil = now + JackpotSeconds;
+                clubBanner = false;
                 dingsLeft = 8;
                 nextDing = now + 0.2f;
                 PRSounds.Play(SlotsSounds.Jackpot);
             }
             else PRSounds.Play(SlotsSounds.Win);
+
+            CheckThousandClub();
+        }
+
+        // ---------- 충전 ----------
+
+        /// <summary>
+        /// 은 200닢이 칩 스무 닢이 된다. 은은 지도 위에 깔린 것만 센다 -
+        /// 창고든 바닥이든, 기계 앞까지 들고 올 수 있는 것들.
+        /// </summary>
+        private void Charge()
+        {
+            if (spinning) return;
+
+            Map map = Board != null ? Board.Map : null;
+            if (map == null) return;
+
+            // 파괴하면 lister 목록이 그 자리에서 줄어드니 복사본을 밟고 간다.
+            List<Thing> silver = new List<Thing>(map.listerThings.ThingsOfDef(ThingDefOf.Silver));
+
+            int total = 0;
+            for (int i = 0; i < silver.Count; i++) total += silver[i].stackCount;
+
+            if (total < ChargeCost)
+            {
+                Messages.Message("SLT.Msg.NoSilver".Translate(ChargeCost),
+                    MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+
+            int remaining = ChargeCost;
+            for (int i = 0; i < silver.Count && remaining > 0; i++)
+            {
+                int take = Mathf.Min(silver[i].stackCount, remaining);
+                silver[i].SplitOff(take).Destroy();
+                remaining -= take;
+            }
+
+            credits += ChargeTokens;
+            if (credits > peak) peak = credits;
+            Persist();
+            PRSounds.Play(SlotsSounds.Win);
+            CheckThousandClub();
+        }
+
+        /// <summary>
+        /// 칩 천 닢. 은으로 바꿔 주는 길은 없다 - 그 순간 이 창은 오락이 아니라
+        /// 환전소가 된다. 대신 기계가 이 일을 딱 한 번, 성대하게 기억해 준다.
+        /// </summary>
+        private void CheckThousandClub()
+        {
+            if (credits < ClubThreshold) return;
+
+            GameComponent_Recreation store = GameComponent_Recreation.Current;
+            if (store == null || store.GetCounter(KeyClub) != 0) return;
+            store.SetCounter(KeyClub, 1);
+
+            jackpotUntil = now + JackpotSeconds;
+            clubBanner = true;
+            dingsLeft = 8;
+            nextDing = now + 0.2f;
+            PRSounds.Play(SlotsSounds.Jackpot);
+
+            if (SeatedPawn != null)
+            {
+                Messages.Message("SLT.Msg.Club".Translate(SeatedPawn.LabelShortCap),
+                    SeatedPawn, MessageTypeDefOf.PositiveEvent, false);
+
+                ThoughtDef club = DefDatabase<ThoughtDef>.GetNamedSilentFail("PR_SlotsThousandClub");
+                if (club != null && SeatedPawn.needs != null && SeatedPawn.needs.mood != null)
+                    SeatedPawn.needs.mood.thoughts.memories.TryGainMemory(club);
+            }
         }
 
         // ---------- 조작 ----------
@@ -279,6 +393,29 @@ namespace Slots
             Rect machine = new Rect(area.x + area.width * 0.1f, area.y + 52f,
                                     area.width * 0.8f, area.height - 64f);
             DrawMachine(machine);
+            DrawChargeButton(area);
+        }
+
+        /// <summary>은을 칩으로 바꾸는 작은 버튼. 릴이 도는 동안은 잠긴다.</summary>
+        private void DrawChargeButton(Rect area)
+        {
+            const float width = 220f;
+            const float height = 30f;
+            Rect button = new Rect(area.center.x - width / 2f, area.yMax - height - 2f, width, height);
+
+            TooltipHandler.TipRegion(button, "SLT.Btn.Charge.Tip".Translate(ChargeCost, ChargeTokens));
+
+            string label = "SLT.Btn.Charge".Translate(ChargeTokens, ChargeCost).ToString();
+
+            if (spinning)
+            {
+                GUI.color = PRTheme.Dim;
+                Widgets.ButtonText(button, label, true, false, false);
+                GUI.color = Color.white;
+                return;
+            }
+
+            if (Widgets.ButtonText(button, label)) Charge();
         }
 
         private void DrawMachine(Rect area)
@@ -448,7 +585,7 @@ namespace Slots
             GUI.color = new Color(SlotsTheme.JackpotEdge.r * pulse, SlotsTheme.JackpotEdge.g * pulse,
                                   SlotsTheme.JackpotEdge.b * pulse, fade);
             Widgets.Label(new Rect(cabinet.x, cabinet.yMax + 8f, cabinet.width, 34f),
-                "SLT.Jackpot".Translate().ToString());
+                (clubBanner ? "SLT.Club" : "SLT.Jackpot").Translate().ToString());
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.UpperLeft;

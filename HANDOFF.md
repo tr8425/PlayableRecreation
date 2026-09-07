@@ -70,12 +70,16 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 
 - 빌드 경고 0 · 오류 0
 - 테스트 264 개 전부 통과 (다트 · 펀칭백 Core 포함)
-- `Tools/verify.py` — 번역 키 482 짝, 안 쓰는 키 0, Def 참조 성함
+- `Tools/verify.py` — 번역 키 487 짝, 안 쓰는 키 0, Def 참조 성함
   (ModSupport 의 Def · 패치 · 지원 모드 defName 까지 검사한다)
 - `Tools/guistate.py` — GUI 전역 상태를 되돌리지 않는 메서드 0
-- `Tools/package.py` — 통과 (57 파일 · 570 KB, LoadFolders.xml 과 ModSupport 포함)
+- `Tools/package.py` — 통과 (57 파일 · 578 KB, LoadFolders.xml 과 ModSupport 포함)
 - 인게임 확인: 기존 일곱 창은 확인 완료. **신작 넷(다트·펀칭백·슬롯·Gloomy 패치)은
   인게임 확인 전이다** — v1.1.0 재업로드 전에 반드시 확인할 것
+- 슬롯 칩은 세이브 지갑이다 — `GameComponent_Recreation` 의 범용 카운터
+  (`GetCounter`/`SetCounter`, `Slots/…` 키)에 저장. 은 200 → 칩 20 충전,
+  천 닢 도달 시 콜로니당 한 번 `PR_SlotsThousandClub` 생각 + 연출.
+  은을 도로 내주는 길은 일부러 없다 (환전소 금지)
 
 **창작마당에 올라가 있다.** id 3794530553, 2026-09-03 공개, v1.0.0.
 `About/PublishedFileId.txt` 커밋됨. 언어별 설명은 `Workshop/description_en.txt` ·
@@ -109,7 +113,7 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 About/           About.xml · Preview.png (640x360, 영문) · ModIcon.png
 Assemblies/      PlayableRecreation.dll  ← 커밋한다. 배포에 필요하다
 Defs/            MiniGameDefs 가 핵심. 게임 하나 = MiniGameDef 하나
-Languages/       English · Korean. Keyed 482 키씩
+Languages/       English · Korean. Keyed 487 키씩
 LoadFolders.xml  본체("/") + ModSupport 조건부 로드. 배포에 반드시 포함 (package.py 가 챙긴다)
 ModSupport/      VFE · Gloomy · Casino. 각각 Defs/Patches/Languages 미니 트리
 Patches/         PatchOperationAdd 일곱 개. 이 파일이 모드의 진입점이다
