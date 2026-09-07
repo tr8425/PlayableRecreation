@@ -14,6 +14,9 @@ namespace Slots
         public static readonly Color WinFlash = new Color(0.93f, 0.75f, 0.38f, 0.35f);
         public static readonly Color Credits = new Color(0.93f, 0.75f, 0.38f);
         public static readonly Color JackpotEdge = new Color(0.98f, 0.84f, 0.36f);
+
+        public static readonly Color BarPlate = new Color(0.90f, 0.86f, 0.76f);
+        public static readonly Color BarText = new Color(0.16f, 0.14f, 0.12f);
     }
 
     /// <summary>바닐라 소리를 빌려 쓴다.</summary>

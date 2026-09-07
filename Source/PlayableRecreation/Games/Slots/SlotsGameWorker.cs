@@ -11,8 +11,8 @@ namespace Slots
     /// 난이도와 전적을 붙이는 것은 거짓말이라서다. 세션 칩 스무 닢으로 어디까지 가는지,
     /// 그것이 전부다. 진짜 은화는 한 닢도 걸리지 않는다 - 도박 경제는 카지노 모드의 몫이다.
     ///
-    /// 릴의 그림은 이 행성의 물건들이다 - 금, 은, 옥, 산딸기. 그림 파일을 만들지 않고
-    /// 바닐라 아이콘을 빌려 쓴다.
+    /// 릴은 슬롯머신의 그 얼굴들이다 - 7, 코인 자리엔 금, BAR, 체리 자리엔 딸기,
+    /// 레몬 자리엔 이 행성답게 해골. 7과 BAR 는 굽고, 나머지는 바닐라 아이콘을 빌려 쓴다.
     ///
     /// 릴은 (시드, 순번)으로 결정된다. 당기는 순간 결과는 이미 정해져 있다 -
     /// 원래 슬롯머신이 그런 물건이다.
@@ -20,15 +20,17 @@ namespace Slots
     public class SlotsGameWorker : MiniGameWorker
     {
         private const int StartCredits = 20;
-        private const int Symbols = 4;          // 금 · 은 · 옥 · 산딸기
+        private const int Symbols = 5;          // 7 · 금 · BAR · 딸기 · 해골
+        private const int SymbolSeven = 0;
+        private const int SymbolBar = 2;
         private const float ReelStop0 = 0.55f;
         private const float ReelStopGap = 0.4f;
         private const float JackpotSeconds = 3.2f;
 
-        private static readonly int[] Pay3 = { 100, 25, 10, 5 };
-        private const int PayPairGold = 2;
+        private static readonly int[] Pay3 = { 150, 50, 20, 10, 5 };
+        private const int PayPairSeven = 5;
 
-        /// <summary>릴에 도는 물건들. 좋은 것일수록 드물다.</summary>
+        /// <summary>릴에 도는 물건들. 7(0)과 BAR(2)는 def 가 아니라 구운 그림이다.</summary>
         private static ThingDef[] symbolDefs;
 
         private static ThingDef[] SymbolDefs
@@ -39,10 +41,11 @@ namespace Slots
                 {
                     symbolDefs = new[]
                     {
+                        null,
                         DefDatabase<ThingDef>.GetNamedSilentFail("Gold"),
-                        DefDatabase<ThingDef>.GetNamedSilentFail("Silver"),
-                        DefDatabase<ThingDef>.GetNamedSilentFail("Jade"),
-                        DefDatabase<ThingDef>.GetNamedSilentFail("RawBerries"),
+                        null,
+                        DefDatabase<ThingDef>.GetNamedSilentFail("Plant_Strawberry"),
+                        DefDatabase<ThingDef>.GetNamedSilentFail("Skull"),
                     };
                 }
 
@@ -173,12 +176,13 @@ namespace Slots
 
         private int SymbolAt(int spin, int reel)
         {
-            // 가중치 - 산딸기 4 · 옥 3 · 은 2 · 금 하나. 좋은 것일수록 드물다.
+            // 가중치 - 해골 30 · 딸기 25 · BAR 20 · 금 15 · 7 은 10. 좋은 것일수록 드물다.
             float u = AimMath.Uniform(seed, spin * 3 + reel);
-            if (u < 0.1f) return 0;
-            if (u < 0.3f) return 1;
-            if (u < 0.6f) return 2;
-            return 3;
+            if (u < 0.10f) return 0;
+            if (u < 0.25f) return 1;
+            if (u < 0.45f) return 2;
+            if (u < 0.70f) return 3;
+            return 4;
         }
 
         private void Spin()
@@ -205,9 +209,9 @@ namespace Slots
             if (reels[0] == reels[1] && reels[1] == reels[2]) win = Pay3[reels[0]];
             else
             {
-                int golds = 0;
-                for (int i = 0; i < 3; i++) if (reels[i] == 0) golds++;
-                if (golds == 2) win = PayPairGold;
+                int sevens = 0;
+                for (int i = 0; i < 3; i++) if (reels[i] == SymbolSeven) sevens++;
+                if (sevens == 2) win = PayPairSeven;
             }
 
             if (win <= 0) return;
@@ -372,6 +376,18 @@ namespace Slots
 
         private static void DrawSymbol(Rect rect, int symbol)
         {
+            if (symbol == SymbolSeven)
+            {
+                GUI.DrawTexture(rect, SlotsTextures.Seven);
+                return;
+            }
+
+            if (symbol == SymbolBar)
+            {
+                DrawBarPlate(rect);
+                return;
+            }
+
             ThingDef def = SymbolDefs[symbol];
 
             if (def != null)
@@ -386,13 +402,29 @@ namespace Slots
             GUI.color = Color.white;
         }
 
-        /// <summary>잭팟 - 금덩이가 쏟아지고 글자가 고동친다.</summary>
+        /// <summary>슬롯머신의 그 BAR. 크림색 판에 굵은 검은 글자.</summary>
+        private static void DrawBarPlate(Rect rect)
+        {
+            Rect plate = new Rect(rect.x, rect.center.y - rect.height * 0.26f,
+                                  rect.width, rect.height * 0.52f);
+
+            Widgets.DrawBoxSolid(plate.ExpandedBy(2f), SlotsTheme.WindowEdge);
+            Widgets.DrawBoxSolid(plate, SlotsTheme.BarPlate);
+
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            GUI.color = SlotsTheme.BarText;
+            Widgets.Label(plate, "BAR");
+            GUI.color = Color.white;
+            Text.Anchor = TextAnchor.UpperLeft;
+        }
+
+        /// <summary>잭팟 - 7이 쏟아지고 글자가 고동친다.</summary>
         private void DrawJackpot(Rect cabinet)
         {
-            ThingDef gold = SymbolDefs[0];
             float remain = jackpotUntil - now;
 
-            // 쏟아지는 금. 열마다 자리와 박자가 달라 비처럼 보인다.
+            // 쏟아지는 7. 열마다 자리와 박자가 달라 비처럼 보인다.
             Rect rain = new Rect(cabinet.x, cabinet.y, cabinet.width, cabinet.height + 46f);
             for (int i = 0; i < 22; i++)
             {
@@ -403,16 +435,8 @@ namespace Slots
                 float fall = ((now * (0.55f + v * 0.5f) + v * 3f) % 1f);
                 float y = rain.y - 10f + fall * rain.height;
 
-                float size = 12f + v * 8f;
-                Rect coin = new Rect(x, y, size, size);
-
-                if (gold != null) Widgets.ThingIcon(coin, gold);
-                else
-                {
-                    GUI.color = SlotsTheme.JackpotEdge;
-                    GUI.DrawTexture(coin, PRTextures.Dot);
-                    GUI.color = Color.white;
-                }
+                float size = 14f + v * 10f;
+                GUI.DrawTexture(new Rect(x, y, size, size), SlotsTextures.Seven);
             }
 
             // 고동치는 글자. 마지막 0.6초에 잦아든다.
@@ -436,7 +460,7 @@ namespace Slots
         {
             if (page == 0)
             {
-                // 릴 세 개를 그대로 보여준다 - 전부 금으로.
+                // 릴 세 개를 그대로 보여준다 - 전부 7로.
                 Rect machine = new Rect(area.x + area.width * 0.15f, area.center.y - 80f,
                                         area.width * 0.7f, 160f);
                 int[] saved = { reels[0], reels[1], reels[2] };
@@ -452,13 +476,21 @@ namespace Slots
             Listing_Standard list = new Listing_Standard();
             list.Begin(new Rect(area.x + area.width * 0.16f, area.y + 24f, area.width * 0.68f, area.height - 24f));
 
-            list.Label("SLT.Tut.Pay.Gold".Translate(Pay3[0]));
-            list.Label("SLT.Tut.Pay.Silver".Translate(Pay3[1]));
-            list.Label("SLT.Tut.Pay.Jade".Translate(Pay3[2]));
-            list.Label("SLT.Tut.Pay.Berries".Translate(Pay3[3]));
-            list.Label("SLT.Tut.Pay.Pair".Translate(PayPairGold));
+            // 이름을 def 에서 가져오면 번역도 아이콘도 저절로 맞는다.
+            list.Label("SLT.Tut.Pay.Seven".Translate(Pay3[0]));
+            list.Label("SLT.Tut.Pay.Row".Translate(LabelOf(1), Pay3[1]));
+            list.Label("SLT.Tut.Pay.Bar".Translate(Pay3[2]));
+            list.Label("SLT.Tut.Pay.Row".Translate(LabelOf(3), Pay3[3]));
+            list.Label("SLT.Tut.Pay.Row".Translate(LabelOf(4), Pay3[4]));
+            list.Label("SLT.Tut.Pay.PairSeven".Translate(PayPairSeven));
 
             list.End();
+        }
+
+        private static string LabelOf(int symbol)
+        {
+            ThingDef def = SymbolDefs[symbol];
+            return def != null ? def.LabelCap.ToString() : "?";
         }
     }
 }
