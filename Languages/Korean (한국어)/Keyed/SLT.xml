@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 조작 -->
+  <SLT.Btn.Pull>당기기  (Enter)</SLT.Btn.Pull>
+  <SLT.Credits>칩 {0}</SLT.Credits>
+  <SLT.Peak>최고 {0}</SLT.Peak>
+
+  <!-- 상태 -->
+  <SLT.Status.Idle>한 번에 칩 하나.</SLT.Status.Idle>
+  <SLT.Status.Spinning>릴이 생각 중입니다…</SLT.Status.Spinning>
+  <SLT.Status.Won>{0}닢 나왔습니다!</SLT.Status.Won>
+  <SLT.Status.Broke>칩이 떨어졌습니다. 기계가 감사를 표합니다 - 최고 {0}닢.</SLT.Status.Broke>
+
+  <!-- 배당표 -->
+  <SLT.Tut.Pay.Sevens>7 셋: {0}</SLT.Tut.Pay.Sevens>
+  <SLT.Tut.Pay.Bars>BAR 셋: {0}</SLT.Tut.Pay.Bars>
+  <SLT.Tut.Pay.Coins>동전 셋: {0}</SLT.Tut.Pay.Coins>
+  <SLT.Tut.Pay.Plums>자두 셋: {0}</SLT.Tut.Pay.Plums>
+  <SLT.Tut.Pay.Pair>7 둘: {0}</SLT.Tut.Pay.Pair>
+
+  <!-- 튜토리얼 -->
+  <SLT.Tut.P1.Title>1. 슬롯머신</SLT.Tut.P1.Title>
+  <SLT.Tut.P1.Body>하우스 칩 스무 닢, 레버 하나, 그리고 답을 이미 알고 있는 릴 세 개.
+
+진짜 은화는 오가지 않습니다 - 칩은 하우스의 것이고, 당신이 일어나면 제자리로 돌아갑니다. 오락실에서 실력이 도와주지 않는 유일한 물건입니다.
+
+기계가 이기기 전에 칩이 얼마나 쌓이는지 보세요. 기계는 결국 이깁니다.</SLT.Tut.P1.Body>
+
+  <SLT.Tut.P2.Title>2. 배당표</SLT.Tut.P2.Title>
+  <SLT.Tut.P2.Body>한 번 당기는 데 칩 하나. 같은 그림 셋이면 배당이 나옵니다 - 7이 가장 크고 자두가 가장 작습니다. 7 두 개는 위로금입니다.
+
+규칙은 그게 전부입니다. 당기세요.</SLT.Tut.P2.Body>
+
+</LanguageData>

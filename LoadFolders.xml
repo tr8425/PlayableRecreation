@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  모드 가구 지원은 폴더째로 조건부다. 해당 모드가 없으면 그 폴더의 Def 도 패치도
+  아예 로드되지 않으므로, 이 모드의 의존성은 여전히 0개다.
+
+  이 파일이 있으면 림월드는 여기 적힌 폴더만 읽는다 - "/" 가 본체다.
+-->
+<loadFolders>
+  <v1.6>
+    <li>/</li>
+    <li IfModActive="VanillaExpanded.VFECore">ModSupport/VFE</li>
+    <li IfModActive="Solaris.FurnitureBase">ModSupport/Gloomy</li>
+    <li IfModActive="Adamas.HospitalityCasino">ModSupport/Casino</li>
+  </v1.6>
+</loadFolders>

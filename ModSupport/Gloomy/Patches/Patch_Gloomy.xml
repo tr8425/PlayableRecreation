@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  GloomyFurniture 의 체스판·포커 테이블·당구대는 우리가 이미 만든 게임과 같은 가구다.
+  기존 게임을 그대로 붙인다 - 새 규칙도 새 그림도 없다.
+
+  이 폴더는 GloomyFurniture 가 켜져 있을 때만 로드된다 (LoadFolders.xml).
+-->
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="GL_ChessTable"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Chess</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="GL_PokerTable"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Poker</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="GL_BilliardsTable"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Billiards</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+</Patch>

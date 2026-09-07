@@ -27,7 +27,21 @@
 
 일곱 개 전부 Core 소속이다. DLC 없이 동작한다. 오디세이가 있으면 별 보기가 더 준다.
 
-규모: C# 117 파일 · 18,800 줄. 테스트 239 개. 배포본 432 KB.
+**모드 가구 지원 (2026-09-07 추가, v1.1.0)** — 전부 소프트 의존이다. `LoadFolders.xml`
+의 `IfModActive` 로 `ModSupport/<모드>/` 폴더째 조건부 로드되므로, 해당 모드가 없으면
+Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개다.
+
+| 지원 모드 (packageId) | 가구 | 게임 |
+|---|---|---|
+| VFE (`VanillaExpanded.VFECore`) | `Joy_DartsBoard` | 다트 — 신작, `Darts` |
+| VFE | `Joy_PunchingBag` | 펀칭백 리듬 게임 — 신작, `Punching` |
+| GloomyFurniture (`Solaris.FurnitureBase`) | `GL_ChessTable` · `GL_PokerTable` · `GL_BilliardsTable` | 기존 체스·포커·나인볼 재사용 (패치만) |
+| Hospitality: Casino (`Adamas.HospitalityCasino`) | `HC_SlotMachine{Red,Blue,Green}` | 슬롯머신 — 신작, `Slots`, hasMatch=false |
+
+신작 게임의 C# 은 본체 DLL 에 항상 실려 있고, Def 가 없으면 잠들어 있다.
+룰렛(하우스전 뱅크런 설계 확정)은 3차분 — 아직 코드가 없다.
+
+규모: C# 104 파일 · 17,700 줄. 테스트 264 개. 배포본 57 파일 · 570 KB.
 
 ---
 
@@ -40,7 +54,9 @@
    가구에 컴포넌트 하나를 *더할* 뿐이다. 그래서 모드를 빼도 가구가 바닐라로 돌아온다
 3. **`Core/` 와 `AI/` 는 Verse · RimWorld · UnityEngine 을 모른다.** 그래서 테스트가
    림월드 없이 돈다. 테스트 프로젝트가 이 폴더들을 `<Compile Include>` 로 끌어간다
-4. **`Framework/` 는 어떤 게임도 모른다. 게임끼리도 서로 모른다**
+4. **`Framework/` 는 어떤 게임도 모른다. 게임끼리도 서로 모른다.**
+   여러 게임이 쓰는 순수 산수(결정론 난수, 두 막대 조준)는 `Framework/Core/AimMath.cs`
+   중립 지대에 있다 — 게임이 게임을 참조하는 일은 여전히 없다
 5. **플레이어의 게임 속도를 건드리지 않는다.** `TickManager.CurTimeSpeed` 를 읽지도 쓰지도
    않는다. 멈추는 것은 바닐라 `Window.forcePause` 로만 한다.
    **스페이스는 플레이어의 일시정지 키다** — 판을 진행시키는 키는 엔터다 (`Framework/UI/PRKeys.cs`)
@@ -53,26 +69,29 @@
 ## 3. 지금 상태
 
 - 빌드 경고 0 · 오류 0
-- 테스트 239 개 전부 통과
-- `Tools/verify.py` — 번역 키 408 짝, 안 쓰는 키 0, Def 참조 성함
+- 테스트 264 개 전부 통과 (다트 · 펀칭백 Core 포함)
+- `Tools/verify.py` — 번역 키 482 짝, 안 쓰는 키 0, Def 참조 성함
+  (ModSupport 의 Def · 패치 · 지원 모드 defName 까지 검사한다)
 - `Tools/guistate.py` — GUI 전역 상태를 되돌리지 않는 메서드 0
-- `Tools/package.py` — 통과 (36 파일 · 432 KB)
-- 인게임 확인: 일곱 창 전부 열리고 돌아간다 (스크린샷으로 확인)
+- `Tools/package.py` — 통과 (57 파일 · 570 KB, LoadFolders.xml 과 ModSupport 포함)
+- 인게임 확인: 기존 일곱 창은 확인 완료. **신작 넷(다트·펀칭백·슬롯·Gloomy 패치)은
+  인게임 확인 전이다** — v1.1.0 재업로드 전에 반드시 확인할 것
 
-**창작마당에는 아직 안 올렸다.** `About/PublishedFileId.txt` 가 없다 — 저장소에도,
-설치본에도 (2026-09-01 확인). 창작마당 검색에도 `Playable Recreation` 항목 없음.
-이름이 겹치는 다른 모드도 없다.
+**창작마당에 올라가 있다.** id 3794530553, 2026-09-03 공개, v1.0.0.
+`About/PublishedFileId.txt` 커밋됨. 언어별 설명은 `Workshop/description_en.txt` ·
+`description_ko.txt` — 웹에서 언어별로 잘라 넣는다 (한도는 언어마다 별도 8,000자).
 
 ---
 
 ## 4. 다음에 할 일
 
-1. **창작마당 업로드** — 절차는 `Workshop/RELEASE.md` 에 전부 있다. 림월드를 직접 띄워
-   Mods 메뉴에서 올려야 한다 (사람 손이 필요한 단계).
-   첫 업로드 뒤 `About/PublishedFileId.txt` 를 저장소로 가져와 커밋하는 것을 잊지 말 것.
-   그게 없으면 다음 업로드가 같은 항목을 갱신하지 못하고 새 항목을 만든다
-2. **인게임 QA 남은 것** — 판을 저장하고 다시 여는 것, 무효화 조건(전투·청소·수리·손상·이동·만료),
-   오디세이 소행성/궤도의 하늘과 지표 두 모드, 한국어·영어 양쪽 화면 읽기
+1. **v1.1.0 인게임 QA** — 다트(조준 클릭 + 두 막대, 세이브·복원), 펀칭백(리듬 판정,
+   시작 게이트), 슬롯(릴 연출), Gloomy 가구 3종에서 기존 게임 진입. VFE·Gloomy·Casino
+   를 켠 판과 끈 판 양쪽에서 (끈 쪽은 로그에 빨간 줄이 없어야 한다)
+2. **v1.1.0 재업로드** — 목요일 저녁 소프트 런칭으로 결정됨. 재업로드는 웹의 언어별
+   설명을 건드리지 않는다. 갱신 노트에 "Mod support" 요지를 쓸 것
+3. **창작마당 설명·스크린샷** — 설명문에 Mod support 절 추가(언어별 파일 갱신),
+   모드 가구 이미지는 바닐라 12장 **뒤에** "Requires ..." 뱃지를 이미지에 구워 붙인다
 
 ### 손대면 좋을 것 (급하지 않음)
 
@@ -90,13 +109,15 @@
 About/           About.xml · Preview.png (640x360, 영문) · ModIcon.png
 Assemblies/      PlayableRecreation.dll  ← 커밋한다. 배포에 필요하다
 Defs/            MiniGameDefs 가 핵심. 게임 하나 = MiniGameDef 하나
-Languages/       English · Korean. Keyed 408 키씩
+Languages/       English · Korean. Keyed 482 키씩
+LoadFolders.xml  본체("/") + ModSupport 조건부 로드. 배포에 반드시 포함 (package.py 가 챙긴다)
+ModSupport/      VFE · Gloomy · Casino. 각각 Defs/Patches/Languages 미니 트리
 Patches/         PatchOperationAdd 일곱 개. 이 파일이 모드의 진입점이다
 Source/PlayableRecreation/
   Framework/     게임을 모르는 층. Dialog_MiniGame · MiniGameWorker · 저장 · 전적 · 숙련
   Framework/UI/  PRTextures(절차적) · PRContent(파일) · PRKeys · PRTheme
   Games/<이름>/  Core(Verse 0) · AI(Verse 0) · 나머지는 창 그리는 코드
-Tests/PlayableRecreation.Tests/   239 개. net9.0 · xUnit. 림월드 불필요
+Tests/PlayableRecreation.Tests/   264 개. net9.0 · xUnit. 림월드 불필요
 Textures/PR/     체스 기물 6 · 카드 무늬 4. 전부 흰색 RGB + 알파 실루엣
 Tools/           verify.py · guistate.py · package.py · make_art.py · WebPreview/
 Workshop/        description.txt (창작마당에 붙여넣을 글) · RELEASE.md (절차)

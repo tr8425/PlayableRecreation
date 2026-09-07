@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 난이도 -->
+  <PBG.Difficulty.T0.Desc>산책 템포. 한 번에 한 방.</PBG.Difficulty.T0.Desc>
+  <PBG.Difficulty.T1.Desc>조금 빨라지고, 두 방짜리가 섞입니다.</PBG.Difficulty.T1.Desc>
+  <PBG.Difficulty.T2.Desc>연타가 시작됩니다.</PBG.Difficulty.T2.Desc>
+  <PBG.Difficulty.T3.Desc>빠르고, 연타투성이입니다.</PBG.Difficulty.T3.Desc>
+  <PBG.Difficulty.T4.Desc>백이 쉬지 않고 부릅니다.</PBG.Difficulty.T4.Desc>
+
+  <!-- 조작 -->
+  <PBG.Btn.Start>시작  (Enter)</PBG.Btn.Start>
+  <PBG.Btn.Punch>주먹  (Enter)</PBG.Btn.Punch>
+  <PBG.Scoreboard.Target>목표 {0}</PBG.Scoreboard.Target>
+  <PBG.Scoreboard.Combo>콤보 {0}</PBG.Scoreboard.Combo>
+
+  <!-- 판정 -->
+  <PBG.Judge.Perfect>정타</PBG.Judge.Perfect>
+  <PBG.Judge.Good>스침</PBG.Judge.Good>
+  <PBG.Judge.Miss>헛스윙</PBG.Judge.Miss>
+
+  <!-- 상태 -->
+  <PBG.Status.Armed>준비되면 누르세요. 첫 주먹부터 박자가 흐릅니다.</PBG.Status.Armed>
+  <PBG.Status.Ready>들으세요. 백이 먼저 부릅니다.</PBG.Status.Ready>
+  <PBG.Status.Playing>정박에 답하세요.</PBG.Status.Playing>
+  <PBG.Status.Win>세트 클리어! {0} / {1}</PBG.Status.Win>
+  <PBG.Status.Lose>세트 종료. {0} / {1}</PBG.Status.Lose>
+
+  <!-- 기록 -->
+  <PBG.Tally.Combo>최고 콤보 {0}</PBG.Tally.Combo>
+  <PBG.Tally.Perfects>정타 {0}</PBG.Tally.Perfects>
+  <PBG.Tally.Score>최고 점수 {0}</PBG.Tally.Score>
+
+  <!-- 점수표 -->
+  <PBG.Tut.Score.Judge>정박 {0}점, 살짝 어긋나면 {1}점. 그보다 어긋나면 0점에 콤보가 끊깁니다.</PBG.Tut.Score.Judge>
+  <PBG.Tut.Score.Ko>마지막 큰 한 방은 {0}배입니다.</PBG.Tut.Score.Ko>
+  <PBG.Tut.Score.Target>목표 점수에 닿으면 그 세트는 당신의 것입니다.</PBG.Tut.Score.Target>
+
+  <!-- 튜토리얼 -->
+  <PBG.Tut.P1.Title>1. 펀칭백</PBG.Tut.P1.Title>
+  <PBG.Tut.P1.Body>여기엔 상대가 없습니다. 박자가 있습니다.
+
+백이 두 박 흔들리며 부릅니다 - 스윙, 스윙 - 그다음 박에 주먹으로 답하세요. 한 방, 두 방, 때로는 빠른 네 방 연타.
+
+빨리 치는 것은 이 게임이 아닙니다. 제때 치는 것이 이 게임입니다.</PBG.Tut.P1.Body>
+
+  <PBG.Tut.P2.Title>2. 박자</PBG.Tut.P2.Title>
+  <PBG.Tut.P2.Body>아래의 띠가 악보입니다. 점이 오른쪽에서 흘러와 선에 닿는 순간 치세요 - 클릭하거나 Enter.
+
+흐릿한 눈금은 백이 부르는 박입니다. 그건 치지 않습니다. 끝의 큰 금색 점이 마무리 한 방입니다.
+
+세트는 첫 입력과 함께, 두 박의 예비 박을 거쳐 시작됩니다. 난이도가 오르면 템포가 빨라지고 연타가 늘어나지만, 판정 창은 그대로입니다.</PBG.Tut.P2.Body>
+
+  <PBG.Tut.P3.Title>3. 점수</PBG.Tut.P3.Title>
+  <PBG.Tut.P3.Body>모든 주먹은 정박에서 얼마나 가까웠는지로 판정됩니다.
+
+허공에 휘두르면 점수는 잃지 않지만 콤보와 체면이 끊깁니다. 박을 통째로 놓치면 그 박은 사라집니다 - 박자는 기다려 주지 않습니다.
+
+목표 점수에 닿으면 세트 클리어. 기록에는 최고 점수와 최고 콤보, 정타 수가 남습니다.</PBG.Tut.P3.Body>
+
+</LanguageData>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Hospitality: Casino 가 있을 때만 로드된다 (LoadFolders.xml).
+
+    슬롯은 별 보기처럼 승부가 아니다 - 의사결정이 없는 게임에 난이도와 전적을
+    붙이는 것은 거짓말이라서다. 진짜 은화도 걸지 않는다. 도박 경제는 카지노 모드의 몫이다.
+  -->
+
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Slots</defName>
+    <label>slot machine</label>
+    <description>Pull the lever and watch the reels. Twenty house tokens, no real silver.</description>
+    <workerClass>Slots.SlotsGameWorker</workerClass>
+    <targetThing>HC_SlotMachineRed</targetThing>
+
+    <hasMatch>false</hasMatch>
+    <difficultyCount>1</difficultyCount>
+
+    <tutorialPages>2</tutorialPages>
+    <tutorialKeyPrefix>SLT.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>false</supportsSave>
+    <showLog>false</showLog>
+
+    <vanillaJob>Play_SlotMachine</vanillaJob>
+    <playThought>PR_PlayedSlots</playThought>
+
+    <windowSize>(620, 560)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
+</Defs>

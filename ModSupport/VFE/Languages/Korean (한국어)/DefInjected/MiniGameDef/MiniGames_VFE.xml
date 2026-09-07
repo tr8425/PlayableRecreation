@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PR_Darts.label>다트</PR_Darts.label>
+  <PR_Darts.description>AI 상대와 다트 한 판. 어디를 노릴지가 절반이다.</PR_Darts.description>
+
+  <PR_PunchingBag.label>펀칭백</PR_PunchingBag.label>
+  <PR_PunchingBag.description>박자에 맞춰 백을 친다. 상대는 리듬이다.</PR_PunchingBag.description>
+
+</LanguageData>

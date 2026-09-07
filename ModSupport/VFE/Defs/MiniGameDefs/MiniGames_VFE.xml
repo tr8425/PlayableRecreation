@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Vanilla Furniture Expanded 가 있을 때만 로드된다 (LoadFolders.xml).
+    워커와 판정은 본체 DLL 에 실려 있고, VFE 가 없으면 이 정의가 없으므로 잠들어 있다.
+  -->
+
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Darts</defName>
+    <label>darts</label>
+    <description>Throw darts at the board against an AI opponent.</description>
+    <workerClass>Darts.DartsGameWorker</workerClass>
+    <targetThing>Joy_DartsBoard</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>DRT.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>3</tutorialPages>
+    <tutorialKeyPrefix>DRT.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>true</supportsSave>
+    <showLog>true</showLog>
+
+    <tallyKeys>
+      <li>DRT.Tally.Triples</li>
+      <li>DRT.Tally.Bulls</li>
+      <li>DRT.Tally.BestVisit</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_DartsBoard</vanillaJob>
+    <playThought>PR_PlayedDarts</playThought>
+    <wonTale>PR_WonMatch</wonTale>
+    <linkedSkill>Shooting</linkedSkill>
+
+    <windowSize>(860, 720)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
+  <!--
+    펀칭백은 상대가 없다. 겨루는 것은 박자다 - 백이 두 박 부르면 정박에 답한다.
+    실시간 한 세트로 끝나므로 가구에 남길 판이 없다 (supportsSave=false).
+  -->
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_PunchingBag</defName>
+    <label>punching bag</label>
+    <description>Work the bag to the beat. The rhythm is the opponent.</description>
+    <workerClass>Punching.PunchingGameWorker</workerClass>
+    <targetThing>Joy_PunchingBag</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>PBG.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>3</tutorialPages>
+    <tutorialKeyPrefix>PBG.Tut</tutorialKeyPrefix>
+
+    <supportsUndo>false</supportsUndo>
+    <supportsSave>false</supportsSave>
+    <showLog>false</showLog>
+
+    <tallyKeys>
+      <li>PBG.Tally.Combo</li>
+      <li>PBG.Tally.Perfects</li>
+      <li>PBG.Tally.Score</li>
+    </tallyKeys>
+
+    <vanillaJob>Play_PunchingBag</vanillaJob>
+    <playThought>PR_PlayedPunchingBag</playThought>
+    <linkedSkill>Melee</linkedSkill>
+
+    <windowSize>(760, 680)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
+</Defs>

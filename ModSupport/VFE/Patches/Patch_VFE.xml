@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  VFE 가구에 우리 컴포넌트만 "추가"한다. 본체의 Patch_Recreation.xml 과 같은 원칙 -
+  스탯/Job/JoyGiver 는 건드리지 않고, 모드를 빼면 가구는 VFE 상태로 돌아간다.
+
+  이 폴더는 VFE 가 켜져 있을 때만 로드되므로 (LoadFolders.xml) 조건 검사가 필요 없다.
+-->
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="Joy_DartsBoard"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Darts</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="Joy_PunchingBag"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_PunchingBag</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+</Patch>

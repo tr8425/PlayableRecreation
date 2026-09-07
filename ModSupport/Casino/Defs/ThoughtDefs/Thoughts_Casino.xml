@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 깰 난이도가 없으니 별 보기처럼 평범한 기억이다. -->
+
+  <ThoughtDef>
+    <defName>PR_PlayedSlots</defName>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>pulled the lever a while</label>
+        <description>The reels spun, the machine sang its little song, and my tokens went where tokens go. I regret nothing.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

@@ -15,6 +15,9 @@
     소스를 링크로 끌어와 테스트한다 (별도 어셈블리 분리 불필요).
   -->
   <ItemGroup>
+    <Compile Include="..\..\Source\PlayableRecreation\Framework\Core\**\*.cs" LinkBase="FrameworkCore" />
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Darts\Core\**\*.cs" LinkBase="Darts" />
+    <Compile Include="..\..\Source\PlayableRecreation\Games\Punching\Core\**\*.cs" LinkBase="Punching" />
     <Compile Include="..\..\Source\PlayableRecreation\Games\Ur\Core\**\*.cs" LinkBase="UrCore" />
     <Compile Include="..\..\Source\PlayableRecreation\Games\Ur\AI\**\*.cs" LinkBase="UrAI" />
     <Compile Include="..\..\Source\PlayableRecreation\Games\Throwing\Core\**\*.cs" LinkBase="Throwing" />

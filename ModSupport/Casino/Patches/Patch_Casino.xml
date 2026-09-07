@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  카지노의 슬롯머신 세 대에 같은 게임을 붙인다. 세 대는 스킨 차이일 뿐이다.
+  이 가구들은 이미 comps 를 갖고 있으므로 안에 li 만 더한다.
+
+  이 폴더는 Hospitality: Casino 가 켜져 있을 때만 로드된다 (LoadFolders.xml).
+-->
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="HC_SlotMachineRed"]/comps</xpath>
+    <value>
+      <li Class="PlayableRecreation.CompProperties_MiniGame">
+        <game>PR_Slots</game>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="HC_SlotMachineBlue"]/comps</xpath>
+    <value>
+      <li Class="PlayableRecreation.CompProperties_MiniGame">
+        <game>PR_Slots</game>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="HC_SlotMachineGreen"]/comps</xpath>
+    <value>
+      <li Class="PlayableRecreation.CompProperties_MiniGame">
+        <game>PR_Slots</game>
+      </li>
+    </value>
+  </Operation>
+
+</Patch>

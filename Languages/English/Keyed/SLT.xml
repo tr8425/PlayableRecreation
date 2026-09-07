@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Controls -->
+  <SLT.Btn.Pull>Pull  (Enter)</SLT.Btn.Pull>
+  <SLT.Credits>Tokens {0}</SLT.Credits>
+  <SLT.Peak>best {0}</SLT.Peak>
+
+  <!-- Status -->
+  <SLT.Status.Idle>One token a pull.</SLT.Status.Idle>
+  <SLT.Status.Spinning>The reels are thinking...</SLT.Status.Spinning>
+  <SLT.Status.Won>Paid {0}!</SLT.Status.Won>
+  <SLT.Status.Broke>Out of tokens. The machine thanks you - best stack {0}.</SLT.Status.Broke>
+
+  <!-- Paytable -->
+  <SLT.Tut.Pay.Sevens>Three sevens: {0}</SLT.Tut.Pay.Sevens>
+  <SLT.Tut.Pay.Bars>Three bars: {0}</SLT.Tut.Pay.Bars>
+  <SLT.Tut.Pay.Coins>Three coins: {0}</SLT.Tut.Pay.Coins>
+  <SLT.Tut.Pay.Plums>Three plums: {0}</SLT.Tut.Pay.Plums>
+  <SLT.Tut.Pay.Pair>Two sevens: {0}</SLT.Tut.Pay.Pair>
+
+  <!-- Tutorial -->
+  <SLT.Tut.P1.Title>1. Slot machine</SLT.Tut.P1.Title>
+  <SLT.Tut.P1.Body>Twenty house tokens, a lever, and three reels that already know the answer.
+
+No real silver changes hands - the tokens are the house's, and they go home when you do. This is the one thing in the rec room where skill will not help you.
+
+See how tall the stack gets before the machine wins. The machine always wins.</SLT.Tut.P1.Body>
+
+  <SLT.Tut.P2.Title>2. Paytable</SLT.Tut.P2.Title>
+  <SLT.Tut.P2.Body>A pull costs one token. Three of a kind pays - sevens best, plums least - and a pair of sevens gets you a consolation.
+
+That is the whole rulebook. Pull.</SLT.Tut.P2.Body>
+
+</LanguageData>

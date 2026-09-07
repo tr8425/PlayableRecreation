@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PR_PlayedDarts.stages.0.label>다트를 벽에 던졌어</PR_PlayedDarts.stages.0.label>
+  <PR_PlayedDarts.stages.0.description>세 발은 판에 맞았다. 나머지는 저 벽 주인이 알아서 할 문제다.</PR_PlayedDarts.stages.0.description>
+
+  <PR_PlayedDarts.stages.1.label>다트 감은 좀 잡았어</PR_PlayedDarts.stages.1.label>
+  <PR_PlayedDarts.stages.1.description>이제 전부 판에는 맞는다. 판 어디에 맞는지는 아직 협상 중이다.</PR_PlayedDarts.stages.1.description>
+
+  <PR_PlayedDarts.stages.2.label>그럭저럭 던졌어</PR_PlayedDarts.stages.2.label>
+  <PR_PlayedDarts.stages.2.description>20을 노려서 20에 맞혔다. 두 번이나. 세 번째 발이 어디 갔는지는 생각하지 않기로 했다.</PR_PlayedDarts.stages.2.description>
+
+  <PR_PlayedDarts.stages.3.label>잘 던져</PR_PlayedDarts.stages.3.label>
+  <PR_PlayedDarts.stages.3.description>트리플 20은 가늘고 작은 칸인데, 손이 먼저 그 길을 외우기 시작했다.</PR_PlayedDarts.stages.3.description>
+
+  <PR_PlayedDarts.stages.4.label>거의 안 빗나가</PR_PlayedDarts.stages.4.label>
+  <PR_PlayedDarts.stages.4.description>사람들이 내가 던지기 전에 어디 맞을지 대신 불러 주기 시작했다. 나는 그 말을 계속 맞는 말로 만들어 주고 있다.</PR_PlayedDarts.stages.4.description>
+
+  <PR_PlayedDarts.stages.5.label>다트를 마스터했다</PR_PlayedDarts.stages.5.label>
+  <PR_PlayedDarts.stages.5.description>판 하나, 다트 세 발, 트리플 20 팔 밀리미터. 나머지 판은 쳐다보지도 않게 됐다.</PR_PlayedDarts.stages.5.description>
+
+  <PR_PlayedPunchingBag.stages.0.label>백에 팔을 휘둘렀어</PR_PlayedPunchingBag.stages.0.label>
+  <PR_PlayedPunchingBag.stages.0.description>팔이 말을 안 들을 때까지 백을 쳤다. 백은 아무렇지도 않아 보였다. 내 주먹은 생각이 다르다.</PR_PlayedPunchingBag.stages.0.description>
+
+  <PR_PlayedPunchingBag.stages.1.label>리듬을 찾는 중이야</PR_PlayedPunchingBag.stages.1.label>
+  <PR_PlayedPunchingBag.stages.1.description>더 빨리 치지 말고 제때 치라고 누가 그랬다. 얄밉게도, 그게 통한다.</PR_PlayedPunchingBag.stages.1.description>
+
+  <PR_PlayedPunchingBag.stages.2.label>백을 제대로 쳤어</PR_PlayedPunchingBag.stages.2.label>
+  <PR_PlayedPunchingBag.stages.2.description>스윙, 스윙, 히트. 백이 돌아오는 자리에 내 주먹이 먼저 가서 기다린다.</PR_PlayedPunchingBag.stages.2.description>
+
+  <PR_PlayedPunchingBag.stages.3.label>백을 잘 다뤄</PR_PlayedPunchingBag.stages.3.label>
+  <PR_PlayedPunchingBag.stages.3.description>박자를 입으로 세는 걸 그만뒀다. 이제 어깨가 센다.</PR_PlayedPunchingBag.stages.3.description>
+
+  <PR_PlayedPunchingBag.stages.4.label>리듬을 거의 안 놓쳐</PR_PlayedPunchingBag.stages.4.label>
+  <PR_PlayedPunchingBag.stages.4.description>사람들이 내 템포를 빌리려고 옆에서 같이 훈련한다. 모르는 척해 주고 있다.</PR_PlayedPunchingBag.stages.4.description>
+
+  <PR_PlayedPunchingBag.stages.5.label>펀칭백을 마스터했다</PR_PlayedPunchingBag.stages.5.label>
+  <PR_PlayedPunchingBag.stages.5.description>백이 흔들리면 내가 답한다. 운동이기를 그만두고, 내가 항상 이기는 대화가 되었다.</PR_PlayedPunchingBag.stages.5.description>
+
+</LanguageData>

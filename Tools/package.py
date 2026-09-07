@@ -24,7 +24,7 @@ NAME = 'Playable Recreation'
 MODS = r'C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods'
 
 # 올라가는 것. 이 목록에 없으면 올라가지 않는다.
-FOLDERS = ['About', 'Defs', 'Languages', 'Patches', 'Textures']
+FOLDERS = ['About', 'Defs', 'Languages', 'ModSupport', 'Patches', 'Textures']
 ASSEMBLY = os.path.join('Assemblies', 'PlayableRecreation.dll')
 
 # 폴더 안에서도 걸러 내는 것.
@@ -122,7 +122,8 @@ def bake():
     os.makedirs(os.path.join(out, 'Assemblies'))
     shutil.copy2(os.path.join(ROOT, ASSEMBLY), os.path.join(out, ASSEMBLY))
 
-    for extra in ['LICENSE', 'LICENSE.txt', 'README.md']:
+    # LoadFolders.xml 이 빠지면 ModSupport 가 통째로 죽은 짐이 된다.
+    for extra in ['LoadFolders.xml', 'LICENSE', 'LICENSE.txt', 'README.md']:
         path = os.path.join(ROOT, extra)
         if os.path.exists(path):
             shutil.copy2(path, os.path.join(out, extra))

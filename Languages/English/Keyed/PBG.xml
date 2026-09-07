@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Difficulty -->
+  <PBG.Difficulty.T0.Desc>A walking tempo. One punch at a time.</PBG.Difficulty.T0.Desc>
+  <PBG.Difficulty.T1.Desc>A little quicker, and doubles join in.</PBG.Difficulty.T1.Desc>
+  <PBG.Difficulty.T2.Desc>The flurries start.</PBG.Difficulty.T2.Desc>
+  <PBG.Difficulty.T3.Desc>Fast, and mostly flurries.</PBG.Difficulty.T3.Desc>
+  <PBG.Difficulty.T4.Desc>The bag barely stops calling.</PBG.Difficulty.T4.Desc>
+
+  <!-- Controls -->
+  <PBG.Btn.Start>Start  (Enter)</PBG.Btn.Start>
+  <PBG.Btn.Punch>Punch  (Enter)</PBG.Btn.Punch>
+  <PBG.Scoreboard.Target>target {0}</PBG.Scoreboard.Target>
+  <PBG.Scoreboard.Combo>combo {0}</PBG.Scoreboard.Combo>
+
+  <!-- Judgement -->
+  <PBG.Judge.Perfect>Clean hit</PBG.Judge.Perfect>
+  <PBG.Judge.Good>Caught it</PBG.Judge.Good>
+  <PBG.Judge.Miss>Whiff</PBG.Judge.Miss>
+
+  <!-- Status -->
+  <PBG.Status.Armed>Press when ready. Your first punch starts the beat.</PBG.Status.Armed>
+  <PBG.Status.Ready>Listen. The bag calls first.</PBG.Status.Ready>
+  <PBG.Status.Playing>Answer on the beat.</PBG.Status.Playing>
+  <PBG.Status.Win>Set cleared! {0} of {1}</PBG.Status.Win>
+  <PBG.Status.Lose>Set over. {0} of {1}</PBG.Status.Lose>
+
+  <!-- Records -->
+  <PBG.Tally.Combo>Best combo {0}</PBG.Tally.Combo>
+  <PBG.Tally.Perfects>Clean hits {0}</PBG.Tally.Perfects>
+  <PBG.Tally.Score>Best score {0}</PBG.Tally.Score>
+
+  <!-- Scoring -->
+  <PBG.Tut.Score.Judge>On the beat: {0}. A little off: {1}. Late or early past that: nothing, and the combo breaks.</PBG.Tut.Score.Judge>
+  <PBG.Tut.Score.Ko>The last big note pays {0} times.</PBG.Tut.Score.Ko>
+  <PBG.Tut.Score.Target>Reach the target score and the set is yours.</PBG.Tut.Score.Target>
+
+  <!-- Tutorial -->
+  <PBG.Tut.P1.Title>1. Punching bag</PBG.Tut.P1.Title>
+  <PBG.Tut.P1.Body>There is no opponent here. There is a rhythm.
+
+The bag swings twice to call the beat - swing, swing - and you answer with your fist on the beats that follow. One answer, two, or a quick flurry of four.
+
+Punching faster is not the game. Punching on time is.</PBG.Tut.P1.Body>
+
+  <PBG.Tut.P2.Title>2. The beat</PBG.Tut.P2.Title>
+  <PBG.Tut.P2.Body>The tape at the bottom is the score sheet. Dots slide in from the right; the moment one touches the line, punch - click, or press Enter.
+
+Faint ticks are the bag's calls. You do not punch those. The big gold dot at the end is the finisher.
+
+The set starts with your first press, after a two-beat count-in. Higher tiers raise the tempo and thicken the flurries; the timing windows never change.</PBG.Tut.P2.Body>
+
+  <PBG.Tut.P3.Title>3. Scoring</PBG.Tut.P3.Title>
+  <PBG.Tut.P3.Body>Every answer is judged by how close to the beat it landed.
+
+Swinging at nothing costs no points, but it breaks your combo and your dignity. Miss a note entirely and it is gone - the beat does not wait.
+
+Reach the target score and the set is cleared. Records keep your best score, your best combo, and your clean hits.</PBG.Tut.P3.Body>
+
+</LanguageData>

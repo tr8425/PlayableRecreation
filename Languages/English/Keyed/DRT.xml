@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Difficulty -->
+  <DRT.Difficulty.T0.Desc>Aims at the middle and hopes.</DRT.Difficulty.T0.Desc>
+  <DRT.Difficulty.T1.Desc>Aims at the bull. Usually lands somewhere near it.</DRT.Difficulty.T1.Desc>
+  <DRT.Difficulty.T2.Desc>Works the triple 19 and scores steadily.</DRT.Difficulty.T2.Desc>
+  <DRT.Difficulty.T3.Desc>Aims triple 20 and hits it often.</DRT.Difficulty.T3.Desc>
+  <DRT.Difficulty.T4.Desc>Lives on the triple 20.</DRT.Difficulty.T4.Desc>
+
+  <!-- Board -->
+  <DRT.Scoreboard>Round {0} of {1} - highest total wins</DRT.Scoreboard>
+  <DRT.Scoreboard.Extra>Tiebreak - round {0}</DRT.Scoreboard.Extra>
+
+  <!-- Status -->
+  <DRT.Status.Aim>Click the board to aim, then stop the bar.</DRT.Status.Aim>
+  <DRT.Status.Power>Stop the power bar.</DRT.Status.Power>
+  <DRT.Status.Opponent>They are throwing...</DRT.Status.Opponent>
+  <DRT.Status.Hit>{0} · {1} points</DRT.Status.Hit>
+  <DRT.Status.HitThem>Theirs · {0}, {1} points</DRT.Status.HitThem>
+  <DRT.Status.Miss>Off the board.</DRT.Status.Miss>
+  <DRT.Status.MissThem>Theirs · off the board</DRT.Status.MissThem>
+  <DRT.Status.WinPlayer>You win! {0} to {1}</DRT.Status.WinPlayer>
+  <DRT.Status.WinOpponent>They win. {0} to {1}</DRT.Status.WinOpponent>
+  <DRT.Miss>miss</DRT.Miss>
+
+  <!-- Records -->
+  <DRT.Tally.Triples>Triples {0}</DRT.Tally.Triples>
+  <DRT.Tally.Bulls>Bulls {0}</DRT.Tally.Bulls>
+  <DRT.Tally.BestVisit>Best visit {0}</DRT.Tally.BestVisit>
+
+  <!-- Scoring -->
+  <DRT.Tut.Score.Rings>Thin outer ring doubles the sector, thin inner ring triples it.</DRT.Tut.Score.Rings>
+  <DRT.Tut.Score.Bull>Outer bull 25, inner bull 50.</DRT.Tut.Score.Bull>
+  <DRT.Tut.Score.Rounds>{0} rounds of {1} darts each. Highest total wins; a tie adds rounds until it breaks.</DRT.Tut.Score.Rounds>
+
+  <!-- Tutorial -->
+  <DRT.Tut.P1.Title>1. Darts</DRT.Tut.P1.Title>
+  <DRT.Tut.P1.Body>You throw three darts a round at a numbered board.
+
+Each wedge scores its number. The thin outer ring doubles it, the thin inner ring triples it. The centre is the bull: 25 for the outer ring, 50 for the dot.
+
+Both sides throw five rounds. Highest total takes the game.</DRT.Tut.P1.Body>
+
+  <DRT.Tut.P2.Title>2. Throwing</DRT.Tut.P2.Title>
+  <DRT.Tut.P2.Body>Click anywhere on the board to place your aim. That is the half of the game the bars cannot help you with - triple 20 pays best and punishes worst, because 1 and 5 live next door.
+
+Then stop two bars in turn: aim, then power. The green band is the sweet spot, and it moves and changes size with every dart. Miss on aim and the dart drifts sideways; miss on power and it lands high or low.
+
+Higher tiers move the bars faster, let the band shrink and wander further, and throw better against you.</DRT.Tut.P2.Body>
+
+  <DRT.Tut.P3.Title>3. Scoring</DRT.Tut.P3.Title>
+  <DRT.Tut.P3.Body>Five rounds, three darts each, straight addition.
+
+There is no checkout arithmetic here - the pub next door plays 501, this board keeps it honest. If the totals are level after five rounds, you keep throwing a round at a time until they are not.
+
+There is no undo. A dart is a dart.</DRT.Tut.P3.Body>
+
+</LanguageData>
