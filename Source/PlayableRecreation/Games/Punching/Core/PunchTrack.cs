@@ -40,8 +40,8 @@ namespace Punching.Core
         public const int KoMultiplier = 3;
 
         /// <summary>판정 창(초). 템포가 올라도 창은 그대로다 - 그것이 난이도다.</summary>
-        public const float PerfectWindow = 0.09f;
-        public const float GoodWindow = 0.20f;
+        public const float PerfectWindow = 0.07f;
+        public const float GoodWindow = 0.16f;
 
         /// <summary>첫 콜까지의 예비 박.</summary>
         public const float LeadInBeats = 2f;
@@ -95,16 +95,17 @@ namespace Punching.Core
             switch (tier)
             {
                 case 0: return 66f;
-                case 1: return 76f;
-                case 2: return 86f;
-                case 3: return 96f;
-                default: return 106f;
+                case 1: return 80f;
+                case 2: return 94f;
+                case 3: return 110f;
+                default: return 126f;
             }
         }
 
+        /// <summary>위로 갈수록 세트도 길어진다 - 템포만이 아니라 지구력도 시험이다.</summary>
         private static int PatternCount(int tier)
         {
-            return 12 + tier;
+            return 12 + tier * 2;
         }
 
         /// <summary>패턴 배합. 위로 갈수록 연타가 늘어난다.</summary>
@@ -115,9 +116,9 @@ namespace Punching.Core
             {
                 case 0: single = 0.70f; dbl = 0.30f; break;
                 case 1: single = 0.50f; dbl = 0.40f; break;
-                case 2: single = 0.35f; dbl = 0.40f; break;
-                case 3: single = 0.25f; dbl = 0.40f; break;
-                default: single = 0.15f; dbl = 0.40f; break;
+                case 2: single = 0.30f; dbl = 0.40f; break;
+                case 3: single = 0.18f; dbl = 0.37f; break;
+                default: single = 0.08f; dbl = 0.32f; break;
             }
 
             return u < single ? 0 : u < single + dbl ? 1 : 2;
@@ -128,10 +129,10 @@ namespace Punching.Core
             switch (tier)
             {
                 case 0: return 0.55f;
-                case 1: return 0.62f;
-                case 2: return 0.70f;
-                case 3: return 0.78f;
-                default: return 0.85f;
+                case 1: return 0.64f;
+                case 2: return 0.72f;
+                case 3: return 0.80f;
+                default: return 0.88f;
             }
         }
 
