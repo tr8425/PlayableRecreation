@@ -24,6 +24,20 @@
 
 ## 항목
 
+### 2026-09-08 · Bones · 창작마당 댓글 — `신규`
+> "This is a true gem."
+- 칭찬. v1.1.0 을 낸 직후에 달렸다.
+- 답글 문안 (게시하면 `답변완료` 로 바꾼다):
+  > Thank you — that is a lovely thing to wake up to. Enjoy the games.
+
+### 2026-09-05 · ContourJeans64 · 창작마당 댓글 — `신규`
+> "I really enjoyed this mod,"
+- 칭찬. 09-05 에 달렸는데 대장에 빠져 있던 것을 지금 채운다.
+- 답글 문안 (게시하면 `답변완료` 로 바꾼다):
+  > Thank you! There is a little more of it as of 1.1.0 — if you have Vanilla
+  > Furniture Expanded, GloomyFurniture or Hospitality: Casino, some of their
+  > furniture is playable now too.
+
 ### 2026-09-08 · 개발자 QA (2차) · 인게임 — `수정배포`
 > "사진도 찍어왔고, 잠깐 플레이에서는 큰 버그를 찾지 못했어"
 > "gloomy, 모드없음 둘 다 정상작동한다"
@@ -35,12 +49,29 @@
 - 창작마당 캐러셀에는 모드 지원 다섯 창을 낱장으로 걸지 않고 `mod_collage.jpg` 한 장으로
   묶었다 (`Tools/make_mod_collage.py`). 낱장이면 "저 모드가 있어야 하나" 로 읽힌다.
 
-### 2026-09-05 · galesdeloscien · 창작마당 댓글 — `답변완료` `백로그`
-> "oh man, pls make a vfe integration plss!!!! this mod is so pawsome fr"
+### 2026-09-05 · galesdeloscien · 창작마당 댓글 — `수정배포` `백로그`
+> "oh man, pls make a vfe integration plss!!!! this mod is so pawsome fr,
+> here's a nugget :nuggetofrogue:"
 - 판단: VFE(Vanilla Furniture Expanded) 가구 연동 요청. 조사 결과 VFE 엔 기존 7게임을
   얹을 가구가 없고, 게임성 가구(다트판·룰렛 테이블·아케이드)는 새 게임을 요구한다.
-- 조치: 답글 완료. 별도 애드온 모드 + 다트 우선 계획 수립. VE 계열 12개 모듈 스캔 —
+- 1차 조치: 답글 완료. 별도 애드온 모드 + 다트 우선 계획 수립. VE 계열 12개 모듈 스캔 —
   우리가 패치하는 바닐라 가구 7종 def 를 건드리는 패치 없음(공존 무결) 확인.
+- **2026-09-08 v1.1.0 으로 배포됨.** 애드온이 아니라 본체 내장 + 소프트 의존으로 갔다
+  (VFE 다트·펀칭백·룰렛·아케이드, Gloomy 3종, Casino 슬롯).
+  이 사람이 이번 판의 직접적인 계기다 — 배포 답글을 따로 단다.
+- 답글 문안 (게시하면 이 줄을 `답글 완료` 로 바꾼다):
+  > Done — 1.1.0 is up. With Vanilla Furniture Expanded loaded, the darts board,
+  > the punching bag, the roulette table and the arcade machine are all playable
+  > now. Darts is five rounds of three, the punching bag is a rhythm game, roulette
+  > is a bankroll run against the house, and the arcade machine has no game of its
+  > own — you pick a difficulty and it deals you a random one, including games
+  > whose furniture you never built. GloomyFurniture's chess, poker and billiards
+  > tables and Hospitality: Casino's slot machines came along too.
+  >
+  > It is all built into the mod and entirely optional — nothing is required, and
+  > nothing changes if you don't have those installed.
+  >
+  > Thanks for the nudge. And for the nugget.
 
 ### 2026-09-05 · Amor · 창작마당 댓글 — `답변완료`
 > "FINALLY more places to play Game of Ur"
