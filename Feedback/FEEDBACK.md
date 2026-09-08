@@ -37,16 +37,18 @@
 
 ### 2026-09-08 · Bones · 창작마당 댓글 — `신규`
 > "This is a true gem."
-- 칭찬. v1.1.0 을 낸 직후에 달렸다.
-- 답글 문안 (게시하면 `답변완료` 로 바꾼다):
-  > @Bones thank you! that means a lot, enjoy
+- 칭찬. 답글은 ContourJeans64 와 한 댓글로 묶는다 (아래).
 
 ### 2026-09-05 · ContourJeans64 · 창작마당 댓글 — `신규`
 > "I really enjoyed this mod,"
 - 칭찬. 09-05 에 달렸는데 대장에 빠져 있던 것을 지금 채운다.
-- 답글 문안 (게시하면 `답변완료` 로 바꾼다):
-  > @ContourJeans64 thanks! there's a bit more of it as of the latest update if
-  > you've got VFE, GloomyFurniture or Hospitality: Casino
+- **Bones 와 한 댓글로 묶는다.** 둘 다 질문 없는 칭찬이라 거의 같은 인사를 두 번
+  연달아 다는 꼴이 된다. 둘 다 1.1.0 이 올라가기 전에 쓴 댓글이라 업데이트 한 줄을
+  붙였다.
+- 답글 문안 (게시하면 두 항목 다 `답변완료` 로 바꾼다):
+  > @Bones @ContourJeans64 thank you both, that means a lot. there's a bit more
+  > of it as of the latest update if you've got VFE, GloomyFurniture or
+  > Hospitality: Casino
 
 ### 2026-09-08 · 개발자 QA (2차) · 인게임 — `수정배포`
 > "사진도 찍어왔고, 잠깐 플레이에서는 큰 버그를 찾지 못했어"
