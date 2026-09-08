@@ -37,6 +37,15 @@ namespace Stargazing
         /// <summary>이웃한 칸 사이의 간격. 칸을 얼마나 크게 그릴지가 여기서 나온다.</summary>
         public float Spacing = 0.34f;
 
+        /// <summary>몇 겹까지 훑었는가. 배율 표시가 이것을 쓴다.</summary>
+        public int Rings;
+
+        /// <summary>가로로 몇 칸을 보고 있는가.</summary>
+        public int Across
+        {
+            get { return Rings * 2 + 1; }
+        }
+
         public string BelowLabel;
         public string BelowRegion;
         public bool BelowLit;
@@ -54,12 +63,20 @@ namespace Stargazing
     /// </summary>
     public static class GroundWatch
     {
-        /// <summary>바로 아래에서 몇 칸까지 볼 것인가. 망원경이지 위성 사진이 아니다.</summary>
-        private const int Rings = 3;
+        /// <summary>
+        /// 바로 아래에서 몇 겹까지 볼 것인가. 좁히면 칸 하나하나가 커지고,
+        /// 넓히면 멀리까지 본다 - 바다 한가운데라면 넓혀야 뭍이 나온다.
+        /// 한 겹 아래로는 칸이 원반을 넘도록 커져 겹쳐 버리므로 둘이 바닥이다.
+        /// </summary>
+        public const int MinRings = 2;
+        public const int MaxRings = 10;
+        public const int DefaultRings = 3;
 
-        public static GroundPatch Observe(Map map)
+        public static GroundPatch Observe(Map map, int rings)
         {
-            GroundPatch patch = new GroundPatch();
+            rings = Mathf.Clamp(rings, MinRings, MaxRings);
+
+            GroundPatch patch = new GroundPatch { Rings = rings };
             if (map == null || Find.WorldGrid == null) return patch;
 
             PlanetLayer surface = Find.WorldGrid.Surface;
@@ -73,7 +90,7 @@ namespace Stargazing
             float shrink = Mathf.Cos(origin.y * Mathf.Deg2Rad);
             if (shrink < 0.05f) shrink = 0.05f;
 
-            List<PlanetTile> near = Spread(surface, below);
+            List<PlanetTile> near = Spread(surface, below, rings);
 
             // 먼저 접평면 좌표를 다 뽑아 두고, 가장 먼 것이 테두리에 닿도록 함께 줄인다.
             List<Vector2> flat = new List<Vector2>(near.Count);
@@ -93,8 +110,12 @@ namespace Stargazing
 
             long ticks = Find.TickManager != null ? Find.TickManager.TicksAbs : 0L;
 
+            // 세계의 물건들을 타일별로 한 번만 훑어 둔다. 넓게 보면 칸이 삼백 개가 넘어서,
+            // 칸마다 세계 전체를 뒤지면 그만큼 헛일이 곱해진다.
+            Dictionary<int, string> marks = MarksByTile();
+
             for (int i = 0; i < near.Count; i++)
-                patch.Cells.Add(Read(surface, near[i], flat[i] / far, near[i] == below, ticks));
+                patch.Cells.Add(Read(surface, near[i], flat[i] / far, near[i] == below, ticks, marks));
 
             patch.Spacing = SpacingOf(patch.Cells);
             patch.Valid = patch.Cells.Count > 0;
@@ -111,7 +132,7 @@ namespace Stargazing
         }
 
         /// <summary>바로 아래에서 바깥으로 몇 겹. 첫 항목은 언제나 한가운데다.</summary>
-        private static List<PlanetTile> Spread(PlanetLayer surface, PlanetTile middle)
+        private static List<PlanetTile> Spread(PlanetLayer surface, PlanetTile middle, int rings)
         {
             List<PlanetTile> found = new List<PlanetTile> { middle };
             HashSet<int> seen = new HashSet<int> { middle.tileId };
@@ -120,7 +141,7 @@ namespace Stargazing
             List<PlanetTile> next = new List<PlanetTile>();
             List<PlanetTile> buffer = new List<PlanetTile>();
 
-            for (int ring = 0; ring < Rings; ring++)
+            for (int ring = 0; ring < rings; ring++)
             {
                 next.Clear();
 
@@ -146,7 +167,7 @@ namespace Stargazing
         }
 
         private static GroundCell Read(PlanetLayer surface, PlanetTile tile, Vector2 at,
-                                       bool center, long ticks)
+                                       bool center, long ticks, Dictionary<int, string> marks)
         {
             Tile info = surface[tile];
 
@@ -164,21 +185,35 @@ namespace Stargazing
             float hour = GenDate.HourFloat(ticks, longitude);
             cell.Lit = hour >= 6f && hour < 18f;
 
-            cell.Mark = MarkOn(tile, info);
+            cell.Mark = MarkOn(tile, info, marks);
             return cell;
         }
 
-        /// <summary>여기 무엇이 있는가. 사람이 사는 곳이 먼저고, 없으면 눈에 띄는 지형이다.</summary>
-        private static string MarkOn(PlanetTile tile, Tile info)
+        /// <summary>세계의 물건들이 어느 타일에 있는가. 한 타일에 여럿이면 먼저 잡히는 것이 이긴다.</summary>
+        private static Dictionary<int, string> MarksByTile()
         {
-            if (Find.WorldObjects != null)
+            Dictionary<int, string> marks = new Dictionary<int, string>();
+            if (Find.WorldObjects == null) return marks;
+
+            List<WorldObject> all = Find.WorldObjects.AllWorldObjects;
+
+            for (int i = 0; i < all.Count; i++)
             {
-                foreach (WorldObject world in Find.WorldObjects.ObjectsAt(tile))
-                {
-                    if (world == null) continue;
-                    return world.LabelShortCap;
-                }
+                WorldObject world = all[i];
+                if (world == null || !world.Tile.Valid) continue;
+                if (marks.ContainsKey(world.Tile.tileId)) continue;
+
+                marks[world.Tile.tileId] = world.LabelShortCap;
             }
+
+            return marks;
+        }
+
+        /// <summary>여기 무엇이 있는가. 사람이 사는 곳이 먼저고, 없으면 눈에 띄는 지형이다.</summary>
+        private static string MarkOn(PlanetTile tile, Tile info, Dictionary<int, string> marks)
+        {
+            string world;
+            if (marks != null && marks.TryGetValue(tile.tileId, out world)) return world;
 
             Landmark landmark = info.Landmark;
             if (landmark == null) return null;

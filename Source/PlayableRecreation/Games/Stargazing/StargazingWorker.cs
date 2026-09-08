@@ -27,6 +27,9 @@ namespace Stargazing
         /// </summary>
         private const float GroundInterval = 1.1f;
 
+        /// <summary>여기까지 좁혀 봐야 지표의 이름표를 단다. 그보다 넓으면 점만 남는다.</summary>
+        private const int NameRings = 5;
+
         /// <summary>처음부터 그어져 있는 별자리 수. 이름표가 그만큼 준비되어 있다.</summary>
         private const int KnownCount = 11;
         private const int NameCount = 14;
@@ -60,6 +63,9 @@ namespace Stargazing
         private float nextRefresh;
         private float nextGround;
         private Rect lastDisc;
+
+        /// <summary>아래를 볼 때 몇 겹까지 훑는가. 넓히면 칸이 작아지는 대신 멀리 본다.</summary>
+        private int groundRings = GroundWatch.DefaultRings;
 
         private bool drawing;
         private readonly List<int> chain = new List<int>();
@@ -167,7 +173,7 @@ namespace Stargazing
                 if (patch == null || now >= nextGround)
                 {
                     nextGround = now + GroundInterval;
-                    patch = GroundWatch.Observe(Here);
+                    patch = GroundWatch.Observe(Here, groundRings);
                 }
 
                 return;
@@ -312,6 +318,23 @@ namespace Stargazing
             chain.Clear();
             hovered = -1;
 
+            Rebuild();
+            PRSounds.Play(StarSounds.Pick);
+        }
+
+        /// <summary>
+        /// 배율을 바꾼다. 걸음이 양수면 넓게, 음수면 가깝게 - 바다 한가운데서
+        /// 온통 같은 파랑만 보인다면 넓히는 쪽이 답이다.
+        /// </summary>
+        private void Zoom(int step)
+        {
+            int next = Mathf.Clamp(groundRings + step, GroundWatch.MinRings, GroundWatch.MaxRings);
+            if (next == groundRings) return;
+
+            groundRings = next;
+
+            // 다음 훑기를 기다리지 않고 바로 다시 읽는다. 배율은 손이 돌린 것이라 즉시 답해야 한다.
+            patch = null;
             Rebuild();
             PRSounds.Play(StarSounds.Pick);
         }
@@ -558,6 +581,13 @@ namespace Stargazing
         /// </summary>
         private void DrawGroundArea()
         {
+            // 원반 위에서 굴린 휠은 배율이다. 옆 패널의 목록은 제 스크롤을 따로 가진다.
+            if (Event.current.type == EventType.ScrollWheel && disc.Contains(Event.current.mousePosition))
+            {
+                Zoom(Event.current.delta.y > 0f ? 1 : -1);
+                Event.current.Use();
+            }
+
             GUI.color = StarTheme.Void;
             GUI.DrawTexture(disc, PRTextures.Dot);
             GUI.color = Color.white;
@@ -586,7 +616,12 @@ namespace Stargazing
                 GUI.DrawTexture(box, PRTextures.Dot);
                 GUI.color = Color.white;
 
-                if (!cell.Label.NullOrEmpty()) TooltipHandler.TipRegion(box, cell.Label);
+                // 넓게 보면 이름표를 다 달 자리가 없다. 그래도 짚으면 무엇인지는 말해 준다.
+                string tip = cell.Mark.NullOrEmpty() ? cell.Label
+                    : cell.Label.NullOrEmpty() ? cell.Mark
+                    : cell.Mark + "\n" + cell.Label;
+
+                if (!tip.NullOrEmpty()) TooltipHandler.TipRegion(box, tip);
             }
 
             DrawGroundMarks(reach, half);
@@ -598,9 +633,17 @@ namespace Stargazing
             DrawCompass();
         }
 
-        /// <summary>바로 아래에 과녁을 두고, 사람이 사는 곳에는 이름을 단다.</summary>
+        /// <summary>
+        /// 바로 아래에 과녁을 두고, 사람이 사는 곳에는 이름을 단다.
+        /// 넓게 보는 중이면 이름은 접고 점만 남긴다 - 저기 무언가 있다는 것까지만 알려 주고,
+        /// 궁금하면 가깝게 당겨 보라는 뜻이다.
+        /// </summary>
         private void DrawGroundMarks(float reach, float half)
         {
+            // 창 크기가 아니라 겹 수로 정한다. 큰 창에서는 칸이 커지지만, 넓게 볼수록
+            // 이름표끼리 부딪히는 것은 마찬가지다.
+            bool named = patch.Rings <= NameRings;
+
             Text.Font = GameFont.Tiny;
             Text.Anchor = TextAnchor.MiddleLeft;
 
@@ -633,7 +676,7 @@ namespace Stargazing
                 }
 
                 GUI.DrawTexture(Square(at, 3.5f), PRTextures.Dot);
-                Widgets.Label(new Rect(at.x + 7f, at.y - 9f, 110f, 18f), cell.Mark);
+                if (named) Widgets.Label(new Rect(at.x + 7f, at.y - 9f, 110f, 18f), cell.Mark);
                 GUI.color = Color.white;
             }
 
@@ -827,6 +870,12 @@ namespace Stargazing
             GUI.color = Color.white;
             y += 30f;
 
+            if (below)
+            {
+                DrawZoomRow(new Rect(inner.x, y, inner.width, 24f));
+                y += 32f;
+            }
+
             if (drawing)
             {
                 Rect cancel = new Rect(inner.x, y, inner.width, 28f);
@@ -848,6 +897,46 @@ namespace Stargazing
             y += 20f;
 
             DrawMineList(new Rect(inner.x, y, inner.width, inner.yMax - y));
+        }
+
+        /// <summary>
+        /// 배율 조절. 원반 위에서 휠을 굴려도 되지만, 버튼이 없으면 아무도 굴려 보지 않는다.
+        /// 가운데에는 지금 가로로 몇 칸을 보고 있는지가 뜬다.
+        /// </summary>
+        private void DrawZoomRow(Rect row)
+        {
+            const float button = 28f;
+
+            Rect wider = new Rect(row.x, row.y, button, row.height);
+            Rect closer = new Rect(row.xMax - button, row.y, button, row.height);
+            Rect span = new Rect(wider.xMax + 4f, row.y, closer.x - wider.xMax - 8f, row.height);
+
+            TooltipHandler.TipRegion(wider, "STG.Ground.Wider".Translate());
+            TooltipHandler.TipRegion(closer, "STG.Ground.Closer".Translate());
+
+            bool canWiden = groundRings < GroundWatch.MaxRings;
+            bool canClose = groundRings > GroundWatch.MinRings;
+
+            if (Button(wider, "-", canWiden)) Zoom(1);
+            if (Button(closer, "+", canClose)) Zoom(-1);
+
+            Text.Font = GameFont.Tiny;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            GUI.color = PRTheme.Dim;
+            Widgets.Label(span, "STG.Ground.Span".Translate(patch != null ? patch.Across : 0));
+            GUI.color = Color.white;
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
+        }
+
+        private static bool Button(Rect rect, string label, bool enabled)
+        {
+            if (enabled) return Widgets.ButtonText(rect, label);
+
+            GUI.color = PRTheme.Dim;
+            Widgets.ButtonText(rect, label, true, false, false);
+            GUI.color = Color.white;
+            return false;
         }
 
         /// <summary>하늘이냐 지표냐. 보고 있는 쪽에는 표시가 남는다.</summary>

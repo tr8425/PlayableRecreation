@@ -41,6 +41,9 @@
   <STG.Ground.Nothing>아래에 잡히는 것이 없습니다.</STG.Ground.Nothing>
   <STG.Ground.Lit>낮</STG.Ground.Lit>
   <STG.Ground.Dark>밤</STG.Ground.Dark>
+  <STG.Ground.Span>가로 {0}칸</STG.Ground.Span>
+  <STG.Ground.Wider>물러나서 더 넓게 봅니다.</STG.Ground.Wider>
+  <STG.Ground.Closer>가깝게 당깁니다. 칸이 충분히 커지면 이름이 붙습니다.</STG.Ground.Closer>
   <STG.Panel.Mine>내가 이은 것</STG.Panel.Mine>
   <STG.Panel.None>아직 없습니다. 아래 버튼으로 별을 이어 보세요.</STG.Panel.None>
   <STG.Panel.Erase>지웁니다.</STG.Panel.Erase>
@@ -63,7 +66,7 @@
   <STG.Planet.Tip>행성
 밝은 면 {0}%</STG.Planet.Tip>
   <STG.Status.Planet>행성이 {0}% 차 있습니다.</STG.Status.Planet>
-  <STG.Status.Ground>아래를 봅니다. 어두운 칸은 그쪽이 밤입니다.</STG.Status.Ground>
+  <STG.Status.Ground>아래를 봅니다. 휠을 굴려 넓히거나 당길 수 있고, 어두운 칸은 그쪽이 밤입니다.</STG.Status.Ground>
   <STG.Status.WithMoon>위성이 {0}% 차 있습니다. 궤도 위에 {1}개.</STG.Status.WithMoon>
   <STG.Status.WithObjects>궤도 위에 {0}개가 지나갑니다.</STG.Status.WithObjects>
   <STG.Status.Drawing>{0}개 골랐습니다. 세 개부터 별자리가 됩니다.</STG.Status.Drawing>

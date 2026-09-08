@@ -41,6 +41,9 @@
   <STG.Ground.Nothing>Nothing down there to see.</STG.Ground.Nothing>
   <STG.Ground.Lit>day</STG.Ground.Lit>
   <STG.Ground.Dark>night</STG.Ground.Dark>
+  <STG.Ground.Span>{0} tiles across</STG.Ground.Span>
+  <STG.Ground.Wider>Pull back and take in more ground.</STG.Ground.Wider>
+  <STG.Ground.Closer>Move in closer. Names appear once the tiles are big enough.</STG.Ground.Closer>
   <STG.Panel.Mine>Traced by you</STG.Panel.Mine>
   <STG.Panel.None>Nothing yet. Use the button below to join some stars.</STG.Panel.None>
   <STG.Panel.Erase>Erase this one.</STG.Panel.Erase>
@@ -63,7 +66,7 @@
   <STG.Planet.Tip>the planet
 {0}% lit</STG.Planet.Tip>
   <STG.Status.Planet>The planet is {0}% lit.</STG.Status.Planet>
-  <STG.Status.Ground>Looking down. The dark tiles are the ones in night.</STG.Status.Ground>
+  <STG.Status.Ground>Looking down. Scroll to widen or narrow the view; the dark tiles are the ones in night.</STG.Status.Ground>
   <STG.Status.WithMoon>The moon is {0}% lit. {1} object(s) in orbit.</STG.Status.WithMoon>
   <STG.Status.WithObjects>{0} object(s) passing overhead.</STG.Status.WithObjects>
   <STG.Status.Drawing>{0} picked. Three makes a constellation.</STG.Status.Drawing>
