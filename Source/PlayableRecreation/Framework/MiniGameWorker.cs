@@ -30,6 +30,18 @@ namespace PlayableRecreation
         /// <summary>기록에 남는 진행량. 우르는 턴 수, 던지는 게임은 이닝 수.</summary>
         public abstract int Rounds { get; }
 
+        /// <summary>
+        /// 기권을 전적에 남길 만큼 판이 진행됐는가. 첫 수를 두기 전에 창을 닫은 것은
+        /// 판을 접은 것이 아니라 앉지 않은 것이라, 패배로 적지 않는다.
+        ///
+        /// 대개는 라운드가 둘 이상이면 진행된 것이다. 한 라운드 안에서 이미 잃을 것을
+        /// 잃는 게임(룰렛의 첫 스핀)은 이 값을 따로 답해야 공짜 재시도가 생기지 않는다.
+        /// </summary>
+        public virtual bool HasProgress
+        {
+            get { return Rounds > 1; }
+        }
+
         public abstract bool IsOver { get; }
         public abstract bool PlayerWon { get; }
 

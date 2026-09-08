@@ -54,6 +54,22 @@ namespace PlayableRecreation.UI
             get { return game.windowSize; }
         }
 
+        /// <summary>
+        /// 이 판을 연 자리의 주인. 보통은 지금 하고 있는 게임 그 자체지만, 아케이드처럼
+        /// 뽑아 주는 자리라면 뽑기 통 쪽이다. '새 판'이 뽑힌 게임을 그대로 다시 열면
+        /// 그 기계는 두 번째부터 추첨함이기를 그만둔다.
+        /// </summary>
+        private MiniGameDef Origin
+        {
+            get
+            {
+                if (board == null) return game;
+
+                CompMiniGame comp = board.TryGetComp<CompMiniGame>();
+                return comp != null && comp.Game != null ? comp.Game : game;
+            }
+        }
+
         /// <summary>새 판.</summary>
         public Dialog_MiniGame(MiniGameDef game, Thing board, Pawn seatedPawn, int tier, bool practice)
         {
@@ -554,8 +570,9 @@ namespace PlayableRecreation.UI
         {
             Close(false);
 
-            if (practice) Find.WindowStack.Add(new Dialog_MiniGame(game, board, seatedPawn, tier, true));
-            else GameEntry.StartNew(game, board, seatedPawn);
+            // 다시 여는 것은 하던 게임이 아니라 그 자리다. 아케이드에서는 통을 다시 흔든다.
+            if (practice) GameEntry.Launch(Origin, board, seatedPawn, tier, true);
+            else GameEntry.StartNew(Origin, board, seatedPawn);
         }
 
         private void DropSession()
@@ -595,7 +612,8 @@ namespace PlayableRecreation.UI
 
             // 손도 대지 않고 버린 판은 전적이 아니다. 다만 그 잣대는 기권에만 댄다 -
             // 규칙대로 끝난 판은 한 수 만에 끝났더라도 남아야 한다 (룰렛의 한 방 승리).
-            if (byResignation && worker.Rounds <= 1) return;
+            // '손도 대지 않았다'의 뜻은 게임이 정한다. 룰렛은 첫 스핀부터 판이 진행된 것이다.
+            if (byResignation && !worker.HasProgress) return;
 
             AccumulatePlayTime();
 

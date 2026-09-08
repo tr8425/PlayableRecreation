@@ -112,7 +112,7 @@ namespace Stargazing
 
             // 세계의 물건들을 타일별로 한 번만 훑어 둔다. 넓게 보면 칸이 삼백 개가 넘어서,
             // 칸마다 세계 전체를 뒤지면 그만큼 헛일이 곱해진다.
-            Dictionary<int, string> marks = MarksByTile();
+            Dictionary<int, string> marks = MarksByTile(surface);
 
             for (int i = 0; i < near.Count; i++)
                 patch.Cells.Add(Read(surface, near[i], flat[i] / far, near[i] == below, ticks, marks));
@@ -189,8 +189,13 @@ namespace Stargazing
             return cell;
         }
 
-        /// <summary>세계의 물건들이 어느 타일에 있는가. 한 타일에 여럿이면 먼저 잡히는 것이 이긴다.</summary>
-        private static Dictionary<int, string> MarksByTile()
+        /// <summary>
+        /// 세계의 물건들이 어느 타일에 있는가. 한 타일에 여럿이면 먼저 잡히는 것이 이긴다.
+        ///
+        /// 지표층의 것만 센다. 타일 번호는 층마다 따로 매겨져서, 층을 가리지 않으면
+        /// 궤도에 떠 있는 우리 자신이 저 아래 어느 땅의 이름표가 되어 버린다.
+        /// </summary>
+        private static Dictionary<int, string> MarksByTile(PlanetLayer surface)
         {
             Dictionary<int, string> marks = new Dictionary<int, string>();
             if (Find.WorldObjects == null) return marks;
@@ -201,6 +206,7 @@ namespace Stargazing
             {
                 WorldObject world = all[i];
                 if (world == null || !world.Tile.Valid) continue;
+                if (world.Tile.Layer != surface) continue;
                 if (marks.ContainsKey(world.Tile.tileId)) continue;
 
                 marks[world.Tile.tileId] = world.LabelShortCap;

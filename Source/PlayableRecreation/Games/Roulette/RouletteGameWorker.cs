@@ -67,6 +67,15 @@ namespace Roulette
             get { return run != null ? run.Spins : 0; }
         }
 
+        /// <summary>
+        /// 룰렛은 한 번만 돌려도 판이 끝난 것이다 - 열 닢을 걸고 잃은 사람이 창을 닫아
+        /// 없던 일로 만들 수는 없다. 그래서 라운드 둘이 아니라 스핀 하나를 기준으로 답한다.
+        /// </summary>
+        public override bool HasProgress
+        {
+            get { return run != null && run.Spins > 0; }
+        }
+
         /// <summary>공이 도는 동안은 아직 끝이 아니다 - 마지막 스핀의 연출을 지키는 문이다.</summary>
         public override bool IsOver
         {

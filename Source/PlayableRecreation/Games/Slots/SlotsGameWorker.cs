@@ -77,6 +77,10 @@ namespace Slots
         /// <summary>이번 줄의 배당. 당기는 순간 확정되고, 릴이 멈출 때 드러난다.</summary>
         private int pendingWin;
 
+        /// <summary>당길 때 찍어 둔 지갑·최고치. 도는 동안은 이 사본을 보여 준다.</summary>
+        private int spinShownCredits = StartCredits;
+        private int spinPeak = StartCredits;
+
         /// <summary>세이브가 없을 때(테스트 같은 비정상 상황)만 쓰는 예비 지갑.</summary>
         private int detachedTokens = StartCredits;
 
@@ -98,6 +102,9 @@ namespace Slots
 
         /// <summary>천 닢 클럽 연출 중이면 잭팟 현수막 대신 클럽 현수막을 건다.</summary>
         private bool clubBanner;
+
+        /// <summary>클럽 도장은 찍혔고 연출만 밀려 있다. 릴이 멈추면 연다.</summary>
+        private bool clubOwed;
 
         // ---------- 프레임워크에 답하는 것들 ----------
 
@@ -178,6 +185,10 @@ namespace Slots
             store.SetCounter(KeyTokens, tokens);
 
             if (tokens > store.GetCounter(KeyPeak, StartCredits)) store.SetCounter(KeyPeak, tokens);
+
+            // 천 닢에 닿는 순간이 여기다. 릴이 멈출 때까지 미루면 그 사이에 창이 닫히거나
+            // 다른 창이 한 닢을 써서 999가 되어 버리고, 그러면 영영 지나간 일이 된다.
+            ClaimThousandClub(tokens);
         }
 
         // ---------- 수명 ----------
@@ -195,6 +206,7 @@ namespace Slots
             jackpotUntil = 0f;
             dingsLeft = 0;
             clubBanner = false;
+            clubOwed = false;
 
             // 지갑은 세이브의 것이다. 처음 앉는 식민지에게만 하우스가 스무 닢을 내준다.
             GameComponent_Recreation store = Store;
@@ -206,6 +218,8 @@ namespace Slots
             }
 
             shownCredits = Credits;
+            spinShownCredits = Credits;
+            spinPeak = Peak;
         }
 
         public override void Resume(MiniGameSaveData data)
@@ -222,9 +236,10 @@ namespace Slots
             lastNow = now;
 
             // 칩 표시가 실제 값을 쫓아간다. 딴 것이 클수록 빨리, 그래도 한동안은 센다.
-            // 도는 동안은 배당을 뺀 값을 보여준다 - 칩은 이미 지갑에 들어와 있지만,
-            // 결과를 릴보다 먼저 알려주면 릴을 볼 이유가 없어진다.
-            float target = spinning ? Credits - pendingWin : Credits;
+            // 도는 동안은 당길 때 찍어 둔 값을 보여준다 - 칩은 이미 지갑에 들어와 있지만
+            // 결과를 릴보다 먼저 알려주면 릴을 볼 이유가 없어진다. 살아 있는 지갑에서
+            // 배당을 빼는 식이면 그 사이 다른 창이 쓴 만큼이 어긋나 음수까지 내려간다.
+            float target = spinning ? spinShownCredits : Credits;
             float gap = Mathf.Abs(target - shownCredits);
             if (gap > 0.001f)
                 shownCredits = Mathf.MoveTowards(shownCredits, target, delta * Mathf.Max(6f, gap * 2.2f));
@@ -236,6 +251,10 @@ namespace Slots
                 dingsLeft--;
                 nextDing = now + 0.28f;
             }
+
+            // 밀어 둔 클럽 연출은 릴이 다 멈춘 다음 프레임에 열린다. 그래서 같은 줄에서
+            // 잭팟이 먼저 터졌더라도 클럽 현수막이 그 위에 걸린다 - 그쪽이 더 큰 일이다.
+            if (clubOwed && !spinning) OpenClubBanner();
 
             if (!spinning) return;
 
@@ -282,6 +301,10 @@ namespace Slots
             lastWin = 0;
             spins++;
 
+            // 도는 동안 걸어 둘 숫자를 먼저 찍는다. 판돈 한 닢만 빠진 모습이다.
+            spinShownCredits = Mathf.Max(0, Credits - 1);
+            spinPeak = Peak;
+
             AddTokens(pendingWin - 1);
 
             spinning = true;
@@ -318,8 +341,6 @@ namespace Slots
                 PRSounds.Play(SlotsSounds.Jackpot);
             }
             else PRSounds.Play(SlotsSounds.Win);
-
-            CheckThousandClub();
         }
 
         // ---------- 충전 ----------
@@ -381,20 +402,31 @@ namespace Slots
 
             AddTokens(ChargeTokens);
             PRSounds.Play(SlotsSounds.Win);
-            CheckThousandClub();
         }
 
         /// <summary>
         /// 칩 천 닢. 은으로 바꿔 주는 길은 없다 - 그 순간 이 창은 오락이 아니라
         /// 환전소가 된다. 대신 기계가 이 일을 딱 한 번, 성대하게 기억해 준다.
+        ///
+        /// 도장은 지갑이 천 닢에 닿는 그 순간 찍는다. 릴이 멈출 때까지 미루면 그 사이
+        /// 창을 닫거나 옆 기계에서 한 닢을 써서 999가 된 사람은 영영 이 문 앞을 지나친다.
+        /// 연출만 밀어 두었다가 릴이 멈춘 뒤에 연다.
         /// </summary>
-        private void CheckThousandClub()
+        private void ClaimThousandClub(int tokens)
         {
-            if (Credits < ClubThreshold) return;
+            if (tokens < ClubThreshold) return;
 
             GameComponent_Recreation store = Store;
             if (store == null || store.GetCounter(KeyClub) != 0) return;
+
             store.SetCounter(KeyClub, 1);
+            clubOwed = true;
+        }
+
+        /// <summary>밀어 두었던 클럽 연출.</summary>
+        private void OpenClubBanner()
+        {
+            clubOwed = false;
 
             jackpotUntil = now + JackpotSeconds;
             clubBanner = true;
@@ -452,8 +484,10 @@ namespace Slots
             Text.Anchor = TextAnchor.MiddleRight;
             GUI.color = PRTheme.Dim;
             Text.Font = GameFont.Small;
+            // 최고치도 도는 동안은 당길 때의 사본이다. 배당이 이미 지갑에 들어가 있어서,
+            // 살아 있는 값을 그대로 걸면 릴이 멈추기 전에 최고치가 먼저 올라가 결과를 흘린다.
             Widgets.Label(new Rect(area.center.x, area.y, area.width / 2f, 40f),
-                "SLT.Peak".Translate(Peak).ToString());
+                "SLT.Peak".Translate(spinning ? spinPeak : Peak).ToString());
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
