@@ -20,6 +20,11 @@
 디테일은 적당히. 무엇이 열리는지까지는 말하되 게임마다 규칙을 늘어놓지 않는다 —
 읽는 사람이 궁금하면 설명문을 본다.
 
+**칭찬 답글에 업데이트 홍보를 얹지 않는다.** 특히 이번처럼 남의 모드가 있어야
+쓸 수 있는 기능이면 더 그렇다. 그 모드를 안 쓰는 사람에게는 알릴 값어치가 없고,
+고맙다는 말에 광고를 붙인 꼴이 된다. 새 소식은 변경 기록과 설명문이 맡는다.
+업데이트를 언급할 자리는 그것을 요청한 사람의 댓글이다 (galesdeloscien 처럼).
+
 > @ferny fixed both in the latest update. turns out the tutorial was opening
 > behind the game window the whole time. thanks for the report!
 
@@ -35,20 +40,18 @@
 
 ## 항목
 
-### 2026-09-08 · Bones · 창작마당 댓글 — `신규`
+### 2026-09-08 · Bones · 창작마당 댓글 — `답변완료`
 > "This is a true gem."
-- 칭찬. 답글은 ContourJeans64 와 한 댓글로 묶는다 (아래).
+- 칭찬. 답글은 ContourJeans64 와 한 댓글로 묶어서 달았다 (아래).
 
-### 2026-09-05 · ContourJeans64 · 창작마당 댓글 — `신규`
+### 2026-09-05 · ContourJeans64 · 창작마당 댓글 — `답변완료`
 > "I really enjoyed this mod,"
 - 칭찬. 09-05 에 달렸는데 대장에 빠져 있던 것을 지금 채운다.
-- **Bones 와 한 댓글로 묶는다.** 둘 다 질문 없는 칭찬이라 거의 같은 인사를 두 번
-  연달아 다는 꼴이 된다. 둘 다 1.1.0 이 올라가기 전에 쓴 댓글이라 업데이트 한 줄을
-  붙였다.
-- 답글 문안 (게시하면 두 항목 다 `답변완료` 로 바꾼다):
-  > @Bones @ContourJeans64 thank you both, that means a lot. there's a bit more
-  > of it as of the latest update if you've got VFE, GloomyFurniture or
-  > Hospitality: Casino
+- **Bones 와 한 댓글로 묶었다.** 둘 다 질문 없는 칭찬이라 거의 같은 인사를 두 번
+  연달아 다는 꼴이 된다.
+- 초안에 붙였던 "업데이트 나왔다" 한 줄은 빼고 감사만 하고 끝냈다. 판단 근거는
+  아래 어투 규칙에 적어 두었다.
+- 조치: 2026-09-08 답글 완료.
 
 ### 2026-09-08 · 개발자 QA (2차) · 인게임 — `수정배포`
 > "사진도 찍어왔고, 잠깐 플레이에서는 큰 버그를 찾지 못했어"
@@ -71,7 +74,7 @@
 - **2026-09-08 v1.1.0 으로 배포됨.** 애드온이 아니라 본체 내장 + 소프트 의존으로 갔다
   (VFE 다트·펀칭백·룰렛·아케이드, Gloomy 3종, Casino 슬롯).
   이 사람이 이번 판의 직접적인 계기다 — 배포 답글을 따로 단다.
-- 답글 문안 (게시하면 이 줄을 `답글 완료` 로 바꾼다):
+- 조치: 2026-09-08 답글 완료.
   > @galesdeloscien done, it's in the update that just went up. with VFE loaded
   > the darts board, punching bag, roulette table and arcade machine all open now
   > (the arcade has no game of its own - you pick a difficulty and it rolls you a
