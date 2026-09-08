@@ -12,6 +12,17 @@
 - 피드백에서 작업이 파생되면 "백로그" 표에도 반영한다.
 - 세션을 마치기 전, 대응 안 된 `신규` 항목이 남았는지 확인한다.
 
+### 답글 어투
+
+작성자(Rostra)가 쓰는 투를 따른다. `@이름` 으로 시작하고 그 뒤는 소문자로,
+두세 줄 안에 끝낸다. 목록·굵은 글씨·판매 문구는 쓰지 않는다.
+
+디테일은 적당히. 무엇이 열리는지까지는 말하되 게임마다 규칙을 늘어놓지 않는다 —
+읽는 사람이 궁금하면 설명문을 본다.
+
+> @ferny fixed both in the latest update. turns out the tutorial was opening
+> behind the game window the whole time. thanks for the report!
+
 ## 백로그 (피드백에서 파생된 작업)
 
 | 우선순위 | 작업 | 근거 | 상태 |
@@ -28,15 +39,14 @@
 > "This is a true gem."
 - 칭찬. v1.1.0 을 낸 직후에 달렸다.
 - 답글 문안 (게시하면 `답변완료` 로 바꾼다):
-  > Thank you — that is a lovely thing to wake up to. Enjoy the games.
+  > @Bones thank you! that means a lot, enjoy
 
 ### 2026-09-05 · ContourJeans64 · 창작마당 댓글 — `신규`
 > "I really enjoyed this mod,"
 - 칭찬. 09-05 에 달렸는데 대장에 빠져 있던 것을 지금 채운다.
 - 답글 문안 (게시하면 `답변완료` 로 바꾼다):
-  > Thank you! There is a little more of it as of 1.1.0 — if you have Vanilla
-  > Furniture Expanded, GloomyFurniture or Hospitality: Casino, some of their
-  > furniture is playable now too.
+  > @ContourJeans64 thanks! there's a bit more of it as of the latest update if
+  > you've got VFE, GloomyFurniture or Hospitality: Casino
 
 ### 2026-09-08 · 개발자 QA (2차) · 인게임 — `수정배포`
 > "사진도 찍어왔고, 잠깐 플레이에서는 큰 버그를 찾지 못했어"
@@ -60,18 +70,12 @@
   (VFE 다트·펀칭백·룰렛·아케이드, Gloomy 3종, Casino 슬롯).
   이 사람이 이번 판의 직접적인 계기다 — 배포 답글을 따로 단다.
 - 답글 문안 (게시하면 이 줄을 `답글 완료` 로 바꾼다):
-  > Done — 1.1.0 is up. With Vanilla Furniture Expanded loaded, the darts board,
-  > the punching bag, the roulette table and the arcade machine are all playable
-  > now. Darts is five rounds of three, the punching bag is a rhythm game, roulette
-  > is a bankroll run against the house, and the arcade machine has no game of its
-  > own — you pick a difficulty and it deals you a random one, including games
-  > whose furniture you never built. GloomyFurniture's chess, poker and billiards
-  > tables and Hospitality: Casino's slot machines came along too.
+  > @galesdeloscien done, it's in the update that just went up. with VFE loaded
+  > the darts board, punching bag, roulette table and arcade machine all open now
+  > (the arcade has no game of its own - you pick a difficulty and it rolls you a
+  > random one). GloomyFurniture and Hospitality: Casino got a few too.
   >
-  > It is all built into the mod and entirely optional — nothing is required, and
-  > nothing changes if you don't have those installed.
-  >
-  > Thanks for the nudge. And for the nugget.
+  > thanks for the nudge, and for the nugget
 
 ### 2026-09-05 · Amor · 창작마당 댓글 — `답변완료`
 > "FINALLY more places to play Game of Ur"
