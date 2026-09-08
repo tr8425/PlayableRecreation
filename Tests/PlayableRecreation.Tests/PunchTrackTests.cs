@@ -115,5 +115,53 @@ namespace PlayableRecreation.Tests
             // 창 바로 바깥이지만 보정만큼은 살려 준다.
             Assert.NotEqual(NoteJudge.Miss, track.RegisterHit(first + PunchTrack.GoodWindow + 0.03f, 0.05f));
         }
+
+        /// <summary>
+        /// 미스를 굳히는 잣대도 보정을 같이 받아야 한다. 좁게 굳히면 늦은 주먹이
+        /// 닿기 전에 이미 미스가 되어, 넓혀 준 창이 늦은 쪽에서는 없는 것이 된다.
+        /// </summary>
+        [Fact]
+        public void 보정_안의_늦은_박은_아직_미스가_아니다()
+        {
+            PunchTrack track = PunchTrack.Generate(3, 0);
+            float first = track.Notes[0].Beat * track.BeatSeconds;
+
+            track.AdvanceMisses(first + PunchTrack.GoodWindow + 0.03f, 0.05f);
+
+            Assert.Equal(0, track.Misses);
+            Assert.Equal(NoteJudge.Pending, track.Notes[0].Judge);
+
+            // 그래서 같은 순간에 도착한 주먹이 아직 이 박을 잡을 수 있다.
+            Assert.NotEqual(NoteJudge.Miss, track.RegisterHit(first + PunchTrack.GoodWindow + 0.03f, 0.05f));
+            Assert.Equal(0, track.Whiffs);
+        }
+
+        [Fact]
+        public void 보정_밖의_늦은_박은_미스로_굳는다()
+        {
+            PunchTrack track = PunchTrack.Generate(3, 0);
+            float first = track.Notes[0].Beat * track.BeatSeconds;
+
+            track.AdvanceMisses(first + PunchTrack.GoodWindow + 0.08f, 0.05f);
+
+            Assert.Equal(1, track.Misses);
+            Assert.Equal(NoteJudge.Miss, track.Notes[0].Judge);
+        }
+
+        /// <summary>세트 끝을 한 프레임에 지나쳐도 안 친 발은 전부 미스로 남아야 한다.</summary>
+        [Fact]
+        public void 끝을_건너뛰어도_안_친_발은_미스로_남는다()
+        {
+            PunchTrack track = PunchTrack.Generate(3, 0);
+
+            float past = track.LastNoteTime + 10f;
+            Assert.True(track.Done(past));
+
+            track.AdvanceMisses(past, 0f);
+
+            Assert.Equal(track.Notes.Count, track.Misses);
+            Assert.Equal(track.Notes.Count, track.JudgedCount);
+            Assert.False(track.Flawless);
+        }
     }
 }

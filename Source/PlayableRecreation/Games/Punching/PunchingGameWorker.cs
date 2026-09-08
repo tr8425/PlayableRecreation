@@ -105,9 +105,12 @@ namespace Punching
             if (!armed) return;
 
             songTime = now - startTime;
-            if (track.Done(songTime)) return;
 
-            track.AdvanceMisses(songTime);
+            // 끝을 판정하기 전에 남은 발부터 정산한다. 프레임이 크게 튀어 세트 끝을
+            // 한 번에 지나가 버리면, 안 친 발들이 판정되지 않은 채로 남아 완봉이 된다.
+            track.AdvanceMisses(songTime, Slack);
+
+            if (track.Done(songTime)) return;
 
             // 콜 박마다 낮은 소리. 너무 늦게 온 프레임에는 소리를 걸러야 귀가 안 헷갈린다.
             IReadOnlyList<float> cues = track.Cues;

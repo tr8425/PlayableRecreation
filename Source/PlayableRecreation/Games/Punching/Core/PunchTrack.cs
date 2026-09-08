@@ -236,15 +236,21 @@ namespace Punching.Core
             return note.Judge;
         }
 
-        /// <summary>창을 지나쳐 버린 발들을 미스로 굳힌다.</summary>
-        public void AdvanceMisses(float songTime)
+        /// <summary>
+        /// 창을 지나쳐 버린 발들을 미스로 굳힌다.
+        ///
+        /// slack 은 <see cref="RegisterHit"/> 이 받아 주는 것과 같은 값이어야 한다.
+        /// 좁게 굳히면 늦은 주먹이 도착하기 전에 이미 미스로 확정되어, 프레임 보정이
+        /// 늦은 쪽에서는 아예 작동하지 않고 같은 입력이 미스와 헛스윙으로 두 번 세어진다.
+        /// </summary>
+        public void AdvanceMisses(float songTime, float slack = 0f)
         {
             for (int i = 0; i < notes.Count; i++)
             {
                 PunchNote note = notes[i];
                 if (note.Judge != NoteJudge.Pending) continue;
 
-                if (note.Beat * BeatSeconds < songTime - GoodWindow)
+                if (note.Beat * BeatSeconds < songTime - GoodWindow - slack)
                 {
                     note.Judge = NoteJudge.Miss;
                     JudgedCount++;

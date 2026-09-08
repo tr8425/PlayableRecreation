@@ -61,13 +61,10 @@ namespace Roulette
             get { return run != null ? run.Spins : 0; }
         }
 
-        /// <summary>
-        /// 스핀 번호(1-기준). 완주 판정에 하나를 더해 두는 이유: 첫 스핀의 올인 한 방으로
-        /// 판이 끝나도 전적에 남아야 한다. 기권 보호(Rounds ≤ 1)는 스핀 0에서만 걸리면 된다.
-        /// </summary>
+        /// <summary>돌린 횟수. 기록의 '최단 승리'가 이 값을 그대로 쓰므로 부풀리지 않는다.</summary>
         public override int Rounds
         {
-            get { return run != null ? run.Spins + 1 : 0; }
+            get { return run != null ? run.Spins : 0; }
         }
 
         /// <summary>공이 도는 동안은 아직 끝이 아니다 - 마지막 스핀의 연출을 지키는 문이다.</summary>

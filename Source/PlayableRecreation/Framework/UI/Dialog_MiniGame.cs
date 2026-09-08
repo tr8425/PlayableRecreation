@@ -591,7 +591,11 @@ namespace PlayableRecreation.UI
 
         private void RecordResult(bool won, bool byResignation)
         {
-            if (!game.hasMatch || practice || worker == null || worker.Rounds <= 1) return;
+            if (!game.hasMatch || practice || worker == null) return;
+
+            // 손도 대지 않고 버린 판은 전적이 아니다. 다만 그 잣대는 기권에만 댄다 -
+            // 규칙대로 끝난 판은 한 수 만에 끝났더라도 남아야 한다 (룰렛의 한 방 승리).
+            if (byResignation && worker.Rounds <= 1) return;
 
             AccumulatePlayTime();
 

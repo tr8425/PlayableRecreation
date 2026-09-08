@@ -71,10 +71,14 @@ namespace Slots
         private int seed;
         private int spinIndex;
 
-        private int credits = StartCredits;
-        private int peak = StartCredits;
         private int lastWin;
         private int spins;
+
+        /// <summary>이번 줄의 배당. 당기는 순간 확정되고, 릴이 멈출 때 드러난다.</summary>
+        private int pendingWin;
+
+        /// <summary>세이브가 없을 때(테스트 같은 비정상 상황)만 쓰는 예비 지갑.</summary>
+        private int detachedTokens = StartCredits;
 
         private readonly int[] reels = new int[3];
         private bool spinning;
@@ -122,11 +126,58 @@ namespace Slots
         {
             get
             {
-                if (credits <= 0 && !spinning) return "SLT.Status.Broke".Translate(peak).ToString();
+                if (Credits <= 0 && !spinning) return "SLT.Status.Broke".Translate(Peak).ToString();
                 if (spinning) return "SLT.Status.Spinning".Translate().ToString();
                 if (lastWin > 0) return "SLT.Status.Won".Translate(lastWin).ToString();
                 return "SLT.Status.Idle".Translate().ToString();
             }
+        }
+
+        // ---------- 지갑 ----------
+
+        /// <summary>
+        /// 지갑은 언제나 세이브가 들고 있다. 창이 이 값을 복사해 들고 있으면 안 된다 -
+        /// 기계 두 대를 같이 열어 두면 나중에 쓰는 창이 앞선 창의 칩을 덮어써 버린다.
+        /// 그래서 읽기도 쓰기도 매번 세이브를 거친다.
+        /// </summary>
+        private static GameComponent_Recreation Store
+        {
+            get { return GameComponent_Recreation.Current; }
+        }
+
+        private int Credits
+        {
+            get
+            {
+                GameComponent_Recreation store = Store;
+                return store != null ? store.GetCounter(KeyTokens, StartCredits) : detachedTokens;
+            }
+        }
+
+        private int Peak
+        {
+            get
+            {
+                GameComponent_Recreation store = Store;
+                return store != null ? store.GetCounter(KeyPeak, StartCredits) : detachedTokens;
+            }
+        }
+
+        /// <summary>칩을 더하거나 뺀다. 읽고-고치고-쓰기라 다른 창의 결과를 지우지 않는다.</summary>
+        private void AddTokens(int delta)
+        {
+            GameComponent_Recreation store = Store;
+
+            if (store == null)
+            {
+                detachedTokens = Mathf.Max(0, detachedTokens + delta);
+                return;
+            }
+
+            int tokens = Mathf.Max(0, store.GetCounter(KeyTokens, StartCredits) + delta);
+            store.SetCounter(KeyTokens, tokens);
+
+            if (tokens > store.GetCounter(KeyPeak, StartCredits)) store.SetCounter(KeyPeak, tokens);
         }
 
         // ---------- 수명 ----------
@@ -136,6 +187,7 @@ namespace Slots
             seed = newSeed;
             spinIndex = 0;
             lastWin = 0;
+            pendingWin = 0;
             spins = 0;
             spinning = false;
             stopped = 0;
@@ -145,7 +197,7 @@ namespace Slots
             clubBanner = false;
 
             // 지갑은 세이브의 것이다. 처음 앉는 식민지에게만 하우스가 스무 닢을 내준다.
-            GameComponent_Recreation store = GameComponent_Recreation.Current;
+            GameComponent_Recreation store = Store;
             if (store != null && store.GetCounter(KeyInit) == 0)
             {
                 store.SetCounter(KeyInit, 1);
@@ -153,19 +205,7 @@ namespace Slots
                 store.SetCounter(KeyPeak, StartCredits);
             }
 
-            credits = store != null ? store.GetCounter(KeyTokens, StartCredits) : StartCredits;
-            peak = store != null ? store.GetCounter(KeyPeak, StartCredits) : StartCredits;
-            shownCredits = credits;
-        }
-
-        /// <summary>칩이 움직일 때마다 지갑에 적어 둔다. 창이 어떻게 닫혀도 잃지 않는다.</summary>
-        private void Persist()
-        {
-            GameComponent_Recreation store = GameComponent_Recreation.Current;
-            if (store == null) return;
-
-            store.SetCounter(KeyTokens, credits);
-            store.SetCounter(KeyPeak, peak);
+            shownCredits = Credits;
         }
 
         public override void Resume(MiniGameSaveData data)
@@ -182,9 +222,12 @@ namespace Slots
             lastNow = now;
 
             // 칩 표시가 실제 값을 쫓아간다. 딴 것이 클수록 빨리, 그래도 한동안은 센다.
-            float gap = Mathf.Abs(credits - shownCredits);
+            // 도는 동안은 배당을 뺀 값을 보여준다 - 칩은 이미 지갑에 들어와 있지만,
+            // 결과를 릴보다 먼저 알려주면 릴을 볼 이유가 없어진다.
+            float target = spinning ? Credits - pendingWin : Credits;
+            float gap = Mathf.Abs(target - shownCredits);
             if (gap > 0.001f)
-                shownCredits = Mathf.MoveTowards(shownCredits, credits, delta * Mathf.Max(6f, gap * 2.2f));
+                shownCredits = Mathf.MoveTowards(shownCredits, target, delta * Mathf.Max(6f, gap * 2.2f));
 
             // 잭팟의 종소리는 몇 번에 나눠 울린다.
             if (dingsLeft > 0 && now >= nextDing)
@@ -209,7 +252,7 @@ namespace Slots
             if (stopped >= 3)
             {
                 spinning = false;
-                Settle();
+                Reveal();
             }
         }
 
@@ -224,17 +267,22 @@ namespace Slots
             return 4;
         }
 
+        /// <summary>
+        /// 당긴다. 판돈과 배당이 같은 순간에 오간다 - 릴이 도는 중에 창이 닫히거나
+        /// 습격이 판을 끊어도 칩 한 닢만 나가고 딴 것은 사라지는 일이 없다.
+        /// </summary>
         private void Spin()
         {
-            if (spinning || credits <= 0) return;
-
-            credits--;
-            lastWin = 0;
-            spins++;
-            Persist();
+            if (spinning || Credits <= 0) return;
 
             for (int reel = 0; reel < 3; reel++) reels[reel] = SymbolAt(spinIndex, reel);
             spinIndex++;
+
+            pendingWin = WinForReels();
+            lastWin = 0;
+            spins++;
+
+            AddTokens(pendingWin - 1);
 
             spinning = true;
             stopped = 0;
@@ -242,27 +290,25 @@ namespace Slots
             PRSounds.Play(SlotsSounds.Pull);
         }
 
-        private void Settle()
+        /// <summary>지금 줄의 배당. 같은 그림 셋, 아니면 7 두 개의 위로금.</summary>
+        private int WinForReels()
         {
-            int win = 0;
+            if (reels[0] == reels[1] && reels[1] == reels[2]) return Pay3[reels[0]];
 
-            if (reels[0] == reels[1] && reels[1] == reels[2]) win = Pay3[reels[0]];
-            else
-            {
-                int sevens = 0;
-                for (int i = 0; i < 3; i++) if (reels[i] == SymbolSeven) sevens++;
-                if (sevens == 2) win = PayPairSeven;
-            }
+            int sevens = 0;
+            for (int i = 0; i < 3; i++) if (reels[i] == SymbolSeven) sevens++;
+            return sevens == 2 ? PayPairSeven : 0;
+        }
 
-            if (win <= 0) return;
+        /// <summary>릴이 다 멈췄다. 칩은 이미 오갔고, 여기서는 그것을 드러내기만 한다.</summary>
+        private void Reveal()
+        {
+            if (pendingWin <= 0) return;
 
-            credits += win;
-            lastWin = win;
+            lastWin = pendingWin;
             winFlashUntil = now + 1.1f;
-            if (credits > peak) peak = credits;
-            Persist();
 
-            if (win >= Pay3[0])
+            if (pendingWin >= Pay3[0])
             {
                 // 잭팟. 기계가 아는 가장 화려한 3초.
                 jackpotUntil = now + JackpotSeconds;
@@ -279,9 +325,29 @@ namespace Slots
         // ---------- 충전 ----------
 
         /// <summary>
-        /// 은 200닢이 칩 스무 닢이 된다. 은은 지도 위에 깔린 것만 센다 -
-        /// 창고든 바닥이든, 기계 앞까지 들고 올 수 있는 것들.
+        /// 은 200닢이 칩 스무 닢이 된다. 식민지의 은만 센다 - 바닐라 거래가 쓰는 것과
+        /// 같은 잣대다. 안개 속, 금지된 것, 그리고 거주 구역도 창고도 아닌 곳에 널린 것은
+        /// 우리 것이 아니다. 그러지 않으면 이 버튼이 고대 위험 안의 은까지 원격으로 먹는다.
         /// </summary>
+        private List<Thing> ColonySilver(Map map)
+        {
+            List<Thing> silver = new List<Thing>();
+
+            List<Thing> all = map.listerThings.ThingsOfDef(ThingDefOf.Silver);
+            for (int i = 0; i < all.Count; i++)
+            {
+                Thing thing = all[i];
+                if (thing == null || thing.Destroyed || !thing.Spawned) continue;
+                if (thing.Position.Fogged(map)) continue;
+                if (thing.IsForbidden(Faction.OfPlayer)) continue;
+                if (!map.areaManager.Home[thing.Position] && !thing.IsInAnyStorage()) continue;
+
+                silver.Add(thing);
+            }
+
+            return silver;
+        }
+
         private void Charge()
         {
             if (spinning) return;
@@ -290,7 +356,7 @@ namespace Slots
             if (map == null) return;
 
             // 파괴하면 lister 목록이 그 자리에서 줄어드니 복사본을 밟고 간다.
-            List<Thing> silver = new List<Thing>(map.listerThings.ThingsOfDef(ThingDefOf.Silver));
+            List<Thing> silver = ColonySilver(map);
 
             int total = 0;
             for (int i = 0; i < silver.Count; i++) total += silver[i].stackCount;
@@ -305,14 +371,15 @@ namespace Slots
             int remaining = ChargeCost;
             for (int i = 0; i < silver.Count && remaining > 0; i++)
             {
-                int take = Mathf.Min(silver[i].stackCount, remaining);
-                silver[i].SplitOff(take).Destroy();
+                Thing stack = silver[i];
+                if (stack.Destroyed) continue;
+
+                int take = Mathf.Min(stack.stackCount, remaining);
+                stack.SplitOff(take).Destroy();
                 remaining -= take;
             }
 
-            credits += ChargeTokens;
-            if (credits > peak) peak = credits;
-            Persist();
+            AddTokens(ChargeTokens);
             PRSounds.Play(SlotsSounds.Win);
             CheckThousandClub();
         }
@@ -323,9 +390,9 @@ namespace Slots
         /// </summary>
         private void CheckThousandClub()
         {
-            if (credits < ClubThreshold) return;
+            if (Credits < ClubThreshold) return;
 
-            GameComponent_Recreation store = GameComponent_Recreation.Current;
+            GameComponent_Recreation store = Store;
             if (store == null || store.GetCounter(KeyClub) != 0) return;
             store.SetCounter(KeyClub, 1);
 
@@ -364,7 +431,7 @@ namespace Slots
 
         public override bool ActionEnabled
         {
-            get { return !spinning && credits > 0; }
+            get { return !spinning && Credits > 0; }
         }
 
         public override void DoAction()
@@ -386,7 +453,7 @@ namespace Slots
             GUI.color = PRTheme.Dim;
             Text.Font = GameFont.Small;
             Widgets.Label(new Rect(area.center.x, area.y, area.width / 2f, 40f),
-                "SLT.Peak".Translate(peak).ToString());
+                "SLT.Peak".Translate(Peak).ToString());
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
