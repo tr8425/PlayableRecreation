@@ -58,6 +58,8 @@ With [b]Odyssey[/b] installed you also see what passes overhead. Standing on an 
 
 [img]https://images.steamusercontent.com/ugc/11943859427531556545/269B2B54768F1EC529BE99D5CB31C0FA109530DC/[/img]
 
+[img]https://images.steamusercontent.com/ugc/13840801495460265741/D4D921C906FEFD18A3FF7CF2C26A4B04DC3480C2/[/img]
+
 [h2]Mastery[/h2]
 
 The first time you clear a difficulty, colonists get a little more recreation and a little more skill from that piece of furniture. It accrues per game. Switch it off in the settings if you would rather it didn't.
@@ -65,6 +67,8 @@ The first time you clear a difficulty, colonists get a little more recreation an
 [img]https://images.steamusercontent.com/ugc/18299372653310041799/0E2BAB3687B7CADA8C3585DA8D84F58958B5C909/[/img]
 
 [h2]More furniture, if you already have the mods[/h2]
+
+[img]https://images.steamusercontent.com/ugc/12932015864041118073/879A36FE049709DBB7CA6536480E965100145CBC/[/img]
 
 None of this is required and nothing is asked of you. These wake up only when the mod is already in your list; the dependency list stays empty either way.
 
@@ -75,8 +79,6 @@ None of this is required and nothing is asked of you. These wake up only when th
 [/list]
 
 The arcade machine has no game of its own. Pick a difficulty and it deals you a random one — including games whose furniture you never built.
-
-{{SS6_MOD}}
 
 [h2]Compatibility and saves[/h2]
 [list]

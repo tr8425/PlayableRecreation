@@ -56,6 +56,8 @@
 
 [img]https://images.steamusercontent.com/ugc/11943859427531556545/269B2B54768F1EC529BE99D5CB31C0FA109530DC/[/img]
 
+[img]https://images.steamusercontent.com/ugc/13840801495460265741/D4D921C906FEFD18A3FF7CF2C26A4B04DC3480C2/[/img]
+
 [h2]숙련[/h2]
 
 난이도를 처음 깰 때마다 그 가구에서 정착민이 얻는 재미와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다. 싫으면 설정에서 끄면 됩니다.
@@ -63,6 +65,8 @@
 [img]https://images.steamusercontent.com/ugc/18299372653310041799/0E2BAB3687B7CADA8C3585DA8D84F58958B5C909/[/img]
 
 [h2]가지고 있다면 늘어나는 가구[/h2]
+
+[img]https://images.steamusercontent.com/ugc/12932015864041118073/879A36FE049709DBB7CA6536480E965100145CBC/[/img]
 
 아무것도 요구하지 않습니다. 이미 목록에 있는 모드에만 반응하고, 의존성 목록은 그대로 비어 있습니다.
 
@@ -73,8 +77,6 @@
 [/list]
 
 아케이드 게임기에는 자기 게임이 없습니다. 난이도만 고르면 무엇이 걸릴지 모르는 채로 한 판이 열립니다 — 지어 본 적 없는 가구의 게임까지 나옵니다.
-
-{{SS6_MOD}}
 
 [h2]호환성과 세이브[/h2]
 [list]
