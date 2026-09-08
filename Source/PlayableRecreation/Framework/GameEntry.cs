@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using PlayableRecreation.UI;
 using Verse;
@@ -28,7 +29,7 @@ namespace PlayableRecreation
         {
             GameSession session = SessionFor(board);
 
-            if (session != null && session.game == game) Resume(session);
+            if (session != null && game.Accepts(session.game)) Resume(session);
             else StartNew(game, board, pawn);
         }
 
@@ -37,17 +38,67 @@ namespace PlayableRecreation
         {
             if (game.difficultyCount <= 1)
             {
-                Find.WindowStack.Add(new Dialog_MiniGame(game, board, pawn, 0, false));
+                Launch(game, board, pawn, 0, false);
                 return;
             }
 
             if (pawn != null && PRMod.Settings.linkToPawnSkill)
             {
-                Find.WindowStack.Add(new Dialog_MiniGame(game, board, pawn, TierForPawn(game, pawn), false));
+                Launch(game, board, pawn, TierForPawn(game, pawn), false);
                 return;
             }
 
             Find.WindowStack.Add(new Dialog_Difficulty(game, board, pawn));
+        }
+
+        /// <summary>
+        /// 난이도가 정해진 뒤의 마지막 관문. 보통은 고른 그 게임을 열지만,
+        /// 추첨함이라면 여기서 통을 흔든다 - 난이도는 이미 사람이 골랐고, 무엇을 할지만 남았다.
+        /// </summary>
+        public static void Launch(MiniGameDef game, Thing board, Pawn pawn, int tier, bool practice)
+        {
+            if (game == null) return;
+
+            MiniGameDef chosen = game;
+
+            if (game.randomPick)
+            {
+                chosen = PickFor(game);
+
+                if (chosen == null)
+                {
+                    Messages.Message("PR.Random.Empty".Translate(), MessageTypeDefOf.RejectInput, false);
+                    return;
+                }
+
+                Messages.Message("PR.Random.Picked".Translate(chosen.LabelCap),
+                    board, MessageTypeDefOf.NeutralEvent, false);
+            }
+
+            Find.WindowStack.Add(new Dialog_MiniGame(chosen, board, pawn, tier, practice));
+        }
+
+        /// <summary>
+        /// 뽑기 통. 지금 로드되어 있는 승부 게임 전부다 - 설치한 모드에 따라 통의 내용이 달라지고,
+        /// 꺼 둔 항목은 들어오지 않는다. 목록을 어디에 적어 두지 않는 이유가 그것이다.
+        /// </summary>
+        private static MiniGameDef PickFor(MiniGameDef picker)
+        {
+            List<MiniGameDef> pool = new List<MiniGameDef>();
+
+            List<MiniGameDef> all = DefDatabase<MiniGameDef>.AllDefsListForReading;
+            for (int i = 0; i < all.Count; i++)
+            {
+                MiniGameDef game = all[i];
+
+                if (game == picker || game.randomPick) continue;
+                if (!game.hasMatch) continue;              // 승부가 없으면 고른 난이도가 뜻을 잃는다
+                if (!PRMod.Settings.IsEnabled(game)) continue;
+
+                pool.Add(game);
+            }
+
+            return pool.Count > 0 ? pool.RandomElement() : null;
         }
 
         public static void Resume(GameSession session)

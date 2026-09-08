@@ -7,6 +7,9 @@
   <PR.Play.Label>Play {0}</PR.Play.Label>
   <PR.Play.Broken>Too broken to use</PR.Play.Broken>
   <PR.Play.Resume>Pick up where you left off (round {0}, {1})</PR.Play.Resume>
+  <PR.Play.ResumeNamed>Pick up your {0} (round {1}, {2})</PR.Play.ResumeNamed>
+  <PR.Random.Picked>The cabinet lands on {0}.</PR.Random.Picked>
+  <PR.Random.Empty>Nothing on the shelf - every game is switched off in the mod settings.</PR.Random.Empty>
   <PR.Play.Discard>Sweep it up and start over</PR.Play.Discard>
 
   <!-- Window -->

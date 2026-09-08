@@ -107,4 +107,32 @@
     <windowSize>(900, 700)</windowSize>
   </PlayableRecreation.MiniGameDef>
 
+  <!--
+    아케이드 기계는 자기 게임이 없다. 난이도만 고르게 하고 그 난이도로 다른 게임을
+    하나 뽑아 준다 - 무엇이 걸릴지 모르는 것이 이 가구의 전부다.
+
+    workerClass 가 없는 것은 실수가 아니다. 뽑기 통은 그때 로드된 승부 게임들이라,
+    카지노나 Gloomy 를 깔면 통이 저절로 커진다.
+  -->
+  <PlayableRecreation.MiniGameDef>
+    <defName>PR_Arcade</defName>
+    <label>arcade machine</label>
+    <description>Pick a difficulty and let the cabinet choose the game.</description>
+    <randomPick>true</randomPick>
+    <targetThing>Joy_Arcade</targetThing>
+
+    <difficultyCount>5</difficultyCount>
+    <difficultyKeyPrefix>ARC.Difficulty</difficultyKeyPrefix>
+
+    <tutorialPages>1</tutorialPages>
+    <tutorialKeyPrefix>ARC.Tut</tutorialKeyPrefix>
+
+    <!-- 무르기·기록·저장은 전부 뽑힌 게임의 몫이라 여기 적어 봐야 아무 일도 하지 않는다. -->
+
+    <vanillaJob>Play_Arcade</vanillaJob>
+    <playThought>PR_PlayedArcade</playThought>
+
+    <windowSize>(900, 720)</windowSize>
+  </PlayableRecreation.MiniGameDef>
+
 </Defs>

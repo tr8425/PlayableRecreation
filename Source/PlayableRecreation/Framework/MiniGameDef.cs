@@ -14,8 +14,16 @@ namespace PlayableRecreation
     /// </summary>
     public class MiniGameDef : Def
     {
-        /// <summary>판을 실제로 굴리는 클래스. <see cref="MiniGameWorker"/> 파생.</summary>
+        /// <summary>판을 실제로 굴리는 클래스. <see cref="MiniGameWorker"/> 파생. 추첨함에는 없다.</summary>
         public Type workerClass;
+
+        /// <summary>
+        /// 자기 판이 없는 항목. 난이도만 고르게 하고, 그 난이도로 다른 게임 하나를 뽑아 준다 -
+        /// 아케이드 기계처럼 "무엇이 걸릴지 모르는" 자리를 위한 것이다.
+        ///
+        /// 프레임워크는 무엇이 뽑히는지 모른다. 그때 로드되어 있는 승부 게임들이 곧 뽑기 통이다.
+        /// </summary>
+        public bool randomPick;
 
         /// <summary>이 게임이 붙는 가구. 실제 부착은 XML 패치가 하고, 이 값은 조회용이다.</summary>
         public string targetThing;
@@ -75,9 +83,20 @@ namespace PlayableRecreation
 
         public MiniGameWorker MakeWorker()
         {
+            if (workerClass == null) return null;
+
             MiniGameWorker worker = (MiniGameWorker)Activator.CreateInstance(workerClass);
             worker.def = this;
             return worker;
+        }
+
+        /// <summary>
+        /// 이 가구에 남은 판이 이 항목의 것인가. 추첨함은 자기가 뽑아 준 게임의 판도 자기 것으로 친다 -
+        /// 그러지 않으면 아케이드에 두던 체스가 다음에 열 때 사라진다.
+        /// </summary>
+        public bool Accepts(MiniGameDef played)
+        {
+            return played != null && (played == this || randomPick);
         }
 
         /// <summary>난이도 표시 이름. 단계 이름은 게임을 가리지 않으므로 프레임워크가 들고 있다.</summary>
@@ -103,7 +122,16 @@ namespace PlayableRecreation
         {
             foreach (string error in base.ConfigErrors()) yield return error;
 
-            if (workerClass == null)
+            if (randomPick)
+            {
+                if (workerClass != null)
+                    yield return "randomPick has no board of its own; drop workerClass";
+                if (!hasMatch)
+                    yield return "randomPick needs hasMatch - it only ever picks games that have one";
+                if (difficultyCount < 2)
+                    yield return "randomPick needs more than one difficulty; it is the only thing it asks";
+            }
+            else if (workerClass == null)
                 yield return "workerClass is null";
             else if (!typeof(MiniGameWorker).IsAssignableFrom(workerClass))
                 yield return workerClass.Name + " is not a MiniGameWorker";

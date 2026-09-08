@@ -40,4 +40,15 @@
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="Joy_Arcade"]</xpath>
+    <value>
+      <comps>
+        <li Class="PlayableRecreation.CompProperties_MiniGame">
+          <game>PR_Arcade</game>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
 </Patch>

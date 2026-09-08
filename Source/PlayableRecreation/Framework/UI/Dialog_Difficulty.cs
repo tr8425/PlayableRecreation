@@ -100,7 +100,7 @@ namespace PlayableRecreation.UI
             }
 
             Close(false);
-            Find.WindowStack.Add(new Dialog_MiniGame(game, board, seatedPawn, tier, practice));
+            GameEntry.Launch(game, board, seatedPawn, tier, practice);
         }
     }
 }

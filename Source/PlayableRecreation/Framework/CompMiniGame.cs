@@ -56,8 +56,18 @@ namespace PlayableRecreation
             get
             {
                 GameSession session = GameEntry.SessionFor(parent);
-                return session != null && session.game == Game ? session : null;
+                return session != null && Game != null && Game.Accepts(session.game) ? session : null;
             }
+        }
+
+        /// <summary>이어 하기 문구. 추첨함에 남은 판은 무엇이 걸렸던 것인지까지 말해 준다.</summary>
+        private string ResumeLabel(GameSession session)
+        {
+            if (session.game != Game)
+                return "PR.Play.ResumeNamed".Translate(
+                    session.game.LabelCap, session.rounds, Game.TierLabel(session.tier)).ToString();
+
+            return "PR.Play.Resume".Translate(session.rounds, Game.TierLabel(session.tier)).ToString();
         }
 
         // 식민자 선택 → 가구 우클릭 — 다른 상호작용 가구와 같은 조작 관습
@@ -76,7 +86,7 @@ namespace PlayableRecreation
             if (session != null)
             {
                 yield return new FloatMenuOption(
-                    "PR.Play.Resume".Translate(session.rounds, Game.TierLabel(session.tier)),
+                    ResumeLabel(session),
                     delegate { GameEntry.Resume(session); });
 
                 yield return new FloatMenuOption(
@@ -101,8 +111,8 @@ namespace PlayableRecreation
             yield return new Command_Action
             {
                 defaultLabel = session != null
-                    ? "PR.Play.Resume".Translate(session.rounds, Game.TierLabel(session.tier))
-                    : "PR.Play.Label".Translate(Game.LabelCap),
+                    ? ResumeLabel(session)
+                    : "PR.Play.Label".Translate(Game.LabelCap).ToString(),
                 defaultDesc = Game.description,
                 icon = parent.def.uiIcon,
                 action = delegate
@@ -112,8 +122,9 @@ namespace PlayableRecreation
                 }
             };
 
-            // 승부가 아닌 항목에는 남길 전적이 없다. 버튼도 두지 않는다.
-            if (!Game.hasMatch) yield break;
+            // 승부가 아닌 항목에는 남길 전적이 없다. 추첨함도 마찬가지다 -
+            // 전적은 실제로 한 게임 쪽에 쌓이므로 여기서 펼쳐 봐야 늘 비어 있다.
+            if (!Game.hasMatch || Game.randomPick) yield break;
 
             yield return new Command_Action
             {

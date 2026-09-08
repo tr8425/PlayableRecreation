@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!--
+    The arcade cabinet has no game of its own. The difficulty is the only thing you choose;
+    the cabinet picks what you play. So these read as promises about the opponent, not the game.
+  -->
+  <ARC.Difficulty.T0.Desc>Whatever boots up, it will go easy on you.</ARC.Difficulty.T0.Desc>
+  <ARC.Difficulty.T1.Desc>Whatever boots up, it plays like someone still learning.</ARC.Difficulty.T1.Desc>
+  <ARC.Difficulty.T2.Desc>Whatever boots up, it knows what it is doing.</ARC.Difficulty.T2.Desc>
+  <ARC.Difficulty.T3.Desc>Whatever boots up, it will punish a lazy move.</ARC.Difficulty.T3.Desc>
+  <ARC.Difficulty.T4.Desc>Whatever boots up, it is better at it than you are.</ARC.Difficulty.T4.Desc>
+
+  <!-- Tutorial -->
+  <ARC.Tut.P1.Title>1. Arcade machine</ARC.Tut.P1.Title>
+  <ARC.Tut.P1.Body>One cabinet, a shelf of cartridges, and a coin slot that does not care which one you wanted.
+
+You pick the difficulty. The machine picks the game - anything in the rec room that has an opponent, from the game of Ur to the punching bag. Whatever it lands on starts at the difficulty you chose, and the result goes on that game's record, not the cabinet's.
+
+Install more furniture mods and the shelf gets longer.</ARC.Tut.P1.Body>
+
+</LanguageData>

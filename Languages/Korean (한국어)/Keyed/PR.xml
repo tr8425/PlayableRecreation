@@ -7,6 +7,9 @@
   <PR.Play.Label>{0} 하기</PR.Play.Label>
   <PR.Play.Broken>못 쓸 만큼 부서져 있음</PR.Play.Broken>
   <PR.Play.Resume>이어서 하기 ({0}회차 · {1})</PR.Play.Resume>
+  <PR.Play.ResumeNamed>{0} 이어서 하기 ({1}회차 · {2})</PR.Play.ResumeNamed>
+  <PR.Random.Picked>기계가 고른 것은 {0}입니다.</PR.Random.Picked>
+  <PR.Random.Empty>선반이 비었습니다 - 모드 설정에서 게임이 전부 꺼져 있습니다.</PR.Random.Empty>
   <PR.Play.Discard>하던 판을 접고 새로 시작</PR.Play.Discard>
 
   <!-- 창 -->

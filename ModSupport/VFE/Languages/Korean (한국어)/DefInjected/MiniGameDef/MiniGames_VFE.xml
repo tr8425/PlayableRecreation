@@ -10,4 +10,7 @@
   <PR_Roulette.label>룰렛</PR_Roulette.label>
   <PR_Roulette.description>휠을 상대로 뱅크롤을 굴린다. 변동성을 골라 목표액까지.</PR_Roulette.description>
 
+  <PR_Arcade.label>아케이드 게임기</PR_Arcade.label>
+  <PR_Arcade.description>난이도만 고르면 무엇을 할지는 기계가 정한다.</PR_Arcade.description>
+
 </LanguageData>

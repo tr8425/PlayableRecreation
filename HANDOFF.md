@@ -70,12 +70,18 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 
 - 빌드 경고 0 · 오류 0
 - 테스트 284 개 전부 통과 (다트 · 펀칭백 · 룰렛 Core 포함)
-- `Tools/verify.py` — 번역 키 526 짝, 안 쓰는 키 0, Def 참조 성함
+- `Tools/verify.py` — 번역 키 539 짝, 안 쓰는 키 0, Def 참조 성함
   (ModSupport 의 Def · 패치 · 지원 모드 defName 까지 검사한다)
 - `Tools/guistate.py` — GUI 전역 상태를 되돌리지 않는 메서드 0
-- `Tools/package.py` — 통과 (59 파일 · 605 KB, LoadFolders.xml 과 ModSupport 포함)
-- 인게임 확인: 기존 일곱 창은 확인 완료. **신작 다섯(다트·펀칭백·슬롯·룰렛·Gloomy 패치)은
-  인게임 확인 전이다** — v1.1.0 재업로드 전에 반드시 확인할 것
+- `Tools/package.py` — 통과 (61 파일 · 614 KB, LoadFolders.xml 과 ModSupport 포함)
+- 인게임 확인: 기존 일곱 창은 확인 완료.
+  **신작 여섯(다트·펀칭백·슬롯·룰렛·아케이드·Gloomy 패치)은 인게임 확인 전이다**
+  — v1.1.0 재업로드 전에 반드시 확인할 것
+- 아케이드는 게임이 아니라 **추첨함**이다 (`MiniGameDef.randomPick`). workerClass 가 없고,
+  난이도만 고르게 한 뒤 `GameEntry.Launch` 가 그때 로드된 승부 게임 중 하나를 뽑아 연다.
+  전적·숙련도·저장은 전부 뽑힌 게임 쪽에 쌓인다 — 그래서 추첨함에는 tallyKeys 도
+  기록 버튼도 없다 (`verify.py` 가 이 예외를 안다). 가구에 남은 판이 다른 게임의
+  것이어도 이어 할 수 있게 `MiniGameDef.Accepts` 가 받아 준다
 - 펀칭백 난이도는 1차 QA "쉽다" 피드백으로 조였다 (2026-09-07) — BPM 66~126
   (구 66~106), 판정 창 Perfect 0.07 · Good 0.16 (구 0.09/0.20, 티어 불변 철학 유지),
   목표 점유율 0.55~0.88, 상위 티어 연타 비중·세트 길이(12+티어×2 패턴) 증가.
@@ -108,6 +114,7 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 
 1. **v1.1.0 인게임 QA** — 다트(조준 클릭 + 두 막대, 세이브·복원), 펀칭백(리듬 판정,
    시작 게이트), 슬롯(릴 연출 · 지갑 · 충전), 룰렛(베팅 클릭 · 휠 연출 · 세이브·복원),
+   아케이드(난이도 → 무작위 추첨, 남긴 판 이어 하기), 별 보기 지표 배율,
    Gloomy 가구 3종에서 기존 게임 진입. VFE·Gloomy·Casino
    를 켠 판과 끈 판 양쪽에서 (끈 쪽은 로그에 빨간 줄이 없어야 한다)
 2. **v1.1.0 재업로드** — 목요일 저녁 소프트 런칭으로 결정됨. 재업로드는 웹의 언어별
@@ -131,7 +138,7 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 About/           About.xml · Preview.png (640x360, 영문) · ModIcon.png
 Assemblies/      PlayableRecreation.dll  ← 커밋한다. 배포에 필요하다
 Defs/            MiniGameDefs 가 핵심. 게임 하나 = MiniGameDef 하나
-Languages/       English · Korean. Keyed 526 키씩
+Languages/       English · Korean. Keyed 539 키씩
 LoadFolders.xml  본체("/") + ModSupport 조건부 로드. 배포에 반드시 포함 (package.py 가 챙긴다)
 ModSupport/      VFE · Gloomy · Casino. 각각 Defs/Patches/Languages 미니 트리
 Patches/         PatchOperationAdd 일곱 개. 이 파일이 모드의 진입점이다

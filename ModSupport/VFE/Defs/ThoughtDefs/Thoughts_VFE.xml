@@ -81,6 +81,21 @@
     </stages>
   </ThoughtDef>
 
+  <!-- 아케이드는 자기 숙련도가 없다. 깬 것은 실제로 한 게임 쪽에 쌓인다. -->
+
+  <ThoughtDef>
+    <defName>PR_PlayedArcade</defName>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>fed the cabinet</label>
+        <description>You never know what the machine will boot into. Today it was something I was almost good at.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
   <ThoughtDef>
     <defName>PR_PlayedRoulette</defName>
     <thoughtClass>PlayableRecreation.Thought_Mastery</thoughtClass>

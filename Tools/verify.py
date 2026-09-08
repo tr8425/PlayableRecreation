@@ -229,11 +229,19 @@ for game in game_nodes():
                 problems.append('%s: %s "%s" is not a Def' % (name, field, node.text.strip()))
 
     # 승부인 항목에는 집계 이름표가 있어야 기록 화면이 비지 않는다.
+    # 추첨함은 예외다 - 자기 판을 굴리지 않으므로 전적도 집계도 뽑힌 게임 쪽에 쌓인다.
+    picker = game.find('randomPick')
+    is_picker = picker is not None and picker.text.strip().lower() == 'true'
+
     flag = game.find('hasMatch')
-    if flag is None or flag.text.strip().lower() != 'false':
+    if not is_picker and (flag is None or flag.text.strip().lower() != 'false'):
         tally = game.find('tallyKeys')
         if tally is None or len(list(tally)) == 0:
             problems.append('%s: a match with no tallyKeys' % name)
+
+    # 추첨함은 반대로 워커가 없어야 한다. 있으면 굴리지도 않을 판을 만든 것이다.
+    if is_picker and game.find('workerClass') is not None:
+        problems.append('%s: randomPick has no board of its own; drop workerClass' % name)
 
     if '<game>%s</game>' % name not in patch_src:
         problems.append('%s: no patch entry' % name)

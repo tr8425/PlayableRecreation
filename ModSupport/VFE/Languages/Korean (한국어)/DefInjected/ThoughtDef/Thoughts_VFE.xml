@@ -37,6 +37,9 @@
   <PR_PlayedPunchingBag.stages.5.label>펀칭백을 마스터했다</PR_PlayedPunchingBag.stages.5.label>
   <PR_PlayedPunchingBag.stages.5.description>백이 흔들리면 내가 답한다. 운동이기를 그만두고, 내가 항상 이기는 대화가 되었다.</PR_PlayedPunchingBag.stages.5.description>
 
+  <PR_PlayedArcade.stages.0.label>오락기에 붙어 있었어</PR_PlayedArcade.stages.0.label>
+  <PR_PlayedArcade.stages.0.description>이 기계가 뭘 띄울지는 아무도 모른다. 오늘은 그럭저럭 할 줄 아는 게 나왔다.</PR_PlayedArcade.stages.0.description>
+
   <PR_PlayedRoulette.stages.0.label>휠에 칩을 먹였어</PR_PlayedRoulette.stages.0.label>
   <PR_PlayedRoulette.stages.0.description>행운의 숫자에 전부 걸었다. 휠의 행운의 숫자는 다른 것이었다.</PR_PlayedRoulette.stages.0.description>
 

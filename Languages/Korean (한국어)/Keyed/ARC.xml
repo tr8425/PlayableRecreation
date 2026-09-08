@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!--
+    아케이드 기계에는 자기 게임이 없다. 고르는 것은 난이도뿐이고 무엇을 할지는 기계가 정하므로,
+    설명도 게임이 아니라 상대에 대한 약속으로 쓴다.
+  -->
+  <ARC.Difficulty.T0.Desc>무엇이 걸리든 살살 해 줍니다.</ARC.Difficulty.T0.Desc>
+  <ARC.Difficulty.T1.Desc>무엇이 걸리든 아직 배우는 솜씨입니다.</ARC.Difficulty.T1.Desc>
+  <ARC.Difficulty.T2.Desc>무엇이 걸리든 제 할 일은 압니다.</ARC.Difficulty.T2.Desc>
+  <ARC.Difficulty.T3.Desc>무엇이 걸리든 대충 둔 수는 응징합니다.</ARC.Difficulty.T3.Desc>
+  <ARC.Difficulty.T4.Desc>무엇이 걸리든 당신보다 잘합니다.</ARC.Difficulty.T4.Desc>
+
+  <!-- 튜토리얼 -->
+  <ARC.Tut.P1.Title>1. 아케이드 게임기</ARC.Tut.P1.Title>
+  <ARC.Tut.P1.Body>기계 한 대, 카트리지 한 선반, 그리고 당신이 뭘 하고 싶었는지 따위는 묻지 않는 동전 구멍.
+
+당신은 난이도를 고릅니다. 게임은 기계가 고릅니다 - 오락실에 있는 것 중 상대가 있는 것이라면 우르의 게임부터 펀칭백까지 무엇이든. 걸린 게임은 당신이 고른 난이도로 시작하고, 결과는 아케이드가 아니라 그 게임의 전적에 남습니다.
+
+가구 모드를 더 깔면 선반이 그만큼 길어집니다.</ARC.Tut.P1.Body>
+
+</LanguageData>
