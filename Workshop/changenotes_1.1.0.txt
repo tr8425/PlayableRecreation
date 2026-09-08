@@ -1,0 +1,55 @@
+== English ==
+
+[b]1.1.0 — other people's furniture[/b]
+
+Nothing here is required. These wake up only if the mod is already in your list; the dependency list stays empty.
+
+[b]Vanilla Furniture Expanded[/b]
+[list]
+[*][b]Darts[/b] — five rounds, three darts each, highest total wins
+[*][b]Punching bag[/b] — answer the beat. Miss it and the combo goes
+[*][b]Roulette[/b] — a bankroll run against the house. Twenty chips, a target to reach, and a table limit that makes the higher difficulties mean something
+[*][b]Arcade machine[/b] — no game of its own. Pick a difficulty and it deals you a random one, including games whose furniture you never built
+[/list]
+
+[b]GloomyFurniture[/b] — its chess table, poker table and billiards table join in.
+
+[b]Hospitality: Casino[/b] — sit at the slot machines. The chips belong to the colony and stay in the save; 200 silver buys 20 more. Reach a thousand and the machine remembers it, once.
+
+[b]Stargazing[/b] — looking down at the surface from orbit now zooms. Scroll, or use the buttons: from 19 tiles up to 331. Wide enough and settlements start showing up down there.
+
+[b]Also[/b]
+[list]
+[*]The punching bag got harder across the board — tighter timing windows, faster songs, longer patterns
+[*]A resigned roulette table is recorded from the first spin. Closing the window is no longer a free retry
+[*]Slot machine chips no longer get clobbered when two machines are open at once, and a payout is no longer lost if the window closes mid-spin
+[*]The charge button only spends silver the colony can actually reach — no more reaching into an unopened ancient danger
+[/list]
+
+== 한국어 ==
+
+[b]1.1.0 — 남의 가구[/b]
+
+아무것도 요구하지 않습니다. 이미 목록에 있는 모드에만 반응하고, 의존성 목록은 그대로 비어 있습니다.
+
+[b]Vanilla Furniture Expanded[/b]
+[list]
+[*][b]다트[/b] — 5라운드 3다트, 합계가 높은 쪽이 이깁니다
+[*][b]펀칭백[/b] — 박자에 답합니다. 놓치면 연타가 끊깁니다
+[*][b]룰렛[/b] — 하우스전 뱅크롤 런. 칩 스무 닢, 도달할 목표, 그리고 높은 난이도를 진짜로 만드는 테이블 리밋
+[*][b]아케이드 게임기[/b] — 자기 게임이 없습니다. 난이도만 고르면 한 판이 뽑혀 열립니다. 지어 본 적 없는 가구의 게임까지 나옵니다
+[/list]
+
+[b]GloomyFurniture[/b] — 그쪽 체스판·포커 테이블·당구대가 함께 열립니다.
+
+[b]Hospitality: Casino[/b] — 슬롯머신 앞에 앉습니다. 칩은 정착지의 것이라 세이브에 남고, 은 200닢이 스무 닢이 됩니다. 천 닢에 닿으면 기계가 그 일을 딱 한 번 기억합니다.
+
+[b]별 보기[/b] — 궤도에서 지표를 내려다볼 때 배율을 바꿀 수 있습니다. 휠이나 버튼으로 19칸에서 331칸까지. 넓게 보면 저 아래 정착지들이 보이기 시작합니다.
+
+[b]그 밖에[/b]
+[list]
+[*]펀칭백이 전반적으로 어려워졌습니다 — 판정 창은 좁게, 곡은 빠르게, 패턴은 길게
+[*]룰렛은 첫 스핀부터 전적에 남습니다. 창을 닫는 것이 더는 공짜 재시도가 아닙니다
+[*]기계 두 대를 같이 열어도 슬롯 칩이 서로를 덮어쓰지 않고, 릴이 도는 중에 창을 닫아도 딴 것이 사라지지 않습니다
+[*]충전 버튼은 정착지가 실제로 닿을 수 있는 은만 씁니다 — 열지 않은 고대 위험 속 은까지 먹던 것을 고쳤습니다
+[/list]

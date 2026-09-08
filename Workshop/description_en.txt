@@ -15,7 +15,7 @@ The recreation they have been enjoying, played by you instead.
 [*][b]Stargazing[/b] — point the telescope at this planet's sky. The one thing here you cannot win
 [/list]
 
-All seven are base-game buildings. No DLC required.
+All seven are base-game buildings. No DLC required. If Vanilla Furniture Expanded, GloomyFurniture or Hospitality: Casino happen to be in your list, more of their furniture becomes playable too — see below.
 
 [table]
 [tr][th]Game[/th][th]Recreation[/th][th]Skill[/th][/tr]
@@ -64,10 +64,25 @@ The first time you clear a difficulty, colonists get a little more recreation an
 
 [img]https://images.steamusercontent.com/ugc/18299372653310041799/0E2BAB3687B7CADA8C3585DA8D84F58958B5C909/[/img]
 
+[h2]More furniture, if you already have the mods[/h2]
+
+None of this is required and nothing is asked of you. These wake up only when the mod is already in your list; the dependency list stays empty either way.
+
+[list]
+[*][b]Vanilla Furniture Expanded[/b] — the [b]darts board[/b] (five rounds, three darts each, highest total wins), the [b]punching bag[/b] (answer the beat), the [b]roulette table[/b] (a bankroll run against the house, table limit and all), and the [b]arcade machine[/b]
+[*][b]GloomyFurniture[/b] — its chess table, poker table and billiards table join in
+[*][b]Hospitality: Casino[/b] — sit at the [b]slot machines[/b]. The chips belong to the colony and stay in the save; silver buys more
+[/list]
+
+The arcade machine has no game of its own. Pick a difficulty and it deals you a random one — including games whose furniture you never built.
+
+{{SS6_MOD}}
+
 [h2]Compatibility and saves[/h2]
 [list]
 [*]RimWorld 1.6
 [*]No DLC required. Odyssey adds more to stargazing
+[*]No mod required either. Vanilla Furniture Expanded, GloomyFurniture and Hospitality: Casino are optional — supported when present, ignored when not
 [*]Safe to add to and remove from existing saves. Remove it and the furniture goes back to vanilla
 [*]No Harmony patches
 [*]No vanilla Defs modified — one component is [i]added[/i] to the furniture, nothing else
@@ -85,6 +100,10 @@ Yes. It is safe to add and remove. Remove it and the furniture goes back to vani
 [b]Q. Do I need any DLC?[/b]
 
 No. All seven buildings are from the base game. Odyssey adds more to stargazing.
+
+[b]Q. Do I need Vanilla Furniture Expanded, GloomyFurniture or Hospitality: Casino?[/b]
+
+No. The mod asks for nothing and its dependency list is empty. If one of them is already loaded, the extra furniture becomes playable; if not, nothing changes and nothing breaks.
 
 [b]Q. Will colonists still use recreation furniture on their own?[/b]
 

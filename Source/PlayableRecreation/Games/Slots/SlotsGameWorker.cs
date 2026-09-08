@@ -208,6 +208,12 @@ namespace Slots
             clubBanner = false;
             clubOwed = false;
 
+            // 아무것도 당기지 않은 기계의 얼굴. 배열을 그냥 두면 0-0-0, 즉 7-7-7 이 걸린 채로
+            // 문을 여는 셈이라 딴 줄 알고 기계를 본다. 어느 규칙으로도 배당이 아닌 줄로 세워 둔다.
+            reels[0] = SymbolBar;
+            reels[1] = 1;   // 금
+            reels[2] = 3;   // 딸기
+
             // 지갑은 세이브의 것이다. 처음 앉는 식민지에게만 하우스가 스무 닢을 내준다.
             GameComponent_Recreation store = Store;
             if (store != null && store.GetCounter(KeyInit) == 0)

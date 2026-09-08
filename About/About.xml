@@ -7,6 +7,16 @@
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
+  <!--
+    의존성은 여전히 0개다. 다만 저 셋 중 깔려 있는 것이 있다면 그쪽이 먼저 로드되어야
+    한다 - 우리 패치가 그 가구 Def 를 찾아 comp 를 얹기 때문이다. loadAfter 는
+    "없으면 말고, 있으면 나보다 먼저" 라는 뜻이라 요구 사항이 되지 않는다.
+  -->
+  <loadAfter>
+    <li>VanillaExpanded.VFECore</li>
+    <li>Solaris.FurnitureBase</li>
+    <li>Adamas.HospitalityCasino</li>
+  </loadAfter>
   <description>The recreation your colonists have been enjoying, played by you instead.
 
 Select a colonist and right-click the furniture. Seven things to do: the game of Ur, chess, poker, nine-ball, horseshoes, hoopstone, and the telescope.
@@ -15,7 +25,7 @@ The six games each have five tiers of AI, a rules walkthrough, practice games, a
 
 The telescope is the one thing here you cannot win. The stars come from the seed your world was generated from, so every world has its own sky, and what you can see depends on your settlement's real latitude and longitude, the hour, and the weather. Join stars into constellations and name them; those belong to the world, not to the telescope. Moving the gravship changes your latitude, and with it the sky. With Odyssey installed you also see what passes overhead, and standing on an asteroid or a platform gives you a different sky altogether — the planet fills one side of it, and you can point the telescope down at the surface instead.
 
-Mod support, all optional: with Vanilla Furniture Expanded the darts board and the punching bag become playable; with GloomyFurniture its chess, poker and billiards tables join in; with Hospitality: Casino you can sit at the slot machines. Nothing is required - support wakes up only when the mod is present.
+Mod support, all optional: with Vanilla Furniture Expanded the darts board, the punching bag and the roulette table become playable, and the arcade machine deals you a random one of these games at the difficulty you pick; with GloomyFurniture its chess, poker and billiards tables join in; with Hospitality: Casino you can sit at the slot machines. Nothing is required - support wakes up only when the mod is present.
 
 No Harmony patches. No vanilla Defs modified. Safe to add to and remove from existing saves. Each entry can be switched off in the mod settings. Korean and English.
 
@@ -39,7 +49,7 @@ No Harmony patches. No vanilla Defs modified. Safe to add to and remove from exi
 
 난이도를 처음 깰 때마다 그 가구에서 식민자가 얻는 여가와 경험치가 조금씩 늘어납니다. 게임마다 따로 쌓입니다.
 
-모드 지원은 전부 선택입니다. Vanilla Furniture Expanded가 있으면 다트판과 펀칭백이, GloomyFurniture가 있으면 그쪽 체스판·포커 테이블·당구대가, Hospitality: Casino가 있으면 슬롯머신이 열립니다. 아무것도 요구하지 않습니다 - 해당 모드가 있을 때만 깨어납니다.
+모드 지원은 전부 선택입니다. Vanilla Furniture Expanded가 있으면 다트판·펀칭백·룰렛 테이블이 열리고, 아케이드 게임기는 난이도만 고르면 그 난이도로 승부 게임 하나를 뽑아 줍니다. GloomyFurniture가 있으면 그쪽 체스판·포커 테이블·당구대가, Hospitality: Casino가 있으면 슬롯머신이 열립니다. 아무것도 요구하지 않습니다 - 해당 모드가 있을 때만 깨어납니다.
 
 Harmony 패치를 쓰지 않고 바닐라 Def도 수정하지 않습니다. 기존 세이브에 넣고 빼도 안전합니다. 항목은 모드 설정에서 하나씩 끌 수 있고, 끄면 우클릭 메뉴만 사라질 뿐 식민자의 자율 여가는 그대로입니다. 멀티플레이어는 지원하지 않습니다.</description>
 </ModMetaData>
