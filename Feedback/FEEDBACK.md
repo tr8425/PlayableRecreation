@@ -37,8 +37,42 @@
 | 3 | 모드 가구 지원 2차 — 펀칭백(VFE, 리듬 콜앤리스폰스)·슬롯(Casino, hasMatch=false) | VFE·Casino 조사 파생 | **QA 통과** (2026-09-08) — 1차와 함께 v1.1.0 으로 낸다 |
 | 4 | 룰렛 (VFE, 하우스전 뱅크롤 런) | VFE 조사 파생 | **QA 통과** (2026-09-08) — 목표 배수 ×1.5~×5, 테이블 리밋 10 |
 | 5 | 아케이드 머신 게임 (VFE Joy_Arcade) | VFE 조사 파생 | **QA 통과** (2026-09-08) — 새 게임 대신 **무작위 추첨함**으로. 난이도만 고르면 기계가 승부 게임 하나를 뽑는다. 테트리스(상표)·격투게임(규모) 안은 폐기 |
+| 6 | **대결 상대를 식민자 중에서 고르기** — 난이도는 고른 폰의 능력치에서 뽑는다 | ferny 09-09 | 신규 — 배관 절반은 이미 있다 (`GameEntry.TierForPawn` 이 linkedSkill+열정을 티어로 바꾼다). 남는 것은 상대 폰을 고르는 자리, 헤더 표기(`PR.Header.Opponent` 가 지금은 난이도 이름만 찍는다), 상대 폰을 어디까지 붙잡아 둘지 |
 
 ## 항목
+
+### 2026-09-09 · LifeIsAbxtch · 창작마당 댓글 — `신규`
+> "Rostra you should listen to Ferny he's the professional"
+- 09-03 에 자동 검사로 숨겨진 댓글을 남긴 그 계정이다 (아래 `관찰중` 항목). 프로필은
+  친구 3명·배지 3개에 게임 목록도 비어 있다 — 활동이 거의 없는 계정이다.
+- 적대적이지 않다. ferny 편을 드는 농담이고, 게다가 맞는 말이다.
+- 답글 문안 (달지 않고 넘어가도 된다):
+  > @LifeIsAbxtch ha, no argument there
+
+### 2026-09-09 · ferny · 창작마당 댓글 — `신규` `백로그`
+> "I really wish you actually had to select one of the other colonists to be your
+> opponent. It feels currently like it sorta reverses the immersion it brings to
+> the table by having you play against invisible AIs and not actual people in
+> your colony"
+- **누구인가**: 프로필 소개가 "progression lead, vanilla expanded writer" 다. 우리가
+  이번 판에 지원을 붙인 바로 그 Vanilla Expanded 쪽 사람이고, 창작마당 항목 115개에
+  림월드 모딩 디스코드를 프로필에 걸어 두었다. 09-03 대문자·튜토리얼 순서 버그를
+  잡아 준 것도 이 사람이다 — 두 번째 피드백이고, 이번엔 버그가 아니라 설계 지적이다.
+- 판단: **멀티플레이 이야기가 아니다.** "people in your colony" 는 식민자를 가리킨다.
+  상대가 이름 없는 AI 라서, 이 모드가 만들어 낸 몰입을 스스로 깎는다는 말이다.
+  맞는 지적이다 — 지금 헤더는 상대 자리에 난이도 이름만 찍는다.
+- 실현 가능성: 난이도를 능력치에서 뽑는 배관은 이미 있다 (`GameEntry.TierForPawn`).
+  새로 만들 것은 상대 폰을 고르는 자리와 헤더 표기, 그리고 상대 폰을 어디까지
+  붙잡아 둘 것인가(예약·이동)다. 백로그 6번.
+- 답글 문안 (게시하면 `답변완료` 로 바꾼다):
+  > @ferny yeah, fair hit. having to pick an actual colonist to sit across from
+  > you is the version I want too, and the difficulty could come straight off
+  > their stats (intellectual for the board games, shooting for the throwing
+  > ones) instead of a menu - half that plumbing is already in there. going on
+  > the list.
+  >
+  > if you meant wider than the colony: another faction I'd look at, real-time
+  > multiplayer I don't see happening (leaderboard-ish, maybe).
 
 ### 2026-09-08 · Bones · 창작마당 댓글 — `답변완료`
 > "This is a true gem."
@@ -51,7 +85,7 @@
   연달아 다는 꼴이 된다.
 - 초안에 붙였던 "업데이트 나왔다" 한 줄은 빼고 감사만 하고 끝냈다. 판단 근거는
   아래 어투 규칙에 적어 두었다.
-- 조치: 2026-09-08 답글 완료.
+- 조치: 2026-09-08 답글 완료. 본인이 "YAY" 로 답했다 — 요청한 사람에게 닿았다.
 
 ### 2026-09-08 · 개발자 QA (2차) · 인게임 — `수정배포`
 > "사진도 찍어왔고, 잠깐 플레이에서는 큰 버그를 찾지 못했어"
@@ -98,6 +132,8 @@
 
 ### 2026-09-03 · LifeIsAbxtch · 창작마당 댓글 — `관찰중`
 - 자동 콘텐츠 검사로 숨김 처리. 본문은 작성자 외 열람 불가(페이지 소스에도 없음).
+- 2026-09-09 현재도 그대로 숨겨져 있다. 같은 계정이 그날 멀쩡한 댓글을 새로 달았으니
+  차단당한 계정은 아니고, 저 한 줄이 검사에 걸린 것으로 보인다.
 - 조치: 대기. 2026-09-10 까지 그대로면 삭제하고 이 항목을 `기각` 으로 바꾼다.
 
 ### 2026-09-03 · ferny · 창작마당 댓글 — `수정배포`
