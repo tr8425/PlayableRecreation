@@ -76,6 +76,26 @@ namespace Chess
             get { return game != null && CapturesBy(ChessBoard.Other(game.PlayerSide)) == 0; }
         }
 
+        /// <summary>
+        /// 포 하나치 밀리고 있다면 지고 있는 것으로 본다. 한 기물 차는 아직 판이 아니다.
+        /// <c>ChessEval.Evaluate</c> 는 둘 차례인 쪽에서 본 점수라 부호를 맞춰 준다.
+        /// </summary>
+        public override bool? Losing
+        {
+            get
+            {
+                if (game == null || game.IsOver) return null;
+
+                int score = ChessEval.Evaluate(game.Board);
+                if (game.Board.SideToMove != game.PlayerSide) score = -score;
+
+                return score < -LosingMargin;
+            }
+        }
+
+        /// <summary>마이너스 하나만큼. 그 아래는 흔히 드나드는 폭이다.</summary>
+        private const int LosingMargin = 300;
+
         public override bool CanUndo
         {
             get { return game != null && !game.IsOver && stage == Stage.Player && game.Ply >= 2; }

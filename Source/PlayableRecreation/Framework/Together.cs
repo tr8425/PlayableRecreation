@@ -158,7 +158,21 @@ namespace PlayableRecreation
                 found.Add(pawn);
             }
 
+            // 좋아하는 사람이 먼저 뜼도록 의견순으로 세운다 (§15 다듬기).
+            // 식구가 열다섯이 넘어가면 목록이 그냥 이름 더미가 되는데,
+            // 맞은편에 누구를 앉힐지는 원래 관계로 고르는 일이다.
+            found.SortByDescending(delegate (Pawn pawn) { return Opinion(pawn, initiator); });
+
             return found;
+        }
+
+        /// <summary>상대가 이 사람을 어떻게 보는가. 의견을 모르는 사이는 0 이다.</summary>
+        private static int Opinion(Pawn pawn, Pawn about)
+        {
+            if (pawn == null || about == null || pawn == about) return 0;
+            if (pawn.relations == null || !pawn.RaceProps.Humanlike) return 0;
+
+            return pawn.relations.OpinionOf(about);
         }
 
         // ---------- 조각 ----------

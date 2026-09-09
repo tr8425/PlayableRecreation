@@ -149,6 +149,17 @@ namespace PlayableRecreation
             get { return false; }
         }
 
+        /// <summary>
+        /// 지금 지고 있나. **판세를 말할 수 없는 게임은 null 을 준다** — <c>HasProgress</c> 와 같은 패턴이다.
+        ///
+        /// 프레임워크는 이 값이 참일 때 무슨 일이 일어나는지만 알고, 그게 이 게임의 무엇인지는
+        /// 모른다(제약 4). 지금은 강한 공격성을 가진 상대가 판을 엎을지 재는 데에만 쓰인다.
+        /// </summary>
+        public virtual bool? Losing
+        {
+            get { return null; }
+        }
+
         public MatchResult BuildResult(bool won, bool resigned, int undos, float realSeconds)
         {
             MatchResult result = new MatchResult

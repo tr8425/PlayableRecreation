@@ -48,6 +48,12 @@ namespace PlayableRecreation
         /// </summary>
         public bool playTogetherPersonality = true;
 
+        /// <summary>화가 나면 판을 엎을 수 있다. **판이 남의 성격 때문에 끝난다** — 끕 수 있어야 한다.</summary>
+        public bool playTogetherBoardFlip = true;
+
+        /// <summary>다정한 상대는 무르기를 한 번 더 준다. 무르기 한 칸은 난이도에 직접 닿는다.</summary>
+        public bool playTogetherKindUndo = true;
+
         /// <summary>방문객과 한 판 두면 그 팩션의 우호도가 움직인다.</summary>
         public bool playTogetherGoodwill = true;
 
@@ -176,6 +182,8 @@ namespace PlayableRecreation
             Scribe_Values.Look(ref playTogetherChildren, "playTogetherChildren", true);
             Scribe_Values.Look(ref playTogetherVisitors, "playTogetherVisitors", true);
             Scribe_Values.Look(ref playTogetherPersonality, "playTogetherPersonality", true);
+            Scribe_Values.Look(ref playTogetherBoardFlip, "playTogetherBoardFlip", true);
+            Scribe_Values.Look(ref playTogetherKindUndo, "playTogetherKindUndo", true);
             Scribe_Values.Look(ref playTogetherGoodwill, "playTogetherGoodwill", true);
             Scribe_Values.Look(ref playTogetherGoodwillScale, "playTogetherGoodwillScale", 100);
             Scribe_Values.Look(ref playTogetherGoodwillDrop, "playTogetherGoodwillDrop", true);

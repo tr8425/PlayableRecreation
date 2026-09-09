@@ -15,6 +15,9 @@ namespace PlayableRecreation
         /// <summary>둘이 한 판을 끝까지 뒀다.</summary>
         public static ThoughtDef PR_PlayedTogether;
 
+        /// <summary>마주 앉아 한 판을 끝낸 사이의 의견.</summary>
+        public static ThoughtDef PR_PlayedTogetherSocial;
+
         /// <summary>판 앞에 있던 사람이 없어졌다.</summary>
         public static ThoughtDef PR_OpponentGone;
 

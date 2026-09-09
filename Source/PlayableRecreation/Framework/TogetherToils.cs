@@ -55,6 +55,7 @@ namespace PlayableRecreation
                 if (!pawn.IsHashIntervalTick(CheckInterval)) return;
 
                 TogetherMatch.TickWatch(board);
+                FaceAcross(pawn, board);
 
                 // 판도 없고 기다리는 것도 없다. 서 있을 이유가 사라졌다.
                 if (!TogetherMatch.ShouldHold(board, pawn))
@@ -78,6 +79,20 @@ namespace PlayableRecreation
             });
 
             return toil;
+        }
+
+        /// <summary>
+        /// 마주 보게 세운다. 맞은편을 모르면 판을 본다 — 혹자 딱 서 있지는 않게 한다.
+        /// 토일이 handlingFacing 을 가져갔으므로 바닐라가 방향을 대신 돌려 주지 않는다.
+        /// </summary>
+        private static void FaceAcross(Pawn pawn, Thing board)
+        {
+            Pawn partner = TogetherMatch.PartnerOf(board, pawn);
+
+            if (partner != null && partner.Spawned && partner.Map == pawn.Map)
+                pawn.rotationTracker.FaceTarget(partner);
+            else
+                pawn.rotationTracker.FaceTarget(board);
         }
 
         /// <summary>

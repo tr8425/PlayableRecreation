@@ -260,6 +260,21 @@
   </ThoughtDef>
 
   <ThoughtDef>
+    <defName>PR_PlayedTogetherSocial</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>4</durationDays>
+    <stackLimit>6</stackLimit>
+    <stackLimitForSameOtherPawn>3</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.7</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>played a game with me</label>
+        <baseOpinionOffset>5</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
     <defName>PR_OpponentGone</defName>
     <durationDays>2</durationDays>
     <stackLimit>1</stackLimit>

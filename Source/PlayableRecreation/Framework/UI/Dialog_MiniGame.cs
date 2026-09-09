@@ -288,6 +288,27 @@ namespace PlayableRecreation.UI
             Close();
         }
 
+        /// <summary>
+        /// 지고 있는 판을 상대가 엎을 때가 됐는가 (§10.2).
+        ///
+        /// 엎으면 바닐라 사교 다툼이 벌어져 양쪽 Job 이 끈긴다. 그러면 §7.1 의 결합이
+        /// 창을 닫아 주긴 하지만, 그 길로 두면 "자리를 뗴다" 라는 뚝뜡한 문구가 한 줄 더 뜼고
+        /// 판이 가구 위에 남는다. **엎은 판은 남지 않는다** — 그게 엎는다는 뜻이다.
+        ///
+        /// 전적에는 적지 않는다. 기권한 것은 플레이어가 아니니까 — 패배가 아니라 중단이다.
+        /// </summary>
+        private void CheckBoardFlip()
+        {
+            if (matchFinished || practice) return;
+            if (!TogetherPersonality.ShouldFlip(seatedPawn, opponentPawn, worker)) return;
+
+            TogetherPersonality.Flip(seatedPawn, opponentPawn);
+
+            matchFinished = true;
+            DropSession();
+            Close();
+        }
+
         private static int LatestLogId()
         {
             if (Find.PlayLog == null) return -1;
@@ -348,7 +369,12 @@ namespace PlayableRecreation.UI
             {
                 nextTalkCheck = now + ThreatCheckInterval;
                 CheckSeats();
-                if (PRMod.Settings.playTogetherPersonality) CollectTalk();
+
+                if (PRMod.Settings.playTogetherPersonality)
+                {
+                    CollectTalk();
+                    CheckBoardFlip();
+                }
             }
 
             worker.Tick(now);
@@ -610,6 +636,12 @@ namespace PlayableRecreation.UI
 
         // ---------- 무르기 · 재시도 · 기권 ----------
 
+        /// <summary>이 판의 무르기 한도. 다정한 상대가 맞은편이면 한 칸 늘어난다 (§10.2).</summary>
+        private int UndoLimit
+        {
+            get { return PRMod.Settings.undoLimit + TogetherPersonality.UndoBonus(opponentPawn); }
+        }
+
         private bool UndoAvailable
         {
             get
@@ -617,7 +649,7 @@ namespace PlayableRecreation.UI
                 if (worker.IsOver || !worker.CanUndo) return false;
                 if (practice) return true;
                 if (PRMod.Settings.noUndoOnHardDifficulty && tier >= 3) return false;
-                return undosUsed < PRMod.Settings.undoLimit;
+                return undosUsed < UndoLimit;
             }
         }
 
@@ -629,7 +661,7 @@ namespace PlayableRecreation.UI
                 return "PR.Btn.Undo.Blocked".Translate();
 
             return "PR.Btn.Undo.Tip".Translate(
-                Mathf.Max(0, PRMod.Settings.undoLimit - undosUsed), PRMod.Settings.undoLimit);
+                Mathf.Max(0, UndoLimit - undosUsed), UndoLimit);
         }
 
         private void UndoNow()
@@ -760,6 +792,9 @@ namespace PlayableRecreation.UI
 
             Remember(seatedPawn);
             Remember(opponentPawn);
+
+            RememberEachOther(seatedPawn, opponentPawn);
+            RememberEachOther(opponentPawn, seatedPawn);
         }
 
         private static void Remember(Pawn pawn)
@@ -769,6 +804,19 @@ namespace PlayableRecreation.UI
             if (pawn.needs == null || pawn.needs.mood == null) return;
 
             pawn.needs.mood.thoughts.memories.TryGainMemory(PRDefOf.PR_PlayedTogether);
+        }
+
+        /// <summary>
+        /// 마주 앉아 한 판을 끝낸 사이는 조금 가까워진다. 이기고 지는 것과 무관하다 —
+        /// 함께 둔 것이 남는 것이지 승부가 남는 것이 아니기 때문이다.
+        /// </summary>
+        private static void RememberEachOther(Pawn pawn, Pawn other)
+        {
+            if (pawn == null || other == null || pawn == other) return;
+            if (pawn.Dead || pawn.needs == null || pawn.needs.mood == null) return;
+            if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
+
+            pawn.needs.mood.thoughts.memories.TryGainMemory(PRDefOf.PR_PlayedTogetherSocial, other);
         }
 
         private void RecordResult(bool won, bool byResignation)

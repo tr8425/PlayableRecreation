@@ -25,6 +25,7 @@
   <PR.Together.NeverCame>{0} never made it to the board.</PR.Together.NeverCame>
   <PR.Together.LeftSaved>{0} got up. The game stays on the furniture.</PR.Together.LeftSaved>
   <PR.Together.LeftLost>{0} got up, and the game went with them.</PR.Together.LeftLost>
+  <PR.Together.BoardFlip>{0} sent the pieces flying rather than lose to {1}.</PR.Together.BoardFlip>
   <PR.Together.Goodwill.Up>{0} enjoyed the game. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Up>
   <PR.Together.Goodwill.Down>{0} was taken apart at the board and did not enjoy it. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Down>
   <PR.Together.Goodwill.Walkout>{0} was left sitting there when the game was abandoned. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Walkout>
@@ -151,6 +152,9 @@ You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
   <PR.Settings.Together.Visitors>        Visitors can play too</PR.Settings.Together.Visitors>
   <PR.Settings.Together.Personality>        Their personality shows at the board</PR.Settings.Together.Personality>
   <PR.Settings.Together.Personality.Desc>What they say to each other while playing appears in the log panel. The game does not write any of it — vanilla does.</PR.Settings.Together.Personality.Desc>
+  <PR.Settings.Together.BoardFlip>            They can flip the board when angry</PR.Settings.Together.BoardFlip>
+  <PR.Settings.Together.BoardFlip.Desc>A hyper-aggressive opponent who is losing may start a social fight, which ends the game. Off means only their words carry their temper.</PR.Settings.Together.BoardFlip.Desc>
+  <PR.Settings.Together.KindUndo>            A kind opponent gives you one more takeback</PR.Settings.Together.KindUndo>
   <PR.Settings.Together.Goodwill>        Playing with a visitor moves faction goodwill</PR.Settings.Together.Goodwill>
   <PR.Settings.Together.Goodwill.Desc>A close game pleases them. Crushing a guest does not. Only the last game of a visit counts, and a low tier barely moves anything.</PR.Settings.Together.Goodwill.Desc>
   <PR.Settings.Together.GoodwillScale>            Goodwill size: {0} %</PR.Settings.Together.GoodwillScale>

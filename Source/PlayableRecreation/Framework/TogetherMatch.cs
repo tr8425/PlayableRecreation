@@ -178,6 +178,30 @@ namespace PlayableRecreation
             return null;
         }
 
+        /// <summary>이 가구에서 맞은편에 선 사람. 마주 보게 세우려면 누군지 알아야 한다.</summary>
+        public static Pawn PartnerOf(Thing board, Pawn pawn)
+        {
+            if (board == null || pawn == null) return null;
+
+            for (int i = 0; i < live.Count; i++)
+            {
+                Live entry = live[i];
+                if (entry.board != board) continue;
+                if (entry.seated == pawn) return entry.opponent;
+                if (entry.opponent == pawn) return entry.seated;
+            }
+
+            for (int i = 0; i < pending.Count; i++)
+            {
+                Pending entry = pending[i];
+                if (entry.board != board) continue;
+                if (entry.seated == pawn) return entry.opponent;
+                if (entry.opponent == pawn) return entry.seated;
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// 이 폰이 **다른** 가구의 판에 붙잡혀 있는가. 세션이 아직 저장되기 전에도
         /// 참인 값이라, 같은 사람을 두 판에 지목하는 것을 여기서 먼저 막는다.

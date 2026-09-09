@@ -74,6 +74,17 @@ namespace Ur
             get { return match != null && match.Captures(Side.Bot) == 0; }
         }
 
+        /// <summary>말 둘보다 많이 들어가 있으면 지고 있는 것이다. 하나 차는 주사위 한 번이면 뒤집힌다.</summary>
+        public override bool? Losing
+        {
+            get
+            {
+                if (match == null || match.IsOver) return null;
+
+                return match.State.Scored(Side.Bot) > match.State.Scored(Side.Player) + 1;
+            }
+        }
+
         public override bool CanUndo
         {
             get { return match != null && !match.IsOver && undoTarget.HasValue; }

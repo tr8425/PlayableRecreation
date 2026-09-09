@@ -114,6 +114,8 @@
   <PR_PlayedTogether.stages.0.label>누군가와 한 판 두었어</PR_PlayedTogether.stages.0.label>
   <PR_PlayedTogether.stages.0.description>맞은편에 누가 앉아서 끝까지 한 판을 둔지 오랫만이다. 상대가 신음을 내줄 수 있는 판은 같은 게임이어도 다른 게임이다.</PR_PlayedTogether.stages.0.description>
 
+  <PR_PlayedTogetherSocial.stages.0.label>나와 한 판 두었다</PR_PlayedTogetherSocial.stages.0.label>
+
   <PR_OpponentGone.stages.0.label>함께 두던 사람을 잃었어</PR_OpponentGone.stages.0.label>
   <PR_OpponentGone.stages.0.description>판은 아직 그대로 놓여 있고 승부는 중간에서 멈췄 있다. 자꾸 빈 의자 쪽을 보게 된다. 어차피 끝까지 두지는 못했을 판이지만.</PR_OpponentGone.stages.0.description>
 

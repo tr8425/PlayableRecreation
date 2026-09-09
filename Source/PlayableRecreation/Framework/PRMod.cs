@@ -123,6 +123,14 @@ namespace PlayableRecreation
             list.CheckboxLabeled("PR.Settings.Together.Personality".Translate(), ref Settings.playTogetherPersonality,
                 "PR.Settings.Together.Personality.Desc".Translate());
 
+            if (Settings.playTogetherPersonality)
+            {
+                list.CheckboxLabeled("    " + "PR.Settings.Together.BoardFlip".Translate(),
+                    ref Settings.playTogetherBoardFlip, "PR.Settings.Together.BoardFlip.Desc".Translate());
+                list.CheckboxLabeled("    " + "PR.Settings.Together.KindUndo".Translate(),
+                    ref Settings.playTogetherKindUndo);
+            }
+
             list.CheckboxLabeled("PR.Settings.Together.Goodwill".Translate(), ref Settings.playTogetherGoodwill,
                 "PR.Settings.Together.Goodwill.Desc".Translate());
 

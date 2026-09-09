@@ -25,6 +25,7 @@
   <PR.Together.NeverCame>{0}이(가) 끝내 판 앞에 오지 않았습니다.</PR.Together.NeverCame>
   <PR.Together.LeftSaved>{0}이(가) 일어났습니다. 판은 가구에 남습니다.</PR.Together.LeftSaved>
   <PR.Together.LeftLost>{0}이(가) 일어나면서 판도 훩해졌습니다.</PR.Together.LeftLost>
+  <PR.Together.BoardFlip>{0}이(가) {1}에게 지느니 판을 엎어버렸습니다.</PR.Together.BoardFlip>
   <PR.Together.Goodwill.Up>{0}이(가) 판을 즐겁게 두었습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Up>
   <PR.Together.Goodwill.Down>{0}이(가) 판 앞에서 짓밟혔고, 즐겁지 않았습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Down>
   <PR.Together.Goodwill.Walkout>판을 엎고 일어서는 바람에 {0}은(는) 그대로 앉아 있었습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Walkout>
@@ -151,6 +152,9 @@
   <PR.Settings.Together.Visitors>        방문객도 상대가 됩니다</PR.Settings.Together.Visitors>
   <PR.Settings.Together.Personality>        성격이 판에 비칩니다</PR.Settings.Together.Personality>
   <PR.Settings.Together.Personality.Desc>두는 동안 서로 하는 말이 기록 패널에 뜽니다. 대사를 이 모드가 쓰지 않습니다 — 바닐라가 굴린 말을 옮겼을 뿐입니다.</PR.Settings.Together.Personality.Desc>
+  <PR.Settings.Together.BoardFlip>            화가 나면 판을 엎을 수 있습니다</PR.Settings.Together.BoardFlip>
+  <PR.Settings.Together.BoardFlip.Desc>강한 공격성 유전자를 가진 상대가 지고 있으면 사교 다툼을 걸어 판을 끝내버립니다. 끄면 성격은 말에만 남습니다.</PR.Settings.Together.BoardFlip.Desc>
+  <PR.Settings.Together.KindUndo>            다정한 상대는 무르기를 한 번 더 줍니다</PR.Settings.Together.KindUndo>
   <PR.Settings.Together.Goodwill>        방문객과 두면 팩션 우호도가 움직입니다</PR.Settings.Together.Goodwill>
   <PR.Settings.Together.Goodwill.Desc>접전이었으면 손님이 즐겁습니다. 손님을 압도적으로 이기면 그렇지 않습니다. 한 방문에 마지막 판 하나만 세고, 난이도가 낮으면 거의 움직이지 않습니다.</PR.Settings.Together.Goodwill.Desc>
   <PR.Settings.Together.GoodwillScale>            우호도 크기: {0} %</PR.Settings.Together.GoodwillScale>
