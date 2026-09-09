@@ -227,6 +227,19 @@ namespace PlayableRecreation
             return false;
         }
 
+        /// <summary>
+        /// 판을 전부 잊는다. **새 판을 시작하거나 불러올 때 불러야 한다.**
+        ///
+        /// 여기 두 목록은 static 이라 메인메뉴로 나갔다 들어와도 그대로 남는다.
+        /// 지난 판의 폰과 가구를 계속 잡고 있으면 이미 버려진 Game 하나가 통째로
+        /// 메모리에 남고, 무엇보다 없는 판을 있다고 대답하게 된다.
+        /// </summary>
+        public static void Reset()
+        {
+            pending.Clear();
+            live.Clear();
+        }
+
         public static void Cancel(Thing board)
         {
             Pending entry = PendingFor(board);

@@ -235,6 +235,20 @@ namespace PlayableRecreation
             if (ActiveSession == session) ActiveSession = null;
         }
 
+        /// <summary>
+        /// 들고 있던 판을 놓는다. 새 판과 불러온 판 둘 다에서 불린다 —
+        /// <see cref="TogetherMatch"/> 는 세이브에 안 남지만 static 이라 저절로 비지는 않는다.
+        /// </summary>
+        public override void StartedNewGame()
+        {
+            TogetherMatch.Reset();
+        }
+
+        public override void LoadedGame()
+        {
+            TogetherMatch.Reset();
+        }
+
         public override void GameComponentTick()
         {
             // 방문이 끝났는지는 판이 하나도 없어도 살펴야 한다 - 손님은 판과 무관하게 떠난다.
