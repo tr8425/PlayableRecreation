@@ -122,6 +122,19 @@ namespace PlayableRecreation
             list.CheckboxLabeled("PR.Settings.Together.Visitors".Translate(), ref Settings.playTogetherVisitors);
             list.CheckboxLabeled("PR.Settings.Together.Personality".Translate(), ref Settings.playTogetherPersonality,
                 "PR.Settings.Together.Personality.Desc".Translate());
+
+            list.CheckboxLabeled("PR.Settings.Together.Goodwill".Translate(), ref Settings.playTogetherGoodwill,
+                "PR.Settings.Together.Goodwill.Desc".Translate());
+
+            if (Settings.playTogetherGoodwill)
+            {
+                list.Label("PR.Settings.Together.GoodwillScale".Translate(Settings.playTogetherGoodwillScale));
+                Settings.playTogetherGoodwillScale =
+                    Mathf.RoundToInt(list.Slider(Settings.playTogetherGoodwillScale, 0f, 200f));
+
+                list.CheckboxLabeled("    " + "PR.Settings.Together.GoodwillDrop".Translate(),
+                    ref Settings.playTogetherGoodwillDrop);
+            }
         }
 
         private void DoMasterySection(Listing_Standard list)
@@ -179,6 +192,7 @@ namespace PlayableRecreation
                     list.CheckboxLabeled("    " + "PR.Invalidation.Repair.Label".Translate(), ref Settings.invalidateOnRepair);
                     list.CheckboxLabeled("    " + "PR.Invalidation.Damaged.Label".Translate(), ref Settings.invalidateOnDamage);
                     list.CheckboxLabeled("    " + "PR.Invalidation.Moved.Label".Translate(), ref Settings.invalidateOnMove);
+                    list.CheckboxLabeled("    " + "PR.Invalidation.OpponentGone.Label".Translate(), ref Settings.invalidateOnOpponentGone);
                     list.CheckboxLabeled("    " + "PR.Invalidation.Expired.Label".Translate(), ref Settings.invalidateOnExpiry);
 
                     if (Settings.invalidateOnExpiry)

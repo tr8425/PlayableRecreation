@@ -737,6 +737,7 @@ namespace PlayableRecreation.UI
             PRSounds.Play(won ? PRSounds.Win : PRSounds.Lose);
 
             RecordResult(won, false);
+            RememberTheGame();
             DropSession();
 
             if (!won || practice) return;
@@ -746,6 +747,28 @@ namespace PlayableRecreation.UI
 
             if (game.wonTale != null && seatedPawn != null && board != null)
                 TaleRecorder.RecordTale(game.wonTale, seatedPawn, board.def);
+        }
+
+        /// <summary>
+        /// 둘이 한 판을 끝까지 둔 기억. 이기고 지는 것과 무관하게 둘 다 받는다 —
+        /// 맞은편에 사람이 있었다는 것 자체가 기억이기 때문이다.
+        /// 손님은 빼다 — 손님의 기분까지 우리가 적을 자리는 아니다.
+        /// </summary>
+        private void RememberTheGame()
+        {
+            if (practice || opponentPawn == null || !PRMod.Settings.playThought) return;
+
+            Remember(seatedPawn);
+            Remember(opponentPawn);
+        }
+
+        private static void Remember(Pawn pawn)
+        {
+            if (pawn == null || pawn.Dead) return;
+            if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
+            if (pawn.needs == null || pawn.needs.mood == null) return;
+
+            pawn.needs.mood.thoughts.memories.TryGainMemory(PRDefOf.PR_PlayedTogether);
         }
 
         private void RecordResult(bool won, bool byResignation)
@@ -768,6 +791,10 @@ namespace PlayableRecreation.UI
             if (component != null) component.ColonyRecord(game).Record(in result);
 
             if (session != null) session.realSeconds = 0f;
+
+            // 방문객과 둔 판은 우호도까지 움직인다. 기권도 결과다 — 판을 엎고 일어선 것도
+            // 한 줄이 된다. 여러 판을 두었으면 여기가 매번 불리면서 가장 나중 판으로 갈아끼워진다.
+            TogetherGoodwill.Apply(game, opponentPawn, result);
         }
     }
 }

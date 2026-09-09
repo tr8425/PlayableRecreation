@@ -25,6 +25,9 @@
   <PR.Together.NeverCame>{0} never made it to the board.</PR.Together.NeverCame>
   <PR.Together.LeftSaved>{0} got up. The game stays on the furniture.</PR.Together.LeftSaved>
   <PR.Together.LeftLost>{0} got up, and the game went with them.</PR.Together.LeftLost>
+  <PR.Together.Goodwill.Up>{0} enjoyed the game. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Up>
+  <PR.Together.Goodwill.Down>{0} was taken apart at the board and did not enjoy it. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Down>
+  <PR.Together.Goodwill.Walkout>{0} was left sitting there when the game was abandoned. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Walkout>
   <PR.Together.Sit>{0} sits down</PR.Together.Sit>
   <PR.Together.Alone>Play alone</PR.Together.Alone>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
@@ -91,6 +94,7 @@
   <PR.Invalidation.Repair.Label>Furniture repaired</PR.Invalidation.Repair.Label>
   <PR.Invalidation.Damaged.Label>Furniture damaged</PR.Invalidation.Damaged.Label>
   <PR.Invalidation.Moved.Label>Furniture moved</PR.Invalidation.Moved.Label>
+  <PR.Invalidation.OpponentGone.Label>Someone at the board is gone</PR.Invalidation.OpponentGone.Label>
   <PR.Invalidation.Expired.Label>Left too long</PR.Invalidation.Expired.Label>
 
   <PR.Invalidation.Combat.Msg>The fighting went right over the game.</PR.Invalidation.Combat.Msg>
@@ -100,6 +104,7 @@
   <PR.Invalidation.Moved.Msg>Moving it tipped the whole game over.</PR.Invalidation.Moved.Msg>
   <PR.Invalidation.Destroyed.Msg>It is gone, and the game with it.</PR.Invalidation.Destroyed.Msg>
   <PR.Invalidation.Expired.Msg>Nobody remembers how that game stood.</PR.Invalidation.Expired.Msg>
+  <PR.Invalidation.OpponentGone.Msg>{0} is not coming back to the board. The game ends there.</PR.Invalidation.OpponentGone.Msg>
 
   <PR.Invalidation.Letter.Label>Game scattered</PR.Invalidation.Letter.Label>
   <PR.Invalidation.Letter.Text>{0}
@@ -146,6 +151,10 @@ You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
   <PR.Settings.Together.Visitors>        Visitors can play too</PR.Settings.Together.Visitors>
   <PR.Settings.Together.Personality>        Their personality shows at the board</PR.Settings.Together.Personality>
   <PR.Settings.Together.Personality.Desc>What they say to each other while playing appears in the log panel. The game does not write any of it — vanilla does.</PR.Settings.Together.Personality.Desc>
+  <PR.Settings.Together.Goodwill>        Playing with a visitor moves faction goodwill</PR.Settings.Together.Goodwill>
+  <PR.Settings.Together.Goodwill.Desc>A close game pleases them. Crushing a guest does not. Only the last game of a visit counts, and a low tier barely moves anything.</PR.Settings.Together.Goodwill.Desc>
+  <PR.Settings.Together.GoodwillScale>            Goodwill size: {0} %</PR.Settings.Together.GoodwillScale>
+  <PR.Settings.Together.GoodwillDrop>            It can go down as well as up</PR.Settings.Together.GoodwillDrop>
   <PR.Settings.Together.NeedsSave>        Needs saved games turned on.</PR.Settings.Together.NeedsSave>
   <PR.Settings.LinkSkill>Set the tier from the colonist skill</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>Skips the picker. Each game uses its own skill.</PR.Settings.LinkSkill.Desc>

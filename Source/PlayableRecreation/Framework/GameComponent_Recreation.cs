@@ -13,11 +13,17 @@ namespace PlayableRecreation
         /// <summary>무효화 폴링 주기(틱). 1초에 한 번이면 충분하다.</summary>
         private const int CheckInterval = 60;
 
+        /// <summary>방문이 끝났는지 보는 주기. 손님은 초 단위로 떠나지 않는다.</summary>
+        private const int VisitCheckInterval = 2500;
+
         private Dictionary<string, int> clearedMasks = new Dictionary<string, int>();
         private Dictionary<string, int> lastRetryTicks = new Dictionary<string, int>();
         private Dictionary<string, GameRecord> colonyRecords = new Dictionary<string, GameRecord>();
         private Dictionary<string, int> counters = new Dictionary<string, int>();
         private List<GameSession> sessions = new List<GameSession>();
+
+        /// <summary>이번 방문에 그 팩션에게 이미 준 우호도. 열쇠는 <c>Faction.loadID</c> 다.</summary>
+        private Dictionary<int, int> goodwillApplied = new Dictionary<int, int>();
 
         /// <summary>지금 창이 열려 있는 판. 두는 중에는 절대 무효화하지 않는다.</summary>
         public GameSession ActiveSession;
@@ -65,6 +71,62 @@ namespace PlayableRecreation
         {
             counters[key] = value;
         }
+
+        // ---------- 방문객 우호도 (§11.2) ----------
+
+        /// <summary>이번 방문에 이 팩션에게 이미 준 값. 없으면 0.</summary>
+        public int GoodwillApplied(Faction faction)
+        {
+            if (faction == null) return 0;
+
+            int value;
+            return goodwillApplied.TryGetValue(faction.loadID, out value) ? value : 0;
+        }
+
+        public void SetGoodwillApplied(Faction faction, int value)
+        {
+            if (faction == null) return;
+
+            if (value == 0) goodwillApplied.Remove(faction.loadID);
+            else goodwillApplied[faction.loadID] = value;
+        }
+
+        /// <summary>
+        /// 손님이 다 떠난 팩션은 잊는다. 그래야 다음 방문이 새 방문이 된다.
+        /// 기억이 남아 있으면 다음에 온 무리에게 "이미 줬다"고 답하게 된다.
+        /// </summary>
+        private void ForgetEndedVisits()
+        {
+            if (goodwillApplied.Count == 0) return;
+
+            List<Faction> factions = Find.FactionManager.AllFactionsListForReading;
+            List<Map> maps = Find.Maps;
+
+            tmpGone.Clear();
+
+            foreach (KeyValuePair<int, int> pair in goodwillApplied)
+            {
+                Faction faction = null;
+                for (int i = 0; i < factions.Count; i++)
+                    if (factions[i].loadID == pair.Key) { faction = factions[i]; break; }
+
+                if (faction == null) { tmpGone.Add(pair.Key); continue; }
+
+                bool present = false;
+                for (int i = 0; i < maps.Count && !present; i++)
+                {
+                    List<Pawn> here = maps[i].mapPawns.SpawnedPawnsInFaction(faction);
+                    present = here != null && here.Count > 0;
+                }
+
+                if (!present) tmpGone.Add(pair.Key);
+            }
+
+            for (int i = 0; i < tmpGone.Count; i++) goodwillApplied.Remove(tmpGone[i]);
+            tmpGone.Clear();
+        }
+
+        private static readonly List<int> tmpGone = new List<int>();
 
         // ---------- 숙련도 ----------
 
@@ -175,6 +237,9 @@ namespace PlayableRecreation
 
         public override void GameComponentTick()
         {
+            // 방문이 끝났는지는 판이 하나도 없어도 살펴야 한다 - 손님은 판과 무관하게 떠난다.
+            if (Find.TickManager.TicksGame % VisitCheckInterval == 0) ForgetEndedVisits();
+
             if (sessions.Count == 0) return;
             if (Find.TickManager.TicksGame % CheckInterval != 0) return;
 
@@ -205,6 +270,7 @@ namespace PlayableRecreation
             Scribe_Collections.Look(ref lastRetryTicks, "lastRetryTicks", LookMode.Value, LookMode.Value);
             Scribe_Collections.Look(ref colonyRecords, "colonyRecords", LookMode.Value, LookMode.Deep);
             Scribe_Collections.Look(ref counters, "counters", LookMode.Value, LookMode.Value);
+            Scribe_Collections.Look(ref goodwillApplied, "goodwillApplied", LookMode.Value, LookMode.Value);
             Scribe_Collections.Look(ref sessions, "sessions", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
@@ -213,6 +279,7 @@ namespace PlayableRecreation
                 if (lastRetryTicks == null) lastRetryTicks = new Dictionary<string, int>();
                 if (colonyRecords == null) colonyRecords = new Dictionary<string, GameRecord>();
                 if (counters == null) counters = new Dictionary<string, int>();
+                if (goodwillApplied == null) goodwillApplied = new Dictionary<int, int>();
                 if (sessions == null) sessions = new List<GameSession>();
 
                 // 참조가 끊긴(가구나 게임 정의가 사라진) 판은 조용히 정리한다.

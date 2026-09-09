@@ -44,9 +44,18 @@ namespace PlayableRecreation
 
         /// <summary>
         /// 성격이 판에 비친다. 대부분은 바닐라가 이미 하는 일이고,
-        /// 우리는 그것을 창 안으로 옮기만 한다. 끄면 그 띄가 사라진다.
+        /// 우리는 그것을 창 안으로 옮기기만 한다. 끄면 그 띠가 사라진다.
         /// </summary>
         public bool playTogetherPersonality = true;
+
+        /// <summary>방문객과 한 판 두면 그 팩션의 우호도가 움직인다.</summary>
+        public bool playTogetherGoodwill = true;
+
+        /// <summary>우호도 크기의 배율(%). 0 이면 사실상 끔이다.</summary>
+        public int playTogetherGoodwillScale = 100;
+
+        /// <summary>끄면 마이너스가 0 이 된다 — 오르기만 한다.</summary>
+        public bool playTogetherGoodwillDrop = true;
 
         public bool sounds = true;
 
@@ -78,6 +87,12 @@ namespace PlayableRecreation
         public bool invalidateOnDamage = true;
         public bool invalidateOnMove = true;
         public bool invalidateOnExpiry = false;
+
+        /// <summary>
+        /// 판 앞에 있던 사람이 없어지면 판도 흘트러진다.
+        /// 새 자리가 아니라 이미 있는 무효화 목록의 들여쓴 한 줄이다.
+        /// </summary>
+        public bool invalidateOnOpponentGone = true;
 
         /// <summary>마지막 수로부터 이 일수가 지나면 판을 잊는다. invalidateOnExpiry 가 켜져 있을 때만.</summary>
         public int sessionExpiryDays = 3;
@@ -161,6 +176,9 @@ namespace PlayableRecreation
             Scribe_Values.Look(ref playTogetherChildren, "playTogetherChildren", true);
             Scribe_Values.Look(ref playTogetherVisitors, "playTogetherVisitors", true);
             Scribe_Values.Look(ref playTogetherPersonality, "playTogetherPersonality", true);
+            Scribe_Values.Look(ref playTogetherGoodwill, "playTogetherGoodwill", true);
+            Scribe_Values.Look(ref playTogetherGoodwillScale, "playTogetherGoodwillScale", 100);
+            Scribe_Values.Look(ref playTogetherGoodwillDrop, "playTogetherGoodwillDrop", true);
             Scribe_Values.Look(ref sounds, "sounds", true);
 
             Scribe_Values.Look(ref linkToPawnSkill, "linkToPawnSkill", false);
@@ -177,6 +195,7 @@ namespace PlayableRecreation
             Scribe_Values.Look(ref invalidateOnDamage, "invalidateOnDamage", true);
             Scribe_Values.Look(ref invalidateOnMove, "invalidateOnMove", true);
             Scribe_Values.Look(ref invalidateOnExpiry, "invalidateOnExpiry", false);
+            Scribe_Values.Look(ref invalidateOnOpponentGone, "invalidateOnOpponentGone", true);
             Scribe_Values.Look(ref sessionExpiryDays, "sessionExpiryDays", 3);
             Scribe_Values.Look(ref invalidationLetterSent, "invalidationLetterSent", false);
 

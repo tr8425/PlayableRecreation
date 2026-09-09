@@ -242,6 +242,37 @@
   </ThoughtDef>
 
   <!--
+    몰입 모드 2칸. 이 둘은 숙련도를 따라가지 않는다 - 맞은편에 누가 있었는지는
+    내가 얼마나 잘 두는지와 아무 상관이 없다.
+  -->
+
+  <ThoughtDef>
+    <defName>PR_PlayedTogether</defName>
+    <durationDays>0.75</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>played a game with someone</label>
+        <description>Somebody sat down across from me and we played the thing out to the end. It is a different game when the other side can groan at you.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PR_OpponentGone</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>lost a game partner</label>
+        <description>The board is still sitting there with the game half-finished. I keep looking at the other chair. We were not going to get to the end of it anyway, I suppose.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
     망원경은 깰 난이도가 없다. 숙련도를 따라갈 것이 없으므로 단계도 하나뿐이고,
     그래서 Thought_Mastery 가 아니라 평범한 기억이다.
   -->

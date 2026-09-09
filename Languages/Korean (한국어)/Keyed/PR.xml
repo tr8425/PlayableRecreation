@@ -25,6 +25,9 @@
   <PR.Together.NeverCame>{0}이(가) 끝내 판 앞에 오지 않았습니다.</PR.Together.NeverCame>
   <PR.Together.LeftSaved>{0}이(가) 일어났습니다. 판은 가구에 남습니다.</PR.Together.LeftSaved>
   <PR.Together.LeftLost>{0}이(가) 일어나면서 판도 훩해졌습니다.</PR.Together.LeftLost>
+  <PR.Together.Goodwill.Up>{0}이(가) 판을 즐겁게 두었습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Up>
+  <PR.Together.Goodwill.Down>{0}이(가) 판 앞에서 짓밟혔고, 즐겁지 않았습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Down>
+  <PR.Together.Goodwill.Walkout>판을 엎고 일어서는 바람에 {0}은(는) 그대로 앉아 있었습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Walkout>
   <PR.Together.Sit>{0}이(가) 앉는다</PR.Together.Sit>
   <PR.Together.Alone>혼자 두기</PR.Together.Alone>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
@@ -91,6 +94,7 @@
   <PR.Invalidation.Repair.Label>가구를 수리함</PR.Invalidation.Repair.Label>
   <PR.Invalidation.Damaged.Label>가구가 손상됨</PR.Invalidation.Damaged.Label>
   <PR.Invalidation.Moved.Label>가구를 옮김</PR.Invalidation.Moved.Label>
+  <PR.Invalidation.OpponentGone.Label>판 앞에 있던 사람이 사라짐</PR.Invalidation.OpponentGone.Label>
   <PR.Invalidation.Expired.Label>오래 방치됨</PR.Invalidation.Expired.Label>
 
   <PR.Invalidation.Combat.Msg>전투 중에 하던 판이 뒤집혔습니다.</PR.Invalidation.Combat.Msg>
@@ -100,6 +104,7 @@
   <PR.Invalidation.Moved.Msg>가구를 옮기면서 하던 판이 쏟아졌습니다.</PR.Invalidation.Moved.Msg>
   <PR.Invalidation.Destroyed.Msg>가구가 사라졌습니다. 하던 승부도 함께.</PR.Invalidation.Destroyed.Msg>
   <PR.Invalidation.Expired.Msg>오래 방치된 판을 아무도 기억하지 못합니다.</PR.Invalidation.Expired.Msg>
+  <PR.Invalidation.OpponentGone.Msg>{0}은(는) 다시 판 앞으로 오지 못합니다. 두던 판은 거기서 끝납니다.</PR.Invalidation.OpponentGone.Msg>
 
   <PR.Invalidation.Letter.Label>흐트러진 판</PR.Invalidation.Letter.Label>
   <PR.Invalidation.Letter.Text>{0}
@@ -145,7 +150,11 @@
   <PR.Settings.Together.Children>        어린이도 상대가 됩니다</PR.Settings.Together.Children>
   <PR.Settings.Together.Visitors>        방문객도 상대가 됩니다</PR.Settings.Together.Visitors>
   <PR.Settings.Together.Personality>        성격이 판에 비칩니다</PR.Settings.Together.Personality>
-  <PR.Settings.Together.Personality.Desc>두는 동안 서로 하는 말이 기록 패널에 뜼니다. 대사를 이 모드가 쓰지 않습니다 — 바닐라가 굴린 말을 옮겼을 뿐입니다.</PR.Settings.Together.Personality.Desc>
+  <PR.Settings.Together.Personality.Desc>두는 동안 서로 하는 말이 기록 패널에 뜽니다. 대사를 이 모드가 쓰지 않습니다 — 바닐라가 굴린 말을 옮겼을 뿐입니다.</PR.Settings.Together.Personality.Desc>
+  <PR.Settings.Together.Goodwill>        방문객과 두면 팩션 우호도가 움직입니다</PR.Settings.Together.Goodwill>
+  <PR.Settings.Together.Goodwill.Desc>접전이었으면 손님이 즐겁습니다. 손님을 압도적으로 이기면 그렇지 않습니다. 한 방문에 마지막 판 하나만 세고, 난이도가 낮으면 거의 움직이지 않습니다.</PR.Settings.Together.Goodwill.Desc>
+  <PR.Settings.Together.GoodwillScale>            우호도 크기: {0} %</PR.Settings.Together.GoodwillScale>
+  <PR.Settings.Together.GoodwillDrop>            나쁘게 끝나면 내려가기도 합니다</PR.Settings.Together.GoodwillDrop>
   <PR.Settings.Together.NeedsSave>        판 저장이 켜져 있어야 합니다.</PR.Settings.Together.NeedsSave>
   <PR.Settings.LinkSkill>난이도를 정착민의 기술로 자동 결정</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>난이도 선택 창을 건너뜁니다. 게임마다 기준 기술이 다릅니다.</PR.Settings.LinkSkill.Desc>
