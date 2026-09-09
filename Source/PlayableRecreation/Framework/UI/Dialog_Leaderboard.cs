@@ -216,6 +216,11 @@ namespace PlayableRecreation.UI
         private void DrawSummary(Rect area, GameRecord record)
         {
             Listing_Standard list = new Listing_Standard();
+
+            // 여기도 두 칸으로 나뉘어질 자리가 아니다. 넘치면 잘리는 편이
+            // 소리 없이 화면 밖으로 사라지는 것보다 낫다.
+            list.maxOneColumn = true;
+
             list.Begin(area);
 
             Text.Font = GameFont.Tiny;

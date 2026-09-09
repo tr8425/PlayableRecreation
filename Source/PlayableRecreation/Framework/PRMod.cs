@@ -28,6 +28,15 @@ namespace PlayableRecreation
             Widgets.BeginScrollView(inRect, ref scroll, view);
 
             Listing_Standard list = new Listing_Standard();
+
+            // **반드시 한 칸이어야 한다.** 바닐라 <c>Listing.GetRect</c> 는 그리는 줄마다
+            // <c>NewColumnIfNeeded</c> 를 부르고, 내용이 <c>listingRect.height</c> 를 넘으면
+            // <c>curY</c> 를 0 으로 되돌리면서 <c>curX</c> 를 한 칸 너비만큼 오른쪽으로 밀어
+            // 나머지를 화면 밖으로 내보낸다. 그러면 CurHeight 가 마지막 칸의 높이만 답하고,
+            // 그 값이 다음 프레임의 listingRect.height 로 들어가 더 일찍 칸을 넘기게 된다 —
+            // **설정 창이 한 번 무너지면 스스로 점점 비어 버리는 자기강화 고장이다.**
+            list.maxOneColumn = true;
+
             list.Begin(view);
 
             DoGamesSection(list);
