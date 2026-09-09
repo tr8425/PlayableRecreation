@@ -66,8 +66,22 @@ namespace PlayableRecreation
         {
             GameSession session = SessionFor(board);
 
-            if (session != null && game.Accepts(session.game)) Resume(session);
-            else StartNew(game, board, pawn);
+            if (session == null || !game.Accepts(session.game))
+            {
+                StartNew(game, board, pawn);
+                return;
+            }
+
+            // 상대가 있던 판이면 그 사람도 다시 불러야 이어 두는 것이 된다.
+            if (Together.Enabled && session.opponentPawn != null && session.seatedPawn != null
+                && Together.Qualifies(session.opponentPawn, session.seatedPawn, board, session.game))
+            {
+                TogetherMatch.Arrange(session.game, board, session.seatedPawn, session.opponentPawn,
+                    session.tier, session.practice, session);
+                return;
+            }
+
+            Resume(session);
         }
 
         /// <summary>난이도를 정해 새 판을 연다. 단계가 하나뿐이거나 폰 연동이면 선택 창을 건너뛴다.</summary>
@@ -125,7 +139,7 @@ namespace PlayableRecreation
         {
             if (game.difficultyCount <= 1)
             {
-                Launch(game, board, pawn, opponent, 0, false);
+                Commit(game, board, pawn, opponent, 0, false);
                 return;
             }
 
@@ -134,11 +148,27 @@ namespace PlayableRecreation
 
             if (measured != null && PRMod.Settings.linkToPawnSkill)
             {
-                Launch(game, board, pawn, opponent, TierForPawn(game, measured), false);
+                Commit(game, board, pawn, opponent, TierForPawn(game, measured), false);
                 return;
             }
 
             Find.WindowStack.Add(new Dialog_Difficulty(game, board, pawn, opponent));
+        }
+
+        /// <summary>
+        /// 난이도까지 정해진 뒤의 갈림길. 상대가 있으면 창을 바로 열지 않고 둘을 부른다 —
+        /// 창은 둘 다 판 앞에 닿았을 때 열린다(§4-4).
+        /// </summary>
+        public static void Commit(MiniGameDef game, Thing board, Pawn pawn, Pawn opponent,
+            int tier, bool practice)
+        {
+            if (opponent != null && Together.Enabled)
+            {
+                TogetherMatch.Arrange(game, board, pawn, opponent, tier, practice, null);
+                return;
+            }
+
+            Launch(game, board, pawn, opponent, tier, practice);
         }
 
         public static void Launch(MiniGameDef game, Thing board, Pawn pawn, int tier, bool practice)

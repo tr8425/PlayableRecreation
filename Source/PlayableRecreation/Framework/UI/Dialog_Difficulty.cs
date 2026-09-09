@@ -109,7 +109,7 @@ namespace PlayableRecreation.UI
             }
 
             Close(false);
-            GameEntry.Launch(game, board, seatedPawn, opponentPawn, tier, practice);
+            GameEntry.Commit(game, board, seatedPawn, opponentPawn, tier, practice);
         }
     }
 }

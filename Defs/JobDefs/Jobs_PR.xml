@@ -12,4 +12,15 @@
     <casualInterruptible>true</casualInterruptible>
   </JobDef>
 
+  <!--
+    몰입 모드 2칸 전용. 상대가 판 앞으로 걸어가 판이 끝날 때까지 선다.
+    창을 여는 것은 이 Job 이 아니다 - 둘 다 닿았을 때 TogetherMatch 가 열어 준다.
+  -->
+  <JobDef>
+    <defName>PR_JoinGame</defName>
+    <driverClass>PlayableRecreation.JobDriver_JoinGame</driverClass>
+    <reportString>sitting down to play with TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
 </Defs>

@@ -22,6 +22,9 @@ namespace PlayableRecreation.UI
         private const float Pad = 12f;
         private const float LogLineHeight = 20f;
 
+        /// <summary>창 안에 남기는 말의 상한. 판 하나가 대화 기록이 되지는 않는다.</summary>
+        private const int TalkLimit = 12;
+
         /// <summary>위협 감시 주기(실시간 초). 매 프레임 맵을 훑을 필요는 없다.</summary>
         private const float ThreatCheckInterval = 0.5f;
 
@@ -51,6 +54,13 @@ namespace PlayableRecreation.UI
 
         private Vector2 logScroll;
         private int lastLogCount;
+
+        /// <summary>두 사람이 주고받은 말. 게임이 아니라 프레임워크가 들고 있다(제약 4).</summary>
+        private readonly List<string> talk = new List<string>();
+
+        /// <summary>창을 연 시점의 기록 자리. 그 뒤에 생긴 것만 집는다(§7.2).</summary>
+        private int talkCursor = -1;
+        private float nextTalkCheck;
 
         public override Vector2 InitialSize
         {
@@ -144,6 +154,15 @@ namespace PlayableRecreation.UI
             // 열 때 이미 싸우고 있었다면 그 위협으로는 끊지 않는다. 새로 닥친 것만 판을 끊는다.
             threatAtOpen = ThreatPresent();
             nextThreatCheck = openedAt + ThreatCheckInterval;
+            nextTalkCheck = openedAt + ThreatCheckInterval;
+
+            // 2칸이 꺼져 있으면 아무도 부르지 않았으므로 창을 폰에 묶지 않는다 -
+            // 묶으면 "앉아 있지 않다"가 곧바로 참이 되어 창이 스스로 닫힌다.
+            if (opponentPawn != null && Together.Enabled)
+            {
+                TogetherMatch.OpenedWindow(board, seatedPawn, opponentPawn);
+                talkCursor = LatestLogId();
+            }
         }
 
         /// <summary>
@@ -162,6 +181,9 @@ namespace PlayableRecreation.UI
         public override void PostClose()
         {
             base.PostClose();
+
+            // 판이 닫혔으니 붙잡을 이유도 끝났다. 두 Job 이 다음 검사에서 스스로 끝난다.
+            if (board != null) TogetherMatch.ClosedWindow(board);
 
             AccumulatePlayTime();
 
@@ -245,6 +267,67 @@ namespace PlayableRecreation.UI
             Close();
         }
 
+        // ---------- 둘이 두는 판 ----------
+
+        /// <summary>
+        /// 어느 쪽이든 자리를 뜨면 창이 스스로 닫히고 판은 가구에 남는다(§7.1).
+        /// **기권으로 치지 않는다** - RecordResult 를 부르지 않으므로 중단이지 패배가 아니다.
+        /// </summary>
+        private void CheckSeats()
+        {
+            if (opponentPawn == null || board == null) return;
+
+            Pawn gone = TogetherMatch.WhoLeft(board);
+            if (gone == null) return;
+
+            bool kept = PRMod.Settings.saveSessions && game.supportsSave;
+            TaggedString message = (kept ? "PR.Together.LeftSaved" : "PR.Together.LeftLost")
+                .Translate(gone.LabelShortCap);
+
+            Messages.Message(message, board, MessageTypeDefOf.NeutralEvent, false);
+            Close();
+        }
+
+        private static int LatestLogId()
+        {
+            if (Find.PlayLog == null) return -1;
+
+            List<LogEntry> entries = Find.PlayLog.AllEntries;
+            return entries != null && entries.Count > 0 ? entries[0].LogID : -1;
+        }
+
+        /// <summary>
+        /// 바닐라가 굴린 대화를 창 안으로 옮긴다(§7.2). 만드는 것이 아니라 옮기는 것이다.
+        /// 양쪽을 모두 Concerns 로 갖는 항목만 집는다 - 옆을 지나가는 사람의 잡담은 판 밖의 일이다.
+        /// </summary>
+        private void CollectTalk()
+        {
+            if (opponentPawn == null || seatedPawn == null) return;
+            if (Find.PlayLog == null) return;
+
+            List<LogEntry> entries = Find.PlayLog.AllEntries;
+            if (entries == null) return;
+
+            int newest = talkCursor;
+
+            // 최신이 0번이므로 뒤에서부터 훑어야 시간순으로 쌓인다.
+            for (int i = entries.Count - 1; i >= 0; i--)
+            {
+                LogEntry entry = entries[i];
+                if (entry == null || entry.LogID <= talkCursor) continue;
+                if (entry.LogID > newest) newest = entry.LogID;
+
+                if (!entry.Concerns(seatedPawn) || !entry.Concerns(opponentPawn)) continue;
+
+                talk.Add(entry.ToGameStringFromPOV(seatedPawn));
+            }
+
+            talkCursor = newest;
+
+            // 판 하나가 남길 말의 상한. 넘치면 오래된 것부터 잊는다.
+            while (talk.Count > TalkLimit) talk.RemoveAt(0);
+        }
+
         // ---------- 진행 ----------
 
         public override void WindowUpdate()
@@ -260,6 +343,13 @@ namespace PlayableRecreation.UI
 
             // 시간이 멈춰 있으면 습격이 생길 수도 없으므로 검사하지 않는다.
             if (!forcePause) CheckThreat(now);
+
+            if (opponentPawn != null && Together.Enabled && now >= nextTalkCheck)
+            {
+                nextTalkCheck = now + ThreatCheckInterval;
+                CheckSeats();
+                if (PRMod.Settings.playTogetherPersonality) CollectTalk();
+            }
 
             worker.Tick(now);
             TrackSavePoint();
@@ -448,7 +538,10 @@ namespace PlayableRecreation.UI
             Widgets.Label(new Rect(inner.x, inner.y, inner.width, 20f), "PR.Log.Title".Translate());
             GUI.color = Color.white;
 
-            Rect view = new Rect(inner.x, inner.y + 22f, inner.width, inner.height - 22f);
+            // 사교 띠는 같은 패널 안이지만 아래에 따로 앉는다. 시간순으로 섞지 않는다 -
+            // Log 는 그냥 문자열 목록이라 시각이 없기 때문이다(§7.2).
+            float talkHeight = TalkBandHeight();
+            Rect view = new Rect(inner.x, inner.y + 22f, inner.width, inner.height - 22f - talkHeight);
             Rect content = new Rect(0f, 0f, view.width - 18f, log.Count * LogLineHeight + 4f);
 
             if (log.Count != lastLogCount)
@@ -462,7 +555,40 @@ namespace PlayableRecreation.UI
                 Widgets.Label(new Rect(0f, i * LogLineHeight, content.width, LogLineHeight), log[i]);
             Widgets.EndScrollView();
 
+            if (talkHeight > 0f)
+                DrawTalkBand(new Rect(inner.x, view.yMax, inner.width, talkHeight));
+
             Text.Font = GameFont.Small;
+        }
+
+        /// <summary>사교 띠가 차지할 높이. 말이 없으면 0 이고 패널은 예전 그대로다.</summary>
+        private float TalkBandHeight()
+        {
+            if (opponentPawn == null || talk.Count == 0) return 0f;
+
+            int shown = Mathf.Min(talk.Count, 4);
+            return 24f + shown * LogLineHeight;
+        }
+
+        /// <summary>
+        /// 바닐라가 만든 말을 창 안에 옮겨 둔 자리. 게임이 아니라 프레임워크가 그린다 -
+        /// 그래야 게임 코드가 한 줄도 안 바뀐다(제약 4).
+        /// </summary>
+        private void DrawTalkBand(Rect area)
+        {
+            GUI.color = PRTheme.Dim;
+            Widgets.DrawLineHorizontal(area.x, area.y + 2f, area.width);
+            Widgets.Label(new Rect(area.x, area.y + 4f, area.width, 18f), "PR.Together.Talk".Translate());
+            GUI.color = Color.white;
+
+            int shown = Mathf.Min(talk.Count, 4);
+            float y = area.y + 24f;
+
+            for (int i = talk.Count - shown; i < talk.Count; i++)
+            {
+                Widgets.Label(new Rect(area.x, y, area.width, LogLineHeight), talk[i]);
+                y += LogLineHeight;
+            }
         }
 
         private void DrawFooter(Rect footer)
@@ -587,7 +713,7 @@ namespace PlayableRecreation.UI
             Close(false);
 
             // 다시 여는 것은 하던 게임이 아니라 그 자리다. 아케이드에서는 통을 다시 흔든다.
-            if (practice) GameEntry.Launch(Origin, board, seatedPawn, tier, true);
+            if (practice) GameEntry.Commit(Origin, board, seatedPawn, opponentPawn, tier, true);
             else GameEntry.StartNew(Origin, board, seatedPawn);
         }
 

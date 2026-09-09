@@ -120,6 +120,8 @@ namespace PlayableRecreation
 
             list.CheckboxLabeled("PR.Settings.Together.Children".Translate(), ref Settings.playTogetherChildren);
             list.CheckboxLabeled("PR.Settings.Together.Visitors".Translate(), ref Settings.playTogetherVisitors);
+            list.CheckboxLabeled("PR.Settings.Together.Personality".Translate(), ref Settings.playTogetherPersonality,
+                "PR.Settings.Together.Personality.Desc".Translate());
         }
 
         private void DoMasterySection(Listing_Standard list)

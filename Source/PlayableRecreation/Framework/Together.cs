@@ -34,6 +34,31 @@ namespace PlayableRecreation
             return Enabled && game != null && game.hasMatch;
         }
 
+        /// <summary>
+        /// 이 가구를 몇 명이 나눠 쓸 수 있는가. **바닐라와 같은 값이어야 한다.**
+        ///
+        /// <c>ReservationManager</c> 는 같은 대상·같은 레이어에 걸린 예약의 <c>MaxPawns</c> 가
+        /// 지금 요청과 다르면 **개수와 무관하게 즉시 거절**한다. 그래서 2 로 고정하면
+        /// 포커(4)·편자(3)·망원경(1) 같은 가구에서 바닐라 폰이 그 가구를 아예 못 쓰게 된다.
+        /// 값은 게임이 이미 들고 있는 <see cref="MiniGameDef.vanillaJob"/> 에서 가져온다.
+        /// </summary>
+        public static int SeatCount(MiniGameDef game)
+        {
+            if (game != null && game.vanillaJob != null && game.vanillaJob.joyMaxParticipants > 0)
+                return game.vanillaJob.joyMaxParticipants;
+
+            return 2;
+        }
+
+        /// <summary>가구에서 게임을 얻어 같은 값을 구한다. 두 JobDriver 가 같은 수를 써야 예약이 붙는다.</summary>
+        public static int SeatCount(Thing board)
+        {
+            if (board == null) return 2;
+
+            CompMiniGame comp = board.TryGetComp<CompMiniGame>();
+            return SeatCount(comp != null ? comp.Game : null);
+        }
+
         /// <summary>자격이 없는 이유. 자격이 있으면 null 이다.</summary>
         public enum Refusal
         {
@@ -84,6 +109,7 @@ namespace PlayableRecreation
             if (candidate.Downed || candidate.InMentalState) return Refusal.Busy;
             if (candidate.jobs == null) return Refusal.Busy;
             if (InAnotherGame(candidate, board)) return Refusal.Busy;
+            if (TogetherMatch.HeldElsewhere(candidate, board)) return Refusal.Busy;
 
             if (!candidate.CanReach(board, PathEndMode.Touch, Danger.Some)) return Refusal.TooFar;
             if (!WithinRange(candidate, board, settings.playTogetherRange)) return Refusal.TooFar;

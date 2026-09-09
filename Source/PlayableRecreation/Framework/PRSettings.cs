@@ -42,6 +42,12 @@ namespace PlayableRecreation
         /// <summary>방문객도 상대가 된다. 끄면 우호도 항목도 뜻을 잃는다.</summary>
         public bool playTogetherVisitors = true;
 
+        /// <summary>
+        /// 성격이 판에 비친다. 대부분은 바닐라가 이미 하는 일이고,
+        /// 우리는 그것을 창 안으로 옮기만 한다. 끄면 그 띄가 사라진다.
+        /// </summary>
+        public bool playTogetherPersonality = true;
+
         public bool sounds = true;
 
         /// <summary>켜면 난이도 선택 창 대신 우클릭한 폰의 스킬로 상대를 정한다.</summary>
@@ -154,6 +160,7 @@ namespace PlayableRecreation
             Scribe_Values.Look(ref playTogetherRange, "playTogetherRange", 30);
             Scribe_Values.Look(ref playTogetherChildren, "playTogetherChildren", true);
             Scribe_Values.Look(ref playTogetherVisitors, "playTogetherVisitors", true);
+            Scribe_Values.Look(ref playTogetherPersonality, "playTogetherPersonality", true);
             Scribe_Values.Look(ref sounds, "sounds", true);
 
             Scribe_Values.Look(ref linkToPawnSkill, "linkToPawnSkill", false);

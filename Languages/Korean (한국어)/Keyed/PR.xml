@@ -20,6 +20,11 @@
   <PR.Header.YouNamed>당신 ({0})</PR.Header.YouNamed>
   <PR.Header.Opponent>상대 ({0})</PR.Header.Opponent>
   <PR.Header.OpponentNamed>{0} ({1})</PR.Header.OpponentNamed>
+  <PR.Together.Talk>주고받는 말</PR.Together.Talk>
+  <PR.Together.CannotCome>{0}은(는) 지금 판 앞으로 올 수 없습니다.</PR.Together.CannotCome>
+  <PR.Together.NeverCame>{0}이(가) 끝내 판 앞에 오지 않았습니다.</PR.Together.NeverCame>
+  <PR.Together.LeftSaved>{0}이(가) 일어났습니다. 판은 가구에 남습니다.</PR.Together.LeftSaved>
+  <PR.Together.LeftLost>{0}이(가) 일어나면서 판도 훩해졌습니다.</PR.Together.LeftLost>
   <PR.Together.Sit>{0}이(가) 앉는다</PR.Together.Sit>
   <PR.Together.Alone>혼자 두기</PR.Together.Alone>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
@@ -139,6 +144,8 @@
   <PR.Settings.Together.Range>        부를 수 있는 거리: {0}칸</PR.Settings.Together.Range>
   <PR.Settings.Together.Children>        어린이도 상대가 됩니다</PR.Settings.Together.Children>
   <PR.Settings.Together.Visitors>        방문객도 상대가 됩니다</PR.Settings.Together.Visitors>
+  <PR.Settings.Together.Personality>        성격이 판에 비칩니다</PR.Settings.Together.Personality>
+  <PR.Settings.Together.Personality.Desc>두는 동안 서로 하는 말이 기록 패널에 뜼니다. 대사를 이 모드가 쓰지 않습니다 — 바닐라가 굴린 말을 옮겼을 뿐입니다.</PR.Settings.Together.Personality.Desc>
   <PR.Settings.Together.NeedsSave>        판 저장이 켜져 있어야 합니다.</PR.Settings.Together.NeedsSave>
   <PR.Settings.LinkSkill>난이도를 정착민의 기술로 자동 결정</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>난이도 선택 창을 건너뜁니다. 게임마다 기준 기술이 다릅니다.</PR.Settings.LinkSkill.Desc>
