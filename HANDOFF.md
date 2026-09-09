@@ -70,7 +70,14 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 
 - 빌드 경고 0 · 오류 0
 - 테스트 284 개 전부 통과 (다트 · 펀칭백 · 룰렛 Core 포함)
-- `Tools/verify.py` — 번역 키 539 짝, 안 쓰는 키 0, Def 참조 성함
+- **몰입 모드 2칸 1단계 들어감** (2026-09-09, 미출시) — 명세는
+  `DESIGN_RealityMode.md`. 상대를 골라 둘이 두고, 머리글에 그 사람 이름이
+  난다. **아직 아무도 붙잡지 않는다** — 붙잡는 것은 2단계다.
+  - 새 파일 `Framework/Together.cs` — 자격 판정. 종족 목록을 안 쓴다
+  - 설정은 전부 `immersionMode` 아래다. **최상위는 늘지 않았다**
+  - 겹상: 기즈모와 이어 두기가 몰입 모드를 우회하던 구멍을 막았다 —
+    1칸만 켜 둔 사람에게도 고쳐진다
+- `Tools/verify.py` — 번역 키 555 짝, 안 쓰는 키 0, Def 참조 성함
   (ModSupport 의 Def · 패치 · 지원 모드 defName 까지 검사한다)
 - `Tools/guistate.py` — GUI 전역 상태를 되돌리지 않는 메서드 0
 - `Tools/package.py` — 통과 (61 파일 · 615 KB, LoadFolders.xml 과 ModSupport 포함)
