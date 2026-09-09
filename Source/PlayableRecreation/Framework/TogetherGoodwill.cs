@@ -75,7 +75,10 @@ namespace PlayableRecreation
             int after = faction.GoodwillWith(Faction.OfPlayer);
             if (after == before) return;
 
-            Announce(opponent, faction, delta != 0 ? delta : change, result, before, after);
+            // **실제로 움직인 방향으로 말한다.** 이번 판의 값(delta)이 아니다 —
+            // 앞 판에서 더 좋게 끝냈다면 좋은 판을 두고도 숫자는 내려가는데,
+            // 그때 "올랐다"고 하면 바로 밑에 붙은 두 숫자와 말이 어긋난다.
+            Announce(opponent, faction, after - before, result, before, after);
         }
 
         /// <summary>

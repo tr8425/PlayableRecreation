@@ -62,7 +62,11 @@ namespace PlayableRecreation
                 Messages.Message("PR.Together.CannotCome".Translate(opponent.LabelShortCap),
                     board, MessageTypeDefOf.RejectInput, false);
 
-                OpenNow(game, board, seated, null, tier, practice, session);
+                // **둘이 두던 판은 못 오는 상대로 열지 않는다.** 이어 두는 판은 상대를
+                // 그대로 들고 있어서 혼자 여는 길이 없다 — 열면 §7.1 이 반 초 만에 다시
+                // 닫고 "못 온다" 다음에 "자리를 떴다" 가 잇따르는 이상한 두 줄이 된다.
+                // 판은 가구 위에 그대로 남으므로 나중에 다시 부르면 그만이다.
+                if (session == null) OpenNow(game, board, seated, null, tier, practice, null);
                 return;
             }
 
@@ -124,24 +128,46 @@ namespace PlayableRecreation
                 entry.tier, entry.practice, entry.session);
         }
 
-        /// <summary>기다림이 길어지거나 한쪽이 못 오게 되면 접는다. Hold 가 자기 틱에서 부른다.</summary>
-        public static void TickWatch(Thing board)
+        /// <summary>
+        /// 기다리다 만 판을 치운다. **<see cref="GameComponent_Recreation"/> 가 1초마다 부른다.**
+        ///
+        /// 전에는 Hold 토일의 마무리 동작이 이 일을 했는데, 바닐라 <c>JobDriver.Cleanup</c> 은
+        /// **그때 실행 중이던 토일 하나의** 마무리만 부른다. 걸어가는 도중에 징집되거나 다른
+        /// 일을 받으면 Hold 는 시작조차 안 했으므로 마무리도 없다 — 둘 다 그렇게 빠지면
+        /// 기다리는 판이 영영 남아 그 두 사람이 계속 "이미 다른 판에 있음" 으로 걸린다.
+        /// 안에서 지우게 두지 않고 밖에서 한 번 훑는 편이 확실하다.
+        /// </summary>
+        public static void Sweep()
         {
-            Pending entry = PendingFor(board);
-            if (entry == null) return;
+            for (int i = pending.Count - 1; i >= 0; i--)
+            {
+                Pending entry = pending[i];
 
-            bool lost = !Alive(entry.seated) || !Alive(entry.opponent)
-                || entry.board == null || !entry.board.Spawned;
+                bool lost = !Alive(entry.seated) || !Alive(entry.opponent)
+                    || entry.board == null || !entry.board.Spawned;
 
-            bool timedOut = Find.TickManager.TicksGame - entry.startedTick > WaitLimitTicks;
-            if (!lost && !timedOut) return;
+                bool timedOut = Find.TickManager.TicksGame - entry.startedTick > WaitLimitTicks;
 
-            pending.Remove(entry);
+                // 둘 다 우리 Job 을 놓았으면 아무도 오지 않는다.
+                bool coming = Coming(entry.seated, entry.board) || Coming(entry.opponent, entry.board);
 
-            Pawn missing = Alive(entry.opponent) ? entry.seated : entry.opponent;
-            if (missing != null)
-                Messages.Message("PR.Together.NeverCame".Translate(missing.LabelShortCap),
-                    board, MessageTypeDefOf.NeutralEvent, false);
+                if (!lost && !timedOut && coming) continue;
+
+                pending.Remove(entry);
+
+                // 못 왔다는 말은 못 온 것일 때만 한다. 플레이어가 직접 다른 일을 시켜
+                // 흩어진 경우는 이미 아는 일이라 알릴 말이 없다.
+                if (!lost && !timedOut) continue;
+
+                Pawn missing = Alive(entry.opponent) ? entry.seated : entry.opponent;
+                if (missing != null)
+                    Messages.Message("PR.Together.NeverCame".Translate(missing.LabelShortCap),
+                        entry.board, MessageTypeDefOf.NeutralEvent, false);
+            }
+
+            // 창이 닫히면 PostClose 가 늘 놓아 주므로 보통은 비어 있다. 가구가 사라진 판만 줍는다.
+            for (int i = live.Count - 1; i >= 0; i--)
+                if (live[i].board == null || !live[i].board.Spawned) live.RemoveAt(i);
         }
 
         // ---------- 창이 열린 뒤 ----------
@@ -284,6 +310,20 @@ namespace PlayableRecreation
         {
             return pawn != null && pawn.Spawned && !pawn.Dead && !pawn.Destroyed
                 && !pawn.Downed && !pawn.InMentalState;
+        }
+
+        /// <summary>
+        /// 이 사람이 아직 그 가구로 오는 중인가. 우리 Job 을 그 가구에 대고 들고 있으면
+        /// 오는 중이다 — 걷는 동안에도, 닿아 서 있는 동안에도 같은 Job 이다.
+        /// </summary>
+        private static bool Coming(Pawn pawn, Thing board)
+        {
+            if (!Alive(pawn) || pawn.CurJob == null) return false;
+
+            JobDef def = pawn.CurJobDef;
+            if (def != PRDefOf.PR_GoToGame && def != PRDefOf.PR_JoinGame) return false;
+
+            return pawn.CurJob.GetTarget(TargetIndex.A).Thing == board;
         }
 
         private static bool Arrived(Pawn pawn, Thing board)

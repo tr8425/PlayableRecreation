@@ -254,8 +254,12 @@ namespace PlayableRecreation
             // 방문이 끝났는지는 판이 하나도 없어도 살펴야 한다 - 손님은 판과 무관하게 떠난다.
             if (Find.TickManager.TicksGame % VisitCheckInterval == 0) ForgetEndedVisits();
 
-            if (sessions.Count == 0) return;
             if (Find.TickManager.TicksGame % CheckInterval != 0) return;
+
+            // 부르다 만 판도 세션과 무관하다 - 아직 아무 세션도 없을 때 생기기 때문이다.
+            TogetherMatch.Sweep();
+
+            if (sessions.Count == 0) return;
 
             for (int i = sessions.Count - 1; i >= 0; i--)
             {

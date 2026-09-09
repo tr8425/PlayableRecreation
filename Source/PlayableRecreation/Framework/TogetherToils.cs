@@ -54,7 +54,6 @@ namespace PlayableRecreation
 
                 if (!pawn.IsHashIntervalTick(CheckInterval)) return;
 
-                TogetherMatch.TickWatch(board);
                 FaceAcross(pawn, board);
 
                 // 판도 없고 기다리는 것도 없다. 서 있을 이유가 사라졌다.
@@ -72,12 +71,9 @@ namespace PlayableRecreation
                 }
             };
 
-            toil.AddFinishAction(delegate
-            {
-                Thing board = driver.job.GetTarget(boardIndex).Thing;
-                if (board != null) TogetherMatch.Cancel(board);
-            });
-
+            // 여기에 마무리 동작을 달아 판을 지우지 않는다. 바닐라는 **그때 실행 중이던
+            // 토일 하나의** 마무리만 부르므로, 걸어가는 도중에 빠지면 이 토일은 시작조차
+            // 안 해 마무리도 없다. 치우는 일은 TogetherMatch.Sweep 이 밖에서 맡는다.
             return toil;
         }
 
@@ -101,7 +97,7 @@ namespace PlayableRecreation
         }
 
         /// <summary>
-        /// 마주 보게 세운다. 맞은편을 모르면 판을 본다 — 혹자 딱 서 있지는 않게 한다.
+        /// 마주 보게 세운다. 맞은편을 모르면 판을 본다 — 허공을 보고 서 있지는 않게 한다.
         /// 토일이 handlingFacing 을 가져갔으므로 바닐라가 방향을 대신 돌려 주지 않는다.
         /// </summary>
         private static void FaceAcross(Pawn pawn, Thing board)
