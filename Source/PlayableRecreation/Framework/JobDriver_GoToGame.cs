@@ -27,6 +27,19 @@ namespace PlayableRecreation
             return pawn.Reserve(job.targetA, job, Together.SeatCount(Board), 0, null, errorOnFailed);
         }
 
+        /// <summary>
+        /// 걷는 동안과 두는 동안이 같은 Job 이라 기본 문구 하나로는 틀린 말이 된다 —
+        /// 판 앞에 앉아 두고 있는데 "하러 가는 중" 이라고 뜨는 것을 여기서 바꿋다.
+        /// </summary>
+        public override string GetReport()
+        {
+            Thing board = Board;
+            if (!Together.Enabled || !TogetherToils.Arrived(pawn, board)) return base.GetReport();
+
+            string label = TogetherToils.GameLabel(board);
+            return label != null ? (string)"PR.Job.Playing".Translate(label) : base.GetReport();
+        }
+
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);

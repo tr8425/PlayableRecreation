@@ -155,6 +155,41 @@ ferny 지적에서 파생된 구상. 아직 아무것도 만들지 않았고, �
   이륙해 다른 맵에 내리면** 좌표가 통째로 바뀌므로 남아 있던 판이 전부 "누가 가구를
   옮겼다" 로 무효화될 것 같다. 사실이라면 설명이 틀린 무효화다. 확인이 필요하다.
 
+### 2026-09-10 · Robo · 창작마당 댓글 — `신규`
+> "@ferny The AI difficulty should also scale with the difficulty of the colonist
+> too. Maybe on intelligence skill level."
+
+- ferny 쓰레드에 달린 제안이다. **이미 거의 그대로 있는 기능이다** —
+  `linkToPawnSkill` 이 켜져 있으면 `GameEntry.TierForPawn` 이 게임별
+  `linkedSkill` 과 열정으로 난이도를 뽑는다. 체스·포커·우르·별 보기는
+  Intellectual, 편자·후프스톤·당구는 Shooting 이다. 기본값은 꺼짐.
+- 몰입 모드 2칸 1단계가 그걸 한 걸읍 더 밀었다 — 재는 대상이 내가 아니라
+  **맞은편에 앉은 사람**이다 (명세 D2 · `StartNewWith` 의 `measured`).
+- 다만 정해 주는 값이 아니라 **제안값**이라는 것은 답글에 적어 둔다.
+  전적이 난이도 칸으로 쌀이므로 플레이어가 칸을 못 고르게 되면 장부가 꾸려진다.
+- 답글 문안 (게시하면 `답변완료` 로 바꾼다):
+  > @Robo that's the direction, yeah. the board and card games read intellectual
+  > and the throwing ones read shooting, and the tier now comes off whoever you
+  > sat down across from rather than off you. it stays a suggestion you can
+  > overrule though, since the records are kept per tier.
+
+### 2026-09-10 · ferny — 구현 진행 상황 공유 — `신규`
+
+09-09 지적(아래 항목)에 달 두 번째 답글. 그때는 "목록에 올리겠다" 였고,
+지금은 네 단계가 전부 들어가 인게임 확인 중이다 (미출시).
+
+- **지키지 못할 말은 적지 않는다.** 영상으로 직접 확인한 것만 쓴다 —
+  상대 고르기, 둘이 걸어가 판이 끝날 때까지 서 있기, 머리글의 이름,
+  상대 실력에서 나오는 제안 난이도.
+- **대화 띄는 아직 적지 않는다.** 코드는 들어갔으나 영상 두 판(게임 시간으로
+  1시간 남짓) 동안 한 번도 뜼지 않았다 — 바닐라 사교 빈도를 보면 이상한
+  수치는 아니지만, 돌아가는 것을 보기 전에는 약속할 수 없다 (명세 §16-1, D6).
+- 답글 문안 (게시하면 `답변완료` 로 바꾼다):
+  > @ferny built it. you pick a colonist, the two of them walk over and actually
+  > stand at the board until the game ends, and the suggested tier comes off your
+  > opponent's skill instead of a menu. shaking the bugs out now, so it isn't up
+  > yet — but it's the version you asked for.
+
 ### 2026-09-09 · LifeIsAbxtch · 창작마당 댓글 — `신규`
 > "Rostra you should listen to Ferny he's the professional"
 - 09-03 에 자동 검사로 숨겨진 댓글을 남긴 그 계정이다 (아래 `관찰중` 항목). 프로필은

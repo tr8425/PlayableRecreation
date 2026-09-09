@@ -25,6 +25,8 @@
   <PR.Together.NeverCame>{0} never made it to the board.</PR.Together.NeverCame>
   <PR.Together.LeftSaved>{0} got up. The game stays on the furniture.</PR.Together.LeftSaved>
   <PR.Together.LeftLost>{0} got up, and the game went with them.</PR.Together.LeftLost>
+  <PR.Job.Playing>playing {0}.</PR.Job.Playing>
+  <PR.Job.PlayingWith>playing {0} with {1}.</PR.Job.PlayingWith>
   <PR.Together.BoardFlip>{0} sent the pieces flying rather than lose to {1}.</PR.Together.BoardFlip>
   <PR.Together.Goodwill.Up>{0} enjoyed the game. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Up>
   <PR.Together.Goodwill.Down>{0} was taken apart at the board and did not enjoy it. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Down>

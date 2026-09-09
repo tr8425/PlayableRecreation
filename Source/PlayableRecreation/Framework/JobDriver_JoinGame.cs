@@ -32,6 +32,19 @@ namespace PlayableRecreation
             return pawn.Reserve(job.targetB, job, 1, 0, null, errorOnFailed);
         }
 
+        /// <summary>걷는 동안과 두는 동안이 같은 Job 이라 닿은 뒤에는 문구를 바꿔 준다.</summary>
+        public override string GetReport()
+        {
+            Thing board = Board;
+            if (!TogetherToils.Arrived(pawn, board)) return base.GetReport();
+
+            string label = TogetherToils.GameLabel(board);
+            Pawn partner = Partner;
+            if (label == null || partner == null) return base.GetReport();
+
+            return "PR.Job.PlayingWith".Translate(label, partner.LabelShort);
+        }
+
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);

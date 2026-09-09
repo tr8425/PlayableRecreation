@@ -82,6 +82,25 @@ namespace PlayableRecreation
         }
 
         /// <summary>
+        /// 이미 판 앞에 닿았는가. Job 은 걷기와 붙잡히기를 한 묶음으로 갖고 있어
+        /// 보고문구가 하나라, 앉아 두는 동안에도 "가는 중" 이라고 뜨는 것을 막는다.
+        /// </summary>
+        public static bool Arrived(Pawn pawn, Thing board)
+        {
+            return pawn != null && board != null && board.Spawned && pawn.Spawned
+                && pawn.Map == board.Map && pawn.Position.AdjacentTo8WayOrInside(board);
+        }
+
+        /// <summary>이 가구가 무슨 게임인가. 모르면 null.</summary>
+        public static string GameLabel(Thing board)
+        {
+            if (board == null) return null;
+
+            CompMiniGame comp = board.TryGetComp<CompMiniGame>();
+            return comp != null && comp.Game != null ? comp.Game.LabelCap : null;
+        }
+
+        /// <summary>
         /// 마주 보게 세운다. 맞은편을 모르면 판을 본다 — 혹자 딱 서 있지는 않게 한다.
         /// 토일이 handlingFacing 을 가져갔으므로 바닐라가 방향을 대신 돌려 주지 않는다.
         /// </summary>
