@@ -42,6 +42,8 @@ AI 는 손대지 않는다. 이 기능이 하는 일은 기존 AI 에게 **이�
 - **「대전」·「대결」 계열은 어차피 피했을 이름이다** — 창작마당에서 이미 두 사람이
   멀티플레이로 오해했다. 하위 항목 이름은 그래서 기능 설명으로 둔다:
   *"상대를 골라 둘이 함께 둔다"*.
+- **세부도 전부 그 아래로 간다.** 범위·성격·우호도처럼 취향이 갈리는 값은 코드가 정하지
+  않고 설정으로 올린다(§12). 2칸을 안 켠 사람의 설정 창은 지금과 한 줄도 다르지 않다.
 
 ## 1. 왜
 
@@ -388,7 +390,11 @@ Hold  (ToilCompleteMode.Never)
 > - **§9 의 "여가는 둘 다"가 그대로는 성립하지 않는다.** 줄 수 있는 쪽에만 간다.
 
 거리: 도달 가능(`CanReach`) 검사는 필수. 거리 상한도 둔다 — 없으면 맵 반대편 사람을
-두 시간 기다리는 것이 게임이 된다.
+두 시간 기다리는 것이 게임이 된다. **상한값은 설정이다**(`playTogetherRange`, 기본 30칸) —
+맵 크기와 정착지 모양에 따라 적정값이 다르다.
+
+**어린이·방문객을 받을지도 설정이다**(`playTogetherChildren` · `playTogetherVisitors`,
+둘 다 기본 켬). 위 표는 **켜져 있을 때** 어떻게 되는지를 적은 것이다.
 
 ### 10.2 성격이 판에 비치는 방식
 
@@ -430,6 +436,10 @@ Hold  (ToilCompleteMode.Never)
 성격 수만큼의 규칙이 생기고** 전적이 무슨 뜻인지 알 수 없게 된다. 성격은 **말과 끝내는
 방식**에만 비친다.
 
+**전부 끌 수 있다**(`playTogetherPersonality`). 그 아래 두 줄이 따로 있다 —
+`playTogetherBoardFlip` 과 `playTogetherKindUndo`(§12). 특히 판 엎기는 **판이 남의 성격
+때문에 끝나는 것**이라, 사람에 따라 이야기가 아니라 짜증이다. 끌 수 있어야 한다.
+
 **단계**: 표의 "우리가 할 일 = 없음" 칸은 2단계(붙잡기)가 끝나는 순간 그냥 따라온다.
 무르기와 `Losing` 은 4단계 다듬기로 둔다.
 
@@ -469,6 +479,19 @@ Hold  (ToilCompleteMode.Never)
 난수는 크기에만 얹고 **부호에는 얹지 않는다.** "잘 뒀는데 사이가 나빠졌다"는 배울 것이
 없는 결과다.
 
+### 11.3 설정으로 넘기는 것
+
+우호도는 사람마다 셈이 다른 값이라 크기를 우리가 못 박지 않는다(§12).
+
+| 설정 | 기본 | 하는 일 |
+|---|---|---|
+| `playTogetherGoodwill` | 켬 | 이 절 전체 |
+| `playTogetherGoodwillScale` | 100 % | 표의 모든 크기에 곱한다. **0 % 면 사실상 끔** |
+| `playTogetherGoodwillDrop` | 켬 | 끄면 마이너스가 0 이 된다 — 오르기만 한다 |
+
+11.2 의 파밍 방지 둘(난이도 곱, 방문 1회당 한 번)은 **설정으로 내리지 않는다.**
+끌 수 있게 하면 그건 취향이 아니라 그냥 우호도 자판기다.
+
 방문객이 체류 시간이 끝나 먼저 일어서는 경우는 §8 과 같은 처리에 문구만 다르게 한다.
 그때는 우호도를 건드리지 않는다 — 판을 끝낸 것이 아니기 때문이다.
 
@@ -478,44 +501,123 @@ Hold  (ToilCompleteMode.Never)
 
 **새 최상위 설정은 만들지 않는다.** 이미 있는 몰입 모드 아래로 들어간다(§0).
 
+### 12.1 배치
+
+무효화 블록이 이미 쓰고 있는 문법을 그대로 따른다 — 부모 체크박스, 들여쓴 하위,
+조건부 슬라이더. **부모가 꺼져 있으면 하위는 아예 그려지지 않는다.**
+
 ```
-☑ 몰입 모드 (정착민이 가구까지 걸어간 뒤 시작)      ← 이미 있다. 건드리지 않는다
-    ☐ 상대를 골라 둘이 함께 둔다                    ← 새 항목. 부모가 꺼지면 회색
+[게임 진행]
+  ☑ 판을 두는 동안 게임을 멈춘다                        ← 이미 있다
+  ☑ 몰입 모드 (정착민이 가구까지 걸어간 뒤 시작)         ← 이미 있다. 뜻 그대로
+      ☐ 상대를 골라 둘이 함께 둔다                       ← 새 부모
+          부를 수 있는 거리          [====----]  30 칸
+          ☑ 어린이도 상대가 된다
+          ☑ 방문객도 상대가 된다
+          ☑ 성격이 판에 비친다
+              ☑ 화가 나면 판을 엎을 수 있다
+              ☑ 다정한 상대는 무르기를 한 번 더 준다
+          ☑ 방문객과 두면 팩션 우호도가 움직인다
+              우호도 크기            [=====---]  100 %
+              ☑ 나쁘게 끝나면 내려가기도 한다
+          ☐ 판의 일을 폰 기록에 남긴다
 ```
 
-| 항목 | 기본 | 비고 |
-|---|---|---|
-| `immersionMode` | 꺼짐 | **이미 있다.** 뜻도 저장 키도 그대로 |
-| `immersionPlayTogether` | 꺼짐 | 부모가 켜져 있을 때만. 켜면 `pauseWhilePlaying` 과 상호 배타 (D1) |
-| `invalidateOnOpponentGone` | 켬 | 무효화 목록에 한 줄 |
-| `realityGoodwill` | 켬 | 3단계 |
+### 12.2 항목
 
-새 설정은 셋을 넘기지 않는다. 나머지는 전부 코드가 정한다.
+| 항목 | 기본 | 부모 | 왜 설정인가 |
+|---|---|---|---|
+| `immersionMode` | 꺼짐 | — | **이미 있다.** 뜻도 저장 키도 그대로 |
+| `playTogether` | 꺼짐 | `immersionMode` | 2칸 자체. 켜면 `pauseWhilePlaying` 과 상호 배타 (D1), `saveSessions` 가 켜져 있어야 한다 |
+| `playTogetherRange` | 30 칸 | `playTogether` | 맵 크기와 정착지 모양에 따라 적정값이 다르다. 없으면 맵 반대편 사람을 두 시간 기다린다 (§10.1) |
+| `playTogetherChildren` | 켬 | 〃 | 아이를 판에 앉히는 것에 대한 취향이 갈린다 (§10.1) |
+| `playTogetherVisitors` | 켬 | 〃 | 끄면 §11 이 통째로 잠긴다 |
+| `playTogetherPersonality` | 켬 | 〃 | §10.2. 끄면 성격을 안 본다 |
+| `playTogetherBoardFlip` | 켬 | `…Personality` | **판이 남의 성격 때문에 끝난다.** 사람에 따라 이건 이야기가 아니라 짜증이다 |
+| `playTogetherKindUndo` | 켬 | 〃 | 무르기 한 칸은 난이도에 직접 닿는다 |
+| `playTogetherGoodwill` | 켬 | `playTogether` | §11 |
+| `playTogetherGoodwillScale` | 100 % | `…Goodwill` | 우호도는 전략 자원이다. 0~200 % 로 두고 **0 이면 사실상 끔** |
+| `playTogetherGoodwillDrop` | 켬 | 〃 | 마이너스를 아예 안 보고 싶은 사람이 있다 |
+| `playTogetherNarration` | **꺼짐** | `playTogether` | 18.1. **기본이 꺼짐인 데는 이유가 있다** — 아래 |
+| `invalidateOnOpponentGone` | 켬 | `invalidateSessions` | §8. **새 자리가 아니다** — 이미 있는 무효화 목록의 들여쓴 한 줄로 들어간다 |
 
-**`saveSessions` 와의 관계를 정한다.** D4 의 "밥 먹고 와서 이어 둔다"는 세션이 남아
-있어야만 성립한다. 그런데 `saveSessions` 는 끌 수 있고, 끄면 창을 닫을 때 세션이 지워진다.
-→ **`realityMode` 를 켜려면 `saveSessions` 가 켜져 있어야 한다.** 꺼져 있으면 리얼리티
-모드 항목을 회색으로 두고 이유를 한 줄로 말한다. 몰래 켜 주지 않는다 — 플레이어가 끈
-설정을 모드가 되돌리면 그게 더 나쁘다.
+관전·응원(18.3)은 그때 `playTogether` 아래 하위 두 줄로 붙는다 — 켜기 하나와 인원 상한
+슬라이더 하나. 지금 자리만 비워 둔다.
+
+### 12.3 `playTogetherNarration` 만 기본이 꺼짐인 이유
+
+나머지는 전부 취향이지만 이건 **안전 문제**다. 18.1 에서 확인했듯 우리
+`InteractionDef` 로 남긴 기록은 모드를 빼도 세이브에 남고, 바닐라 표시 코드가
+`intDef` 를 null 검사 없이 쓴다. 위험이 크진 않지만(기록은 150개로 계속 밀려난다)
+**"넣고 빼도 안전하다"는 약속을 우리가 먼저 깨면서 기본값으로 켤 수는 없다.**
+
+켜는 사람은 그 대가로 다른 모드가 판을 읽을 수 있게 된다. **그건 선택지이지
+기본값이 아니다.**
+
+### 12.4 "새 설정은 셋을 넘기지 않는다" 를 여기서 접는다
+
+이 문서는 원래 그렇게 적혀 있었다. 뒤집는다.
+
+그 규칙은 **기능이 스위치 하나일 때** 옳았다. 지금 이 기능은 누구를 앉힐지, 얼마나
+멀리서 부를지, 성격이 판을 끝내도 되는지, 우호도가 내려가도 되는지 — **취향이 갈리는
+지점을 여럿 갖고 있다.** 그런 것을 코드가 정하면 설계가 깔끔한 게 아니라 그냥 남의
+취향을 대신 정한 것이 된다.
+
+대신 규율을 다르게 건다.
+
+1. **최상위는 늘지 않는다.** 전부 `immersionMode` → `playTogether` 아래다. 2칸을 안 켠
+   사람의 설정 창은 **지금과 한 줄도 다르지 않다.**
+2. **기본값만 두면 설계한 그대로다.** 아무것도 안 만져도 §0~§11 이 말한 그 기능이다.
+3. **끄는 쪽이 항상 안전하다.** 어떤 항목을 꺼도 기능이 부서지지 않고 더 조용해질 뿐이다.
+   유일한 예외인 `playTogetherNarration` 은 그래서 **켜는 쪽**이 선택이다.
 
 ## 13. 번역 키 (EN·KO 양쪽)
 
-대략 12~16 짝. `verify.py` 가 짝과 미사용을 잡는다.
+`verify.py` 가 짝과 미사용을 잡는다. 접두사는 `PR.Together.*` 로 통일한다 —
+"reality" 는 이제 쓰지 않는 이름이다(§0).
+
+**판 안에서 (10짝)**
 
 ```
-PR.Reality.PickOpponent      상대 고르기
-PR.Reality.Waiting           X 를 기다리는 중
-PR.Reality.NoOpponent        올 수 있는 사람이 없다
-PR.Reality.CannotPlay        X 는 지금 앉을 수 없다 (이유)
-PR.Reality.LeftForNeed       X 가 일어섰다 (배고픔·피로)
-PR.Reality.Header            맞은편 이름표
-PR.Reality.Talk              기록 패널의 사교 띠 제목
-PR.Invalidate.OpponentGone   무효화 문구
-Thought_PR_OpponentGone      생각 이름·설명
-Thought_PR_PlayedTogether    〃
+PR.Together.PickOpponent      상대 고르기
+PR.Together.Waiting           X 를 기다리는 중
+PR.Together.NoOpponent        올 수 있는 사람이 없다
+PR.Together.CannotPlay        X 는 지금 앉을 수 없다 (이유)
+PR.Together.LeftForNeed       X 가 일어섰다 (배고픔·피로)
+PR.Together.Header            맞은편 이름표
+PR.Together.Talk              기록 패널의 사교 띠 제목
+PR.Invalidation.OpponentGone.Label   무효화 목록의 한 줄 (기존 형식에 맞춘다)
+Thought_PR_OpponentGone       생각 이름·설명
+Thought_PR_PlayedTogether     〃
 ```
+
+**설정 창에서 (12짝 + 설명 4짝)**
+
+```
+PR.Settings.Together                라벨 + .Desc
+PR.Settings.Together.Range          "부를 수 있는 거리: {0} 칸"   ← 값 하나 들어간다
+PR.Settings.Together.Children       라벨
+PR.Settings.Together.Visitors       라벨
+PR.Settings.Together.Personality    라벨 + .Desc
+PR.Settings.Together.BoardFlip      라벨 + .Desc
+PR.Settings.Together.KindUndo       라벨
+PR.Settings.Together.Goodwill       라벨
+PR.Settings.Together.GoodwillScale  "우호도 크기: {0} %"          ← 값 하나
+PR.Settings.Together.GoodwillDrop   라벨
+PR.Settings.Together.Narration      라벨 + .Desc                  ← 설명이 특히 중요하다
+PR.Settings.Together.NeedsSave      "세션 저장이 켜져 있어야 합니다"  ← 회색일 때의 이유
+```
+
+**설명(`.Desc`)을 다는 기준**: 켜고 끄는 결과가 이름만으로 안 보이는 것에만 단다.
+`BoardFlip` 과 `Narration` 은 반드시 필요하다 — 하나는 판이 남의 성격으로 끝난다는
+뜻이고, 하나는 세이브에 자국이 남는다는 뜻이다.
 
 ## 14. 제약 점검 (`HANDOFF.md` §2)
+
+설정이 늘어난 것은 제약과 무관하다 — 전부 `PRSettings` 의 필드와
+`Scribe_Values.Look` 이고, 새 Def 도 Harmony 도 없다. 다만 저장 키가 늘어나므로
+**기존 키의 이름과 뜻은 하나도 건드리지 않는다**(특히 `immersionMode`).
+
 
 | 제약 | 이 명세는 |
 |---|---|
@@ -534,10 +636,10 @@ Thought_PR_PlayedTogether    〃
 
 | 단계 | 내용 | 이게 끝나면 |
 |---|---|---|
-| **1** | 상대 고르기 + 머리글 이름 + 제안 난이도. **붙잡지 않는다**<br>· 세 진입점을 한 문으로 모으기 (§4)<br>· 상대 폰 예약 + 실패 시 양쪽 되돌리기 (§6.1) | ferny 의 지적이 해결된다. 굶주림 문제가 아예 없다 |
-| **2** | 두 폰 붙잡기 — 예약, `Hold` 토일, 욕구 탈출구, 창·폰 결합 | "실제로 앉아 있다"가 된다 |
-| **3** | `OpponentGone` + 생각. 방문객 우호도 | 이야기가 닫힌다 |
-| **4** | 관계 반영, 마주 보게 세우기, 성격 두 조각(다정다감 무르기 · `Losing`) 같은 다듬기 | 성격의 나머지는 2단계에 이미 따라와 있다 (§10.2) |
+| **1** | 상대 고르기 + 머리글 이름 + 제안 난이도. **붙잡지 않는다**<br>· 세 진입점을 한 문으로 모으기 (§4)<br>· 상대 폰 예약 + 실패 시 양쪽 되돌리기 (§6.1)<br>· 설정: `playTogether` · `…Range` · `…Children` · `…Visitors` | ferny 의 지적이 해결된다. 굶주림 문제가 아예 없다 |
+| **2** | 두 폰 붙잡기 — 예약, `Hold` 토일, 욕구 탈출구, 창·폰 결합<br>· 설정: `…Personality` (성격은 여기서 저절로 따라온다) | "실제로 앉아 있다"가 된다 |
+| **3** | `OpponentGone` + 생각. 방문객 우호도<br>· 설정: `invalidateOnOpponentGone` · `…Goodwill` 3줄 | 이야기가 닫힌다 |
+| **4** | 관계 반영, 마주 보게 세우기, 성격 두 조각(다정다감 무르기 · `Losing`) 같은 다듬기<br>· 설정: `…BoardFlip` · `…KindUndo` | 성격의 나머지는 2단계에 이미 따라와 있다 (§10.2) |
 
 **1단계만으로도 낼 수 있다.** 그게 이 순서의 요점이다 — 2단계가 늦어져도 1단계가
 사용자에게 닿는다. 반대로 1단계 없이 2단계는 뜻이 없다.
@@ -658,6 +760,9 @@ D6 을 "대화는 게임 상태를 모른다"로 읽으면 이 절과 부딪힌�
 > 낼 거면 정리 전략을 같이 정해야 한다: 판이 끝날 때 우리가 남긴 항목을 지우거나,
 > 서술을 우리 창에만 남기고 `PlayLog` 를 아예 안 건드리거나.
 > **이건 아직 열린 질문이다. 앞서 닫힌 것처럼 쓴 것은 틀렸다.**
+
+**설정으로 두고, 기본은 꺼 둔다**(`playTogetherNarration`, §12.3). 남는 자국이
+세이브에 걸리는 유일한 항목이라, 켜는 쪽을 선택으로 만든다.
 
 **부수 효과 하나.** 내보내기를 `TryInteractWith` 로 하면 그 결과가 바닐라
 `PlayLogEntry_Interaction` 이므로, **§7.2 의 읽는 코드가 우리 사건도 그냥 집는다.**
