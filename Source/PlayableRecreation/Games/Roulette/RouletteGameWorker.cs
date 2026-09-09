@@ -572,6 +572,7 @@ namespace Roulette
             }
 
             Listing_Standard list = new Listing_Standard();
+            list.maxOneColumn = true;
             list.Begin(new Rect(area.x + area.width * 0.12f, area.y + 24f, area.width * 0.76f, area.height - 24f));
 
             list.Label("RLT.Tut.Pay.Straight".Translate());

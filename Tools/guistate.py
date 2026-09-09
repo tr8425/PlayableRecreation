@@ -7,6 +7,17 @@ Text.Anchor / Text.Font / GUI.color 는 창 하나가 아니라 그 프레임 �
 
 메서드 단위로 본다. 바꾸는 대입이 하나라도 있는데 기본값으로 되돌리는 대입이
 하나도 없으면 알린다. 되돌리는 쪽이 있으면 통과 - 분기마다 세지는 않는다.
+
+둘째 검사: Listing_Standard 를 만들면서 maxOneColumn 을 안 켜는 자리.
+
+바닐라 Listing.GetRect 는 그리는 줄마다 NewColumnIfNeeded 를 부르고, 내용이
+listingRect.height 를 넘으면 curY 를 0 으로 되돌리면서 curX 를 한 칸 너비만큼
+오른쪽으로 밀어 나머지를 화면 밖으로 내보낸다. 예외도 로그도 없다 - 그냥 사라진다.
+
+더 나쁜 것은 CurHeight 가 curY 라서 **마지막 칸의 높이만** 답한다는 점이다. 그 값을
+스크롤 높이로 삼아 다음 프레임에 다시 쓰면 더 일찍 넘치고, 몇 프레임이면 창이
+통째로 비어 버린다 - 자기강화 고장이다. 모드 설정 창이 실제로 이걸로 무너졌다
+(2026-09-10). 두 칸으로 나누고 싶은 창은 여기 없으므로 전부 못 박는다.
 """
 
 import io
@@ -67,6 +78,31 @@ def methods(text):
     return found
 
 
+LISTING = re.compile(r'^[ \t]*(?:var|Listing_Standard)\s+(\w+)\s*=\s*new\s+Listing_Standard\s*\(')
+
+
+def listing_problems(text, shown):
+    """Listing_Standard 를 만들고 maxOneColumn 을 안 켜는 자리를 찾는다."""
+    found = []
+    lines = text.split('\n')
+
+    for i, line in enumerate(lines):
+        match = LISTING.match(line)
+        if not match:
+            continue
+
+        # 만든 직후 몇 줄 안에 켜야 한다. Begin 뒤에 켜면 이미 늦다.
+        name = match.group(1)
+        window = '\n'.join(lines[i:i + 12])
+        if re.search(re.escape(name) + r'\.maxOneColumn\s*=\s*true', window):
+            continue
+
+        found.append('%s:%d  %s does not set maxOneColumn '
+                     '(overflow walks off the screen with no error)' % (shown, i + 1, name))
+
+    return found
+
+
 def main():
     problems = []
 
@@ -78,6 +114,8 @@ def main():
             path = os.path.join(base, name)
             text = io.open(path, encoding='utf-8').read()
             shown = os.path.relpath(path, ROOT).replace('\\', '/')
+
+            problems.extend(listing_problems(text, shown))
 
             for method, line, body in methods(text):
                 for what, restore in WATCHED:
@@ -98,7 +136,7 @@ def main():
             print('  - ' + problem)
         return 1
 
-    print('OK - every method that changes GUI state puts it back')
+    print('OK - GUI state restored, every Listing_Standard pinned to one column')
     return 0
 
 

@@ -718,6 +718,7 @@ namespace Slots
             }
 
             Listing_Standard list = new Listing_Standard();
+            list.maxOneColumn = true;
             list.Begin(new Rect(area.x + area.width * 0.16f, area.y + 24f, area.width * 0.68f, area.height - 24f));
 
             // 이름을 def 에서 가져오면 번역도 아이콘도 저절로 맞는다.

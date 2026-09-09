@@ -413,6 +413,7 @@ namespace Punching
         private void DrawFigureScore(Rect area)
         {
             Listing_Standard list = new Listing_Standard();
+            list.maxOneColumn = true;
             list.Begin(new Rect(area.x + area.width * 0.16f, area.y + 24f, area.width * 0.68f, area.height - 24f));
 
             list.Label("PBG.Tut.Score.Judge".Translate(PunchTrack.PerfectScore, PunchTrack.GoodScore));
