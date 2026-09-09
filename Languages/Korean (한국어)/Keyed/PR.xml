@@ -19,6 +19,17 @@
   <PR.Header.You>당신</PR.Header.You>
   <PR.Header.YouNamed>당신 ({0})</PR.Header.YouNamed>
   <PR.Header.Opponent>상대 ({0})</PR.Header.Opponent>
+  <PR.Header.OpponentNamed>{0} ({1})</PR.Header.OpponentNamed>
+  <PR.Together.Sit>{0}이(가) 앉는다</PR.Together.Sit>
+  <PR.Together.Alone>혼자 두기</PR.Together.Alone>
+  <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
+  <PR.Together.Why.TooYoung>너무 어림</PR.Together.Why.TooYoung>
+  <PR.Together.Why.ChildrenOff>어린이가 꺼져 있음</PR.Together.Why.ChildrenOff>
+  <PR.Together.Why.VisitorsOff>방문객이 꺼져 있음</PR.Together.Why.VisitorsOff>
+  <PR.Together.Why.Incapable>판을 다룰 수 없음</PR.Together.Why.Incapable>
+  <PR.Together.Why.TooFar>너무 멀리 있음</PR.Together.Why.TooFar>
+  <PR.Together.Why.Busy>지금은 어려움</PR.Together.Why.Busy>
+
   <PR.Log.Title>진행</PR.Log.Title>
   <PR.Side.You>당신</PR.Side.You>
   <PR.Side.Opponent>상대</PR.Side.Opponent>
@@ -123,6 +134,12 @@
   <PR.Settings.Pause.Desc>끄면 하는 동안 정착지 시간이 흐릅니다. 위협이 나타나면 창이 저절로 닫힙니다.</PR.Settings.Pause.Desc>
   <PR.Settings.Immersion>몰입 모드 (정착민이 가구까지 걸어간 뒤 시작)</PR.Settings.Immersion>
   <PR.Settings.Immersion.Desc>선택한 정착민이 가구 앞에 선 뒤 창이 열립니다.</PR.Settings.Immersion.Desc>
+  <PR.Settings.Together>    상대를 골라 둘이 함께 두기</PR.Settings.Together>
+  <PR.Settings.Together.Desc>정착지의 누군가가 맞은편에 앉습니다. 판 위에 난이도 대신 그 사람의 이름이 적힙니다.</PR.Settings.Together.Desc>
+  <PR.Settings.Together.Range>        부를 수 있는 거리: {0}칸</PR.Settings.Together.Range>
+  <PR.Settings.Together.Children>        어린이도 상대가 됩니다</PR.Settings.Together.Children>
+  <PR.Settings.Together.Visitors>        방문객도 상대가 됩니다</PR.Settings.Together.Visitors>
+  <PR.Settings.Together.NeedsSave>        판 저장이 켜져 있어야 합니다.</PR.Settings.Together.NeedsSave>
   <PR.Settings.LinkSkill>난이도를 정착민의 기술로 자동 결정</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>난이도 선택 창을 건너뜁니다. 게임마다 기준 기술이 다릅니다.</PR.Settings.LinkSkill.Desc>
   <PR.Settings.Sounds>효과음</PR.Settings.Sounds>

@@ -82,6 +82,10 @@ namespace PlayableRecreation
                 "PR.Settings.Pause.Desc".Translate());
             list.CheckboxLabeled("PR.Settings.Immersion".Translate(), ref Settings.immersionMode,
                 "PR.Settings.Immersion.Desc".Translate());
+
+            // 몰입 모드의 두 번째 칸. 부모가 꺼져 있으면 그리지도 않는다 -
+            // 무효화 블록이 쓰는 것과 같은 문법이다.
+            if (Settings.immersionMode) DoTogetherSection(list);
             list.CheckboxLabeled("PR.Settings.LinkSkill".Translate(), ref Settings.linkToPawnSkill,
                 "PR.Settings.LinkSkill.Desc".Translate());
             list.CheckboxLabeled("PR.Settings.Sounds".Translate(), ref Settings.sounds);
@@ -91,6 +95,31 @@ namespace PlayableRecreation
 
             if (list.ButtonText("PR.Btn.Records".Translate()))
                 Find.WindowStack.Add(new Dialog_Leaderboard(null));
+        }
+
+        /// <summary>
+        /// 몰입 모드 2칸. 취향이 갈리는 값만 올린다 - 끄는 쪽이 언제나 안전하고,
+        /// 기본값만 두면 설계한 그대로다.
+        /// </summary>
+        private void DoTogetherSection(Listing_Standard list)
+        {
+            list.CheckboxLabeled("PR.Settings.Together".Translate(), ref Settings.playTogether,
+                "PR.Settings.Together.Desc".Translate());
+
+            if (!Settings.playTogether) return;
+
+            // 판이 가구에 남지 않으면 "밥 먹고 와서 이어 둔다" 가 성립하지 않는다.
+            if (!Settings.saveSessions)
+            {
+                Note(list, "PR.Settings.Together.NeedsSave".Translate());
+                return;
+            }
+
+            list.Label("PR.Settings.Together.Range".Translate(Settings.playTogetherRange));
+            Settings.playTogetherRange = Mathf.RoundToInt(list.Slider(Settings.playTogetherRange, 5f, 80f));
+
+            list.CheckboxLabeled("PR.Settings.Together.Children".Translate(), ref Settings.playTogetherChildren);
+            list.CheckboxLabeled("PR.Settings.Together.Visitors".Translate(), ref Settings.playTogetherVisitors);
         }
 
         private void DoMasterySection(Listing_Standard list)

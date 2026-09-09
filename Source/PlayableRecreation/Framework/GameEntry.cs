@@ -9,10 +9,18 @@ namespace PlayableRecreation
     /// <summary>우클릭·기즈모·Job 이 모두 거쳐가는 단일 진입점.</summary>
     public static class GameEntry
     {
-        /// <summary>몰입 모드면 폰을 가구까지 보낸 뒤 열고, 아니면 즉시 연다.</summary>
+        /// <summary>
+        /// 모든 진입이 지나가는 문. 우클릭·기즈모·재개가 전부 여기로 모인다.
+        ///
+        /// 폰이 없는 진입(가구 기즈모)이 여기서 걸린다. 예전에는 그대로 창을 열어서
+        /// 몰입 모드를 켜 둬도 아무도 걷지 않았다 — 이제 앉을 사람부터 고른다.
+        /// </summary>
         public static void Begin(MiniGameDef game, Thing board, Pawn pawn)
         {
             if (game == null || board == null) return;
+
+            // 앉을 사람이 없다. 몰입 모드가 원하는 그림이 아니므로 먼저 사람을 고른다.
+            if (pawn == null && PRMod.Settings.immersionMode && AskWhoSits(game, board)) return;
 
             if (pawn != null && pawn.jobs != null && PRMod.Settings.immersionMode)
             {
@@ -22,6 +30,35 @@ namespace PlayableRecreation
             }
 
             OpenWindow(game, board, pawn);
+        }
+
+        /// <summary>
+        /// 가구만 클릭했을 때 앉을 사람을 고른다. 고르면 걸어가는 것까지 다시 Begin 이 맡는다.
+        /// 앉힐 사람이 아무도 없으면 false 를 주고 예전처럼 그냥 연다 — 막지는 않는다.
+        /// </summary>
+        private static bool AskWhoSits(MiniGameDef game, Thing board)
+        {
+            if (board.Map == null) return false;
+
+            List<Pawn> pawns = board.Map.mapPawns.FreeColonistsSpawned;
+            List<FloatMenuOption> options = new List<FloatMenuOption>();
+
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                Pawn candidate = pawns[i];
+                if (candidate.Downed || candidate.InMentalState || candidate.jobs == null) continue;
+                if (!candidate.CanReach(board, PathEndMode.Touch, Danger.Some)) continue;
+
+                Pawn bound = candidate;
+                options.Add(new FloatMenuOption(
+                    "PR.Together.Sit".Translate(bound.LabelShortCap),
+                    delegate { Begin(game, board, bound); }));
+            }
+
+            if (options.Count == 0) return false;
+
+            Find.WindowStack.Add(new FloatMenu(options));
+            return true;
         }
 
         /// <summary>가구에 두던 판이 남아 있으면 이어 두고, 아니면 새 판을 시작한다.</summary>
@@ -36,26 +73,84 @@ namespace PlayableRecreation
         /// <summary>난이도를 정해 새 판을 연다. 단계가 하나뿐이거나 폰 연동이면 선택 창을 건너뛴다.</summary>
         public static void StartNew(MiniGameDef game, Thing board, Pawn pawn)
         {
+            // 2칸이면 난이도보다 먼저 상대를 고른다. 제안 난이도가 상대의 실력에서 나오기 때문이다.
+            if (pawn != null && Together.AppliesTo(game))
+            {
+                AskWhoPlays(game, board, pawn);
+                return;
+            }
+
+            StartNewWith(game, board, pawn, null);
+        }
+
+        /// <summary>
+        /// 상대 고르기. 자격 있는 사람이 먼저 오고, 없는 사람은 이유와 함께 회색으로 뒤에 온다.
+        /// 회색을 보여 주는 이유는 "왜 저 사람은 안 되는가" 가 플레이어의 질문이기 때문이다.
+        /// </summary>
+        private static void AskWhoPlays(MiniGameDef game, Thing board, Pawn initiator)
+        {
+            List<Pawn> candidates = Together.Candidates(initiator, board, game);
+
+            List<FloatMenuOption> able = new List<FloatMenuOption>();
+            List<FloatMenuOption> unable = new List<FloatMenuOption>();
+
+            for (int i = 0; i < candidates.Count; i++)
+            {
+                Pawn bound = candidates[i];
+                Together.Refusal refusal = Together.Judge(bound, initiator, board, game);
+
+                if (refusal == Together.Refusal.None)
+                {
+                    able.Add(new FloatMenuOption(
+                        bound.LabelShortCap,
+                        delegate { StartNewWith(game, board, initiator, bound); }));
+                }
+                else
+                {
+                    unable.Add(new FloatMenuOption(
+                        "PR.Together.Cannot".Translate(bound.LabelShortCap, Together.ReasonText(refusal)),
+                        null));
+                }
+            }
+
+            // 혼자 두는 길은 언제나 남겨 둔다. 2칸을 켰다고 혼자 두는 것을 막지는 않는다.
+            able.Add(new FloatMenuOption("PR.Together.Alone".Translate(),
+                delegate { StartNewWith(game, board, initiator, null); }));
+
+            able.AddRange(unable);
+            Find.WindowStack.Add(new FloatMenu(able));
+        }
+
+        private static void StartNewWith(MiniGameDef game, Thing board, Pawn pawn, Pawn opponent)
+        {
             if (game.difficultyCount <= 1)
             {
-                Launch(game, board, pawn, 0, false);
+                Launch(game, board, pawn, opponent, 0, false);
                 return;
             }
 
-            if (pawn != null && PRMod.Settings.linkToPawnSkill)
+            // 짚어 주는 기준이 상대가 있으면 상대로 바뀐다. D2 — 어디까지나 제안값이다.
+            Pawn measured = opponent != null ? opponent : pawn;
+
+            if (measured != null && PRMod.Settings.linkToPawnSkill)
             {
-                Launch(game, board, pawn, TierForPawn(game, pawn), false);
+                Launch(game, board, pawn, opponent, TierForPawn(game, measured), false);
                 return;
             }
 
-            Find.WindowStack.Add(new Dialog_Difficulty(game, board, pawn));
+            Find.WindowStack.Add(new Dialog_Difficulty(game, board, pawn, opponent));
+        }
+
+        public static void Launch(MiniGameDef game, Thing board, Pawn pawn, int tier, bool practice)
+        {
+            Launch(game, board, pawn, null, tier, practice);
         }
 
         /// <summary>
         /// 난이도가 정해진 뒤의 마지막 관문. 보통은 고른 그 게임을 열지만,
         /// 추첨함이라면 여기서 통을 흔든다 - 난이도는 이미 사람이 골랐고, 무엇을 할지만 남았다.
         /// </summary>
-        public static void Launch(MiniGameDef game, Thing board, Pawn pawn, int tier, bool practice)
+        public static void Launch(MiniGameDef game, Thing board, Pawn pawn, Pawn opponent, int tier, bool practice)
         {
             if (game == null) return;
 
@@ -75,7 +170,7 @@ namespace PlayableRecreation
                     board, MessageTypeDefOf.NeutralEvent, false);
             }
 
-            Find.WindowStack.Add(new Dialog_MiniGame(chosen, board, pawn, tier, practice));
+            Find.WindowStack.Add(new Dialog_MiniGame(chosen, board, pawn, opponent, tier, practice));
         }
 
         /// <summary>
@@ -101,6 +196,35 @@ namespace PlayableRecreation
             return pool.Count > 0 ? pool.RandomElement() : null;
         }
 
+        /// <summary>
+        /// 이어 두기의 문. 몰입 모드면 앉았던 사람이 다시 걸어간 뒤에 열린다 —
+        /// 예전에는 재개만 걷기를 건너뛰어서, 몰입 모드를 켜 둬도 판이 그냥 열렸다.
+        /// </summary>
+        public static void OpenSession(GameSession session)
+        {
+            if (session == null || session.game == null || session.board == null)
+            {
+                Resume(session);
+                return;
+            }
+
+            Pawn seated = session.seatedPawn;
+
+            if (PRMod.Settings.immersionMode && seated != null && seated.jobs != null
+                && seated.Spawned && !seated.Dead && !seated.Downed && !seated.InMentalState
+                && seated.Map == session.board.Map
+                && !seated.Position.AdjacentTo8WayOrInside(session.board)
+                && seated.CanReach(session.board, PathEndMode.Touch, Danger.Some))
+            {
+                Job job = JobMaker.MakeJob(PRDefOf.PR_GoToGame, session.board);
+                seated.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                return;
+            }
+
+            Resume(session);
+        }
+
+        /// <summary>판을 실제로 연다. 준비 절차를 마친 뒤에만 부른다.</summary>
         public static void Resume(GameSession session)
         {
             if (session == null || session.game == null) return;

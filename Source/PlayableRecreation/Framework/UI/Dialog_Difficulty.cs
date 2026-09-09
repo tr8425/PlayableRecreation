@@ -13,6 +13,9 @@ namespace PlayableRecreation.UI
         private readonly Thing board;
         private readonly Pawn seatedPawn;
 
+        /// <summary>고른 상대. 없으면 예전과 같은 창이다.</summary>
+        private readonly Pawn opponentPawn;
+
         /// <summary>연습 판은 숙련도에도 전적에도 기록하지 않는다. 규칙을 익히는 용도.</summary>
         private bool practice;
 
@@ -22,10 +25,16 @@ namespace PlayableRecreation.UI
         }
 
         public Dialog_Difficulty(MiniGameDef game, Thing board, Pawn seatedPawn)
+            : this(game, board, seatedPawn, null)
+        {
+        }
+
+        public Dialog_Difficulty(MiniGameDef game, Thing board, Pawn seatedPawn, Pawn opponentPawn)
         {
             this.game = game;
             this.board = board;
             this.seatedPawn = seatedPawn;
+            this.opponentPawn = opponentPawn;
 
             doCloseX = true;
             closeOnCancel = true;
@@ -100,7 +109,7 @@ namespace PlayableRecreation.UI
             }
 
             Close(false);
-            GameEntry.Launch(game, board, seatedPawn, tier, practice);
+            GameEntry.Launch(game, board, seatedPawn, opponentPawn, tier, practice);
         }
     }
 }

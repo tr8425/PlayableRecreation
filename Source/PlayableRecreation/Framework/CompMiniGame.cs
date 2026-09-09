@@ -87,7 +87,7 @@ namespace PlayableRecreation
             {
                 yield return new FloatMenuOption(
                     ResumeLabel(session),
-                    delegate { GameEntry.Resume(session); });
+                    delegate { GameEntry.OpenSession(session); });
 
                 yield return new FloatMenuOption(
                     "PR.Play.Discard".Translate(),
@@ -117,7 +117,7 @@ namespace PlayableRecreation
                 icon = parent.def.uiIcon,
                 action = delegate
                 {
-                    if (session != null) GameEntry.Resume(session);
+                    if (session != null) GameEntry.OpenSession(session);
                     else GameEntry.Begin(Game, parent, null);
                 }
             };

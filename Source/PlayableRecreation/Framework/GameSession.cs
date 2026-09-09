@@ -11,7 +11,13 @@ namespace PlayableRecreation
     public sealed class GameSession : IExposable
     {
         public Thing board;
+
+        /// <summary>플레이어가 조작하는 쪽. 뜻은 예전과 같다.</summary>
         public Pawn seatedPawn;
+
+        /// <summary>맞은편에 앉은 사람. 몰입 모드 2칸이 아니면 null 이다.</summary>
+        public Pawn opponentPawn;
+
         public MiniGameDef game;
 
         public int tier;
@@ -38,9 +44,15 @@ namespace PlayableRecreation
         }
 
         public GameSession(Thing board, Pawn seatedPawn, MiniGameDef game, int tier, bool practice)
+            : this(board, seatedPawn, null, game, tier, practice)
+        {
+        }
+
+        public GameSession(Thing board, Pawn seatedPawn, Pawn opponentPawn, MiniGameDef game, int tier, bool practice)
         {
             this.board = board;
             this.seatedPawn = seatedPawn;
+            this.opponentPawn = opponentPawn;
             this.game = game;
             this.tier = tier;
             this.practice = practice;
@@ -85,6 +97,7 @@ namespace PlayableRecreation
         {
             Scribe_References.Look(ref board, "board");
             Scribe_References.Look(ref seatedPawn, "seatedPawn");
+            Scribe_References.Look(ref opponentPawn, "opponentPawn");
             Scribe_Defs.Look(ref game, "game");
 
             Scribe_Values.Look(ref tier, "tier", 0);

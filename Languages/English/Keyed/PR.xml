@@ -19,6 +19,17 @@
   <PR.Header.You>You</PR.Header.You>
   <PR.Header.YouNamed>You ({0})</PR.Header.YouNamed>
   <PR.Header.Opponent>Opponent ({0})</PR.Header.Opponent>
+  <PR.Header.OpponentNamed>{0} ({1})</PR.Header.OpponentNamed>
+  <PR.Together.Sit>{0} sits down</PR.Together.Sit>
+  <PR.Together.Alone>Play alone</PR.Together.Alone>
+  <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
+  <PR.Together.Why.TooYoung>too young</PR.Together.Why.TooYoung>
+  <PR.Together.Why.ChildrenOff>children are turned off</PR.Together.Why.ChildrenOff>
+  <PR.Together.Why.VisitorsOff>visitors are turned off</PR.Together.Why.VisitorsOff>
+  <PR.Together.Why.Incapable>cannot handle the board</PR.Together.Why.Incapable>
+  <PR.Together.Why.TooFar>too far away</PR.Together.Why.TooFar>
+  <PR.Together.Why.Busy>busy</PR.Together.Why.Busy>
+
   <PR.Log.Title>Play by play</PR.Log.Title>
   <PR.Side.You>You</PR.Side.You>
   <PR.Side.Opponent>AI </PR.Side.Opponent>
@@ -123,6 +134,12 @@ You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
   <PR.Settings.Pause.Desc>Off means colony time runs. The window closes itself when a threat shows up.</PR.Settings.Pause.Desc>
   <PR.Settings.Immersion>Immersion mode (walk over first)</PR.Settings.Immersion>
   <PR.Settings.Immersion.Desc>The window opens once the colonist reaches the furniture.</PR.Settings.Immersion.Desc>
+  <PR.Settings.Together>    Pick an opponent and play together</PR.Settings.Together>
+  <PR.Settings.Together.Desc>Someone from the colony sits across from you. Their name goes on the board instead of a tier.</PR.Settings.Together.Desc>
+  <PR.Settings.Together.Range>        Call someone from up to {0} tiles away</PR.Settings.Together.Range>
+  <PR.Settings.Together.Children>        Children can play too</PR.Settings.Together.Children>
+  <PR.Settings.Together.Visitors>        Visitors can play too</PR.Settings.Together.Visitors>
+  <PR.Settings.Together.NeedsSave>        Needs saved games turned on.</PR.Settings.Together.NeedsSave>
   <PR.Settings.LinkSkill>Set the tier from the colonist skill</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>Skips the picker. Each game uses its own skill.</PR.Settings.LinkSkill.Desc>
   <PR.Settings.Sounds>Sound effects</PR.Settings.Sounds>

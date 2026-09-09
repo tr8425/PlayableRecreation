@@ -136,6 +136,24 @@ namespace PlayableRecreation
             return null;
         }
 
+        /// <summary>
+        /// 이 폰이 다른 가구의 판에 앉아 있는가. 같은 사람을 두 판의 상대로 지목하는 것을
+        /// 막는다 — 예약은 가구만 지키므로 보드가 둘이면 예약으로는 안 걸린다.
+        /// </summary>
+        public bool IsSeatedElsewhere(Pawn pawn, Thing except)
+        {
+            if (pawn == null) return false;
+
+            for (int i = 0; i < sessions.Count; i++)
+            {
+                GameSession session = sessions[i];
+                if (session.board == except) continue;
+                if (session.seatedPawn == pawn || session.opponentPawn == pawn) return true;
+            }
+
+            return false;
+        }
+
         public void Register(GameSession session)
         {
             if (session == null || sessions.Contains(session)) return;

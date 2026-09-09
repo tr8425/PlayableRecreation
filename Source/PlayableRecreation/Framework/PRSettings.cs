@@ -25,6 +25,23 @@ namespace PlayableRecreation
         /// <summary>켜면 선택한 폰이 가구까지 걸어간 뒤 창이 열린다.</summary>
         public bool immersionMode = false;
 
+        // ---------- 몰입 모드 2칸: 둘이 함께 두기 ----------
+        //
+        // 전부 immersionMode 아래에 있다. 부모가 꺼져 있으면 설정 창에 그려지지도 않고
+        // 코드에서도 Together.Enabled 하나로만 묻는다.
+
+        /// <summary>상대를 골라 둘이 함께 둔다. immersionMode 가 켜져 있어야 한다.</summary>
+        public bool playTogether = false;
+
+        /// <summary>상대를 부를 수 있는 최대 거리(칸). 없으면 맵 반대편 사람을 기다리게 된다.</summary>
+        public int playTogetherRange = 30;
+
+        /// <summary>어린이도 상대가 된다. 아기·유아는 이 설정과 무관하게 안 된다.</summary>
+        public bool playTogetherChildren = true;
+
+        /// <summary>방문객도 상대가 된다. 끄면 우호도 항목도 뜻을 잃는다.</summary>
+        public bool playTogetherVisitors = true;
+
         public bool sounds = true;
 
         /// <summary>켜면 난이도 선택 창 대신 우클릭한 폰의 스킬로 상대를 정한다.</summary>
@@ -132,6 +149,11 @@ namespace PlayableRecreation
 
             Scribe_Values.Look(ref pauseWhilePlaying, "pauseWhilePlaying", false);
             Scribe_Values.Look(ref immersionMode, "immersionMode", false);
+
+            Scribe_Values.Look(ref playTogether, "playTogether", false);
+            Scribe_Values.Look(ref playTogetherRange, "playTogetherRange", 30);
+            Scribe_Values.Look(ref playTogetherChildren, "playTogetherChildren", true);
+            Scribe_Values.Look(ref playTogetherVisitors, "playTogetherVisitors", true);
             Scribe_Values.Look(ref sounds, "sounds", true);
 
             Scribe_Values.Look(ref linkToPawnSkill, "linkToPawnSkill", false);

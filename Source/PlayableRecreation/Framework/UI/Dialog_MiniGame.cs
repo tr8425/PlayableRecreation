@@ -28,6 +28,9 @@ namespace PlayableRecreation.UI
         private readonly MiniGameDef game;
         private readonly Thing board;
         private readonly Pawn seatedPawn;
+
+        /// <summary>맞은편에 앉은 사람. 몰입 모드 2칸이 아니면 null 이다.</summary>
+        private readonly Pawn opponentPawn;
         private readonly int tier;
 
         /// <summary>연습 판은 숙련도로도 전적으로도 인정하지 않는다 - 낮은 단계를 반복해 깨는 길을 막는다.</summary>
@@ -72,10 +75,16 @@ namespace PlayableRecreation.UI
 
         /// <summary>새 판.</summary>
         public Dialog_MiniGame(MiniGameDef game, Thing board, Pawn seatedPawn, int tier, bool practice)
+            : this(game, board, seatedPawn, null, tier, practice)
+        {
+        }
+
+        public Dialog_MiniGame(MiniGameDef game, Thing board, Pawn seatedPawn, Pawn opponentPawn, int tier, bool practice)
         {
             this.game = game;
             this.board = board;
             this.seatedPawn = seatedPawn;
+            this.opponentPawn = opponentPawn;
             this.tier = game.ClampTier(tier);
             this.practice = practice;
 
@@ -93,6 +102,7 @@ namespace PlayableRecreation.UI
             game = resumed.game;
             board = resumed.board;
             seatedPawn = resumed.seatedPawn;
+            opponentPawn = resumed.opponentPawn;
             tier = game.ClampTier(resumed.tier);
             practice = resumed.practice;
             undosUsed = resumed.undosUsed;
@@ -191,7 +201,7 @@ namespace PlayableRecreation.UI
             if (board == null) return;
 
             if (session == null)
-                session = new GameSession(board, seatedPawn, game, tier, practice);
+                session = new GameSession(board, seatedPawn, opponentPawn, game, tier, practice);
 
             session.undosUsed = undosUsed;
             session.CaptureFrom(worker);
@@ -323,7 +333,13 @@ namespace PlayableRecreation.UI
             Widgets.Label(line, you);
 
             Text.Anchor = TextAnchor.MiddleRight;
-            if (game.hasMatch) Widgets.Label(line, "PR.Header.Opponent".Translate(game.TierLabel(tier)));
+
+            // 상대에게 얼굴이 생긴다. 이름이 있으면 난이도 대신 이름이 앞에 선다.
+            if (opponentPawn != null)
+                Widgets.Label(line, "PR.Header.OpponentNamed".Translate(
+                    opponentPawn.LabelShortCap, game.TierLabel(tier)));
+            else if (game.hasMatch)
+                Widgets.Label(line, "PR.Header.Opponent".Translate(game.TierLabel(tier)));
 
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
