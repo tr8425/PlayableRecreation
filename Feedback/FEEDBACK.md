@@ -168,10 +168,8 @@ ferny 지적에서 파생된 구상. 아직 아무것도 만들지 않았고, �
 - 다만 정해 주는 값이 아니라 **제안값**이라는 것은 답글에 적어 둔다.
   전적이 난이도 칸으로 쌀이므로 플레이어가 칸을 못 고르게 되면 장부가 꾸려진다.
 - 답글 문안 (게시하면 `답변완료` 로 바꾼다):
-  > @Robo that's the direction, yeah. the board and card games read intellectual
-  > and the throwing ones read shooting, and the tier now comes off whoever you
-  > sat down across from rather than off you. it stays a suggestion you can
-  > overrule though, since the records are kept per tier.
+  > @Robo yeah, that's the direction. the tier comes off whoever you sat down
+  > across from now, not off you.
 
 ### 2026-09-10 · ferny — 구현 진행 상황 공유 — `신규`
 
@@ -185,10 +183,8 @@ ferny 지적에서 파생된 구상. 아직 아무것도 만들지 않았고, �
   1시간 남짓) 동안 한 번도 뜼지 않았다 — 바닐라 사교 빈도를 보면 이상한
   수치는 아니지만, 돌아가는 것을 보기 전에는 약속할 수 없다 (명세 §16-1, D6).
 - 답글 문안 (게시하면 `답변완료` 로 바꾼다):
-  > @ferny built it. you pick a colonist, the two of them walk over and actually
-  > stand at the board until the game ends, and the suggested tier comes off your
-  > opponent's skill instead of a menu. shaking the bugs out now, so it isn't up
-  > yet — but it's the version you asked for.
+  > @ferny built it — you pick a colonist and the two of them walk over and
+  > stand at the board until the game ends. not up yet, still shaking out bugs.
 
 ### 2026-09-09 · LifeIsAbxtch · 창작마당 댓글 — `신규`
 > "Rostra you should listen to Ferny he's the professional"
