@@ -1,0 +1,15 @@
+2026-09-10T19:17:32.6658455+09:00
+assembly=C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Playable Recreation\Assemblies\PlayableRecreation.dll module=cfd028bd-667e-40a5-8dee-a02aad746696 process=37512
+map=Map-0-PlayerHome guest=QA Visitor Lord=RimWorld.LordJob_VisitColony joy=
+PR_Slots seats=1 applies=False
+PR_Darts seats=1 applies=False
+PR_PunchingBag seats=1 applies=False
+PR_Roulette seats=4 applies=True
+PR_Arcade seats=1 applies=False
+PR_Ur seats=2 applies=True
+PR_Horseshoes seats=3 applies=True
+PR_Hoopstone seats=3 applies=True
+PR_Billiards seats=2 applies=True
+PR_Chess seats=2 applies=True
+PR_Poker seats=4 applies=True
+PR_Stargazing seats=1 applies=False

@@ -1,0 +1,2 @@
+using System;using System.Linq;using System.Reflection;using Verse;using UnityEngine;using PlayableRecreation;using PlayableRecreation.UI;
+public static class Command{public static string Run(){var d=Find.WindowStack.Windows.OfType<Dialog_Leaderboard>().First();var before=d.windowRect;d.windowRect.height+=80;var game=DefDatabase<MiniGameDef>.GetNamed("PR_Chess");var record=RecordStore.For(game);return "Same record, original rect="+before+" after="+d.windowRect+" timeSeconds="+record.totalRealSeconds+" undos="+record.totalUndosUsed;}}

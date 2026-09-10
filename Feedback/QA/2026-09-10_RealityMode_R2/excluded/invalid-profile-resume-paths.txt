@@ -1,0 +1,5 @@
+Saved two-player game, actual gizmo/menu/GoToGame pathways.
+drafted gizmo immediateWindow=False
+drafted walk-to-open windowSeen=False stored=True jobs=Wait_Wander,Wait_Combat
+available menu immediateWindow=False
+available reopened=True ticks=223 positions=(151, 0, 121),(150, 0, 120) seats=(151, 0, 121),(150, 0, 120) rotations=3,1 jobs=PR_GoToGame,PR_JoinGame

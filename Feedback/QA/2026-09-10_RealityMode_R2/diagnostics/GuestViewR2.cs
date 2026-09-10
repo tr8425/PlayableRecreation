@@ -1,0 +1,2 @@
+using System;using Verse;using RimWorld;using PlayableRecreation;using PRQA;
+public static class Command{public static string Run(){var p=(Pawn)Host.State["guestR2"];CameraJumper.TryJump(p);Find.Selector.ClearSelection();Find.Selector.Select(p);if(TogetherInvite.IsAlone(p))Find.TickManager.CurTimeSpeed=TimeSpeed.Paused;return "alone="+TogetherInvite.IsAlone(p)+" waiting="+TogetherInvite.IsWaiting(p)+" pos="+p.Position+" edifice="+p.Position.GetEdifice(p.Map)?.def+" report="+p.jobs.curDriver?.GetReport();}}

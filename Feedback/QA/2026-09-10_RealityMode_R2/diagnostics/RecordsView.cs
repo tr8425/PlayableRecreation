@@ -1,0 +1,2 @@
+using System.Linq;using Verse;using RimWorld;using PlayableRecreation;using PlayableRecreation.UI;using UnityEngine;
+public static class Command{public static string Run(){foreach(var d in Find.WindowStack.Windows.ToList())if(d is Dialog_MiniGame||d is Dialog_ModSettings||d is Dialog_Leaderboard)d.Close();Find.TickManager.CurTimeSpeed=TimeSpeed.Paused;Find.WindowStack.Add(new Dialog_Leaderboard(DefDatabase<MiniGameDef>.GetNamed("PR_Chess")));return "Leaderboard default size, twelve games enabled, ten match games.";}}

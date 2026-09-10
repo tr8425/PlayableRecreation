@@ -1,0 +1,3 @@
+After pointer leaves actual result window.
+released=True windowRetained=True jobs=Play_Chess,SocialRelax real=2.699341
+after release practice New game opened=True sameOpponent=True

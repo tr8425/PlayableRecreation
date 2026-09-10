@@ -1,0 +1,3 @@
+window=True
+R2 Tester 0 pos=(131, 0, 80) seat=(131, 0, 80) rot=3 chair=DiningChair job=PR_GoToGame
+R2 Guest pos=(130, 0, 81) seat=(130, 0, 81) rot=1 chair=DiningChair job=PR_JoinGame

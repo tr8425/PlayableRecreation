@@ -32,10 +32,19 @@ namespace PlayableRecreation.UI
 
         private MiniGameDef game;
         private bool showColony;
+        private Vector2 summaryScroll;
 
         public override Vector2 InitialSize
         {
-            get { return new Vector2(620f, 520f); }
+            get
+            {
+                const float width = 620f;
+
+                float height = ContentHeight(width - Margin * 2f) + Margin * 2f;
+
+                // 화면보다 큰 창은 아무것도 못 읽게 만든다. 거기서 모자라는 몫은 요약이 굴려서 받는다.
+                return new Vector2(width, Mathf.Clamp(height, 520f, Verse.UI.screenHeight - 80f));
+            }
         }
 
         public Dialog_Leaderboard(MiniGameDef game)
@@ -125,6 +134,51 @@ namespace PlayableRecreation.UI
 
             DrawSummary(new Rect(inRect.x, y, inRect.width, Mathf.Max(0f, inRect.yMax - FooterHeight - y)), record);
             DrawFooter(new Rect(inRect.x, inRect.yMax - FooterHeight + 6f, inRect.width, FooterHeight - 6f));
+        }
+
+        /// <summary>
+        /// 요약은 작은 글씨로 쓴다. 언어가 작은 글씨를 못 쓰거나 플레이어가 껐으면
+        /// 바닐라가 조용히 보통 글씨로 돌린다 — 자리를 잴 때도 같은 것을 봐야 한다.
+        /// </summary>
+        private static GameFont SummaryFont
+        {
+            get { return Text.TinyFontSupported ? GameFont.Tiny : GameFont.Small; }
+        }
+
+        /// <summary>
+        /// 창을 열기 전에 내용이 얼마나 되는지 미리 잰다. 확장까지 켜면 게임 탭이 두 줄이 되고,
+        /// 그만큼 아래가 밀려서 마지막 요약 줄이 창 밖으로 나갔다 (R2-01).
+        /// 탭을 바꿔도 안 잘리도록 켜져 있는 게임 중 가장 긴 것에 맞춘다.
+        /// </summary>
+        private float ContentHeight(float width)
+        {
+            List<MiniGameDef> games = Enabled;
+
+            float height = 38f;                                              // 제목
+            if (games.Count > 1) height += GameTabsHeight(width, games.Count) + TabGap;
+            height += TabHeight + Pad;                                       // 나의 통산 · 이 식민지
+            height += HeaderHeight;
+            height += Pad + Pad;                                             // 표와 요약 사이의 줄
+            height += FooterHeight;
+
+            // 켜져 있지 않은 게임에서 열렸어도 그 게임은 보여 준다.
+            if (game != null && !games.Contains(game)) games.Add(game);
+
+            float line = Text.LineHeightOf(SummaryFont) + 2f;                // Listing 의 줄 간격
+            float body = 0f;
+
+            foreach (MiniGameDef def in games)
+            {
+                int tallies = def.tallyKeys != null
+                    ? Mathf.Min(def.tallyKeys.Count, GameRecord.TallyCount)
+                    : 0;
+
+                // 난이도 줄 + 통산·집계·연승·시간
+                body = Mathf.Max(body, def.difficultyCount * RowHeight + (3 + tallies) * line);
+            }
+
+            // 딱 맞게 자르면 번역 한 줄이 접히는 순간 다시 잘린다. 한 뼘 남겨 둔다.
+            return height + body + Pad;
         }
 
         /// <summary>한 줄에 몇 개까지 놓을 것인가. 한 개 밑으로는 안 내려간다.</summary>
@@ -254,36 +308,59 @@ namespace PlayableRecreation.UI
             Text.Anchor = TextAnchor.UpperLeft;
         }
 
-        private void DrawSummary(Rect area, GameRecord record)
+        private List<string> SummaryLines(GameRecord record)
         {
-            Listing_Standard list = new Listing_Standard();
+            List<string> lines = new List<string>();
 
-            // 여기도 두 칸으로 나뉘어질 자리가 아니다. 넘치면 잘리는 편이
-            // 소리 없이 화면 밖으로 사라지는 것보다 낫다.
-            list.maxOneColumn = true;
-
-            list.Begin(area);
-
-            Text.Font = GameFont.Tiny;
-            GUI.color = PRTheme.Dim;
-
-            list.Label("PR.Records.Summary".Translate(
-                record.wins, record.losses, record.voided, record.resigns));
+            lines.Add("PR.Records.Summary".Translate(
+                record.wins, record.losses, record.voided, record.resigns).Resolve());
 
             // 그 게임에서만 의미가 있는 숫자들. 이름표는 Def 가 들고 있다.
             if (game.tallyKeys != null)
             {
                 for (int i = 0; i < game.tallyKeys.Count && i < GameRecord.TallyCount; i++)
-                    list.Label(game.tallyKeys[i].Translate(record.Tally(i)));
+                    lines.Add(game.tallyKeys[i].Translate(record.Tally(i)).Resolve());
             }
 
-            list.Label("PR.Records.Streak".Translate(record.flawlessWins, record.longestWinStreak));
-            list.Label("PR.Records.Time".Translate(PlayTimeText(record.totalRealSeconds), record.totalUndosUsed));
+            lines.Add("PR.Records.Streak".Translate(record.flawlessWins, record.longestWinStreak).Resolve());
+            lines.Add("PR.Records.Time".Translate(
+                PlayTimeText(record.totalRealSeconds), record.totalUndosUsed).Resolve());
+
+            return lines;
+        }
+
+        private void DrawSummary(Rect area, GameRecord record)
+        {
+            List<string> lines = SummaryLines(record);
+
+            Text.Font = SummaryFont;
+            GUI.color = PRTheme.Dim;
+
+            // 굴림대 자리를 미리 빼고 잰다. 굴리지 않게 되면 그만큼 여유가 생길 뿐이다.
+            float narrow = area.width - 20f;
+            float needed = 0f;
+            foreach (string line in lines) needed += Text.CalcHeight(line, narrow) + 2f;
+
+            // 창을 내용에 맞춰 키워도 화면이 작으면 모자랄 수 있다.
+            // 그때는 마지막 줄을 잘라 버리는 대신 굴려서 읽게 한다.
+            bool scroll = needed > area.height;
+            Rect inner = scroll ? new Rect(0f, 0f, narrow, needed) : area;
+
+            if (scroll) Widgets.BeginScrollView(area, ref summaryScroll, inner);
+
+            Listing_Standard list = new Listing_Standard();
+
+            // 여기는 두 칸으로 나뉘어질 자리가 아니다.
+            list.maxOneColumn = true;
+
+            list.Begin(inner);
+            foreach (string line in lines) list.Label(line);
+            list.End();
+
+            if (scroll) Widgets.EndScrollView();
 
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
-
-            list.End();
         }
 
         private void DrawFooter(Rect footer)

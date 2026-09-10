@@ -1,0 +1,7 @@
+Fresh healthy pair, no forced social interaction, actual New game callback.
+legal checkmate over=True
+immediate window=True
+  live: QA Rematch 0 + QA Rematch 1 at ChessTable70380
+78 jobs=PR_GoToGame,PR_JoinGame window=True
+  live: QA Rematch 0 + QA Rematch 1 at ChessTable70380
+final sameOpponent=True

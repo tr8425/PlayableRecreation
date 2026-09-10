@@ -1,0 +1,2 @@
+R2 Tester 0 position=(151, 0, 121) rotation=3 seat=(151, 0, 121) chair= report=playing Chess.
+R2 Tester 1 position=(150, 0, 120) rotation=1 seat=(150, 0, 120) chair=DiningChair report=playing Chess with R2 Tester 0.

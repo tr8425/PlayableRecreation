@@ -1,0 +1,4 @@
+Together ON, choose difficulty through actual Dialog_Difficulty.Start callback.
+Joy_PunchingBag opened=True worker=PunchingGameWorker opponent=
+Joy_DartsBoard opened=True worker=DartsGameWorker opponent=
+Joy_Arcade opened=True worker=PunchingGameWorker opponent=

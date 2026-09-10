@@ -1,0 +1,23 @@
+Natural social interactions, Abrasive opponent, superfast game speed; no forced interaction in observation. Board-flip disabled to observe cadence.
+0 count=0 open=True jobs=PR_GoToGame,PR_JoinGame
+519 count=0 open=True jobs=PR_GoToGame,PR_JoinGame
+1041 count=0 open=True jobs=PR_GoToGame,PR_JoinGame
+1570 count=0 open=True jobs=PR_GoToGame,PR_JoinGame
+2015 count=1 open=True jobs=PR_GoToGame,PR_JoinGame
+2544 count=1 open=True jobs=PR_GoToGame,PR_JoinGame
+3072 count=1 open=True jobs=PR_GoToGame,PR_JoinGame
+3523 count=2 open=True jobs=PR_GoToGame,PR_JoinGame
+4046 count=2 open=True jobs=PR_GoToGame,PR_JoinGame
+4569 count=2 open=True jobs=PR_GoToGame,PR_JoinGame
+5020 count=2 open=True jobs=PR_GoToGame,PR_JoinGame
+5543 count=2 open=True jobs=PR_GoToGame,PR_JoinGame
+6059 count=3 open=True jobs=PR_GoToGame,PR_JoinGame
+6504 count=3 open=True jobs=PR_GoToGame,PR_JoinGame
+7027 count=3 open=True jobs=PR_GoToGame,PR_JoinGame
+7556 count=4 open=True jobs=PR_GoToGame,PR_JoinGame
+8000 count=4 open=True jobs=PR_GoToGame,PR_JoinGame
+8529 count=4 open=True jobs=PR_GoToGame,PR_JoinGame
+9058 count=5 open=True jobs=PR_GoToGame,PR_JoinGame
+9503 count=5 open=True jobs=PR_GoToGame,PR_JoinGame
+10037 count=5 open=True jobs=PR_GoToGame,PR_JoinGame
+natural lines: <color=#D09B61FF>R2 Tester 1</color> spoke about training magpies with <color=#D09B61FF>R2 Tester 0</color>. | <color=#D09B61FF>R2 Tester 1</color> and <color=#D09B61FF>R2 Tester 0</color> spoke about sports. | <color=#D09B61FF>R2 Tester 0</color> and <color=#D09B61FF>R2 Tester 1</color> joked about hostile beggars. | <color=#D09B61FF>R2 Tester 0</color> and <color=#D09B61FF>R2 Tester 1</color> shared a word about chess. | <color=#D09B61FF>R2 Tester 0</color> chatted about fighting tapirs with <color=#D09B61FF>R2 Tester 1</color>.

@@ -1,0 +1,2 @@
+2026-09-10T19:36:17.4897898+09:00
+Same record, original rect=(x:543.00, y:220.00, width:620.00, height:520.00) after=(x:543.00, y:220.00, width:620.00, height:600.00) timeSeconds=809 undos=3

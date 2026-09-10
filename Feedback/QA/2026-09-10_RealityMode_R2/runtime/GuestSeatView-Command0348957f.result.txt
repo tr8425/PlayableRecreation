@@ -1,0 +1,2 @@
+2026-09-10T19:42:54.7631730+09:00
+Session opponent=R2 Guest participant=R2 Tester 0. Paused; camera/window moved only to expose reserved chairs.

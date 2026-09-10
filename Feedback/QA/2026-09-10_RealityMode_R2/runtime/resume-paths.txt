@@ -1,0 +1,5 @@
+Saved two-player game, actual gizmo/menu/GoToGame pathways.
+drafted gizmo immediateWindow=False
+drafted walk-to-open windowSeen=False stored=True jobs=Play_Horseshoes,Wait_Combat
+available menu immediateWindow=False
+available reopened=True ticks=589 positions=(131, 0, 80),(130, 0, 81) seats=(131, 0, 80),(130, 0, 81) rotations=3,1 jobs=PR_GoToGame,PR_JoinGame

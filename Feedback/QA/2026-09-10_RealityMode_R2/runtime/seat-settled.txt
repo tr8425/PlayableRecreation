@@ -1,0 +1,2 @@
+R2 Tester 0 pos=(131, 0, 80) seat=(131, 0, 80) rotation=3 chair=DiningChair held=True
+R2 Tester 1 pos=(130, 0, 81) seat=(130, 0, 81) rotation=1 chair=DiningChair held=True

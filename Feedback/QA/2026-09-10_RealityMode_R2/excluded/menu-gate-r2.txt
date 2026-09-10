@@ -1,0 +1,10 @@
+Actual furniture action, together ON, skill linkage OFF.
+Joy_PunchingBag difficulty=False mini=False opponentMenuSeen=False ticks=1058
+Joy_DartsBoard difficulty=False mini=False opponentMenuSeen=False ticks=1045
+Joy_Arcade difficulty=False mini=False opponentMenuSeen=False ticks=1034
+PR_Chess opponentMenu=True
+PR_Poker opponentMenu=True
+PR_Horseshoes opponentMenu=True
+PR_Hoopstone opponentMenu=True
+PR_Ur opponentMenu=True
+PR_Billiards opponentMenu=True

@@ -1,0 +1,2 @@
+using System;using System.Linq;using Verse;using UnityEngine;using PlayableRecreation;using PlayableRecreation.UI;using PRQA;
+public static class Command{public static string Run(){var b=(Thing)Host.State["chess"];CameraJumper.TryJump(new IntVec3(b.Position.x+7,0,b.Position.z),b.Map);var d=Find.WindowStack.Windows.OfType<Dialog_MiniGame>().First();d.windowRect.position=new Vector2(1000,30);var s=GameEntry.SessionFor(b);return "Session opponent="+s.opponentPawn+" participant="+s.seatedPawn+". Paused; camera/window moved only to expose reserved chairs.";}}

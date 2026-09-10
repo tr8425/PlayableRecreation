@@ -1,0 +1,7 @@
+Fresh isolated chessboard with chairs; other colonists drafted to avoid incidental recreation reservations.
+12 window=False R2 Tester 0 job=PR_GoToGame (Job_112792) A = Thing_ChessTable70380 C = (131, 0, 80) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(125, 0, 76) | R2 Tester 1 job=PR_JoinGame (Job_112791) A = Thing_ChessTable70380 B = Thing_Human70268 C = (130, 0, 81) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(126, 0, 76)
+  pending: R2 Tester 0 + R2 Tester 1 at ChessTable70380 (12/2500 ticks, new)
+50 window=False R2 Tester 0 job=PR_GoToGame (Job_112792) A = Thing_ChessTable70380 C = (131, 0, 80) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(127, 0, 77) | R2 Tester 1 job=PR_JoinGame (Job_112791) A = Thing_ChessTable70380 B = Thing_Human70268 C = (130, 0, 81) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(127, 0, 78)
+  pending: R2 Tester 0 + R2 Tester 1 at ChessTable70380 (50/2500 ticks, new)
+101 window=False R2 Tester 0 job=PR_GoToGame (Job_112792) A = Thing_ChessTable70380 C = (131, 0, 80) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(130, 0, 78) | R2 Tester 1 job=PR_JoinGame (Job_112791) A = Thing_ChessTable70380 B = Thing_Human70268 C = (130, 0, 81) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(128, 0, 79)
+  pending: R2 Tester 0 + R2 Tester 1 at ChessTable70380 (101/2500 ticks, new)

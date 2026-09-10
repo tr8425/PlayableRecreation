@@ -1,0 +1,10 @@
+Actual furniture action, together ON, skill linkage OFF.
+37 job=Wait_MaintainPosture (Job_120897) pos=(125, 0, 71)\nJoy_PunchingBag difficulty=True mini=False opponentMenuSeen=False ticks=37
+37 job=PR_GoToGame (Job_120899) A = Thing_Joy_DartsBoard70729 C = (135, 0, 71) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(135, 0, 71)\nJoy_DartsBoard difficulty=True mini=False opponentMenuSeen=False ticks=37
+37 job=PR_GoToGame (Job_120914) A = Thing_Joy_Arcade70730 C = (145, 0, 71) Giver = ThinkNode_QueuedJob [workGiverDef: null] pos=(145, 0, 71)\nJoy_Arcade difficulty=True mini=False opponentMenuSeen=False ticks=37
+PR_Chess opponentMenu=True
+PR_Poker opponentMenu=True
+PR_Horseshoes opponentMenu=True
+PR_Hoopstone opponentMenu=True
+PR_Ur opponentMenu=True
+PR_Billiards opponentMenu=True

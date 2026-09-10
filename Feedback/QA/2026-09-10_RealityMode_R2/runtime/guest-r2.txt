@@ -1,0 +1,22 @@
+fresh Villager, real VisitColony Lord, joy= sent=True
+72 job=PR_InviteGame waiting=True alone=False at=(128, 0, 79) duty=TravelOrLeave report=waiting for someone to play.
+517 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+1039 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+1562 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+2001 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+2517 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+3046 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+3503 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+4032 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+4560 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+5005 job=PR_InviteGame waiting=True alone=False at=(130, 0, 81) duty=Defend report=waiting for someone to play Chess.
+5528 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+6051 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+6501 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+7024 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+7565 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+8010 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+8538 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+9067 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+9512 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
+10040 job=PR_InviteGame waiting=True alone=True at=(130, 0, 81) duty=Defend report=playing Chess alone.
