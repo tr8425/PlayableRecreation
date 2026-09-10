@@ -44,6 +44,16 @@ You also choose how many undos you get. Set it to zero and there are none.
 
 [img]https://images.steamusercontent.com/ugc/12618045191316701357/466F586F6C1033773B4EEB1E9A867DE9600DE4C2/[/img]
 
+[h2]Two at the board[/h2]
+
+Turn on [b]immersion mode[/b] and you can pick an opponent. The two of them walk over, sit down on opposite sides, and stay until the game is over. What they say to each other shows up under the moves. Hunger, a threat, a draft or a moved board gets them up — and if your opponent dies mid-game, the game goes with them.
+
+Visitors play too, and winning or losing moves their faction's goodwill along with their mood. They also sit down on their own and wait for someone to join them.
+
+Who they are shows on the board: a chess master plays chess well, kind colonists let an undo slide, and some will flip the board when they are losing.
+
+Off by default. Leave it off and nothing changes.
+
 [h2]The telescope is different[/h2]
 
 The stars come from the seed your world was generated from, so every world has its own sky.

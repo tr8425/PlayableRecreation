@@ -1,0 +1,75 @@
+== English ==
+
+[b]1.2.0 — sitting across the board[/b]
+
+Until now you played and the colonist watched. Turn on [b]immersion mode[/b] in the settings and pick an opponent, and two of them walk to the furniture, sit down on opposite sides, and stay there until the game is over.
+
+[b]Two at the board[/b]
+[list]
+[*]Pick who you play against. People who cannot come are greyed out with the reason
+[*]They sit across from each other and face each other — chairs first, opposite side if there is one
+[*]Whatever they say to each other while playing shows up under the moves
+[*]Hunger and tiredness get them up. So does a threat, a draft, or the board being moved
+[*]If your opponent dies mid-game, the game goes with them
+[/list]
+
+[b]Visitors[/b] can be your opponent too. Beating them or losing to them moves their faction's goodwill a little, and their mood with it. They also sit down on their own and wait for someone to join them — nobody comes, they end up playing alone.
+
+[b]Who they are shows on the board[/b]
+[list]
+[*]A backstory that names the game counts for that game only. A chess master plays chess well; being a researcher does not
+[*]Kind colonists let an undo slide. Some will flip the board when they are losing
+[*]The move list now carries their names instead of "You" and "AI"
+[/list]
+
+[b]Two things change for everyone[/b]
+[list]
+[*][b]Difficulty is capped by skill.[/b] Tiers beyond whoever sits across from you are locked, and the row says why. Lower tiers stay open. Switch it off in the settings if you would rather it didn't
+[*][b]Chess and poker need a free chair[/b], the way vanilla has always needed one. The game of Ur does not, and neither do billiards, horseshoes, hoopstone or the telescope
+[/list]
+
+[b]Fixed[/b]
+[list]
+[*]The settings window no longer empties itself out one row at a time
+[*]The records window sizes itself to what is in it, so the last line is not cut off
+[*]A position left on furniture no longer marks both players busy everywhere else
+[*]Draft one of the two on the way over and the other one goes back to work instead of standing there for an hour
+[/list]
+
+== 한국어 ==
+
+[b]1.2.0 — 마주 앉기[/b]
+
+지금까지는 플레이어가 두고 정착민은 구경했습니다. 모드 설정에서 [b]몰입 모드[/b]를 켜고 상대를 고르면, 두 사람이 가구까지 걸어가 판을 사이에 두고 마주 앉아 판이 끝날 때까지 그 자리에 있습니다.
+
+[b]판 앞의 두 사람[/b]
+[list]
+[*]누구와 둘지 고릅니다. 올 수 없는 사람은 이유와 함께 회색으로 옵니다
+[*]서로 반대편에 앉아 마주 봅니다 — 의자가 먼저고, 반대편이 비어 있으면 그쪽입니다
+[*]두는 동안 주고받는 말이 기보 아래에 뜹니다
+[*]배가 고프거나 지치면 일어납니다. 위협·징집·가구 이동도 마찬가지입니다
+[*]상대가 판 도중에 죽으면 판도 같이 사라집니다
+[/list]
+
+[b]방문객[/b]도 상대가 됩니다. 이기거나 지면 그쪽 세력의 우호도가 조금 움직이고, 기분도 함께 움직입니다. 방문객이 먼저 판 앞에 앉아 상대를 기다리기도 합니다 — 아무도 안 오면 결국 혼자 둡니다.
+
+[b]누구인지가 판에 비칩니다[/b]
+[list]
+[*]배경 이야기가 그 놀이를 직접 말하면 그 놀이에서만 셉니다. 체스 마스터는 체스를 잘 두고, 연구원이라고 잘 두지는 않습니다
+[*]다정한 사람은 무르기를 봐 줍니다. 지고 있으면 판을 엎는 사람도 있습니다
+[*]기보에 "당신·AI" 대신 두 사람의 이름이 적힙니다
+[/list]
+
+[b]모두에게 달라지는 것 둘[/b]
+[list]
+[*][b]실력에 부치는 난이도는 잠깁니다.[/b] 맞은편에 앉은 사람의 실력을 넘는 칸은 이유와 함께 잠기고, 낮은 칸은 그대로 열려 있습니다. 싫으면 설정에서 끄면 됩니다
+[*][b]체스와 포커는 빈 의자가 있어야 합니다.[/b] 바닐라가 원래 그랬습니다. 우르는 필요 없고, 당구·편자·후프스톤·망원경도 상관없습니다
+[/list]
+
+[b]고친 것[/b]
+[list]
+[*]설정 창이 한 줄씩 스스로 비어 가던 것
+[*]기록 창이 내용에 맞춰 열려서 마지막 줄이 잘리지 않습니다
+[*]가구에 남겨둔 판이 두 사람을 다른 모든 가구에서 "지금은 어려움" 으로 묶던 것
+[*]판으로 가던 중에 한 명이 징집되면, 남은 한 명이 한 시간을 서 있지 않고 제 일로 돌아갑니다
+[/list]

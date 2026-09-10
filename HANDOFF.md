@@ -70,10 +70,15 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 
 - 빌드 경고 0 · 오류 0
 - 테스트 284 개 전부 통과 (다트 · 펀칭백 · 룰렛 Core 포함)
-- **몰입 모드 2칸 네 단계 전부 들어감** (2026-09-09, 미출시) — 명세는
-  `DESIGN_RealityMode.md`. 상대를 골라 둘이 판 앞까지 걸어가 마주 서고, 판이 끝날
-  때까지 거기 서서, 사라진 사람과 손님 우호도까지 이어진다.
-  **인게임 확인은 아직 안 했다** (§16).
+- **몰입 모드 2칸 — v1.2.0 배포 대기** (2026-09-10) — 명세는 `DESIGN_RealityMode.md`.
+  상대를 골라 둘이 판 앞까지 걸어가 **마주 앉고**, 판이 끝날 때까지 거기 있고,
+  사라진 사람과 손님 우호도까지 이어진다.
+  - 인게임 QA 2회. **1차**(`Feedback/QA/2026-09-10_RealityMode/`)가 기능 결함 5건을
+    잡았고, **2차**(`.../2026-09-10_RealityMode_R2/`)에서 다섯 다 통과했다.
+    2차가 낸 기록 창 잘림 1건도 고쳤다
+  - 2차 이후 8커밋이 더 들어갔다. **그중 인게임 확인을 받은 것은 난이도 캡 하나뿐**이다
+    (`Feedback/FEEDBACK.md` 백로그 12~18번). 체크리스트는 `QA_RealityMode.md`
+  - 두 QA 모두 **전체 체크리스트 완주 판정은 아니다.** 미확인 범위는 각 보고서에 있다
   - 새 파일 `Framework/Together.cs` — 자격 판정. 종족 목록을 안 쓴다
   - 새 파일 `Framework/TogetherMatch.cs` — 진행 상태. **세이브에 안 남긴다.**
     불러온 판에는 붙잡을 이유가 없으므로 여기가 비면 두 `Hold` 가 스스로 끝난다
@@ -84,15 +89,23 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
     `ReservationManager` 는 `MaxPawns` 가 다르면 개수와 무관하게 즉시 거절한다
   - 새 파일 `Framework/TogetherGoodwill.cs` · `TogetherPersonality.cs` — 손님 우호도와
     성격. 우호도는 한 방문에 한 번만 움직이고, 난이도가 크기를 정한다
+  - 새 파일 `Framework/TogetherInvite.cs` — 손님이 먼저 앉아 상대를 기다린다.
+    아무도 안 오면 그 자리에서 혼자 둔다 (세이브에 안 남긴다)
+  - 새 파일 `Framework/Seating.cs` — 앉을 자리. **2칸과 무관하게 적용된다.**
+    바닐라 `JoyGiverDef.requireChair` 를 읽어 체스·포커는 빈 의자를 요구하고,
+    맞은편이 이미 잡은 칸에서 가장 먼 자리를 골라 마주 앉힌다
+  - 새 파일 `Framework/PRDebug.cs` — QA 용 개발자 도구 넷. 기다림만 건너뛴다
+  - **모두에게 달라지는 것 둘** — 난이도 캡(`lockTiersAboveSkill`, 기본 켜짐)과
+    의자 규칙. 나머지는 전부 `immersionMode` · `playTogether` 아래이고 기본 꺼짐이다
   - `MiniGameWorker.Losing` 은 기본값 null 이다. 체스·우르만 답한다 —
     판세를 모르는 게임에서는 판을 엎지 않는다
   - 설정은 전부 `immersionMode` 아래다. **최상위는 늘지 않았다**
   - 겹상: 기즈모와 이어 두기가 몰입 모드를 우회하던 구멍을 막았다 —
     1칸만 켜 둔 사람에게도 고쳐진다
-- `Tools/verify.py` — 번역 키 575 짝, 안 쓰는 키 0, Def 참조 성함
+- `Tools/verify.py` — 번역 키 594 짝, 안 쓰는 키 0, Def 참조 성함
   (ModSupport 의 Def · 패치 · 지원 모드 defName 까지 검사한다)
 - `Tools/guistate.py` — GUI 전역 상태를 되돌리지 않는 메서드 0
-- `Tools/package.py` — 통과 (61 파일 · 646 KB, LoadFolders.xml 과 ModSupport 포함)
+- `Tools/package.py` — 통과 (61 파일 · 671 KB, LoadFolders.xml 과 ModSupport 포함)
 - 인게임 확인: **v1.1.0 QA 완료** (2026-09-08) — VFE 다트·펀칭백·룰렛·아케이드,
   Casino 슬롯, 궤도 지표 줌, Gloomy 가구 3종, 그리고 세 모드를 전부 끈 판까지
   실제로 확인했다. 소프트 의존 경로가 양쪽에서 정상. 남은 확인거리 없음.
@@ -143,12 +156,16 @@ Def 도 패치도 존재하지 않는다. About.xml 의존성은 여전히 0개�
 
 ## 4. 다음에 할 일
 
-1. **v1.1.0 재업로드** — QA 는 닫혔다. 남은 것은 올리는 일뿐이다.
+1. **v1.2.0 업로드** — `About.xml` 은 이미 1.2.0 이고 `Workshop/changenotes_1.2.0.txt`
+   와 설명문(`둘이 함께 두기` 구획)도 써 두었다. 남은 것은 올리는 일이다.
    재업로드는 웹의 언어별 설명을 건드리지 않으므로 설명은 직접 붙여 넣어야 한다.
-   순서: 림월드에서 Update on Steam Workshop → 스크린샷(`mod_collage.jpg` ·
-   `surface_zoomed.jpg`)을 캐러셀에 올리고 → 설명문의 `{{SS6_MOD}}` 자리를 그
-   업로드 URL 로 바꾸고 → 언어 탭마다 붙여 넣고 → 변경 기록에
-   `Workshop/changenotes_1.1.0.txt` 를 쓴다
+   순서: 림월드에서 Update on Steam Workshop → 언어 탭마다 설명을 붙여 넣고 →
+   변경 기록에 `Workshop/changenotes_1.2.0.txt` 를 쓴다
+   - **먼저 확인할 것**: v1.1.0 이 실제로 올라갔는가. `FEEDBACK.md` 는 "2026-09-08
+     v1.1.0 으로 배포됨" 이라고 적었는데 이 문서의 옛 §4 는 "재업로드 대기" 였다.
+     안 올라갔다면 `changenotes_1.1.0.txt` 를 먼저 붙여야 한다
+   - **영어 설명이 7,729자다.** 한도가 언어당 8,000자이므로 여유가 270자뿐이다.
+     다음에 무엇을 더하려면 그만큼 덜어내야 한다
 2. **저장소 공개 상태에 유의** — 포트폴리오 목적으로 열어 두었다(2026-09-08).
    8/31 커밋 세 개(`87e21e4` · `6bcec96` · `754a954`)가 `tr8425@gmail.com` 으로
    서명되어 있어 커밋 목록에서 보인다. 나머지는 `Team Rostra <tr8425@naver.com>`.
