@@ -49,7 +49,7 @@
 
   <PR.Log.Title>Play by play</PR.Log.Title>
   <PR.Side.You>You</PR.Side.You>
-  <PR.Side.Opponent>AI </PR.Side.Opponent>
+  <PR.Side.Opponent>Opponent</PR.Side.Opponent>
 
   <!-- Difficulty -->
   <PR.Difficulty.Title>{0} - pick your opponent</PR.Difficulty.Title>

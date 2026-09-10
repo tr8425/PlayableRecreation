@@ -17,8 +17,37 @@ namespace PlayableRecreation
         /// <summary>어느 가구에서, 누가, 몇 단계로, 연습인지.</summary>
         public Thing Board { get; private set; }
         public Pawn SeatedPawn { get; private set; }
+
+        /// <summary>맞은편에 앉은 사람. 2칸이 아니면 없다 — 그때 상대는 AI 다.</summary>
+        public Pawn OpponentPawn { get; private set; }
+
         public int Tier { get; private set; }
         public bool Practice { get; private set; }
+
+        /// <summary>
+        /// 기보에 적히는 이름. 예전에는 "당신" 과 "상대" 두 낱말뿐이었는데,
+        /// 2칸이 들어오면서 판 앞에 진짜 두 사람이 앉게 됐다. 앉은 사람이 있으면
+        /// 이름으로 적는다. 없으면 예전 낱말로 돌아간다.
+        /// </summary>
+        public string YouLabel
+        {
+            get
+            {
+                return SeatedPawn != null
+                    ? SeatedPawn.LabelShortCap
+                    : "PR.Side.You".Translate().ToString();
+            }
+        }
+
+        public string OpponentLabel
+        {
+            get
+            {
+                return OpponentPawn != null
+                    ? OpponentPawn.LabelShortCap
+                    : "PR.Side.Opponent".Translate().ToString();
+            }
+        }
 
         /// <summary>
         /// 지금 판을 남겨둬도 되는 지점인가. 창은 이 값이 바뀔 때마다 가구 위의 판을 갱신한다.
@@ -48,10 +77,11 @@ namespace PlayableRecreation
         /// <summary>창 하단 왼쪽에 그대로 나가는 한 줄.</summary>
         public abstract string StatusText { get; }
 
-        public void Bind(Thing board, Pawn seatedPawn, int tier, bool practice)
+        public void Bind(Thing board, Pawn seatedPawn, Pawn opponentPawn, int tier, bool practice)
         {
             Board = board;
             SeatedPawn = seatedPawn;
+            OpponentPawn = opponentPawn;
             Tier = def != null ? def.ClampTier(tier) : tier;
             Practice = practice;
         }

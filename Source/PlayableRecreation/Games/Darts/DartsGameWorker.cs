@@ -477,9 +477,7 @@ namespace Darts
 
         private string Format(DartEntry entry)
         {
-            string side = entry.Side == DartSide.Player
-                ? "PR.Side.You".Translate().ToString()
-                : "PR.Side.Opponent".Translate().ToString();
+            string side = entry.Side == DartSide.Player ? YouLabel : OpponentLabel;
 
             string tail = entry.Points > 0
                 ? entry.Code + "  +" + entry.Points

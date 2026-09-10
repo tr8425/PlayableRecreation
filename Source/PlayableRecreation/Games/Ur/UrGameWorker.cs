@@ -360,11 +360,9 @@ namespace Ur
             }
         }
 
-        private static string FormatLog(UrLogEntry entry)
+        private string FormatLog(UrLogEntry entry)
         {
-            string side = entry.Side == Side.Player
-                ? "PR.Side.You".Translate().ToString()
-                : "PR.Side.Opponent".Translate().ToString();
+            string side = entry.Side == Side.Player ? YouLabel : OpponentLabel;
 
             if (entry.Passed)
                 return string.Format("{0,3}  {1}  {2}  {3}",

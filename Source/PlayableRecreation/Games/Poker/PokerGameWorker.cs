@@ -318,7 +318,7 @@ namespace Poker
 
             Text.Anchor = TextAnchor.MiddleLeft;
 
-            string who = mine ? "PR.Side.You".Translate().ToString() : "PR.Side.Opponent".Translate().ToString();
+            string who = mine ? YouLabel : OpponentLabel;
             string button = match.Button == seat ? "  " + "POK.Label.Button".Translate() : string.Empty;
 
             GUI.color = PRTheme.Dim;
@@ -655,11 +655,9 @@ namespace Poker
             }
         }
 
-        private static string Format(PokerLogEntry entry)
+        private string Format(PokerLogEntry entry)
         {
-            string side = entry.Seat == PokerSeat.Player
-                ? "PR.Side.You".Translate().ToString()
-                : "PR.Side.Opponent".Translate().ToString();
+            string side = entry.Seat == PokerSeat.Player ? YouLabel : OpponentLabel;
 
             if (entry.Kind == PokerEvent.HandSplit)
                 return string.Format("{0,3}  {1}", entry.Hand, "POK.Log.Split".Translate(entry.Pot));

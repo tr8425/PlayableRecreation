@@ -532,9 +532,7 @@ namespace Throwing
 
         private string Format(ThrowEntry entry)
         {
-            string side = entry.Side == ThrowSide.Player
-                ? "PR.Side.You".Translate().ToString()
-                : "PR.Side.Opponent".Translate().ToString();
+            string side = entry.Side == ThrowSide.Player ? YouLabel : OpponentLabel;
 
             string tail = entry.Ringer
                 ? RingerName

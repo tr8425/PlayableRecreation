@@ -112,7 +112,7 @@ namespace PlayableRecreation.UI
             Configure();
 
             worker = game.MakeWorker();
-            worker.Bind(board, seatedPawn, this.tier, practice);
+            worker.Bind(board, seatedPawn, opponentPawn, this.tier, practice);
             worker.StartNew(NewSeed());
         }
 
@@ -131,7 +131,7 @@ namespace PlayableRecreation.UI
             Configure();
 
             worker = game.MakeWorker();
-            worker.Bind(board, seatedPawn, tier, practice);
+            worker.Bind(board, seatedPawn, opponentPawn, tier, practice);
             worker.Resume(resumed.data);
         }
 
