@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using PlayableRecreation.UI;
 using Verse;
 using Verse.AI;
@@ -182,8 +183,7 @@ namespace PlayableRecreation
                 return;
             }
 
-            // 짚어 주는 기준이 상대가 있으면 상대로 바뀐다. D2 — 어디까지나 제안값이다.
-            Pawn measured = opponent != null ? opponent : pawn;
+            Pawn measured = Measured(pawn, opponent);
 
             if (measured != null && PRMod.Settings.linkToPawnSkill)
             {
@@ -312,14 +312,25 @@ namespace PlayableRecreation
             return component != null ? component.SessionFor(board) : null;
         }
 
-        /// <summary>연동 스킬 + 열정 보정으로 난이도를 정한다. 20레벨을 단계 수로 나눈다.</summary>
-        public static int TierForPawn(MiniGameDef game, Pawn pawn)
+        /// <summary>
+        /// 난이도를 재는 대상. 상대가 있으면 **맞은편에 앉은 사람**이다 (명세 D2) —
+        /// 판이 어려운지 쉬운지는 내가 아니라 그 사람의 실력이 정하기 때문이다.
+        /// </summary>
+        public static Pawn Measured(Pawn pawn, Pawn opponent)
         {
-            int middle = game.difficultyCount / 2;
-            if (game.linkedSkill == null || pawn == null || pawn.skills == null) return game.ClampTier(middle);
+            return opponent != null ? opponent : pawn;
+        }
+
+        /// <summary>
+        /// 이 게임에서 이 사람이 가진 실력. 연동 스킬 + 열정 + 배경 친화다.
+        /// 잴 수 없으면 -1 — 연동 스킬이 없는 게임(추첨함 따위)이 그렇다.
+        /// </summary>
+        public static int EffectiveSkill(MiniGameDef game, Pawn pawn)
+        {
+            if (game == null || game.linkedSkill == null || pawn == null || pawn.skills == null) return -1;
 
             SkillRecord record = pawn.skills.GetSkill(game.linkedSkill);
-            if (record == null) return game.ClampTier(middle);
+            if (record == null) return -1;
 
             int skill = record.Level;
             if (record.passion == Passion.Minor) skill += 1;
@@ -330,9 +341,51 @@ namespace PlayableRecreation
             BackstoryAffinity affinity = AffinityFor(game, pawn);
             if (affinity != null) skill += affinity.levels;
 
+            return skill;
+        }
+
+        /// <summary>연동 스킬 + 열정 보정으로 난이도를 정한다. 20레벨을 단계 수로 나눈다.</summary>
+        public static int TierForPawn(MiniGameDef game, Pawn pawn)
+        {
+            if (game == null) return 0;
+
+            int skill = EffectiveSkill(game, pawn);
+            if (skill < 0) return game.ClampTier(game.difficultyCount / 2);
+
             // 0~20(+2) 을 단계 수로 균등 분할한다.
-            int tier = skill * game.difficultyCount / 21;
-            return game.ClampTier(tier);
+            return game.ClampTier(skill * game.difficultyCount / 21);
+        }
+
+        /// <summary>
+        /// 그 칸에 앉으려면 실력이 얼마나 있어야 하는가. <see cref="TierForPawn"/> 의 역이다 —
+        /// 저쪽이 <c>floor(skill * dc / 21)</c> 이므로 이쪽은 올림이다.
+        /// </summary>
+        public static int SkillNeededFor(MiniGameDef game, int tier)
+        {
+            if (game == null || tier <= 0) return 0;
+
+            int count = Mathf.Max(1, game.difficultyCount);
+            return (tier * 21 + count - 1) / count;
+        }
+
+        /// <summary>
+        /// 이 사람이 앉을 수 있는 가장 높은 칸. 잠금이 꺼져 있거나 잴 수 없으면 상한이 없다.
+        ///
+        /// 실력이 곧 상한이다 — 아래로는 얼마든지 내려갈 수 있고 위로만 못 간다.
+        /// 전적은 원래 칸별로 쌓이므로 장부가 꼬이지는 않는다. 다만 낮은 실력의 폰으로는
+        /// 상위 칸을 못 채우는데, 그게 이 설정을 켠다는 뜻이다.
+        /// </summary>
+        public static int CapForPawn(MiniGameDef game, Pawn pawn)
+        {
+            if (game == null) return 0;
+
+            int top = Mathf.Max(0, game.difficultyCount - 1);
+            if (!PRMod.Settings.lockTiersAboveSkill) return top;
+
+            int skill = EffectiveSkill(game, pawn);
+            if (skill < 0) return top;
+
+            return game.ClampTier(skill * game.difficultyCount / 21);
         }
 
         /// <summary>

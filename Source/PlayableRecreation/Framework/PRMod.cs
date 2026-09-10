@@ -97,6 +97,8 @@ namespace PlayableRecreation
             if (Settings.immersionMode) DoTogetherSection(list);
             list.CheckboxLabeled("PR.Settings.LinkSkill".Translate(), ref Settings.linkToPawnSkill,
                 "PR.Settings.LinkSkill.Desc".Translate());
+            list.CheckboxLabeled("PR.Settings.LockTiers".Translate(), ref Settings.lockTiersAboveSkill,
+                "PR.Settings.LockTiers.Desc".Translate());
             list.CheckboxLabeled("PR.Settings.Sounds".Translate(), ref Settings.sounds);
 
             list.Label("PR.Settings.ThinkTime".Translate(Settings.botThinkSeconds.ToString("0.00")));

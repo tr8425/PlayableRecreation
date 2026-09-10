@@ -57,6 +57,7 @@
   <!-- Difficulty -->
   <PR.Difficulty.Title>{0} - pick your opponent</PR.Difficulty.Title>
   <PR.Difficulty.Hint>You cannot change this once the game starts.</PR.Difficulty.Hint>
+  <PR.Difficulty.TooHard>Beyond {0}’s {1} ({2}/{3})</PR.Difficulty.TooHard>
   <PR.Difficulty.Practice>Practice against an awful opponent</PR.Difficulty.Practice>
   <PR.Difficulty.Practice.Desc>Lowest tier. Nothing is recorded.</PR.Difficulty.Practice.Desc>
   <PR.Difficulty.T0.Label>Poor</PR.Difficulty.T0.Label>
@@ -176,6 +177,8 @@ You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
   <PR.Settings.Together.NeedsSave>        Needs saved games turned on.</PR.Settings.Together.NeedsSave>
   <PR.Settings.LinkSkill>Set the tier from the colonist skill</PR.Settings.LinkSkill>
   <PR.Settings.LinkSkill.Desc>Skips the picker. Each game uses its own skill.</PR.Settings.LinkSkill.Desc>
+  <PR.Settings.LockTiers>Lock tiers the colonist cannot handle</PR.Settings.LockTiers>
+  <PR.Settings.LockTiers.Desc>Measured on whoever sits across the board. Lower tiers stay open.</PR.Settings.LockTiers.Desc>
   <PR.Settings.Sounds>Sound effects</PR.Settings.Sounds>
   <PR.Settings.ThinkTime>Pause before they act: {0}s (shorter at higher tiers)</PR.Settings.ThinkTime>
 

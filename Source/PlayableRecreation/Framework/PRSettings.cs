@@ -74,6 +74,9 @@ namespace PlayableRecreation
         /// <summary>켜면 난이도 선택 창 대신 우클릭한 폰의 스킬로 상대를 정한다.</summary>
         public bool linkToPawnSkill = false;
 
+        /// <summary>실력에 부치는 칸은 아예 못 고르게 잠근다. 기준은 맞은편에 앉은 사람이다.</summary>
+        public bool lockTiersAboveSkill = true;
+
         /// <summary>AI "생각 중" 연출의 기준 시간(초). 난이도가 높을수록 짧아진다.</summary>
         public float botThinkSeconds = 0.75f;
 
@@ -198,6 +201,7 @@ namespace PlayableRecreation
             Scribe_Values.Look(ref sounds, "sounds", true);
 
             Scribe_Values.Look(ref linkToPawnSkill, "linkToPawnSkill", false);
+            Scribe_Values.Look(ref lockTiersAboveSkill, "lockTiersAboveSkill", true);
             Scribe_Values.Look(ref botThinkSeconds, "botThinkSeconds", 0.75f);
 
             Scribe_Values.Look(ref masteryBonus, "masteryBonus", true);
