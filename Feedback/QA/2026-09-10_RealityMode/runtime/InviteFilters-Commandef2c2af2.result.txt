@@ -1,0 +1,8 @@
+2026-09-10T18:02:25.8084374+09:00
+leaving duty excluded=True
+direct debug invite=True
+already waiting guest excluded=True
+waiting board excluded=True
+colonist reserved=True board excluded=True
+all faction pawns map-exit applied cleared=True
+tier0 ordinary/close/crushed scaled=1,1,-1 (runtime calculation only)

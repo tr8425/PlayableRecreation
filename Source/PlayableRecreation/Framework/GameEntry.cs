@@ -72,16 +72,42 @@ namespace PlayableRecreation
                 return;
             }
 
-            // 상대가 있던 판이면 그 사람도 다시 불러야 이어 두는 것이 된다.
-            if (Together.Enabled && session.opponentPawn != null && session.seatedPawn != null
-                && Together.Qualifies(session.opponentPawn, session.seatedPawn, board, session.game))
+            if (ResumeTogether(session)) return;
+
+            Resume(session);
+        }
+
+        /// <summary>
+        /// 둘이 두던 판을 이어 두는 유일한 문. 이어 둘 판이 아니면 false 를 돌려주고
+        /// 부르는 쪽이 평소대로 진행한다.
+        ///
+        /// <b>상대가 못 오면 아무것도 열지 않는다.</b> 세션은 상대를 그대로 들고 있어서
+        /// 혼자 여는 길이 없다 — 열어 봐야 §7.1 이 곧바로 닫고 "자리를 떴다" 가 잇따른다.
+        /// 판은 가구 위에 남으므로 나중에 다시 부르면 그만이다.
+        /// </summary>
+        private static bool ResumeTogether(GameSession session)
+        {
+            if (!Together.Enabled) return false;
+            if (session.opponentPawn == null || session.seatedPawn == null) return false;
+
+            Thing board = session.board;
+
+            Together.Refusal refusal =
+                Together.Judge(session.opponentPawn, session.seatedPawn, board, session.game);
+
+            if (refusal == Together.Refusal.None)
             {
                 TogetherMatch.Arrange(session.game, board, session.seatedPawn, session.opponentPawn,
                     session.tier, session.practice, session);
-                return;
+                return true;
             }
 
-            Resume(session);
+            Messages.Message(
+                "PR.Together.Cannot".Translate(
+                    session.opponentPawn.LabelShortCap, Together.ReasonText(refusal)),
+                board, MessageTypeDefOf.RejectInput, false);
+
+            return true;
         }
 
         /// <summary>난이도를 정해 새 판을 연다. 단계가 하나뿐이거나 폰 연동이면 선택 창을 건너뛴다.</summary>
@@ -250,6 +276,11 @@ namespace PlayableRecreation
                 Resume(session);
                 return;
             }
+
+            // 둘이 두던 판은 **언제나** 여기를 지난다. 예전에는 기즈모와 플로트 메뉴가
+            // 이 검사를 건너뛰고 곧장 열어서, 주도한 쪽이 이미 판 옆에 서 있으면 상대를
+            // 부르지도 않고 창이 열렸다가 §7.1 이 반 초 만에 닫았다 (QA-02).
+            if (ResumeTogether(session)) return;
 
             Pawn seated = session.seatedPawn;
 

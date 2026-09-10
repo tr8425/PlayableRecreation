@@ -24,7 +24,13 @@ namespace PlayableRecreation
 
             // 자리 수는 바닐라가 그 가구에 쓰는 값 그대로다(Together.SeatCount).
             // 실패는 조용히 받는다 - 예약은 다른 모드와 부딪히기 쉬운 자리다.
-            return pawn.Reserve(job.targetA, job, Together.SeatCount(Board), 0, null, errorOnFailed);
+            if (!pawn.Reserve(job.targetA, job, Together.SeatCount(Board), 0, null, errorOnFailed))
+                return false;
+
+            // 자리도 함께 잡는다. 안 잡으면 둘이 같은 칸에 겹쳐 선다 (QA-01).
+            TogetherToils.ClaimSeat(pawn, job, Board, TargetIndex.C);
+
+            return true;
         }
 
         /// <summary>
@@ -44,7 +50,11 @@ namespace PlayableRecreation
         {
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
 
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+            // 자리를 잡았으면 그 칸으로 간다. 못 잡았으면 예전처럼 닿기만 한다.
+            if (job.GetTarget(TargetIndex.C).IsValid)
+                yield return Toils_Goto.GotoCell(TargetIndex.C, PathEndMode.OnCell);
+            else
+                yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 
             Toil open = ToilMaker.MakeToil("OpenMiniGameWindow");
             open.defaultCompleteMode = ToilCompleteMode.Instant;

@@ -29,7 +29,13 @@ namespace PlayableRecreation
 
             // 상대 폰 자체도 잡는다. 가구만 예약해서는 같은 사람을 두 판에 지목하는 것을
             // 막지 못한다 - 보드가 둘이면 각각 두 자리를 따로 잡기 때문이다.
-            return pawn.Reserve(job.targetB, job, 1, 0, null, errorOnFailed);
+            if (!pawn.Reserve(job.targetB, job, 1, 0, null, errorOnFailed))
+                return false;
+
+            // 자리도 함께 잡는다. 안 잡으면 둘이 같은 칸에 겹쳐 선다 (QA-01).
+            TogetherToils.ClaimSeat(pawn, job, Board, TargetIndex.C);
+
+            return true;
         }
 
         /// <summary>걷는 동안과 두는 동안이 같은 Job 이라 닿은 뒤에는 문구를 바꿔 준다.</summary>
@@ -50,7 +56,11 @@ namespace PlayableRecreation
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOnDespawnedOrNull(TargetIndex.B);
 
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+            // 자리를 잡았으면 그 칸으로 간다. 못 잡았으면 예전처럼 닿기만 한다.
+            if (job.GetTarget(TargetIndex.C).IsValid)
+                yield return Toils_Goto.GotoCell(TargetIndex.C, PathEndMode.OnCell);
+            else
+                yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 
             Toil arrive = ToilMaker.MakeToil("PR_JoinArrived");
             arrive.defaultCompleteMode = ToilCompleteMode.Instant;

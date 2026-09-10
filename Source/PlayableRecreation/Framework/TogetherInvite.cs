@@ -17,8 +17,13 @@ namespace PlayableRecreation
     /// 필요한 것은 그 위의 주사위 하나뿐이다.
     ///
     /// <b>아무도 안 오면 혼자 논다.</b> 일어나서 가 버리면 청한 적도 없는 일이 되지만,
-    /// 혼자 두는 손님은 그 자리에 남아 "저 사람 아직 저기 있네" 가 된다. 혼자 두는 방법은
-    /// 우리가 만들지 않는다 — 그 가구의 바닐라 여가 Job 이 이미 그것이다.
+    /// 혼자 두는 손님은 그 자리에 남아 "저 사람 아직 저기 있네" 가 된다.
+    ///
+    /// 처음에는 그 가구의 바닐라 여가 Job 을 그대로 넘겨 주려 했는데 <b>그게 틀렸다</b> —
+    /// 바닐라 <c>JoyUtility.JoyTickCheckEnd</c> 첫 줄이 <c>needs.joy == null</c> 이면 Job 을
+    /// <c>InterruptForced</c> 로 끝낸다. 손님은 여가 욕구가 아예 없으므로(Joy NeedDef 가
+    /// colonistsOnly) 첫 틱에 죽고 곧바로 배회로 넘어갔다 (QA-03). 그래서 <b>우리 Job 을
+    /// 그대로 들고</b> 자리를 지킨다 — 보고 문구만 바뀐다.
     /// </summary>
     public static class TogetherInvite
     {
@@ -31,12 +36,18 @@ namespace PlayableRecreation
         /// <summary>기다려 주는 시간. 넘으면 혼자 둔다.</summary>
         private const int WaitTicks = GenDate.TicksPerHour * 2;
 
+        /// <summary>혼자 두는 시간. 이만큼 지나면 일어나 제 일로 돌아간다.</summary>
+        private const int AloneTicks = GenDate.TicksPerHour * 2;
+
         private sealed class Seat
         {
             public MiniGameDef game;
             public Thing board;
             public Pawn guest;
             public int startedTick;
+
+            /// <summary>기다리기를 접고 혼자 두는 중인가.</summary>
+            public bool alone;
         }
 
         private static readonly List<Seat> waiting = new List<Seat>();
@@ -57,26 +68,42 @@ namespace PlayableRecreation
 
         // ---------- 바깥에서 묻는 것 ----------
 
-        /// <summary>이 가구 앞에서 상대를 기다리는 손님. 없으면 null.</summary>
+        /// <summary>
+        /// 이 가구 앞에서 <b>상대를 기다리는</b> 손님. 혼자 두기로 넘어간 사람은 세지 않는다 —
+        /// 그때는 더 기다리는 것이 아니라 그냥 노는 것이라, 목록에서 "기다리는 중" 이면 거짓말이다.
+        /// 상대로 고르는 것은 여전히 되고, 다만 맨 위로 올리지 않을 뿐이다.
+        /// </summary>
         public static Pawn WaitingAt(Thing board)
         {
             if (board == null) return null;
 
             for (int i = 0; i < waiting.Count; i++)
-                if (waiting[i].board == board) return waiting[i].guest;
+                if (waiting[i].board == board && !waiting[i].alone) return waiting[i].guest;
 
             return null;
         }
 
-        /// <summary>이 사람이 어딘가에서 상대를 기다리고 있는가. 목록에서 맨 앞에 세우는 근거다.</summary>
+        /// <summary>판 앞을 지키고 있는가(기다리는 중이든 혼자 두는 중이든). Job 이 이걸 본다.</summary>
         public static bool IsWaiting(Pawn pawn)
         {
-            if (pawn == null) return false;
+            return SeatOf(pawn) != null;
+        }
+
+        /// <summary>기다리기를 접고 혼자 두는 중인가. 보고 문구가 갈린다.</summary>
+        public static bool IsAlone(Pawn pawn)
+        {
+            Seat seat = SeatOf(pawn);
+            return seat != null && seat.alone;
+        }
+
+        private static Seat SeatOf(Pawn pawn)
+        {
+            if (pawn == null) return null;
 
             for (int i = 0; i < waiting.Count; i++)
-                if (waiting[i].guest == pawn) return true;
+                if (waiting[i].guest == pawn) return waiting[i];
 
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -129,18 +156,24 @@ namespace PlayableRecreation
                     || invite.board == null || !invite.board.Spawned
                     || invite.guest.Map != invite.board.Map;
 
-                bool timedOut = Find.TickManager.TicksGame - invite.startedTick > WaitTicks;
+                int limit = invite.alone ? AloneTicks : WaitTicks;
+                bool timedOut = Find.TickManager.TicksGame - invite.startedTick > limit;
 
-                // 우리 Job 을 놓았으면 더는 기다리는 것이 아니다. 판이 잡혀 JoinGame 으로
+                // 우리 Job 을 놓았으면 더는 판 앞에 있는 것이 아니다. 판이 잡혀 JoinGame 으로
                 // 바뀐 경우도 여기로 온다 - 그때는 이미 Cancel 이 지운 뒤다.
                 bool still = !lost && invite.guest.CurJobDef == PRDefOf.PR_InviteGame;
 
                 if (!lost && !timedOut && still) continue;
 
-                waiting.RemoveAt(i);
+                // 아무도 안 왔다. 자리를 뜨는 것이 아니라 **그 자리에서 혼자 둔다.**
+                if (timedOut && !lost && still && !invite.alone)
+                {
+                    invite.alone = true;
+                    invite.startedTick = Find.TickManager.TicksGame;
+                    continue;
+                }
 
-                // 아무도 안 왔으면 혼자 둔다. 자리를 뜨는 것이 아니라 그 자리에 남는다.
-                if (timedOut && !lost && still) PlayAlone(invite.guest, invite.board, invite.game);
+                waiting.RemoveAt(i);
             }
         }
 
@@ -189,9 +222,10 @@ namespace PlayableRecreation
                 Seat seat = waiting[i];
                 int held = Find.TickManager.TicksGame - seat.startedTick;
 
-                text += "  waiting: " + seat.guest.ToStringSafe()
+                text += (seat.alone ? "  alone: " : "  waiting: ") + seat.guest.ToStringSafe()
                     + " at " + seat.board.ToStringSafe()
-                    + " (" + seat.game.ToStringSafe() + ", " + held + "/" + WaitTicks + " ticks"
+                    + " (" + seat.game.ToStringSafe()
+                    + ", " + held + "/" + (seat.alone ? AloneTicks : WaitTicks) + " ticks"
                     + ", job=" + (seat.guest.CurJobDef != null ? seat.guest.CurJobDef.defName : "none") + ")\n";
             }
 
@@ -347,56 +381,6 @@ namespace PlayableRecreation
                 board, MessageTypeDefOf.NeutralEvent, false);
 
             return true;
-        }
-
-        // ---------- 혼자 두기 ----------
-
-        /// <summary>
-        /// 아무도 안 왔다. 그 가구의 바닐라 여가 Job 을 그대로 준다 — 손님에게 여가 욕구가
-        /// 없어도(바닐라 Joy 는 colonistsOnly 다) Job 자체는 돈다. 우리가 만들 것은 없다.
-        /// </summary>
-        private static void PlayAlone(Pawn guest, Thing board, MiniGameDef game)
-        {
-            if (game == null || game.vanillaJob == null || guest.jobs == null) return;
-
-            IntVec3 spot = SitSpot(guest, board);
-            if (!spot.IsValid) return;
-
-            Job job = JobMaker.MakeJob(game.vanillaJob, board, spot);
-            guest.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-        }
-
-        /// <summary>
-        /// 앉을 자리. 바닐라 <c>JoyGiver_InteractBuildingSitAdjacent</c> 와 같은 규칙이다 —
-        /// 가구에 **상하좌우로** 붙은 칸이어야 하고, 의자가 있으면 그쪽이 먼저다.
-        /// 서 있던 자리가 이미 조건에 맞는 경우가 대부분이라 그것부터 본다.
-        /// </summary>
-        private static IntVec3 SitSpot(Pawn guest, Thing board)
-        {
-            IntVec3 here = guest.Position;
-            if (Sittable(guest, board, here, true)) return here;
-
-            IntVec3 fallback = IntVec3.Invalid;
-
-            foreach (IntVec3 cell in GenAdjFast.AdjacentCellsCardinal(board))
-            {
-                if (Sittable(guest, board, cell, true)) return cell;
-                if (!fallback.IsValid && Sittable(guest, board, cell, false)) fallback = cell;
-            }
-
-            return fallback;
-        }
-
-        private static bool Sittable(Pawn guest, Thing board, IntVec3 cell, bool needChair)
-        {
-            if (!cell.IsValid || !cell.InBounds(board.Map)) return false;
-            if (!cell.AdjacentToCardinal(board.Position)) return false;
-            if (cell.IsForbidden(guest) || !guest.CanReserveSittableOrSpot(cell)) return false;
-
-            if (!needChair) return true;
-
-            Building edifice = cell.GetEdifice(board.Map);
-            return edifice != null && edifice.def.building != null && edifice.def.building.isSittable;
         }
 
         private static MiniGameDef GameOn(Thing board)

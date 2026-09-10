@@ -1,0 +1,16 @@
+playTogether=false; normal furniture Begin, skill-linked difficulty.
+PR_Slots opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=SocialRelax
+ worker=Slots.SlotsGameWorker status=One token a pull. opponent=
+ storedAfterClose=False
+PR_Darts opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Play_Poker
+ worker=Darts.DartsGameWorker status=Click the board to aim, then stop the bar. opponent=
+ storedAfterClose=True
+PR_PunchingBag opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Play_PunchingBag
+ worker=Punching.PunchingGameWorker status=Press when ready. Your first punch starts the beat. opponent=
+ storedAfterClose=False
+PR_Roulette opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Play_Poker
+ worker=Roulette.RouletteGameWorker status=Pick a bet on the table, then spin. opponent=
+ storedAfterClose=True
+PR_Arcade opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=SocialRelax
+ worker=Billiards.BilliardsGameWorker status=Hit the 1 first. Aim with the mouse. opponent=
+ storedAfterClose=True

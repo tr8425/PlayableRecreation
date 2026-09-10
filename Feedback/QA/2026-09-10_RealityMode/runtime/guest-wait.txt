@@ -1,0 +1,131 @@
+faction=보수 북 티베에라도 연방 lord=RimWorld.LordJob_VisitColony invite=no free board with a match, or no idle qualifying guest
+404333 elapsed=11 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=TravelOrLeave food=1
+  waiting: (none)
+404457 elapsed=135 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=TravelOrLeave food=0.996
+  waiting: (none)
+404584 elapsed=262 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.992
+  waiting: (none)
+404708 elapsed=386 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.988
+  waiting: (none)
+404831 elapsed=509 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.984
+  waiting: (none)
+404955 elapsed=633 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.984
+  waiting: (none)
+405079 elapsed=757 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.98
+  waiting: (none)
+405204 elapsed=882 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.976
+  waiting: (none)
+405327 elapsed=1005 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9719999
+  waiting: (none)
+405450 elapsed=1128 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9679999
+  waiting: (none)
+405575 elapsed=1253 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9639999
+  waiting: (none)
+405700 elapsed=1378 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9639999
+  waiting: (none)
+405824 elapsed=1502 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9599999
+  waiting: (none)
+405948 elapsed=1626 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9559999
+  waiting: (none)
+406073 elapsed=1751 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9519999
+  waiting: (none)
+406197 elapsed=1875 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9479999
+  waiting: (none)
+406322 elapsed=2000 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9479999
+  waiting: (none)
+406446 elapsed=2124 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9439999
+  waiting: (none)
+406571 elapsed=2249 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9399999
+  waiting: (none)
+406695 elapsed=2373 pos=(151, 0, 124) job=Wait_Wander report=wandering. duty=Defend food=0.9359999
+  waiting: (none)
+406818 elapsed=2496 pos=(152, 0, 123) job=PR_InviteGame report=waiting for someone to play. duty=Defend food=0.9319999
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 50/5000 ticks, job=PR_InviteGame)
+406941 elapsed=2619 pos=(155, 0, 120) job=PR_InviteGame report=waiting for someone to play. duty=Defend food=0.9279999
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 173/5000 ticks, job=PR_InviteGame)
+407067 elapsed=2745 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9279999
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 299/5000 ticks, job=PR_InviteGame)
+407191 elapsed=2869 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9239998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 423/5000 ticks, job=PR_InviteGame)
+407314 elapsed=2992 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9199998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 546/5000 ticks, job=PR_InviteGame)
+407438 elapsed=3116 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9159998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 670/5000 ticks, job=PR_InviteGame)
+407563 elapsed=3241 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9119998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 795/5000 ticks, job=PR_InviteGame)
+407687 elapsed=3365 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9079998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 919/5000 ticks, job=PR_InviteGame)
+407813 elapsed=3491 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9079998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1045/5000 ticks, job=PR_InviteGame)
+407937 elapsed=3615 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.9039998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1169/5000 ticks, job=PR_InviteGame)
+408060 elapsed=3738 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8999998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1292/5000 ticks, job=PR_InviteGame)
+408185 elapsed=3863 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8959998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1417/5000 ticks, job=PR_InviteGame)
+408311 elapsed=3989 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8919998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1543/5000 ticks, job=PR_InviteGame)
+408437 elapsed=4115 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8879998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1669/5000 ticks, job=PR_InviteGame)
+408562 elapsed=4240 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8879998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1794/5000 ticks, job=PR_InviteGame)
+408688 elapsed=4366 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8839998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 1920/5000 ticks, job=PR_InviteGame)
+408813 elapsed=4491 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8799998
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2045/5000 ticks, job=PR_InviteGame)
+408937 elapsed=4615 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8759997
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2169/5000 ticks, job=PR_InviteGame)
+409063 elapsed=4741 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8719997
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2295/5000 ticks, job=PR_InviteGame)
+409187 elapsed=4865 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8679997
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2419/5000 ticks, job=PR_InviteGame)
+409312 elapsed=4990 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8679997
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2544/5000 ticks, job=PR_InviteGame)
+409437 elapsed=5115 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8639997
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2669/5000 ticks, job=PR_InviteGame)
+409563 elapsed=5241 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8599997
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2795/5000 ticks, job=PR_InviteGame)
+409689 elapsed=5367 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend food=0.8559997
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2921/5000 ticks, job=PR_InviteGame)
+409701 continuation=12 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 2933/5000 ticks, job=PR_InviteGame)
+409826 continuation=137 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3058/5000 ticks, job=PR_InviteGame)
+409946 continuation=257 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3178/5000 ticks, job=PR_InviteGame)
+410068 continuation=379 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3300/5000 ticks, job=PR_InviteGame)
+410192 continuation=503 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3424/5000 ticks, job=PR_InviteGame)
+410320 continuation=631 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3552/5000 ticks, job=PR_InviteGame)
+410444 continuation=755 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3676/5000 ticks, job=PR_InviteGame)
+410570 continuation=881 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3802/5000 ticks, job=PR_InviteGame)
+410694 continuation=1005 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 3926/5000 ticks, job=PR_InviteGame)
+410819 continuation=1130 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4051/5000 ticks, job=PR_InviteGame)
+410945 continuation=1256 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4177/5000 ticks, job=PR_InviteGame)
+411069 continuation=1380 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4301/5000 ticks, job=PR_InviteGame)
+411195 continuation=1506 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4427/5000 ticks, job=PR_InviteGame)
+411320 continuation=1631 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4552/5000 ticks, job=PR_InviteGame)
+411445 continuation=1756 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4677/5000 ticks, job=PR_InviteGame)
+411570 continuation=1881 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4802/5000 ticks, job=PR_InviteGame)
+411695 continuation=2006 pos=(158, 0, 121) job=PR_InviteGame report=waiting for someone to play Chess. duty=Defend
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 4927/5000 ticks, job=PR_InviteGame)
+411820 continuation=2131 pos=(159, 0, 122) job=Play_Chess report=playing chess. duty=Defend
+  waiting: (none)
+411945 continuation=2256 pos=(158, 0, 123) job=Wait_Wander report=wandering. duty=Defend
+  waiting: (none)
+412070 continuation=2381 pos=(158, 0, 123) job=GotoWander report=wandering. duty=Defend
+  waiting: (none)
+412194 continuation=2505 pos=(157, 0, 125) job=GotoWander report=wandering. duty=Defend
+  waiting: (none)

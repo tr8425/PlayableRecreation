@@ -132,6 +132,66 @@ namespace PlayableRecreation
         }
 
         /// <summary>
+        /// 이 사람이 앉을 자리를 잡아 <see cref="TargetIndex.C"/> 에 넣는다.
+        /// <b>예약까지 여기서 한다</b> — 잡아 두지 않으면 다음 사람이 같은 칸을 고른다.
+        ///
+        /// 여태 <c>PathEndMode.Touch</c> 로만 걸어가게 두었는데, Touch 는 "닿기만 하면
+        /// 된다" 라서 둘이 **같은 칸에 겹쳐 선다.** 실제로 겹쳤다(QA-01). 바닐라
+        /// <c>JoyGiver_InteractBuildingSitAdjacent</c> 가 자리를 먼저 예약하는 이유가 이것이다.
+        ///
+        /// 규칙도 바닐라와 같다 — 가구에 상하좌우로 붙은 칸, 의자가 있으면 그쪽이 먼저.
+        /// 자리를 못 잡아도 Job 을 실패시키지 않는다. 겹쳐 서는 것이 못 노는 것보다 낫다.
+        /// </summary>
+        public static bool ClaimSeat(Pawn pawn, Job job, Thing board, TargetIndex index)
+        {
+            if (pawn == null || job == null || board == null || !board.Spawned) return false;
+
+            IntVec3 spot = FindSeat(pawn, board);
+            if (!spot.IsValid) return false;
+
+            if (!pawn.ReserveSittableOrSpot(spot, job, false)) return false;
+
+            job.SetTarget(index, spot);
+            return true;
+        }
+
+        /// <summary>
+        /// 빈 자리 하나. 의자가 있는 칸을 한 바퀴 다 본 뒤에야 맨바닥을 본다 —
+        /// 바닐라도 그 순서다(<c>requireChair</c> 가 아니면 두 바퀴를 돈다).
+        /// </summary>
+        private static IntVec3 FindSeat(Pawn pawn, Thing board)
+        {
+            IntVec3 bare = IntVec3.Invalid;
+
+            foreach (IntVec3 cell in GenAdjFast.AdjacentCellsCardinal(board))
+            {
+                if (!Free(pawn, board, cell)) continue;
+
+                if (Chair(board.Map, cell)) return cell;
+                if (!bare.IsValid) bare = cell;
+            }
+
+            return bare;
+        }
+
+        private static bool Free(Pawn pawn, Thing board, IntVec3 cell)
+        {
+            Map map = board.Map;
+
+            if (map == null || !cell.InBounds(map)) return false;
+            if (cell.IsForbidden(pawn) || !cell.Standable(map)) return false;
+            if (!pawn.CanReserveSittableOrSpot(cell)) return false;
+
+            return pawn.CanReach(cell, PathEndMode.OnCell, Danger.Some);
+        }
+
+        private static bool Chair(Map map, IntVec3 cell)
+        {
+            Building edifice = cell.GetEdifice(map);
+            return edifice != null && edifice.def.building != null && edifice.def.building.isSittable;
+        }
+
+        /// <summary>
         /// 이미 판 앞에 닿았는가. Job 은 걷기와 붙잡히기를 한 묶음으로 갖고 있어
         /// 보고문구가 하나라, 앉아 두는 동안에도 "가는 중" 이라고 뜨는 것을 막는다.
         /// </summary>

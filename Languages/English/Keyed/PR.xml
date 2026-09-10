@@ -28,6 +28,7 @@
   <PR.Job.Playing>playing {0}.</PR.Job.Playing>
   <PR.Job.PlayingWith>playing {0} with {1}.</PR.Job.PlayingWith>
   <PR.Job.Waiting>waiting for someone to play {0}.</PR.Job.Waiting>
+  <PR.Job.PlayingAlone>playing {0} alone.</PR.Job.PlayingAlone>
   <PR.Together.BoardFlip>{0} sent the pieces flying rather than lose to {1}.</PR.Together.BoardFlip>
   <PR.Together.Goodwill.Up>{0} enjoyed the game. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Up>
   <PR.Together.Goodwill.Down>{0} was taken apart at the board and did not enjoy it. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Down>

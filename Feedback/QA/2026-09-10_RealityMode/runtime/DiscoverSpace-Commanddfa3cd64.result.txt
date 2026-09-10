@@ -1,0 +1,18 @@
+2026-09-10T17:41:47.7558500+09:00
+LAYERS [0, RimWorld.SurfaceLayer];[1, RimWorld.OrbitLayer]
+SPACE Settlement 일식 플랫폼 (tile=891,1) tile=891,1 def=SpaceSettlement
+SPACE Settlement 퀘이사 허브 (tile=661,1) tile=661,1 def=SpaceSettlement
+SPACE Settlement 별바다 스테이션 (tile=996,1) tile=996,1 def=SpaceSettlement
+SPACE Settlement 초승달 정거장 (tile=946,1) tile=946,1 def=SpaceSettlement
+SPACE Settlement 유성 허브 (tile=463,1) tile=463,1 def=SpaceSettlement
+SPACE Settlement 공허 스테이션 (tile=200,1) tile=200,1 def=SpaceSettlement
+SPACE Settlement 천체 기지 (tile=139,1) tile=139,1 def=SpaceSettlement
+SPACE Settlement 햇빛 링 (tile=554,1) tile=554,1 def=SpaceSettlement
+SPACE Settlement 태양 허브 (tile=1027,1) tile=1027,1 def=SpaceSettlement
+SPACE BasicAsteroidMapParent Olesya의 대박 달 (tile=10,1) tile=10,1 def=AsteroidBasic
+SPACE BasicAsteroidMapParent 아워엔티나 유성 (tile=1121,1) tile=1121,1 def=AsteroidBasic
+SPACE BasicAsteroidMapParent 전갈 송곳니 유성 (tile=863,1) tile=863,1 def=AsteroidBasic
+SPACE BasicAsteroidMapParent 트로알보뇨 암석 (tile=960,1) tile=960,1 def=AsteroidBasic
+SPACE BasicAsteroidMapParent 검은색 얼룩말 소행성 (tile=1044,1) tile=1044,1 def=AsteroidBasic
+SPACE BasicAsteroidMapParent 레르 유성 (tile=1108,1) tile=1108,1 def=AsteroidBasic
+ENGINE GravEngine45511 (155, 0, 126)

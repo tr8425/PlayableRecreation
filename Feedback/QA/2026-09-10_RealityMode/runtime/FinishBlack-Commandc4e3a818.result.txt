@@ -1,0 +1,2 @@
+2026-09-10T17:33:05.9900850+09:00
+Scripted legal Fool's Mate, both sides use actual worker Commit: f3 e5 g4 Qh4# result=Checkmate isOver=True won=True recordsBefore=3

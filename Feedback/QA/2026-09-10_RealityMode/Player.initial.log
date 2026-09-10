@@ -1,0 +1,58 @@
+Mono path[0] = 'C:/Program Files (x86)/Steam/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'C:/Program Files (x86)/Steam/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path C:/Program Files (x86)/Steam/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3070 (ID=0x2488)
+    Vendor:   NVIDIA
+    VRAM:     8017 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.175 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+UnloadTime: 1.200600 ms
+Command line arguments: -disable-compute-shaders -popupwindow
+RimWorld 1.6.4871 rev591
+Mod Psychic Awakening - RJW Sexperience Addon dependency (rjw.sexperience.ideology) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Psychic Awakening - RJW Sexperience Addon dependency (rjw.sexperience) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod menstruation ReTexture <packageId> (MenstruationAIReReTexture) is not in valid format.
+Tried loading mod with the same packageId multiple times: ElToro.Anims. Ignoring the duplicates.
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\rjw-elt-anim-master
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\rjw-elt-anim
+Fallback handler could not load library C:/Program Files (x86)/Steam/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-00000261FB391010.dll
+Fallback handler could not load library C:/Program Files (x86)/Steam/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-00000261FB367140.dll
+Type GradientHairMaskDef is not a Def type or could not be found, in file GradientHairMasks.xml. Context: <GradientHairMaskDef><defName>G01</defName><texPath>noGraphic</texPath><mask>GradientHair/G01</mask><weight>1</weight></GradientHairMaskDef>
+Type RouletteTextures probably needs a StaticConstructorOnStartup attribute, because it has a field wheel of type Texture2D. All assets must be loaded in the main thread.
+Type DartsTextures probably needs a StaticConstructorOnStartup attribute, because it has a field board of type Texture2D. All assets must be loaded in the main thread.
+Type SlotsTextures probably needs a StaticConstructorOnStartup attribute, because it has a field seven of type Texture2D. All assets must be loaded in the main thread.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+Unloading 97 unused Assets to reduce memory usage. Loaded Objects now: 26636.
+Total: 158.546000 ms (FindLiveObjects: 0.931900 ms CreateObjectMapping: 0.930600 ms MarkObjects: 156.380500 ms  DeleteObjects: 0.302700 ms)
+
+CharacterEditor v1.6.3 initializing...
+updating labels for english...
+loading pawn slot content from file...
+character editor instance created
+checking editor settings...
+bodysizes genes are active
+CharacterEditor v1.6.3 ...done
+CE is trying to create default parameter lists ...
+creating default parameter list for genes...
+250 default entities for genes created
+creating default parameter list for objects...
+1628 default entities for objects created
+creating default parameter list for turrets...
+12 default entities for turrets created
+...lists created
+CE is trying to apply modified parameters...
+no modifications for genes
+no modifications for objects
+no modifications for lifestages
+...done

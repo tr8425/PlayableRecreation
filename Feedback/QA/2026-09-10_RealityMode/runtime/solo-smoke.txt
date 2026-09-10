@@ -1,0 +1,22 @@
+playTogether=false; normal furniture Begin, skill-linked difficulty.
+PR_Ur opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Play_MusicalInstrument
+ worker=Ur.UrGameWorker status=Roll the dice. opponent=
+ storedAfterClose=True
+PR_Horseshoes opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=SocialRelax
+ worker=Throwing.ThrowGameWorker status=Stop the aim bar. opponent=
+ storedAfterClose=True
+PR_Hoopstone opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Skygaze
+ worker=Throwing.ThrowGameWorker status=Stop the aim bar. opponent=
+ storedAfterClose=True
+PR_Billiards opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Play_Billiards
+ worker=Billiards.BilliardsGameWorker status=Hit the 1 first. Aim with the mouse. opponent=
+ storedAfterClose=True
+PR_Chess opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Play_MusicalInstrument
+ worker=Chess.ChessGameWorker status=Your move. opponent=
+ storedAfterClose=True
+PR_Poker opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Play_Billiards
+ worker=Poker.PokerGameWorker status=preflop · blinds 10. Your move. opponent=
+ storedAfterClose=True
+PR_Stargazing opened=True type=PlayableRecreation.UI.Dialog_MiniGame pawnJob=Wait_MaintainPosture
+ worker=Stargazing.StargazingWorker status= opponent=
+ storedAfterClose=False

@@ -315,6 +315,14 @@ namespace PlayableRecreation
         {
             if (pawn == null || pawn.jobs == null) return false;
 
+            // **같은 Job 을 이미 들고 있으면 바닐라는 바꾸지 않고 true 를 돌려준다** —
+            // <c>Pawn_JobTracker.TryTakeOrderedJob</c> 의 첫 줄이 <c>JobIsSameAs</c> 다.
+            // 그러면 걷는 토일이 다시 돌지 않아 도착 통지도 다시 일어나지 않고, 새 판이
+            // 영영 안 열린 채 2500틱 뒤 조용히 취소된다. 연습 판의 "다시 두기" 가 정확히
+            // 이 자리였다 (QA-05). 먼저 놓게 해서 진짜로 새로 시작시킨다.
+            if (pawn.CurJob != null && pawn.CurJobDef == def)
+                pawn.jobs.EndCurrentJob(JobCondition.InterruptForced, false);
+
             Job job = partner != null
                 ? JobMaker.MakeJob(def, board, partner)
                 : JobMaker.MakeJob(def, board);

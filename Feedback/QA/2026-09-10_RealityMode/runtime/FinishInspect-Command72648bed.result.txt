@@ -1,0 +1,2 @@
+2026-09-10T17:33:08.5257574+09:00
+windowOpen=True finished=True recordsBefore=3 recordsNow=4 jobs=PR_GoToGame,PR_JoinGame goodwill=-7 applied=-6 memories=PR_PlayedTogether(),PR_PlayedTogetherSocial(Rostra),PR_PlayedTogetherSocial(Rostra) talkHeight=0

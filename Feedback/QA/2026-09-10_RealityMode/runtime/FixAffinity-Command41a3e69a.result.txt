@@ -1,0 +1,5 @@
+2026-09-10T17:36:58.2152849+09:00
+PR_Chess skill=5 no-affinity=1 with=2 levels=6 label=Chess master
+PR_Poker skill=5 no-affinity=1 with=2 levels=6 label=Blackjack player
+PR_Stargazing skill=5 no-affinity=0 with=0 levels=6 label=Amateur astronomer
+chess-master-on-poker=no tag

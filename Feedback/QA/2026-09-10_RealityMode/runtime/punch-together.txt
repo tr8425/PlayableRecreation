@@ -1,0 +1,74 @@
+0 open=False p=(155, 0, 127) o=(152, 0, 120) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (0/2500 ticks, new)
+60 open=False p=(155, 0, 125) o=(156, 0, 120) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (60/2500 ticks, new)
+145 open=False p=(153, 0, 124) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (145/2500 ticks, new)
+223 open=False p=(150, 0, 124) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (223/2500 ticks, new)
+295 open=False p=(147, 0, 125) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (295/2500 ticks, new)
+374 open=False p=(144, 0, 121) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (374/2500 ticks, new)
+446 open=False p=(142, 0, 119) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (446/2500 ticks, new)
+524 open=False p=(139, 0, 117) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (524/2500 ticks, new)
+596 open=False p=(136, 0, 115) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (596/2500 ticks, new)
+674 open=False p=(136, 0, 115) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (674/2500 ticks, new)
+746 open=False p=(136, 0, 115) o=(159, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (746/2500 ticks, new)
+824 open=False p=(136, 0, 115) o=(160, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (824/2500 ticks, new)
+896 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (896/2500 ticks, new)
+974 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (974/2500 ticks, new)
+1047 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1047/2500 ticks, new)
+1125 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1125/2500 ticks, new)
+1197 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1197/2500 ticks, new)
+1269 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1269/2500 ticks, new)
+1341 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1341/2500 ticks, new)
+1414 open=False p=(136, 0, 115) o=(161, 0, 123) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1414/2500 ticks, new)
+1494 open=False p=(136, 0, 115) o=(161, 0, 124) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1494/2500 ticks, new)
+1573 open=False p=(136, 0, 115) o=(161, 0, 125) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1573/2500 ticks, new)
+1651 open=False p=(136, 0, 115) o=(161, 0, 126) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1651/2500 ticks, new)
+1729 open=False p=(136, 0, 115) o=(159, 0, 128) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1729/2500 ticks, new)
+1801 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1801/2500 ticks, new)
+1879 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1879/2500 ticks, new)
+1951 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (1951/2500 ticks, new)
+2029 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2029/2500 ticks, new)
+2107 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2107/2500 ticks, new)
+2180 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2180/2500 ticks, new)
+2252 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2252/2500 ticks, new)
+2324 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2324/2500 ticks, new)
+2396 open=False p=(136, 0, 115) o=(158, 0, 127) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2396/2500 ticks, new)
+2475 open=False p=(136, 0, 115) o=(158, 0, 126) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2475/2500 ticks, new)
+2547 open=False p=(136, 0, 115) o=(158, 0, 126) jobs=PR_GoToGame,Play_Billiards
+  pending: Rostra + QA Ineligible at Joy_PunchingBag70268 (2547/2500 ticks, new)
+2620 open=False p=(137, 0, 115) o=(158, 0, 126) jobs=Play_MusicalInstrument,Play_Billiards
+  pending/live: (none)
+2698 open=False p=(141, 0, 116) o=(158, 0, 126) jobs=Play_MusicalInstrument,Play_Billiards
+  pending/live: (none)

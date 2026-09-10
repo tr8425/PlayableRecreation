@@ -1,0 +1,5 @@
+Using furniture CompFloatMenuOptions resume action.
+live jobs=PR_GoToGame,PR_JoinGame
+drafted closed=True ticks=25 stored=True
+ACTUAL RESUME label=Pick up where you left off (round 1, Good) immediateWindow=True drafted=True jobs=PR_GoToGame,Wait_Combat
+after120 window=False stored=True jobs=Wait_Wander,Wait_Combat

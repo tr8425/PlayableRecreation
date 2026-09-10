@@ -1,0 +1,11 @@
+2026-09-10T17:41:39.7035467+09:00
+after-load   pending/live: (none)
+  waiting: (none)
+stored=GameOfUrBoard37798 game=PR_Ur rounds=1 tier=0 seated=Rostra currentPawn=True
+stored=HoopstoneRing37803 game=PR_Hoopstone rounds=1 tier=2 seated=Rostra currentPawn=True
+stored=ChessTable37795 game=PR_Chess rounds=1 tier=0 seated=Rostra currentPawn=True
+stored=HorseshoesPin66475 game=PR_Horseshoes rounds=1 tier=1 seated=Rostra currentPawn=True
+stored=HoopstoneRing66476 game=PR_Hoopstone rounds=1 tier=1 seated=Rostra currentPawn=True
+stored=PokerTable66467 game=PR_Poker rounds=1 tier=1 seated=Rostra currentPawn=True
+stored=BilliardsTable37805 game=PR_Billiards rounds=0 tier=2 seated=Rostra currentPawn=True
+guestBeforeTicks=Wait_Wander

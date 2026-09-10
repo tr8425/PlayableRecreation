@@ -1,0 +1,12 @@
+2026-09-10T17:25:24.5919998+09:00
+guest=QA Visitor job=Wait_Wander (Job_112229) casual=True duty=Defend draft=False age=14
+GameOfUrBoard37798 judge=None reserved=False stored=False
+HorseshoesPin37801 judge=None reserved=False stored=False
+Telescope37809 judge=None reserved=False stored=False
+HoopstoneRing37803 judge=None reserved=False stored=False
+ChessTable37795 judge=None reserved=False stored=False
+PokerTable37807 judge=None reserved=False stored=False
+BilliardsTable37805 judge=None reserved=False stored=False
+ChessTable66193 judge=None reserved=False stored=True
+FORCE ok
+  waiting: QA Visitor at ChessTable37795 (PR_Chess, 0/5000 ticks, job=PR_InviteGame)

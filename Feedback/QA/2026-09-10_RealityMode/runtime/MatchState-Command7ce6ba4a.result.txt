@@ -1,0 +1,20 @@
+2026-09-10T17:19:22.8355642+09:00
+ticks=401569 speed=Paused
+WINDOW Verse.ImmediateWindow rect=(x:755.00, y:3.00, width:196.00, height:25.00)
+WINDOW RimWorld.MainTabWindow_Inspect rect=(x:0.00, y:760.00, width:432.00, height:165.00)
+WINDOW PlayableRecreation.UI.Dialog_MiniGame rect=(x:353.00, y:100.00, width:1000.00, height:760.00)
+seatedPawn=Rostra
+opponentPawn=QA ChessMaster
+tier=2
+practice=False
+worker=Chess.ChessGameWorker
+session=PlayableRecreation.GameSession
+matchFinished=False
+talk=
+WINDOW Verse.ImmediateWindow rect=(x:1499.00, y:8.00, width:200.00, height:38.00)
+Rostra pos=(151, 0, 121) rot=2 job=PR_GoToGame report=playing Chess.
+Anya pos=(155, 0, 124) rot=1 job=Clean report=cleaning dirt.
+QA ChessMaster pos=(152, 0, 119) rot=0 job=PR_JoinGame report=playing Chess with Rostra.
+QA Ineligible pos=(161, 0, 120) rot=0 job=Wait_Downed report=downed, unconscious.
+  live: Rostra + QA ChessMaster at ChessTable66193
+  waiting: (none)

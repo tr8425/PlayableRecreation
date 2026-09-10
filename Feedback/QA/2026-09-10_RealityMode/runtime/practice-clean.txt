@@ -1,0 +1,61 @@
+Fresh healthy pair, no forced social interaction, actual New game callback.
+legal checkmate over=True
+immediate window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (0/2500 ticks, new)
+77 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (77/2500 ticks, new)
+143 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (143/2500 ticks, new)
+216 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (216/2500 ticks, new)
+350 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (350/2500 ticks, new)
+430 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (430/2500 ticks, new)
+502 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (502/2500 ticks, new)
+652 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (652/2500 ticks, new)
+730 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (730/2500 ticks, new)
+802 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (802/2500 ticks, new)
+952 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (952/2500 ticks, new)
+1025 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1025/2500 ticks, new)
+1103 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1103/2500 ticks, new)
+1251 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1251/2500 ticks, new)
+1325 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1325/2500 ticks, new)
+1403 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1403/2500 ticks, new)
+1548 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1548/2500 ticks, new)
+1625 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1625/2500 ticks, new)
+1777 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1777/2500 ticks, new)
+1849 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1849/2500 ticks, new)
+1922 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (1922/2500 ticks, new)
+2067 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (2067/2500 ticks, new)
+2145 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (2145/2500 ticks, new)
+2223 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (2223/2500 ticks, new)
+2373 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (2373/2500 ticks, new)
+2445 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending: QA Rematch 0 + QA Rematch 1 at ChessTable66193 (2445/2500 ticks, new)
+2523 jobs=PR_GoToGame,PR_JoinGame window=False
+  pending/live: (none)
+2602 jobs=Play_Billiards,UseTelescope window=False
+  pending/live: (none)
+2752 jobs=Play_Billiards,UseTelescope window=False
+  pending/live: (none)
+final sameOpponent=False

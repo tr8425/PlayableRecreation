@@ -1,0 +1,2 @@
+180 ticks after checkmate window=True jobs=PR_GoToGame,PR_JoinGame
+120 ticks after close jobs=Wait_Wander,Wait_Wander

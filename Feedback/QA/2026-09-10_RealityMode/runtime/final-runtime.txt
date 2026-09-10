@@ -1,0 +1,13 @@
+Actual jobs, normal ticks, UI action callbacks.
+invites OFF: invites are off in mod settings
+frequency 0: invites are off in mod settings
+PR_Stargazing hasMatch=False together=False
+PR_Slots hasMatch=False together=False
+cancelled both, 148 ticks: judge=None,None
+  pending/live: (none)
+practice open jobs=PR_GoToGame,PR_JoinGame
+forced vanilla Chitchat+Insult, after 701 normal ticks talk=<color=#D09B61FF>QA Punch 1</color> directly insulted <color=#D09B61FF>QA Punch 0</color>'s brother's artistic skills.
+practice ended=True
+practice New game opened=False sameOpponent=False practice=
+solo pawn despawned, stored=True
+solo map-exit 229 ticks stored=True

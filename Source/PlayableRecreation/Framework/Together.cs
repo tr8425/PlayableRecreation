@@ -28,10 +28,18 @@ namespace PlayableRecreation
             }
         }
 
-        /// <summary>이 게임이 상대를 앉힐 만한가. 승부가 없으면 상대를 골라도 뜻이 없다.</summary>
+        /// <summary>
+        /// 이 게임이 상대를 앉힐 만한가. 승부가 없으면 상대를 골라도 뜻이 없고,
+        /// <b>가구 정원이 하나면 애초에 둘이 설 수 없다.</b>
+        ///
+        /// 정원은 <see cref="SeatCount"/> 가 바닐라 Job 에서 그대로 가져온다. 펀칭백 ·
+        /// 다트 · 아케이드가 1 이다 — 예약이 둘째 폰을 거절하므로, 상대를 고르게 해 두면
+        /// 목록은 뜨는데 아무 일도 안 일어나고 2500틱 뒤 조용히 취소된다(QA-04).
+        /// <b>크기가 아니라 정원이 기준이다</b> — 1×1 이라서가 아니라 자리가 하나라서다.
+        /// </summary>
         public static bool AppliesTo(MiniGameDef game)
         {
-            return Enabled && game != null && game.hasMatch;
+            return Enabled && game != null && game.hasMatch && SeatCount(game) >= 2;
         }
 
         /// <summary>
@@ -107,6 +115,11 @@ namespace PlayableRecreation
 
             // 1. Job 을 받아 걸어올 수 있나.
             if (candidate.Downed || candidate.InMentalState) return Refusal.Busy;
+
+            // 징집된 사람은 부르지 않는다. 명령을 받아 서 있는 사람을 판 앞으로 끌어오면
+            // 징집이 곧바로 되찾아 가므로, 붙잡히지도 않고 창만 열렸다 닫힌다(QA-02).
+            if (candidate.Drafted) return Refusal.Busy;
+
             if (candidate.jobs == null) return Refusal.Busy;
             if (InAnotherGame(candidate, board)) return Refusal.Busy;
             if (TogetherMatch.HeldElsewhere(candidate, board)) return Refusal.Busy;

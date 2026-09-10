@@ -1,0 +1,10 @@
+Actual vanilla JoyGiver and JobDriver under two-player reservation.
+PR_Poker pairOpen=True maxPawns=4 thirdCanReserve=True
+vanillaGiver=Play_Poker job=Play_Poker (Job_112480) A = Thing_PokerTable66467 B = (131, 0, 111)
+after180 third=Play_Poker (Job_112480) A = Thing_PokerTable66467 B = (131, 0, 111) Giver = ThinkNode_QueuedJob [workGiverDef: null] pair=PR_GoToGame,PR_JoinGame
+PR_Horseshoes pairOpen=True maxPawns=3 thirdCanReserve=True
+vanillaGiver=Play_Horseshoes job=Play_Horseshoes (Job_112495) A = Thing_HorseshoesPin66475 B = (142, 0, 115)
+after180 third=Play_Horseshoes (Job_112495) A = Thing_HorseshoesPin66475 B = (142, 0, 115) Giver = ThinkNode_QueuedJob [workGiverDef: null] pair=PR_GoToGame,PR_JoinGame
+PR_Hoopstone pairOpen=True maxPawns=3 thirdCanReserve=True
+vanillaGiver=Play_Hoopstone job=Play_Hoopstone (Job_112509) A = Thing_HoopstoneRing66476 B = (152, 0, 105)
+after180 third=Play_Hoopstone (Job_112509) A = Thing_HoopstoneRing66476 B = (152, 0, 105) Giver = ThinkNode_QueuedJob [workGiverDef: null] pair=PR_GoToGame,PR_JoinGame

@@ -1,0 +1,7 @@
+Death of QA-generated opponent in unsaved test map.
+12 open=True stored=True memory=False
+25 open=True stored=True memory=False
+37 open=False stored=True memory=False
+50 open=False stored=True memory=False
+62 open=False stored=True memory=False
+75 open=False stored=False memory=True

@@ -28,6 +28,7 @@
   <PR.Job.Playing>{0}을(를) 두는 중.</PR.Job.Playing>
   <PR.Job.PlayingWith>{1}와(과) {0}을(를) 두는 중.</PR.Job.PlayingWith>
   <PR.Job.Waiting>{0} 상대를 기다리는 중.</PR.Job.Waiting>
+  <PR.Job.PlayingAlone>혼자 {0}을(를) 두는 중.</PR.Job.PlayingAlone>
   <PR.Together.BoardFlip>{0}이(가) {1}에게 지느니 판을 엎어버렸습니다.</PR.Together.BoardFlip>
   <PR.Together.Goodwill.Up>{0}이(가) 판을 즐겁게 두었습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Up>
   <PR.Together.Goodwill.Down>{0}이(가) 판 앞에서 짓밟혔고, 즐겁지 않았습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Down>

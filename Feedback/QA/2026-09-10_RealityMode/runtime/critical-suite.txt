@@ -1,0 +1,5 @@
+Resume using OpenWindow entry
+resume-direct open=True ticks=135
+draft-close open=False ticks=25 draft=True job=Wait_Combat stored=True
+resume-drafted open=False ticks=712 draft=True job=PR_JoinGame
+  pending: Rostra + QA ChessMaster at ChessTable66193 (712/2500 ticks, resuming)

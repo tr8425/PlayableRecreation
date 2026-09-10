@@ -1,0 +1,8 @@
+fresh pawns, refusal=None seatCount=1
+43 window=False jobs=PR_GoToGame,Clean positions=(133, 0, 114),(132, 0, 114) canReserve=True,False
+121 window=False jobs=PR_GoToGame,Clean positions=(134, 0, 115),(133, 0, 113) canReserve=True,False
+188 window=False jobs=PR_GoToGame,Clean positions=(134, 0, 115),(133, 0, 114) canReserve=True,False
+267 window=False jobs=PR_GoToGame,Clean positions=(134, 0, 115),(133, 0, 113) canReserve=True,False
+345 window=False jobs=PR_GoToGame,Clean positions=(134, 0, 115),(132, 0, 112) canReserve=True,False
+423 window=False jobs=PR_GoToGame,Clean positions=(134, 0, 115),(131, 0, 112) canReserve=True,False
+501 window=False jobs=PR_GoToGame,Clean positions=(134, 0, 115),(129, 0, 114) canReserve=True,False

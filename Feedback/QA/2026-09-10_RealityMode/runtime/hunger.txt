@@ -1,0 +1,2 @@
+elapsedTicks=37 open=False opponentJob=Ingest (Job_112179) A = Thing_MealSurvivalPack49545 Giver = JobGiver_GetFood [workGiverDef: null] session=PlayableRecreation.GameSession
+  pending/live: (none)

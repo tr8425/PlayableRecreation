@@ -1,0 +1,25 @@
+2026-09-10T17:30:01.2361496+09:00
+ticks=413300 speed=Paused
+WINDOW Verse.ImmediateWindow rect=(x:755.00, y:3.00, width:196.00, height:25.00)
+WINDOW RimWorld.MainTabWindow_Inspect rect=(x:0.00, y:760.00, width:432.00, height:165.00)
+WINDOW PlayableRecreation.UI.Dialog_MiniGame rect=(x:353.00, y:100.00, width:1000.00, height:760.00)
+seatedPawn=Rostra
+opponentPawn=QA Visitor
+tier=4
+practice=False
+worker=Chess.ChessGameWorker
+session=PlayableRecreation.GameSession
+matchFinished=False
+talk=
+WINDOW Verse.ImmediateWindow rect=(x:1499.00, y:8.00, width:200.00, height:38.00)
+Rostra pos=(152, 0, 121) rot=3 job=PR_GoToGame report=playing Chess.
+Anya pos=(151, 0, 118) rot=3 job=Wait_Wander report=wandering.
+QA ChessMaster pos=(161, 0, 126) rot=3 job=Clean report=cleaning dirt.
+QA Ineligible pos=(161, 0, 120) rot=0 job=Wait_Downed report=downed, unconscious.
+QA Visitor pos=(152, 0, 121) rot=3 job=PR_JoinGame report=playing Chess with Rostra.
+Barcaabe pos=(24, 0, 148) rot=1 job=Goto report=moving.
+Guaban pos=(24, 0, 148) rot=1 job=Goto report=moving.
+Trado pos=(25, 0, 147) rot=1 job=Goto report=moving.
+Asamb pos=(23, 0, 177) rot=1 job=Goto report=moving.
+  live: Rostra + QA Visitor at ChessTable66193
+  waiting: (none)

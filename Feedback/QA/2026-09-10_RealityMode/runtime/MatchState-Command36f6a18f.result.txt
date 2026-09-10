@@ -1,0 +1,11 @@
+2026-09-10T17:22:29.2307549+09:00
+ticks=403450 speed=Paused
+WINDOW Verse.ImmediateWindow rect=(x:755.00, y:3.00, width:196.00, height:25.00)
+WINDOW RimWorld.MainTabWindow_Inspect rect=(x:0.00, y:760.00, width:432.00, height:165.00)
+WINDOW Verse.ImmediateWindow rect=(x:1499.00, y:8.00, width:200.00, height:38.00)
+Rostra pos=(151, 0, 121) rot=2 job=PR_GoToGame report=playing Chess.
+Anya pos=(154, 0, 132) rot=2 job=Clean report=cleaning dirt.
+QA ChessMaster pos=(155, 0, 124) rot=3 job=PR_JoinGame report=sitting down to play with Rostra.
+QA Ineligible pos=(161, 0, 120) rot=0 job=Wait_Downed report=downed, unconscious.
+  pending: Rostra + QA ChessMaster at ChessTable66193 (127/2500 ticks, resuming)
+  waiting: (none)

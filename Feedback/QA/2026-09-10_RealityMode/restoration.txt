@@ -1,0 +1,10 @@
+﻿Restored user post-restart mod list, PR settings, Prefs, personal records.
+Removed installed PRQAObserver.dll. QA-only save moved out of user Saves.
+Production PR DLL unchanged. No original save written.
+4628EE4491EEF6F6390181C8B406566D514B0FF6BF1BA3A2E58F1E29C42694CC C:\Users\tr842\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Saves\Compact of Veerehenuay.rws
+DC45AF3BA07309E224E2442C9DD0EB420FF7F2AD8D24489C92111D9F998FE6E8 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Playable Recreation\Assemblies\PlayableRecreation.dll
+8811828307DD82B47F4C32F750BF8F8AFFF719B16621A8814ECC9E6B3C28A4BF C:\Users\tr842\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Config\ModsConfig.xml
+6E1587D51519FD9B66C8D9ADE530E5F412411F2F1F5AB1D393AF0C656CD22198 C:\Users\tr842\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Config\Mod_Playable Recreation_PRMod.xml
+CCD7202369BFED1AB97308CD210A07DA648DE4F95A1B0B3622D504CD272DC5EB C:\Users\tr842\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Config\PlayableRecreation_Records.xml
+2026-09-10 18:11 KST: restarted without observer, loaded original Compact of Veerehenuay via Load game UI, original two colonists Rostra/Anya present; pause selected. Document links checked.
+All four files were byte-identical immediately after restoration. Final original-save play updated exactly one record field through normal product execution: Chess voided 9 -> 10. All other record data matches the original backup; QA wins/losses removed. ModsConfig, Prefs, PR settings remain byte-identical. The report documents this distinction.
