@@ -76,7 +76,10 @@ namespace PlayableRecreation
             VisitorsOff,    // 방문객인데 설정이 꺼져 있다
             Incapable,      // 의식·조작·시각
             TooFar,         // 거리 상한 밖이거나 길이 없다
-            Busy            // 다운·정신 착란·이미 다른 판
+            Drafted,        // 징집돼 있다
+            Downed,         // 쓰러졌거나 제정신이 아니다
+            InGame,         // 이미 다른 판에 붙잡혀 있다
+            Busy            // 그 밖에 부를 수 없는 상태
         }
 
         /// <summary>
@@ -114,15 +117,15 @@ namespace PlayableRecreation
             if (!CanHandleBoard(candidate, game)) return Refusal.Incapable;
 
             // 1. Job 을 받아 걸어올 수 있나.
-            if (candidate.Downed || candidate.InMentalState) return Refusal.Busy;
+            if (candidate.Downed || candidate.InMentalState) return Refusal.Downed;
 
             // 징집된 사람은 부르지 않는다. 명령을 받아 서 있는 사람을 판 앞으로 끌어오면
             // 징집이 곧바로 되찾아 가므로, 붙잡히지도 않고 창만 열렸다 닫힌다(QA-02).
-            if (candidate.Drafted) return Refusal.Busy;
+            if (candidate.Drafted) return Refusal.Drafted;
 
             if (candidate.jobs == null) return Refusal.Busy;
-            if (InAnotherGame(candidate, board)) return Refusal.Busy;
-            if (TogetherMatch.HeldElsewhere(candidate, board)) return Refusal.Busy;
+            if (InAnotherGame(candidate, board)) return Refusal.InGame;
+            if (TogetherMatch.HeldElsewhere(candidate, board)) return Refusal.InGame;
 
             if (!candidate.CanReach(board, PathEndMode.Touch, Danger.Some)) return Refusal.TooFar;
             if (!WithinRange(candidate, board, settings.playTogetherRange)) return Refusal.TooFar;
@@ -145,6 +148,9 @@ namespace PlayableRecreation
                 case Refusal.VisitorsOff: return "PR.Together.Why.VisitorsOff".Translate();
                 case Refusal.Incapable:   return "PR.Together.Why.Incapable".Translate();
                 case Refusal.TooFar:      return "PR.Together.Why.TooFar".Translate();
+                case Refusal.Drafted:     return "PR.Together.Why.Drafted".Translate();
+                case Refusal.Downed:      return "PR.Together.Why.Downed".Translate();
+                case Refusal.InGame:      return "PR.Together.Why.InGame".Translate();
                 default:                  return "PR.Together.Why.Busy".Translate();
             }
         }
@@ -225,7 +231,7 @@ namespace PlayableRecreation
             GameComponent_Recreation component = GameComponent_Recreation.Current;
             if (component == null) return false;
 
-            return component.IsSeatedElsewhere(pawn, board);
+            return component.IsPlayingElsewhere(pawn, board);
         }
     }
 }

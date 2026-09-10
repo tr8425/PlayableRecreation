@@ -199,21 +199,22 @@ namespace PlayableRecreation
         }
 
         /// <summary>
-        /// 이 폰이 다른 가구의 판에 앉아 있는가. 같은 사람을 두 판의 상대로 지목하는 것을
-        /// 막는다 — 예약은 가구만 지키므로 보드가 둘이면 예약으로는 안 걸린다.
+        /// 이 폰이 지금 다른 가구에서 판을 두고 있는가. 같은 사람을 두 판의 상대로 지목하는 것을
+        /// 막는다 — 예약은 가구만 지키므로 보드가 둘이면 예약으로는 안 걸린다. 창이 열려 있어도
+        /// 뒤쪽 지도를 클릭할 수 있어서(<c>absorbInputAroundWindow = false</c>) 실제로 생기는 일이다.
+        ///
+        /// **가구에 남겨둔 판은 세지 않는다.** 그건 사람이 아니라 판이다. 두던 판을 남기고
+        /// 일어난 사람까지 붙잡으면, 그 판을 찾아가 끝내거나 치우기 전에는 어디서도 다시
+        /// 못 앉는다 — 목록에는 "지금은 어려움" 한 마디만 뜨므로 왜 그런지 알 길도 없다.
+        /// 살아 있는 붙잡음은 <see cref="TogetherMatch.HeldElsewhere"/> 가 이미 본다.
         /// </summary>
-        public bool IsSeatedElsewhere(Pawn pawn, Thing except)
+        public bool IsPlayingElsewhere(Pawn pawn, Thing except)
         {
-            if (pawn == null) return false;
+            GameSession session = ActiveSession;
 
-            for (int i = 0; i < sessions.Count; i++)
-            {
-                GameSession session = sessions[i];
-                if (session.board == except) continue;
-                if (session.seatedPawn == pawn || session.opponentPawn == pawn) return true;
-            }
+            if (pawn == null || session == null || session.board == except) return false;
 
-            return false;
+            return session.seatedPawn == pawn || session.opponentPawn == pawn;
         }
 
         public void Register(GameSession session)

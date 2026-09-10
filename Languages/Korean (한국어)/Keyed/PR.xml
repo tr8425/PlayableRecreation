@@ -45,6 +45,9 @@
   <PR.Together.Why.VisitorsOff>방문객이 꺼져 있음</PR.Together.Why.VisitorsOff>
   <PR.Together.Why.Incapable>판을 다룰 수 없음</PR.Together.Why.Incapable>
   <PR.Together.Why.TooFar>너무 멀리 있음</PR.Together.Why.TooFar>
+  <PR.Together.Why.Drafted>징집됨</PR.Together.Why.Drafted>
+  <PR.Together.Why.Downed>쓰러졌거나 제정신이 아님</PR.Together.Why.Downed>
+  <PR.Together.Why.InGame>다른 판에 앉아 있음</PR.Together.Why.InGame>
   <PR.Together.Why.Busy>지금은 어려움</PR.Together.Why.Busy>
 
   <PR.Log.Title>진행</PR.Log.Title>

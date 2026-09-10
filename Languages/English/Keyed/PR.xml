@@ -45,6 +45,9 @@
   <PR.Together.Why.VisitorsOff>visitors are turned off</PR.Together.Why.VisitorsOff>
   <PR.Together.Why.Incapable>cannot handle the board</PR.Together.Why.Incapable>
   <PR.Together.Why.TooFar>too far away</PR.Together.Why.TooFar>
+  <PR.Together.Why.Drafted>drafted</PR.Together.Why.Drafted>
+  <PR.Together.Why.Downed>down or not themselves</PR.Together.Why.Downed>
+  <PR.Together.Why.InGame>already at another board</PR.Together.Why.InGame>
   <PR.Together.Why.Busy>busy</PR.Together.Why.Busy>
 
   <PR.Log.Title>Play by play</PR.Log.Title>
