@@ -70,6 +70,20 @@ namespace PlayableRecreation
         /// <summary>'폰 지능 연동' 이 기준으로 삼는 스킬. 없으면 항상 중간 난이도.</summary>
         public SkillDef linkedSkill;
 
+        /// <summary>
+        /// 배경 이야기가 **이 오락을 직접 말하는** 사람들. 그 사람에게만, 이 게임에서만
+        /// 연동 스킬 레벨을 얹어 준다.
+        ///
+        /// 체스 마스터의 바닐라 보상은 지능 2 다. 연구원 배경이 지능 6 을 주므로,
+        /// 스킬만 보면 **체스는 연구원이 더 잘 둔다.** 그 사람의 이름이 '체스 마스터'인데도.
+        /// 여기 있는 목록이 그 한 칸을 메운다.
+        ///
+        /// 반대로 공학자·연구자처럼 오락을 말하지 않는 배경은 넣지 않는다 — 그런 사람은
+        /// 지능이 알아서 올라가므로 이미 반영되어 있고, 목록에 넣기 시작하면 배경 이야기
+        /// 전체를 우리가 다시 채점하게 된다.
+        /// </summary>
+        public List<BackstoryAffinity> backstoryAffinities;
+
         /// <summary>창 크기.</summary>
         public Vector2 windowSize = new Vector2(980f, 720f);
 
@@ -147,6 +161,32 @@ namespace PlayableRecreation
 
             if (tallyKeys != null && tallyKeys.Count > GameRecord.TallyCount)
                 yield return "tallyKeys holds at most " + GameRecord.TallyCount + " entries";
+
+            if (backstoryAffinities != null && linkedSkill == null)
+                yield return "backstoryAffinities needs linkedSkill - there is nothing to add levels to";
+
+            if (backstoryAffinities != null)
+                foreach (BackstoryAffinity affinity in backstoryAffinities)
+                {
+                    if (affinity == null || affinity.backstory == null)
+                        yield return "backstoryAffinities holds an entry with no backstory";
+                    else if (affinity.levels <= 0)
+                        yield return affinity.backstory.defName + " affinity must add at least one level";
+                }
         }
+    }
+
+    /// <summary>
+    /// "이 배경은 이 오락을 직접 말한다" 한 줄. <see cref="MiniGameDef.backstoryAffinities"/> 를 본다.
+    ///
+    /// 배경은 Def 참조로 둔다 — 오타를 게임이 로딩할 때 바로 잡아 주기 때문이다.
+    /// 그래서 여기 적을 수 있는 것은 반드시 로드되어 있는 배경뿐이다(코어 · 켜 둔 DLC).
+    /// </summary>
+    public class BackstoryAffinity
+    {
+        public BackstoryDef backstory;
+
+        /// <summary>연동 스킬에 얹는 레벨. 0~20 자를 쓰므로 4 면 한 단계쯤 올라간다.</summary>
+        public int levels = 4;
     }
 }

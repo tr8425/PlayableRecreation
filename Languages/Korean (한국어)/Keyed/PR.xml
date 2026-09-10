@@ -33,6 +33,7 @@
   <PR.Together.Goodwill.Walkout>판을 엎고 일어서는 바람에 {0}은(는) 그대로 앉아 있었습니다. {1} 우호도: {2} → {3}.</PR.Together.Goodwill.Walkout>
   <PR.Together.Sit>{0}이(가) 앉는다</PR.Together.Sit>
   <PR.Together.Alone>혼자 두기</PR.Together.Alone>
+  <PR.Together.Affinity>{0} ({1})</PR.Together.Affinity>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
   <PR.Together.Why.TooYoung>너무 어림</PR.Together.Why.TooYoung>
   <PR.Together.Why.ChildrenOff>어린이가 꺼져 있음</PR.Together.Why.ChildrenOff>

@@ -33,6 +33,7 @@
   <PR.Together.Goodwill.Walkout>{0} was left sitting there when the game was abandoned. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Walkout>
   <PR.Together.Sit>{0} sits down</PR.Together.Sit>
   <PR.Together.Alone>Play alone</PR.Together.Alone>
+  <PR.Together.Affinity>{0} ({1})</PR.Together.Affinity>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
   <PR.Together.Why.TooYoung>too young</PR.Together.Why.TooYoung>
   <PR.Together.Why.ChildrenOff>children are turned off</PR.Together.Why.ChildrenOff>

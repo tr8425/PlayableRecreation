@@ -228,6 +228,12 @@ for game in game_nodes():
             if node.text.strip() not in known:
                 problems.append('%s: %s "%s" is not a Def' % (name, field, node.text.strip()))
 
+        # 배경 친화는 목록 안에 들어 있어 위의 직속 자식 검사로는 안 닿는다.
+        # 배경 defName 은 오타가 나도 게임을 켜야만 붉은 줄로 드러나므로 여기서 잡는다.
+        for node in game.findall('backstoryAffinities/li/backstory'):
+            if node.text and node.text.strip() not in known:
+                problems.append('%s: backstory "%s" is not a Def' % (name, node.text.strip()))
+
     # 승부인 항목에는 집계 이름표가 있어야 기록 화면이 비지 않는다.
     # 추첨함은 예외다 - 자기 판을 굴리지 않으므로 전적도 집계도 뽑힌 게임 쪽에 쌓인다.
     picker = game.find('randomPick')

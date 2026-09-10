@@ -115,8 +115,16 @@ namespace PlayableRecreation
 
                 if (refusal == Together.Refusal.None)
                 {
+                    // 배경이 이 오락을 직접 말하는 사람은 그렇다고 적어 준다. 그 사람을 고르면
+                    // 제안 난이도가 뛰는데, 왜 뛰는지가 목록에 안 보이면 그냥 이상한 일이 된다.
+                    BackstoryAffinity affinity = AffinityFor(game, bound);
+                    string label = affinity != null
+                        ? (string)"PR.Together.Affinity".Translate(
+                            bound.LabelShortCap, affinity.backstory.TitleCapFor(bound.gender))
+                        : bound.LabelShortCap;
+
                     able.Add(new FloatMenuOption(
-                        bound.LabelShortCap,
+                        label,
                         delegate { StartNewWith(game, board, initiator, bound); }));
                 }
                 else
@@ -281,9 +289,41 @@ namespace PlayableRecreation
             if (record.passion == Passion.Minor) skill += 1;
             else if (record.passion == Passion.Major) skill += 2;
 
+            // 배경 이야기가 이 오락을 직접 말하면 그만큼 더 얹는다. **이 게임에서만이다** -
+            // 체스 마스터는 체스가 센 것이지 지능이 높은 것이 아니다.
+            BackstoryAffinity affinity = AffinityFor(game, pawn);
+            if (affinity != null) skill += affinity.levels;
+
             // 0~20(+2) 을 단계 수로 균등 분할한다.
             int tier = skill * game.difficultyCount / 21;
             return game.ClampTier(tier);
+        }
+
+        /// <summary>
+        /// 이 사람의 배경 중 이 오락을 직접 말하는 것. 없으면 null.
+        /// 둘 이상 걸리면 **가장 큰 것 하나만** 쓴다 — 어린 시절과 어른 시절이 같은 놀이를
+        /// 말한다고 해서 두 배로 세지는 것은 아니다.
+        /// </summary>
+        public static BackstoryAffinity AffinityFor(MiniGameDef game, Pawn pawn)
+        {
+            if (game == null || game.backstoryAffinities == null) return null;
+            if (pawn == null || pawn.story == null) return null;
+
+            List<BackstoryDef> mine = pawn.story.AllBackstories;
+            if (mine == null) return null;
+
+            BackstoryAffinity best = null;
+
+            for (int i = 0; i < game.backstoryAffinities.Count; i++)
+            {
+                BackstoryAffinity affinity = game.backstoryAffinities[i];
+                if (affinity == null || affinity.backstory == null) continue;
+                if (!mine.Contains(affinity.backstory)) continue;
+
+                if (best == null || affinity.levels > best.levels) best = affinity;
+            }
+
+            return best;
         }
     }
 }

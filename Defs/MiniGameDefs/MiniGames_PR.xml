@@ -186,6 +186,14 @@
     <wonTale>PR_WonMatch</wonTale>
     <linkedSkill>Intellectual</linkedSkill>
 
+    <!-- The chess master's vanilla reward is Intellectual 2. A researcher gets 6, so on
+         skill alone the researcher plays better chess than the person named chess master.
+         These lines pay that back, and only at this board. -->
+    <backstoryAffinities>
+      <li><backstory>ChessMaster67</backstory><levels>6</levels></li>
+      <li><backstory>RebelStudent14</backstory><levels>3</levels></li>
+    </backstoryAffinities>
+
     <windowSize>(1000, 760)</windowSize>
   </PlayableRecreation.MiniGameDef>
 
@@ -217,6 +225,11 @@
     <wonTale>PR_WonMatch</wonTale>
     <linkedSkill>Intellectual</linkedSkill>
 
+    <!-- Card-counting is the one useful thing this childhood taught. -->
+    <backstoryAffinities>
+      <li><backstory>BlackjackPlayer76</backstory><levels>6</levels></li>
+    </backstoryAffinities>
+
     <windowSize>(1020, 780)</windowSize>
   </PlayableRecreation.MiniGameDef>
 
@@ -244,6 +257,10 @@
     <vanillaJob>UseTelescope</vanillaJob>
     <playThought>PR_Stargazed</playThought>
     <linkedSkill>Intellectual</linkedSkill>
+
+    <backstoryAffinities>
+      <li><backstory>AmateurAstronomer77</backstory><levels>6</levels></li>
+    </backstoryAffinities>
 
     <windowSize>(1180, 800)</windowSize>
   </PlayableRecreation.MiniGameDef>
