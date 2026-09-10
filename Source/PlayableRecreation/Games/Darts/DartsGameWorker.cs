@@ -477,7 +477,7 @@ namespace Darts
 
         private string Format(DartEntry entry)
         {
-            string side = entry.Side == DartSide.Player ? YouLabel : OpponentLabel;
+            string side = SideColumn(entry.Side == DartSide.Player);
 
             string tail = entry.Points > 0
                 ? entry.Code + "  +" + entry.Points

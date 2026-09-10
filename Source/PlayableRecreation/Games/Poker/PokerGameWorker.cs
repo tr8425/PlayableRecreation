@@ -681,7 +681,8 @@ namespace Poker
                 default: what = "POK.Log.Raise".Translate(entry.Amount).ToString(); break;
             }
 
-            return string.Format("{0,3}  {1,-5} {2}  {3}", entry.Hand, StreetName(entry.Street), side, what);
+            return string.Format("{0,3}  {1,-5} {2}  {3}", entry.Hand, StreetName(entry.Street),
+                                 SideColumn(entry.Seat == PokerSeat.Player), what);
         }
 
         public override void FillTallies(int[] tallies)

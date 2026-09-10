@@ -362,7 +362,7 @@ namespace Ur
 
         private string FormatLog(UrLogEntry entry)
         {
-            string side = entry.Side == Side.Player ? YouLabel : OpponentLabel;
+            string side = SideColumn(entry.Side == Side.Player);
 
             if (entry.Passed)
                 return string.Format("{0,3}  {1}  {2}  {3}",

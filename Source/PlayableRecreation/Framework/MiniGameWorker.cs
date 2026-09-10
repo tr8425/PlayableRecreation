@@ -49,6 +49,29 @@ namespace PlayableRecreation
             }
         }
 
+        /// <summary>이름 칸의 최소·최대 글자 수. 아래를 보라.</summary>
+        private const int SideColumnMin = 5;
+        private const int SideColumnMax = 10;
+
+        /// <summary>
+        /// 기보에서 이름이 차지하는 칸. 이름 길이가 제각각이면 뒤따르는 것들이
+        /// 들쭉날쭉해지므로 두 이름을 같은 글자 수로 맞춰 둔다.
+        ///
+        /// 비례 글꼴이라 딱 떨어지지는 않는다 — 한글 한 글자가 공백 두 개쯤이다.
+        /// 그래도 짧은 이름 뒤가 바짝 붙어 버리는 것보다는 낫다. 칸보다 긴 이름은
+        /// 칸을 밀어낼 뿐 잘리지 않는다. 이름이 뭉개지는 것이 더 나쁘다.
+        /// </summary>
+        public string SideColumn(bool mine)
+        {
+            string you = YouLabel;
+            string them = OpponentLabel;
+
+            int width = Mathf.Clamp(Mathf.Max(you.Length, them.Length),
+                                    SideColumnMin, SideColumnMax);
+
+            return (mine ? you : them).PadRight(width);
+        }
+
         /// <summary>
         /// 지금 판을 남겨둬도 되는 지점인가. 창은 이 값이 바뀔 때마다 가구 위의 판을 갱신한다.
         /// 우르는 턴이 시작하는 순간, 던지는 게임은 이닝이 끝나는 순간이다.

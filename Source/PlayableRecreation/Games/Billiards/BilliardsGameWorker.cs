@@ -476,7 +476,7 @@ namespace Billiards
 
         private string Format(PoolLogEntry entry)
         {
-            string side = entry.Side == PoolSide.Player ? YouLabel : OpponentLabel;
+            string side = SideColumn(entry.Side == PoolSide.Player);
 
             string tail;
             if (entry.Scratch) tail = "BIL.Log.Scratch".Translate().ToString();
