@@ -6,6 +6,7 @@
   <!-- Entry -->
   <PR.Play.Label>Play {0}</PR.Play.Label>
   <PR.Play.Broken>Too broken to use</PR.Play.Broken>
+  <PR.Play.NoChair>{0} needs a free chair at the board.</PR.Play.NoChair>
   <PR.Play.Resume>Pick up where you left off (round {0}, {1})</PR.Play.Resume>
   <PR.Play.ResumeNamed>Pick up your {0} (round {1}, {2})</PR.Play.ResumeNamed>
   <PR.Random.Picked>The cabinet lands on {0}.</PR.Random.Picked>
@@ -46,6 +47,7 @@
   <PR.Together.Why.Incapable>cannot handle the board</PR.Together.Why.Incapable>
   <PR.Together.Why.TooFar>too far away</PR.Together.Why.TooFar>
   <PR.Together.Why.Drafted>drafted</PR.Together.Why.Drafted>
+  <PR.Together.Why.NoSeat>no chair free at the board</PR.Together.Why.NoSeat>
   <PR.Together.Why.Downed>down or not themselves</PR.Together.Why.Downed>
   <PR.Together.Why.InGame>already at another board</PR.Together.Why.InGame>
   <PR.Together.Why.Busy>busy</PR.Together.Why.Busy>

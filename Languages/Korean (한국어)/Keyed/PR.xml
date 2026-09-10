@@ -6,6 +6,7 @@
   <!-- 진입 -->
   <PR.Play.Label>{0} 하기</PR.Play.Label>
   <PR.Play.Broken>못 쓸 만큼 부서져 있음</PR.Play.Broken>
+  <PR.Play.NoChair>{0}은(는) 판 앞에 빈 의자가 있어야 합니다.</PR.Play.NoChair>
   <PR.Play.Resume>이어서 하기 ({0}회차 · {1})</PR.Play.Resume>
   <PR.Play.ResumeNamed>{0} 이어서 하기 ({1}회차 · {2})</PR.Play.ResumeNamed>
   <PR.Random.Picked>기계가 고른 것은 {0}입니다.</PR.Random.Picked>
@@ -46,6 +47,7 @@
   <PR.Together.Why.Incapable>판을 다룰 수 없음</PR.Together.Why.Incapable>
   <PR.Together.Why.TooFar>너무 멀리 있음</PR.Together.Why.TooFar>
   <PR.Together.Why.Drafted>징집됨</PR.Together.Why.Drafted>
+  <PR.Together.Why.NoSeat>판 앞에 빈 의자가 없음</PR.Together.Why.NoSeat>
   <PR.Together.Why.Downed>쓰러졌거나 제정신이 아님</PR.Together.Why.Downed>
   <PR.Together.Why.InGame>다른 판에 앉아 있음</PR.Together.Why.InGame>
   <PR.Together.Why.Busy>지금은 어려움</PR.Together.Why.Busy>

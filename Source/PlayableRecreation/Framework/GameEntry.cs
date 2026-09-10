@@ -19,6 +19,7 @@ namespace PlayableRecreation
         public static void Begin(MiniGameDef game, Thing board, Pawn pawn)
         {
             if (game == null || board == null) return;
+            if (!HasSeat(game, board, pawn, 1)) return;
 
             // 앉을 사람이 없다. 몰입 모드가 원하는 그림이 아니므로 먼저 사람을 고른다.
             if (pawn == null && PRMod.Settings.immersionMode && AskWhoSits(game, board)) return;
@@ -114,6 +115,9 @@ namespace PlayableRecreation
         /// <summary>난이도를 정해 새 판을 연다. 단계가 하나뿐이거나 폰 연동이면 선택 창을 건너뛴다.</summary>
         public static void StartNew(MiniGameDef game, Thing board, Pawn pawn)
         {
+            // 판을 치우고 새로 시작하는 길은 Begin 을 안 지난다. 여기서도 같은 것을 묻는다.
+            if (!HasSeat(game, board, pawn, 1)) return;
+
             // 2칸이면 난이도보다 먼저 상대를 고른다. 제안 난이도가 상대의 실력에서 나오기 때문이다.
             if (pawn != null && Together.AppliesTo(game))
             {
@@ -277,6 +281,10 @@ namespace PlayableRecreation
                 return;
             }
 
+            // 이어 두는 것도 앉는 일이다. 의자가 없으면 여기서 물러난다.
+            int needed = session.opponentPawn != null ? 2 : 1;
+            if (!HasSeat(session.game, session.board, session.seatedPawn, needed)) return;
+
             // 둘이 두던 판은 **언제나** 여기를 지난다. 예전에는 기즈모와 플로트 메뉴가
             // 이 검사를 건너뛰고 곧장 열어서, 주도한 쪽이 이미 판 옆에 서 있으면 상대를
             // 부르지도 않고 창이 열렸다가 §7.1 이 반 초 만에 닫았다 (QA-02).
@@ -310,6 +318,25 @@ namespace PlayableRecreation
         {
             GameComponent_Recreation component = GameComponent_Recreation.Current;
             return component != null ? component.SessionFor(board) : null;
+        }
+
+        /// <summary>
+        /// 앉을 자리가 있는가. 바닐라가 의자를 요구하는 놀이(체스·포커)는 빈 의자가 없으면
+        /// 아예 시작하지 않는다 — 바닐라 JoyGiver 도 그 자리에서 <c>null</c> 을 돌려준다.
+        ///
+        /// **문은 하나여야 한다.** 기즈모와 플로트 메뉴와 이어 두기가 각자 검사하면
+        /// 언젠가 하나를 빼먹는다 (QA-02 가 그랬다). 들어오는 길은 다 여기를 지난다.
+        /// </summary>
+        public static bool HasSeat(MiniGameDef game, Thing board, Pawn pawn, int needed)
+        {
+            if (board == null || !Seating.Required(board)) return true;
+            if (Seating.Count(pawn, board) >= needed) return true;
+
+            Messages.Message("PR.Play.NoChair".Translate(
+                game != null ? game.LabelCap : board.LabelCap),
+                board, MessageTypeDefOf.RejectInput, false);
+
+            return false;
         }
 
         /// <summary>

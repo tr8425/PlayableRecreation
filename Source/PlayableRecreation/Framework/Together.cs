@@ -76,6 +76,7 @@ namespace PlayableRecreation
             VisitorsOff,    // 방문객인데 설정이 꺼져 있다
             Incapable,      // 의식·조작·시각
             TooFar,         // 거리 상한 밖이거나 길이 없다
+            NoSeat,         // 둘이 앉을 자리가 없다
             Drafted,        // 징집돼 있다
             Downed,         // 쓰러졌거나 제정신이 아니다
             InGame,         // 이미 다른 판에 붙잡혀 있다
@@ -127,6 +128,10 @@ namespace PlayableRecreation
             if (InAnotherGame(candidate, board)) return Refusal.InGame;
             if (TogetherMatch.HeldElsewhere(candidate, board)) return Refusal.InGame;
 
+            // 바닐라가 의자를 요구하는 놀이(체스·포커)는 **둘이 앉을 의자가 둘** 있어야 한다.
+            // 하나뿐이면 부르고 나서 한 사람이 설 자리가 없다.
+            if (Seating.Required(board) && Seating.Count(candidate, board) < 2) return Refusal.NoSeat;
+
             if (!candidate.CanReach(board, PathEndMode.Touch, Danger.Some)) return Refusal.TooFar;
             if (!WithinRange(candidate, board, settings.playTogetherRange)) return Refusal.TooFar;
 
@@ -148,6 +153,7 @@ namespace PlayableRecreation
                 case Refusal.VisitorsOff: return "PR.Together.Why.VisitorsOff".Translate();
                 case Refusal.Incapable:   return "PR.Together.Why.Incapable".Translate();
                 case Refusal.TooFar:      return "PR.Together.Why.TooFar".Translate();
+                case Refusal.NoSeat:      return "PR.Together.Why.NoSeat".Translate();
                 case Refusal.Drafted:     return "PR.Together.Why.Drafted".Translate();
                 case Refusal.Downed:      return "PR.Together.Why.Downed".Translate();
                 case Refusal.InGame:      return "PR.Together.Why.InGame".Translate();

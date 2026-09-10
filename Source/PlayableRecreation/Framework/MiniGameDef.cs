@@ -127,6 +127,40 @@ namespace PlayableRecreation
                 .Translate().ToString();
         }
 
+        private bool? requiresChair;
+
+        /// <summary>
+        /// 바닐라가 이 놀이에 의자를 요구하는가. <c>JoyGiverDef.requireChair</c> 를 그대로 읽는다.
+        ///
+        /// 그 값을 실제로 보는 것은 <c>JoyGiver_InteractBuildingSitAdjacent</c> 뿐이므로
+        /// 다른 기버(당구·편자·망원경)는 요구하지 않는 것으로 친다 — 바닐라가 안 보는 값을
+        /// 우리가 대신 지킬 이유가 없다. 기본값이 true 라 체스·포커가 여기 걸리고,
+        /// 우르만 <c>requireChair false</c> 를 적어 두었다.
+        /// </summary>
+        public bool RequiresChair
+        {
+            get
+            {
+                if (!requiresChair.HasValue) requiresChair = ResolveRequiresChair();
+                return requiresChair.Value;
+            }
+        }
+
+        private bool ResolveRequiresChair()
+        {
+            if (vanillaJob == null) return false;
+
+            foreach (JoyGiverDef giver in DefDatabase<JoyGiverDef>.AllDefsListForReading)
+            {
+                if (giver.jobDef != vanillaJob || giver.giverClass == null) continue;
+                if (!typeof(JoyGiver_InteractBuildingSitAdjacent).IsAssignableFrom(giver.giverClass)) continue;
+
+                return giver.requireChair;
+            }
+
+            return false;
+        }
+
         public int ClampTier(int tier)
         {
             return Mathf.Clamp(tier, 0, Mathf.Max(0, difficultyCount - 1));
