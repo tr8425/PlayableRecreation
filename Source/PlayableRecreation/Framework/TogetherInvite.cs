@@ -144,6 +144,60 @@ namespace PlayableRecreation
             }
         }
 
+        // ---------- 개발자 도구가 부르는 것 (PRDebug) ----------
+
+        /// <summary>
+        /// 주사위를 건너뛰고 지금 당장 청하게 한다. QA 에서 한 시간을 기다리지 않으려고 둔다.
+        /// 성공이면 null, 아니면 왜 안 됐는지 한 줄.
+        /// </summary>
+        public static string ForceInvite()
+        {
+            if (!Enabled) return "invites are off in mod settings";
+
+            List<Map> maps = Find.Maps;
+            if (maps == null || maps.Count == 0) return "no maps";
+
+            for (int i = 0; i < maps.Count; i++)
+                if (TryInviteOn(maps[i])) return null;
+
+            return "no free board with a match, or no idle qualifying guest";
+        }
+
+        /// <summary>기다림을 지금 끝낸다 — 혼자 두기로 넘어가는 자리를 바로 본다.</summary>
+        public static bool ExpireNow(Thing board)
+        {
+            for (int i = 0; i < waiting.Count; i++)
+            {
+                if (waiting[i].board != board) continue;
+
+                waiting[i].startedTick = Find.TickManager.TicksGame - WaitTicks - 1;
+                Sweep();
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>지금 누가 어디서 기다리는가. 로그로 뽑아 본다.</summary>
+        public static string Describe()
+        {
+            if (waiting.Count == 0) return "  waiting: (none)";
+
+            string text = "";
+            for (int i = 0; i < waiting.Count; i++)
+            {
+                Seat seat = waiting[i];
+                int held = Find.TickManager.TicksGame - seat.startedTick;
+
+                text += "  waiting: " + seat.guest.ToStringSafe()
+                    + " at " + seat.board.ToStringSafe()
+                    + " (" + seat.game.ToStringSafe() + ", " + held + "/" + WaitTicks + " ticks"
+                    + ", job=" + (seat.guest.CurJobDef != null ? seat.guest.CurJobDef.defName : "none") + ")\n";
+            }
+
+            return text.TrimEnd('\n');
+        }
+
         // ---------- 청하기 ----------
 
         private static void TryInvite()

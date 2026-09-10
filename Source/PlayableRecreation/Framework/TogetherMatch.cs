@@ -276,6 +276,32 @@ namespace PlayableRecreation
             if (entry != null) pending.Remove(entry);
         }
 
+        /// <summary>
+        /// 지금 들고 있는 것 전부. 개발자 도구(<c>PRDebug</c>)가 로그로 뽑는다 —
+        /// 이 두 목록은 세이브에 안 남아서 밖에서 볼 방법이 이것뿐이다.
+        /// </summary>
+        public static string Describe()
+        {
+            string text = "";
+
+            for (int i = 0; i < pending.Count; i++)
+            {
+                Pending entry = pending[i];
+                int held = Find.TickManager.TicksGame - entry.startedTick;
+
+                text += "  pending: " + entry.seated.ToStringSafe() + " + " + entry.opponent.ToStringSafe()
+                    + " at " + entry.board.ToStringSafe()
+                    + " (" + held + "/" + WaitLimitTicks + " ticks"
+                    + (entry.session != null ? ", resuming" : ", new") + ")\n";
+            }
+
+            for (int i = 0; i < live.Count; i++)
+                text += "  live: " + live[i].seated.ToStringSafe() + " + " + live[i].opponent.ToStringSafe()
+                    + " at " + live[i].board.ToStringSafe() + "\n";
+
+            return text.Length > 0 ? text.TrimEnd('\n') : "  pending/live: (none)";
+        }
+
         // ---------- 조각 ----------
 
         private static void OpenNow(MiniGameDef game, Thing board, Pawn seated, Pawn opponent,
