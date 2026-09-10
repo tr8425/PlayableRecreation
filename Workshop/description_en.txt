@@ -2,8 +2,6 @@
 
 [i]Your colonists have all the fun. Take it back.[/i]
 
-The recreation they have been enjoying, played by you instead.
-
 [h2]Seven things to do[/h2]
 [list]
 [*][b]The game of Ur[/b] — a board game from 2500 BC. Still thrilling, still infuriating
@@ -44,15 +42,24 @@ You also choose how many undos you get. Set it to zero and there are none.
 
 [img]https://images.steamusercontent.com/ugc/12618045191316701357/466F586F6C1033773B4EEB1E9A867DE9600DE4C2/[/img]
 
-[h2]Two at the board[/h2]
+[h2]Immersion mode: two at the board[/h2]
 
-Turn on [b]immersion mode[/b] and you can pick an opponent. The two of them walk over, sit down on opposite sides, and stay until the game is over. What they say to each other shows up under the moves. Hunger, a threat, a draft or a moved board gets them up — and if your opponent dies mid-game, the game goes with them.
+Without it, you play and one colonist sits there. Turn [b]immersion mode[/b] on in the settings and the board gets two people at it.
 
-Visitors play too, and winning or losing moves their faction's goodwill along with their mood. They also sit down on their own and wait for someone to join them.
+[list]
+[*][b]Pick who plays whom.[/b] Right-click the furniture and choose an opponent. Anyone who cannot come is greyed out with the reason — drafted, too far, already at another board
+[*][b]They walk over and sit down across from each other[/b], facing each other, and stay until the game is over
+[*][b]They talk while they play.[/b] Whatever they say to each other appears under the moves — the same social interactions the colony would have had anyway, in the window instead of a speech bubble
+[*][b]They can leave.[/b] Hunger and tiredness get them up, and so does a threat, a draft, or someone moving the board. If your opponent dies mid-game, the game goes with them
+[/list]
 
-Who they are shows on the board: a chess master plays chess well, kind colonists let an undo slide, and some will flip the board when they are losing.
+[b]Visitors count as opponents.[/b] Beat one or lose to one and their faction's goodwill moves a little, their mood with it. They will also sit down at an empty board on their own and wait for someone to join them — and if nobody does, they end up playing alone.
 
-Off by default. Leave it off and nothing changes.
+[b]Who is sitting there shows on the board.[/b] A backstory that names the game counts for that game only: a chess master plays chess well, while being a researcher does not help. Kind colonists let an undo slide. Some will flip the board when they are losing. The move list carries their names.
+
+The difficulty you are offered comes from whoever sits across from you, not from you — so playing the colony's best is a different evening than playing its worst.
+
+All of it is off by default, and every piece of it has its own switch.
 
 [h2]The telescope is different[/h2]
 
@@ -80,7 +87,7 @@ The first time you clear a difficulty, colonists get a little more recreation an
 
 [img]https://images.steamusercontent.com/ugc/12932015864041118073/879A36FE049709DBB7CA6536480E965100145CBC/[/img]
 
-None of this is required and nothing is asked of you. These wake up only when the mod is already in your list; the dependency list stays empty either way.
+None of it is required. These wake up only when the mod is already in your list.
 
 [list]
 [*][b]Vanilla Furniture Expanded[/b] — the [b]darts board[/b] (five rounds, three darts each, highest total wins), the [b]punching bag[/b] (answer the beat), the [b]roulette table[/b] (a bankroll run against the house, table limit and all), and the [b]arcade machine[/b]
@@ -99,39 +106,14 @@ The arcade machine has no game of its own. Pick a difficulty and it deals you a 
 [*]No Harmony patches
 [*]No vanilla Defs modified — one component is [i]added[/i] to the furniture, nothing else
 [*]Every entry can be switched off. Switching one off only removes the right-click option; colonists still use the furniture on their own
+[*]Chess and poker want a free chair at the board, the way vanilla always has
 [*]English · 한국어
 [*]No multiplayer support
 [/list]
 
-[h2]FAQ[/h2]
+[h2]What about other mods, including Combat Extended?[/h2]
 
-[b]Q. Can I add this to an existing save? Can I remove it later?[/b]
-
-Yes. It is safe to add and remove. Remove it and the furniture goes back to vanilla.
-
-[b]Q. Do I need any DLC?[/b]
-
-No. All seven buildings are from the base game. Odyssey adds more to stargazing.
-
-[b]Q. Do I need Vanilla Furniture Expanded, GloomyFurniture or Hospitality: Casino?[/b]
-
-No. The mod asks for nothing and its dependency list is empty. If one of them is already loaded, the extra furniture becomes playable; if not, nothing changes and nothing breaks.
-
-[b]Q. Will colonists still use recreation furniture on their own?[/b]
-
-Yes. Even switching an entry off only removes its right-click option.
-
-[b]Q. Does it change game speed or pause controls?[/b]
-
-No. It never touches game speed, and space remains the usual pause key. Automatic pausing while a window is open is optional, in the mod settings.
-
-[b]Q. Does it support multiplayer?[/b]
-
-No.
-
-[b]Q. What about other mods, including Combat Extended?[/b]
-
-There are no Harmony patches and no vanilla Defs are modified — one component is added to seven pieces of furniture. That leaves very little surface for conflict, but no promises beyond that.
+There are no Harmony patches and no vanilla Defs are modified — one component is [i]added[/i] to seven pieces of furniture. That leaves very little surface for conflict, but no promises beyond that.
 
 [h2]Found a problem?[/h2]
 
