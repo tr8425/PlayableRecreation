@@ -158,20 +158,54 @@ namespace PlayableRecreation
         /// <summary>
         /// 빈 자리 하나. 의자가 있는 칸을 한 바퀴 다 본 뒤에야 맨바닥을 본다 —
         /// 바닐라도 그 순서다(<c>requireChair</c> 가 아니면 두 바퀴를 돈다).
+        ///
+        /// 맞은편 사람이 이미 앉을 자리를 잡았으면 **그 사람에게서 가장 먼 칸**을 고른다.
+        /// 체스판처럼 1×1 이면 정확히 마주 보는 칸이고, 큰 가구에서도 "판 건너" 로 읽힌다.
+        /// 의자가 먼저다 — 마주 보자고 맨바닥에 세우지는 않는다.
         /// </summary>
         private static IntVec3 FindSeat(Pawn pawn, Thing board)
         {
+            IntVec3 across = PartnerSeat(pawn, board);
+
+            IntVec3 chair = IntVec3.Invalid;
             IntVec3 bare = IntVec3.Invalid;
+            int chairScore = -1;
+            int bareScore = -1;
 
             foreach (IntVec3 cell in GenAdjFast.AdjacentCellsCardinal(board))
             {
                 if (!Free(pawn, board, cell)) continue;
 
-                if (Chair(board.Map, cell)) return cell;
-                if (!bare.IsValid) bare = cell;
+                // 맞은편을 모르면 전부 0 이라 먼저 걸린 칸이 남는다 — 예전 그대로다.
+                int score = across.IsValid ? (cell - across).LengthHorizontalSquared : 0;
+
+                if (Chair(board.Map, cell))
+                {
+                    if (score > chairScore) { chairScore = score; chair = cell; }
+                }
+                else if (score > bareScore) { bareScore = score; bare = cell; }
             }
 
-            return bare;
+            return chair.IsValid ? chair : bare;
+        }
+
+        /// <summary>
+        /// 맞은편 사람이 이미 잡아 둔 칸. 아직 안 잡았거나 상대가 없으면 Invalid 다.
+        ///
+        /// <c>TogetherMatch.Arrange</c> 가 상대를 먼저 보내므로, 나중에 앉는 쪽이 이 값을 본다.
+        /// 먼저 앉는 쪽은 아직 아무것도 모르니 예전처럼 첫 의자를 잡는다 — 그거면 충분하다.
+        /// </summary>
+        private static IntVec3 PartnerSeat(Pawn pawn, Thing board)
+        {
+            Pawn partner = TogetherMatch.PartnerOf(board, pawn);
+            if (partner == null || partner.CurJob == null) return IntVec3.Invalid;
+
+            JobDef def = partner.CurJobDef;
+            if (def != PRDefOf.PR_GoToGame && def != PRDefOf.PR_JoinGame && def != PRDefOf.PR_InviteGame)
+                return IntVec3.Invalid;
+
+            LocalTargetInfo seat = partner.CurJob.GetTarget(TargetIndex.C);
+            return seat.IsValid ? seat.Cell : IntVec3.Invalid;
         }
 
         private static bool Free(Pawn pawn, Thing board, IntVec3 cell)
