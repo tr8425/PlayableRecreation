@@ -152,8 +152,11 @@ namespace PlayableRecreation
 
                 bool timedOut = Find.TickManager.TicksGame - entry.startedTick > WaitLimitTicks;
 
-                // 둘 다 우리 Job 을 놓았으면 아무도 오지 않는다.
-                bool coming = Coming(entry.seated, entry.board) || Coming(entry.opponent, entry.board);
+                // **둘 다 오고 있어야 한다.** 하나가 우리 Job 을 놓으면 그 판은 이미 성립하지
+                // 않는다 — 징집이 대표적이다. 예전에는 "하나라도 오는 중" 이면 기다렸는데,
+                // 그러면 남은 한 사람이 2500틱(게임 시간 한 시간) 동안 판 앞에 그냥 서 있었다.
+                // 붙잡는 근거는 이 목록이므로, 여기서 지우면 그 자리에서 제 일로 돌아간다.
+                bool coming = Coming(entry.seated, entry.board) && Coming(entry.opponent, entry.board);
 
                 if (!lost && !timedOut && coming) continue;
 
