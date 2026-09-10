@@ -163,6 +163,11 @@ namespace PlayableRecreation
             // 맞은편에 누구를 앉힐지는 원래 관계로 고르는 일이다.
             found.SortByDescending(delegate (Pawn pawn) { return Opinion(pawn, initiator); });
 
+            // 이 가구 앞에서 기다리고 있는 손님은 의견과 무관하게 맨 위다.
+            // 그 사람 때문에 목록을 연 것이므로 찾게 만들면 안 된다.
+            Pawn waiting = TogetherInvite.WaitingAt(board);
+            if (waiting != null && found.Remove(waiting)) found.Insert(0, waiting);
+
             return found;
         }
 

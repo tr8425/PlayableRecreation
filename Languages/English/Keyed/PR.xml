@@ -27,6 +27,7 @@
   <PR.Together.LeftLost>{0} got up, and the game went with them.</PR.Together.LeftLost>
   <PR.Job.Playing>playing {0}.</PR.Job.Playing>
   <PR.Job.PlayingWith>playing {0} with {1}.</PR.Job.PlayingWith>
+  <PR.Job.Waiting>waiting for someone to play {0}.</PR.Job.Waiting>
   <PR.Together.BoardFlip>{0} sent the pieces flying rather than lose to {1}.</PR.Together.BoardFlip>
   <PR.Together.Goodwill.Up>{0} enjoyed the game. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Up>
   <PR.Together.Goodwill.Down>{0} was taken apart at the board and did not enjoy it. Goodwill with {1}: {2} → {3}.</PR.Together.Goodwill.Down>
@@ -34,6 +35,8 @@
   <PR.Together.Sit>{0} sits down</PR.Together.Sit>
   <PR.Together.Alone>Play alone</PR.Together.Alone>
   <PR.Together.Affinity>{0} ({1})</PR.Together.Affinity>
+  <PR.Together.Waiting>{0} (waiting for you)</PR.Together.Waiting>
+  <PR.Together.Invite>{0} sits down at the {1} and waits for someone to play.</PR.Together.Invite>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
   <PR.Together.Why.TooYoung>too young</PR.Together.Why.TooYoung>
   <PR.Together.Why.ChildrenOff>children are turned off</PR.Together.Why.ChildrenOff>
@@ -153,6 +156,9 @@ You can turn this off in the mod settings.</PR.Invalidation.Letter.Text>
   <PR.Settings.Together.Range>        Call someone from up to {0} tiles away</PR.Settings.Together.Range>
   <PR.Settings.Together.Children>        Children can play too</PR.Settings.Together.Children>
   <PR.Settings.Together.Visitors>        Visitors can play too</PR.Settings.Together.Visitors>
+  <PR.Settings.Together.Invites>        Guests sit down and ask for a game</PR.Settings.Together.Invites>
+  <PR.Settings.Together.Invites.Desc>Now and then a guest takes a seat at a free board and waits. Click the board and they are at the top of the list. If nobody joins them, they play on their own.</PR.Settings.Together.Invites.Desc>
+  <PR.Settings.Together.InviteScale>            How often they ask: {0}%</PR.Settings.Together.InviteScale>
   <PR.Settings.Together.Personality>        Their personality shows at the board</PR.Settings.Together.Personality>
   <PR.Settings.Together.Personality.Desc>What they say to each other while playing appears in the log panel. The game does not write any of it — vanilla does.</PR.Settings.Together.Personality.Desc>
   <PR.Settings.Together.BoardFlip>            They can flip the board when angry</PR.Settings.Together.BoardFlip>

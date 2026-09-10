@@ -12,6 +12,9 @@ namespace PlayableRecreation
         /// <summary>몰입 모드 2칸. 상대가 판 앞으로 가 그 자리에 선다.</summary>
         public static JobDef PR_JoinGame;
 
+        /// <summary>손님이 먼저 판 앞에 앉아 상대를 기다린다.</summary>
+        public static JobDef PR_InviteGame;
+
         /// <summary>둘이 한 판을 끝까지 뒀다.</summary>
         public static ThoughtDef PR_PlayedTogether;
 

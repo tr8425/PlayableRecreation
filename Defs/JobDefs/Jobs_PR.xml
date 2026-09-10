@@ -23,4 +23,16 @@
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 
+  <!--
+    손님이 먼저 판 앞에 앉아 상대를 기다린다. 창은 이 Job 이 열지 않는다 -
+    플레이어가 그 가구를 눌러 이 손님을 고르면 그때 평소의 두 Job 으로 넘어간다.
+    아무도 안 오면 그 가구의 바닐라 여가 Job 으로 갈아탄다(혼자 두기).
+  -->
+  <JobDef>
+    <defName>PR_InviteGame</defName>
+    <driverClass>PlayableRecreation.JobDriver_InviteGame</driverClass>
+    <reportString>waiting for someone to play.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+
 </Defs>

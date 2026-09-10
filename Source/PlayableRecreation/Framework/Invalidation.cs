@@ -149,7 +149,7 @@ namespace PlayableRecreation
 
         /// <summary>
         /// 남은 사람에게 기억을 남긴다. 판이 사라진 것보다 맞은편이 사라진 것이 더 큰 일이다.
-        /// 우리 식구가 아니면 주지 않는다 — 손님의 기분까지 우리가 적을 자리는 아니다.
+        /// 손님도 받는다 — 한 판 두던 상대가 없어진 것은 손님에게도 같은 일이기 때문이다.
         /// </summary>
         private static void RememberTheOther(GameSession session, Pawn gone)
         {
@@ -162,7 +162,6 @@ namespace PlayableRecreation
         private static void Remember(Pawn pawn, Pawn gone)
         {
             if (pawn == null || pawn == gone || pawn.Dead) return;
-            if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
             if (pawn.needs == null || pawn.needs.mood == null) return;
 
             pawn.needs.mood.thoughts.memories.TryGainMemory(PRDefOf.PR_OpponentGone);

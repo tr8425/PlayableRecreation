@@ -56,6 +56,10 @@ namespace PlayableRecreation
 
             Cancel(board);
 
+            // 손님이 청해 놓고 기다리던 자리라면 그 청은 여기서 이루어진 것이다.
+            // 지우지 않으면 잠시 뒤 "아무도 안 왔다" 로 읽고 혼자 두게 만든다.
+            TogetherInvite.Cancel(board);
+
             // 상대가 못 오면 한 사람만 서 있는 그림을 만들지 않는다 — 그냥 혼자 두는 판으로 연다.
             if (!Send(opponent, PRDefOf.PR_JoinGame, board, seated))
             {

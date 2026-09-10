@@ -78,6 +78,60 @@ namespace PlayableRecreation
         }
 
         /// <summary>
+        /// 상대를 기다리며 판 앞에 선다. **먼저 청한 손님이 쓰는 토일이다.**
+        ///
+        /// 끝낼 때를 여기서 재지 않는다 — 시간은 <see cref="TogetherInvite"/> 가 재고
+        /// 여기는 그 답만 본다. 손님이 도중에 다른 일을 받으면 이 토일은 아예 안 돌기 때문이다.
+        /// </summary>
+        public static Toil Wait(JobDriver driver, TargetIndex boardIndex)
+        {
+            Toil toil = ToilMaker.MakeToil("PR_WaitAtBoard");
+
+            toil.defaultCompleteMode = ToilCompleteMode.Never;
+            toil.handlingFacing = true;
+
+            // 기다리는 동안에도 바닐라가 대화를 굴린다. 다만 손님은 같은 팩션끼리만 굴린다(D6).
+            toil.socialMode = RandomSocialMode.Normal;
+
+            toil.initAction = delegate
+            {
+                Thing board = driver.job.GetTarget(boardIndex).Thing;
+                if (board != null) driver.pawn.rotationTracker.FaceTarget(board);
+            };
+
+            toil.tickAction = delegate
+            {
+                Pawn pawn = driver.pawn;
+                Thing board = driver.job.GetTarget(boardIndex).Thing;
+
+                if (board == null)
+                {
+                    driver.EndJobWith(JobCondition.Incompletable);
+                    return;
+                }
+
+                if (!pawn.IsHashIntervalTick(CheckInterval)) return;
+
+                pawn.rotationTracker.FaceTarget(board);
+
+                // 청이 지워졌으면 서 있을 이유가 없다. 혼자 두기로 넘어갔다면 이미 새 Job 이다.
+                if (!TogetherInvite.IsWaiting(pawn))
+                {
+                    driver.EndJobWith(JobCondition.Succeeded);
+                    return;
+                }
+
+                if (NeedsBreak(pawn))
+                {
+                    driver.EndJobWith(JobCondition.InterruptForced);
+                    return;
+                }
+            };
+
+            return toil;
+        }
+
+        /// <summary>
         /// 이미 판 앞에 닿았는가. Job 은 걷기와 붙잡히기를 한 묶음으로 갖고 있어
         /// 보고문구가 하나라, 앉아 두는 동안에도 "가는 중" 이라고 뜨는 것을 막는다.
         /// </summary>

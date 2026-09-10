@@ -129,6 +129,19 @@ namespace PlayableRecreation
 
             list.CheckboxLabeled("PR.Settings.Together.Children".Translate(), ref Settings.playTogetherChildren);
             list.CheckboxLabeled("PR.Settings.Together.Visitors".Translate(), ref Settings.playTogetherVisitors);
+
+            if (Settings.playTogetherVisitors)
+            {
+                list.CheckboxLabeled("    " + "PR.Settings.Together.Invites".Translate(),
+                    ref Settings.playTogetherInvites, "PR.Settings.Together.Invites.Desc".Translate());
+
+                if (Settings.playTogetherInvites)
+                {
+                    list.Label("PR.Settings.Together.InviteScale".Translate(Settings.playTogetherInviteScale));
+                    Settings.playTogetherInviteScale =
+                        Mathf.RoundToInt(list.Slider(Settings.playTogetherInviteScale, 0f, 300f));
+                }
+            }
             list.CheckboxLabeled("PR.Settings.Together.Personality".Translate(), ref Settings.playTogetherPersonality,
                 "PR.Settings.Together.Personality.Desc".Translate());
 

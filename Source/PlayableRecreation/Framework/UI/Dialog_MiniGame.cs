@@ -784,7 +784,10 @@ namespace PlayableRecreation.UI
         /// <summary>
         /// 둘이 한 판을 끝까지 둔 기억. 이기고 지는 것과 무관하게 둘 다 받는다 —
         /// 맞은편에 사람이 있었다는 것 자체가 기억이기 때문이다.
-        /// 손님은 빼다 — 손님의 기분까지 우리가 적을 자리는 아니다.
+        ///
+        /// <b>손님도 받는다.</b> 우호도만 움직이고 기분은 안 움직이면 손님은 팩션의 숫자이지
+        /// 한 판 두고 간 사람이 아니게 된다. 바닐라 기분 욕구는 <c>colonistsOnly</c> 가 아니라
+        /// (여가 욕구와 다르다) 방문객에게도 그대로 있으므로 공짜로 성립한다.
         /// </summary>
         private void RememberTheGame()
         {
@@ -800,7 +803,6 @@ namespace PlayableRecreation.UI
         private static void Remember(Pawn pawn)
         {
             if (pawn == null || pawn.Dead) return;
-            if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
             if (pawn.needs == null || pawn.needs.mood == null) return;
 
             pawn.needs.mood.thoughts.memories.TryGainMemory(PRDefOf.PR_PlayedTogether);
@@ -814,7 +816,6 @@ namespace PlayableRecreation.UI
         {
             if (pawn == null || other == null || pawn == other) return;
             if (pawn.Dead || pawn.needs == null || pawn.needs.mood == null) return;
-            if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
 
             pawn.needs.mood.thoughts.memories.TryGainMemory(PRDefOf.PR_PlayedTogetherSocial, other);
         }

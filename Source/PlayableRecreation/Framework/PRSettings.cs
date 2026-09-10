@@ -42,13 +42,19 @@ namespace PlayableRecreation
         /// <summary>방문객도 상대가 된다. 끄면 우호도 항목도 뜻을 잃는다.</summary>
         public bool playTogetherVisitors = true;
 
+        /// <summary>손님이 먼저 판 앞에 앉아 상대를 기다린다. 방문객 항목이 켜져 있어야 한다.</summary>
+        public bool playTogetherInvites = true;
+
+        /// <summary>손님이 청하는 빈도의 배율(%). 0 이면 사실상 끔이다.</summary>
+        public int playTogetherInviteScale = 100;
+
         /// <summary>
         /// 성격이 판에 비친다. 대부분은 바닐라가 이미 하는 일이고,
         /// 우리는 그것을 창 안으로 옮기기만 한다. 끄면 그 띠가 사라진다.
         /// </summary>
         public bool playTogetherPersonality = true;
 
-        /// <summary>화가 나면 판을 엎을 수 있다. **판이 남의 성격 때문에 끝난다** — 끕 수 있어야 한다.</summary>
+        /// <summary>화가 나면 판을 엎을 수 있다. **판이 남의 성격 때문에 끝난다** — 끌 수 있어야 한다.</summary>
         public bool playTogetherBoardFlip = true;
 
         /// <summary>다정한 상대는 무르기를 한 번 더 준다. 무르기 한 칸은 난이도에 직접 닿는다.</summary>
@@ -181,6 +187,8 @@ namespace PlayableRecreation
             Scribe_Values.Look(ref playTogetherRange, "playTogetherRange", 30);
             Scribe_Values.Look(ref playTogetherChildren, "playTogetherChildren", true);
             Scribe_Values.Look(ref playTogetherVisitors, "playTogetherVisitors", true);
+            Scribe_Values.Look(ref playTogetherInvites, "playTogetherInvites", true);
+            Scribe_Values.Look(ref playTogetherInviteScale, "playTogetherInviteScale", 100);
             Scribe_Values.Look(ref playTogetherPersonality, "playTogetherPersonality", true);
             Scribe_Values.Look(ref playTogetherBoardFlip, "playTogetherBoardFlip", true);
             Scribe_Values.Look(ref playTogetherKindUndo, "playTogetherKindUndo", true);

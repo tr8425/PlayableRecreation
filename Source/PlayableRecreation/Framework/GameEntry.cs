@@ -118,10 +118,15 @@ namespace PlayableRecreation
                     // 배경이 이 오락을 직접 말하는 사람은 그렇다고 적어 준다. 그 사람을 고르면
                     // 제안 난이도가 뛰는데, 왜 뛰는지가 목록에 안 보이면 그냥 이상한 일이 된다.
                     BackstoryAffinity affinity = AffinityFor(game, bound);
-                    string label = affinity != null
-                        ? (string)"PR.Together.Affinity".Translate(
-                            bound.LabelShortCap, affinity.backstory.TitleCapFor(bound.gender))
-                        : bound.LabelShortCap;
+
+                    string label;
+                    if (bound == TogetherInvite.WaitingAt(board))
+                        label = "PR.Together.Waiting".Translate(bound.LabelShortCap);
+                    else if (affinity != null)
+                        label = "PR.Together.Affinity".Translate(
+                            bound.LabelShortCap, affinity.backstory.TitleCapFor(bound.gender));
+                    else
+                        label = bound.LabelShortCap;
 
                     able.Add(new FloatMenuOption(
                         label,

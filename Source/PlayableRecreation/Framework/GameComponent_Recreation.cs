@@ -242,11 +242,13 @@ namespace PlayableRecreation
         public override void StartedNewGame()
         {
             TogetherMatch.Reset();
+            TogetherInvite.Reset();
         }
 
         public override void LoadedGame()
         {
             TogetherMatch.Reset();
+            TogetherInvite.Reset();
         }
 
         public override void GameComponentTick()
@@ -256,8 +258,9 @@ namespace PlayableRecreation
 
             if (Find.TickManager.TicksGame % CheckInterval != 0) return;
 
-            // 부르다 만 판도 세션과 무관하다 - 아직 아무 세션도 없을 때 생기기 때문이다.
+            // 부르다 만 판도, 손님이 청한 판도 세션과 무관하다 - 아직 아무 세션도 없을 때 생긴다.
             TogetherMatch.Sweep();
+            TogetherInvite.Tick();
 
             if (sessions.Count == 0) return;
 
