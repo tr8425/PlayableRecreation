@@ -14,6 +14,15 @@ namespace PlayableRecreation.UI
     public class Dialog_Leaderboard : Window
     {
         private const float TabHeight = 32f;
+
+        /// <summary>
+        /// 탭 하나가 이보다 좁아지면 줄을 늘린다. 확장까지 켜면 승부 게임이 열이라,
+        /// 한 줄에 밀어 넣으면 탭이 56픽셀이 되고 "Arcade machine" 같은 이름이 접히면서
+        /// 윗부분이 잘려 나간다. 이름을 줄이는 대신 줄을 늘린다.
+        /// </summary>
+        private const float TabMinWidth = 92f;
+
+        private const float TabGap = 6f;
         private const float HeaderHeight = 26f;
         private const float RowHeight = 28f;
         private const float FooterHeight = 40f;
@@ -91,8 +100,9 @@ namespace PlayableRecreation.UI
             List<MiniGameDef> games = Enabled;
             if (games.Count > 1)
             {
-                DrawGameTabs(new Rect(inRect.x, y, inRect.width, TabHeight), games);
-                y += TabHeight + 6f;
+                float tabs = GameTabsHeight(inRect.width, games.Count);
+                DrawGameTabs(new Rect(inRect.x, y, inRect.width, tabs), games);
+                y += tabs + TabGap;
             }
 
             DrawScopeTabs(new Rect(inRect.x, y, inRect.width, TabHeight));
@@ -117,13 +127,37 @@ namespace PlayableRecreation.UI
             DrawFooter(new Rect(inRect.x, inRect.yMax - FooterHeight + 6f, inRect.width, FooterHeight - 6f));
         }
 
-        private void DrawGameTabs(Rect row, List<MiniGameDef> games)
+        /// <summary>한 줄에 몇 개까지 놓을 것인가. 한 개 밑으로는 안 내려간다.</summary>
+        private static int TabsPerRow(float width, int count)
         {
-            float width = (row.width - (games.Count - 1) * 6f) / games.Count;
+            int fits = Mathf.FloorToInt((width + TabGap) / (TabMinWidth + TabGap));
+            return Mathf.Clamp(fits, 1, count);
+        }
+
+        /// <summary>탭이 차지할 높이. 그린 뒤에 알면 늦으므로 자리를 잡을 때 먼저 묻는다.</summary>
+        private static float GameTabsHeight(float width, int count)
+        {
+            int perRow = TabsPerRow(width, count);
+            int rows = Mathf.CeilToInt(count / (float)perRow);
+
+            return rows * TabHeight + (rows - 1) * TabGap;
+        }
+
+        private void DrawGameTabs(Rect area, List<MiniGameDef> games)
+        {
+            int perRow = TabsPerRow(area.width, games.Count);
+            float width = (area.width - (perRow - 1) * TabGap) / perRow;
 
             for (int i = 0; i < games.Count; i++)
             {
-                Rect tab = new Rect(row.x + i * (width + 6f), row.y, width, row.height);
+                int col = i % perRow;
+                int row = i / perRow;
+
+                Rect tab = new Rect(
+                    area.x + col * (width + TabGap),
+                    area.y + row * (TabHeight + TabGap),
+                    width, TabHeight);
+
                 if (TabButton(tab, games[i].LabelCap, games[i] == game)) game = games[i];
             }
         }
@@ -152,9 +186,16 @@ namespace PlayableRecreation.UI
             else if (Mouse.IsOver(rect)) Widgets.DrawHighlight(rect);
 
             Text.Anchor = TextAnchor.MiddleCenter;
+            Text.Font = GameFont.Tiny;
             GUI.color = selected ? Color.white : PRTheme.Dim;
-            Widgets.Label(rect, label);
+
+            // 줄을 늘려도 안 들어가는 이름이 있다. 그때는 잘라 쓰고 통째로는 툴팁에 남긴다.
+            string shown = label.Truncate(rect.width - 8f);
+            Widgets.Label(rect, shown);
+            if (shown != label && Mouse.IsOver(rect)) TooltipHandler.TipRegion(rect, label);
+
             GUI.color = Color.white;
+            Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.UpperLeft;
 
             return Widgets.ButtonInvisible(rect);

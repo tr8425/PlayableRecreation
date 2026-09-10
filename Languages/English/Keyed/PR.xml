@@ -38,6 +38,7 @@
   <PR.Together.Affinity>{0} ({1})</PR.Together.Affinity>
   <PR.Together.Waiting>{0} (waiting for you)</PR.Together.Waiting>
   <PR.Together.Invite>{0} sits down at the {1} and waits for someone to play.</PR.Together.Invite>
+  <PR.Together.GotUp>The match is over; they get up from the board.</PR.Together.GotUp>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
   <PR.Together.Why.TooYoung>too young</PR.Together.Why.TooYoung>
   <PR.Together.Why.ChildrenOff>children are turned off</PR.Together.Why.ChildrenOff>

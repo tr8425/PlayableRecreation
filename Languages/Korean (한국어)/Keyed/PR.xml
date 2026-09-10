@@ -24,7 +24,7 @@
   <PR.Together.CannotCome>{0}은(는) 지금 판 앞으로 올 수 없습니다.</PR.Together.CannotCome>
   <PR.Together.NeverCame>{0}이(가) 끝내 판 앞에 오지 않았습니다.</PR.Together.NeverCame>
   <PR.Together.LeftSaved>{0}이(가) 일어났습니다. 판은 가구에 남습니다.</PR.Together.LeftSaved>
-  <PR.Together.LeftLost>{0}이(가) 일어나면서 판도 훩해졌습니다.</PR.Together.LeftLost>
+  <PR.Together.LeftLost>{0}이(가) 일어나면서 판도 흐트러졌습니다.</PR.Together.LeftLost>
   <PR.Job.Playing>{0}을(를) 두는 중.</PR.Job.Playing>
   <PR.Job.PlayingWith>{1}와(과) {0}을(를) 두는 중.</PR.Job.PlayingWith>
   <PR.Job.Waiting>{0} 상대를 기다리는 중.</PR.Job.Waiting>
@@ -38,6 +38,7 @@
   <PR.Together.Affinity>{0} ({1})</PR.Together.Affinity>
   <PR.Together.Waiting>{0} (기다리는 중)</PR.Together.Waiting>
   <PR.Together.Invite>{0}이(가) {1} 앞에 앉아 상대를 기다립니다.</PR.Together.Invite>
+  <PR.Together.GotUp>판이 끝나 두 사람이 자리에서 일어섰습니다.</PR.Together.GotUp>
   <PR.Together.Cannot>{0} — {1}</PR.Together.Cannot>
   <PR.Together.Why.TooYoung>너무 어림</PR.Together.Why.TooYoung>
   <PR.Together.Why.ChildrenOff>어린이가 꺼져 있음</PR.Together.Why.ChildrenOff>

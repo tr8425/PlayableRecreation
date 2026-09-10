@@ -28,6 +28,13 @@ namespace PlayableRecreation.UI
         /// <summary>위협 감시 주기(실시간 초). 매 프레임 맵을 훑을 필요는 없다.</summary>
         private const float ThreatCheckInterval = 0.5f;
 
+        /// <summary>
+        /// 판이 끝난 뒤 두 사람을 더 붙잡아 두는 시간(초). 결과 창에 "다시 두기" 가 있으니
+        /// 그 자리에서 곧바로 일어서면 다시 부르는 길이 멀어진다. 그동안 창을 만지지도
+        /// 보지도 않으면 스스로 일어선다 — 결과만 띄워 두고 자리를 뜬 판이라는 뜻이다.
+        /// </summary>
+        private const float HoldAfterMatch = 10f;
+
         private readonly MiniGameDef game;
         private readonly Thing board;
         private readonly Pawn seatedPawn;
@@ -61,6 +68,10 @@ namespace PlayableRecreation.UI
         /// <summary>창을 연 시점의 기록 자리. 그 뒤에 생긴 것만 집는다(§7.2).</summary>
         private int talkCursor = -1;
         private float nextTalkCheck;
+
+        /// <summary>이 시각이 지나면 두 사람을 놓아준다. 0 이면 잴 것이 없다.</summary>
+        private float releaseAt;
+        private bool released;
 
         public override Vector2 InitialSize
         {
@@ -309,6 +320,36 @@ namespace PlayableRecreation.UI
             Close();
         }
 
+        /// <summary>
+        /// 결과 창을 띄워 둔 채 아무것도 안 하면 두 사람을 놓아준다.
+        /// 창은 그대로 남는다 — 결과는 계속 읽을 수 있어야 하고, "다시 두기" 를 누르면
+        /// 그때 다시 부르면 그만이다.
+        /// </summary>
+        private void ReleaseWhenIdle()
+        {
+            if (released || releaseAt <= 0f) return;
+            if (Time.realtimeSinceStartup < releaseAt) return;
+
+            released = true;
+            releaseAt = 0f;
+
+            if (board == null) return;
+
+            TogetherMatch.ClosedWindow(board);
+            Messages.Message("PR.Together.GotUp".Translate(), board, MessageTypeDefOf.SilentInput, false);
+        }
+
+        /// <summary>창을 보고 있거나 만지고 있으면 아직 일어서지 않는다.</summary>
+        private void KeepSeatedWhileWatching(Rect inRect)
+        {
+            if (released || releaseAt <= 0f) return;
+
+            EventType type = Event.current.type;
+            if (!Mouse.IsOver(inRect) && type != EventType.MouseDown && type != EventType.KeyDown) return;
+
+            releaseAt = Time.realtimeSinceStartup + HoldAfterMatch;
+        }
+
         private static int LatestLogId()
         {
             if (Find.PlayLog == null) return -1;
@@ -358,7 +399,7 @@ namespace PlayableRecreation.UI
 
             // 판은 Tick 에서 끝날 수도, 판을 클릭하는 순간 끝날 수도 있다.
             // 정리는 어느 쪽이든 다음 프레임의 여기서 한 번만 일어난다.
-            if (game.hasMatch && worker.IsOver) { FinishMatch(); return; }
+            if (game.hasMatch && worker.IsOver) { FinishMatch(); ReleaseWhenIdle(); return; }
 
             float now = Time.realtimeSinceStartup;
 
@@ -401,6 +442,7 @@ namespace PlayableRecreation.UI
         public override void DoWindowContents(Rect inRect)
         {
             worker.HandleShortcuts();
+            KeepSeatedWhileWatching(inRect);
 
             DrawHeader(new Rect(inRect.x, inRect.y, inRect.width, HeaderHeight));
 
@@ -610,11 +652,21 @@ namespace PlayableRecreation.UI
             int shown = Mathf.Min(talk.Count, 4);
             float y = area.y + 24f;
 
+            // 한 줄에 한 마디씩이다. 긴 말은 그대로 두면 접히면서 아랫부분이 잘려 나가므로
+            // **먼저 잘라서** 한 줄로 만들고, 통째로는 툴팁으로 보여 준다.
+            Text.Font = GameFont.Tiny;
+
             for (int i = talk.Count - shown; i < talk.Count; i++)
             {
-                Widgets.Label(new Rect(area.x, y, area.width, LogLineHeight), talk[i]);
+                Rect line = new Rect(area.x, y, area.width, LogLineHeight);
+
+                Widgets.Label(line, talk[i].Truncate(area.width - 4f));
+                if (Mouse.IsOver(line)) TooltipHandler.TipRegion(line, talk[i]);
+
                 y += LogLineHeight;
             }
+
+            Text.Font = GameFont.Small;
         }
 
         private void DrawFooter(Rect footer)
@@ -771,6 +823,10 @@ namespace PlayableRecreation.UI
             RecordResult(won, false);
             RememberTheGame();
             DropSession();
+
+            // 판은 끝났지만 두 사람은 잠깐 더 앉아 있는다. 시계는 여기서 건다.
+            if (opponentPawn != null && Together.Enabled)
+                releaseAt = Time.realtimeSinceStartup + HoldAfterMatch;
 
             if (!won || practice) return;
 
